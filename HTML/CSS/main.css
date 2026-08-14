@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Bungee&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Google Sans", sans-serif;
+}
+.header{
+    background-color: #9F735A;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="text"], input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="text"]:focus, input[type="password"]:focus{
+    border: 2px solid #9F735A;
+    outline: none;
+
+}
