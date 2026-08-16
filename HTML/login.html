@@ -9,23 +9,43 @@
 </head>
 <body>
     <div class="header">
-        <img src="Imagens/Logo/TituloBranco.svg" class="logoHeader" alt="" srcset="">
+        <img src="icones/IconesLogo/TituloBranco.svg" class="logoHeader" alt="" srcset="">
     </div>
     <div class="campoTexto">
-        <div class="texto"></div>
-        <div class="campoTextoUsuario">
-            <label for="inputLogin" class="labelLogin label">Login</label>
-            <input type="text" name="username" id="inputLogin" class="inputLogin" placeholder="Preencha com CPF/CNPJ">
+        <div class="textoLoginContainer"><p class="textoLogin">Faça cadastro ou entre em sua conta para experiências exclusivas</p></div>
+
+
+        <div class="campoInformacoesPai">
+
+            <div class="campoTextoUsuario campoTextoLogin">
+                <label for="inputLogin" class="labelLogin label">Login</label>
+                <input type="text" name="username" id="inputEmail" class="inputLogin" placeholder="Preencha com CPF/CNPJ">
+            </div>
+    
+            <div class="campoTextoSenha campoTextoLogin">
+                <label for="inputSenha" class="labelSenha label">Senha</label>
+                <input type="text" name="password" id="inputSenha" class="inputSenha" placeholder="Preencha com sua senha">
+            </div>
+
+        </div>
+        
+        <div class="containerBotao">
+            <button type="submit" class="botaoEntrar" id="submitBttn">Acessar</button>
+        </div>
+        <div class="opcoesLoginGoogleContainer">
+            <div class="opcoesLoginGoogle">
+                <div class="botao"><img src="icones/googleIcon.svg" class="loginGoogleIcon" alt="">Login com Google</div>
+                <div class="botao"><img src="icones/gmailIcon.svg" class="loginGoogleIcon" alt="">Login com Email</div>
+            </div>
+        </div>
+        
+        
+        <div class="opcoesCadastrar">
+            <div class="opcoesCadastrarTexto">Não tenho conta? <a href="">Cadastrar-se</a></div>
         </div>
 
-        <div class="campoTextoSenha">
-            <label for="inputSenha" class="labelSenha label">Senha</label>
-            <input type="password" name="password" id="inputSenha" class="inputSenha" placeholder="Preencha com sua senha">
-        </div>
-        <div class="botao botaoEntrar">
-            <button type="submit" class="botaoEntrar">Entrar</button>
-        </div>
     </div>
-    <script src="JavaScript/script.js"></script>
+    <script src="JavaScript/loginScripts/login.js"></script>
+    <script src="JavaScript/loginScripts/enviar.js"></script>
 </body>
 </html> 

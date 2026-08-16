@@ -57,7 +57,7 @@ def login():
     if usuario is None or not check_password_hash(usuario.senha, dados['senha']):
         return {"error" : "Dados invalidos"}
     
-    return {"menssage" : f"bem vindo, {usuario.nome}!", "tipo_usuario": usuario.tipo_usuario}
+    return {"menssage" : f"bem vindo"}
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
