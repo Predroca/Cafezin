@@ -5,7 +5,7 @@ from routes.auth_rotas import auth_rotas
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://root:@localhost:3306/Cafezin"
-app.register_blueprint(auth)
+app.register_blueprint(auth_bp)
 CORS(app)
 
 
