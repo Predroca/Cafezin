@@ -5,7 +5,7 @@ from models.usuario import Usuario, db
 
 auth_bp = Blueprint('auth', __name__)
 
-@app.route('/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def registrar():
     dados = request.get_json()
 
