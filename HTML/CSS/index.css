@@ -1,0 +1,7 @@
+body{
+    background-image: url("../img/cafezin.png");
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
+}

@@ -1,5 +1,6 @@
 :root{
     --inputSize:490px;
+    --inputSizeSenha:490px;
     --textEnphasisSize:1.5rem;
     --textEnphasisColor:#4B362A;
     --buttonBackground:#7a492e;
@@ -25,13 +26,19 @@ body{
     margin: 50px;
 }
 
-input[type="text"], input[type="password"]{
+input[type = "text"]{
     width: var(--inputSize);
     background-color: rgb(237, 221, 213);
     color: var(--textEnphasisColor);
     padding: 10px;
 }
-input[type="text"]::placeholder, input[type="password"]::placeholder{
+input[type="password"]{
+    width: var(--inputSizeSenha);
+    background-color: rgb(237, 221, 213);
+    color: var(--textEnphasisColor);
+    padding: 10px;
+}
+input::placeholder{
     color: #4B362A;
     
 }
