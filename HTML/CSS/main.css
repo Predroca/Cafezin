@@ -2,35 +2,116 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-:root{
-    --headerColorLight:#9F735A;
-    --headerColorDark:#61402d;
-    --lightColor:white;
+@font-face {
+    font-family: "Brasika";
+    src: url("../Fontes/brasika-display.otf") format("opentype");
+}
+
+:root {
+    /* =====================
+       CORES PRINCIPAIS
+    ===================== */
+
+    --cor-marrom-escuro: #26110c;
+    --cor-marrom-escuro-2: #2d1c16;
+    --cor-marrom-principal: #4b362a;
+    --cor-marrom-vermelhado: #331303;
+    --cor-marrom-medio: #6b2c0b;
+    --cor-marrom-claro: #734630;
+
+    /* =====================
+       CORES DE DESTAQUE
+    ===================== */
+
+    --cor-laranja-escuro: #94461b;
+    --cor-laranja-escuro-2: #93471a;
+    --cor-laranja: #b8744f;
+    --cor-laranja-claro: #e1a768;
+    --cor-bege-destaque: #e8be90;
+
+    /* =====================
+       CORES CLARAS / BACKGROUND
+    ===================== */
+
+    --cor-background: #fefcfa;
+    --cor-background-alternativo: #fff5f0;
+    --cor-background-bege: #fff3e7;
+    --cor-bege-claro: #f6e5d3;
+    --cor-cinza-claro: #d8dfe0;
+
+    /* =====================
+       TEXTOS
+    ===================== */
+
+    --cor-texto: #000000;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-claro-alternativo: #fefefe;
+    --cor-texto-secundario: #7f6f62;
+
+    /* =====================
+       CORES ADICIONAIS
+    ===================== */
+
+    --cor-azul: #748eac;
+
+    /* =====================
+       TAMANHOS DE FONTE
+    ===================== */
+
+    --fonte-muito-pequena: 0.75rem;
+    --fonte-pequena: 0.875rem;
+    --fonte-normal: 1rem;
+    --fonte-media: 1.25rem;
+    --fonte-grande: 1.5rem;
+    --fonte-titulo: 2rem;
+    --fonte-titulo-grande: 2.5rem;
+
+    /* =====================
+       ESPAÇAMENTOS
+    ===================== */
+
+    --espacamento-extra-pequeno: 0.25rem;
+    --espacamento-pequeno: 0.5rem;
+    --espacamento-medio: 1rem;
+    --espacamento-grande: 1.5rem;
+    --espacamento-extra-grande: 2rem;
+    --espacamento-muito-grande: 3rem;
+
+    /* =====================
+       BORDAS
+    ===================== */
+
+    --borda-fina: 1px;
+    --borda-media: 2px;
+
+    --borda-arredondada-pequena: 5px;
+    --borda-arredondada-media: 10px;
+    --borda-arredondada-grande: 20px;
+    --borda-arredondada-completa: 999px;
+
+
+    /* =====================
+       TAMANHOS DE ELEMENTOS
+    ===================== */
+
+    --altura-input: 45px;
+    --altura-botao: 45px;
+
+    --largura-container: 1200px;
+    --largura-formulario: 400px;
+
+
+    /* =====================
+       TRANSIÇÕES
+    ===================== */
+
+    --transicao-rapida: 0.2s;
+    --transicao-normal: 0.3s;
+    --transicao-lenta: 0.5s;
 }
 
 *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    font-family: "Google Sans", sans-serif;
-}
-.header{
-    background-image:linear-gradient(to left, var(--headerColorLight), var(--headerColorDark)70%);
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-input{
-    border: none;
-    padding: 15px;
-    border-radius: 7px;
-    box-sizing: border-box;
-}
-input[type="text"]:focus, input[type="password"]:focus{
-    border: 2px solid var(--headerColor);
-    outline: none;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
 }
