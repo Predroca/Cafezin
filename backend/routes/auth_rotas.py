@@ -5,6 +5,29 @@ from models.usuario import Usuario, db
 
 auth_bp = Blueprint('auth', __name__)
 
+@auth_bp.route('/register', methods=['POST'])
+def registrar():
+    dados = request.get_json()
+
+    existe = Usuario.query.filter_by(email=dados['email']).first()
+    if existe is not None:
+        return {"error" : "email já cadastrado"}, 409
+    
+    senha_hash = generate_password_hash(dados["senha"])
+
+    novo_usuario = Usuario(
+        email = dados['email'],
+        senha = senha_hash,
+        nome = dados["nome"],
+        tipo_usuario = dados["tipo_usuario"],
+        telefone = dados.get("telefone")
+    )
+
+    db.session.add(novo_usuario)
+    db.session.commit()
+
+    return {"menssage" : "usuario criado", "usuario" : novo_usuario.nome}
+
 @auth_bp.route('/login', methods=['POST'])
 def login():
     dados = request.get_json()
