@@ -1,0 +1,191 @@
+body{
+    font-family: "Google Sans", sans-serif;
+}
+
+.titulo{
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+}
+.logo{
+    font-size: var(--fonte-media);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    background-color: var(--cor-marrom-claro);
+    font-size:var(--fonte-normal);
+    color: var(--cor-background-bege);
+    padding: var(--espacamento-pequeno);
+    justify-content: center;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+    color: var(--cor-background-bege);
+}
+.containerInformacoes ul{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+li{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.botao a{
+    background-color: var(--cor-laranja);
+    padding: var(--espacamento-pequeno);
+    padding-left: var(--espacamento-grande);
+    padding-right: var(--espacamento-grande);
+    width: auto;
+    height: auto;
+    border-radius: var(--borda-arredondada-pequena);
+}
+.imageSection{
+    width: 100%;
+}
+.imageSection img{
+    width: 100%;
+    height: 100%;
+}
+.imageSectionText{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+.tituloBanner{
+    font-size: var(--fonte-titulo-grande);
+    font-family: "Brasika", sans-serif;
+    width: 30%;
+    text-align: center;
+    position: relative;
+    color: var(--cor-texto-claro-alternativo);
+    align-self: flex-end;
+    right: 10%;
+    
+}
+.subtituloBanner{
+    color: var(--cor-texto-claro-alternativo);
+    margin-right: 17%;
+    text-align: center;
+    width: 15%;
+    align-self: flex-end;
+    font-size: var(--fonte-media);
+}
+.sessaoInfosSection{
+    margin-top: var(--espacamento-padrao);
+    color: var(--cor-marrom-vermelhado);
+}
+.imageSectionText{
+    text-shadow: 0px 0px 10px black;
+}
+.sessaoInfos:nth-child(1){
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    position: relative;
+}
+.sessaoInfos:nth-child(2){
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    margin-top: var(--espacamento-padrao);
+    position: relative;
+}
+.sessaoInfosImagens{
+    display: grid;
+    grid-template-columns:2fr 2fr 2fr;   
+    gap: var(--espacamento-pequeno); 
+    z-index: 1;
+    position: relative;
+}
+.sessaoInfosImagens::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width:30%;
+    height: 100%;
+    background-image: linear-gradient(to right, white, transparent 70%);
+}
+.sessaoInfosImagens2{
+    display: grid;
+    grid-template-columns:2fr 2fr 2fr;   
+    gap: var(--espacamento-pequeno); 
+    z-index: 1;
+    position: relative;
+
+}
+.sessaoInfosImagens2::after{
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:30%;
+    height: 100%;
+    background-image: linear-gradient(to left, white, transparent 70%);
+}
+.sessaoInfosImagens2 img{
+    width: 100%;
+    z-index: 0;
+    position: relative;
+}
+.sessaoInfosImagens img{
+    width: 100%;
+    z-index: 0;
+    position: relative;
+}
+.sessaoInfosContainerInfos{
+    width: 70%;
+    max-width: 150px;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    display: flex;
+    gap: var(--espacamento-grande);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--fonte-media);
+}
+.sessaoInfosContainerInfos2{
+    color: var(--cor-marrom-medio);
+}
+
+.cafeteriaBotao2{
+    width: 160px;
+    background-color: var(--cor-marrom-medio);
+    padding: var(--espacamento-medio);
+    color: var(--cor-texto-claro-alternativo);
+    border-radius: var(--borda-arredondada-pequena);
+}
+
+.titSessaoInfos{
+    font-size: 2.25rem;
+    font-family: "Brasika", sans-serif;
+}
+
+.cafeteriaBotao{
+    width: 160px;
+    background-color: var(--cor-marrom-vermelhado);
+    padding: var(--espacamento-medio);
+    color: var(--cor-texto-claro-alternativo);
+    border-radius: var(--borda-arredondada-pequena);
+}

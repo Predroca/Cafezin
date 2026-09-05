@@ -76,6 +76,7 @@
     --espacamento-grande: 1.5rem;
     --espacamento-extra-grande: 2rem;
     --espacamento-muito-grande: 3rem;
+    --espacamento-padrao:66px;
 
     /* =====================
        BORDAS
@@ -83,12 +84,10 @@
 
     --borda-fina: 1px;
     --borda-media: 2px;
-
     --borda-arredondada-pequena: 5px;
     --borda-arredondada-media: 10px;
     --borda-arredondada-grande: 20px;
     --borda-arredondada-completa: 999px;
-
 
     /* =====================
        TAMANHOS DE ELEMENTOS
@@ -96,7 +95,6 @@
 
     --altura-input: 45px;
     --altura-botao: 45px;
-
     --largura-container: 1200px;
     --largura-formulario: 400px;
 
