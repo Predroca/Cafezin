@@ -1,5 +1,5 @@
 let bord = document.getElementById('bttnClick');
-const listE = document.getElementsByTagName('li');
+const listE = document.querySelectorAll('.list');
 const bordPX = bord.getBoundingClientRect().left;
 console.log(bordPX)
 for(let li of listE){
