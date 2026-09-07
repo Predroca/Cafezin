@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/index.css">
 </head>
-<body>
+<body id="topo">
+    <div class="paraTopoSeta">
+       <a href="#topo"><img src="icones/SetaUp.svg" alt="" class="setaUp"></a>
+    </div>
     <header>
         <div class="logo titulo">
             Cafézin
@@ -14,9 +17,9 @@
 
         <div class="containerInformacoes">
             <ul>
-                <li>Sobre nós</li>
-                <li>Loja</li>
-                <li>Entregador</li>
+                <li><a href="cafeDev.html">Sobre nós</a></li>
+                <li><a href="login.html">Loja</a></li>
+                <li><a href="login.html">Entregador</a></li>
                 <li><a href="cadastrar.html">Cadastrar-se</a></li>
             </ul>
         </div>
@@ -24,6 +27,8 @@
         <div class="botao">
             <a href="login.html">Entrar</a>
         </div>
+        <div class="scrollBarAnimated"></div>
+        
     </header>
 
     <main>
@@ -41,12 +46,12 @@
         <div class="sessaoInfos">
 
             <div class="sessaoInfosImagens">
-                <img src="img/index/CafeteriaFrony.png" alt="Não foi possível carregar a imagem">
-                <img src="img/index/image (4).png" alt="Não foi possível carregar a imagem">
-                <img src="img/index/image (3).png" alt="Não foi possível carregar a imagem">
+                <img src="img/index/CafeteriaFrony.png" alt="Não foi possível carregar a imagem" class="imagensAparecer" style="--i:2; --n:1">
+                <img src="img/index/image (4).png" alt="Não foi possível carregar a imagem" class="imagensAparecer" style="--i:1; --n:2">
+                <img src="img/index/image (3).png" alt="Não foi possível carregar a imagem" class="imagensAparecer" style="--i:0; --n:3">
             </div>
         
-            <div class="sessaoInfosContainerInfos">
+            <div class="sessaoInfosContainerInfos sessaoInfosContainerInfos1">
 
                 <div class="titSessaoInfos">
                     Diversas
@@ -60,7 +65,7 @@
                 </p>
 
                 <div class="cafeteriaBotao">
-                    <a href="">Ver cafeterias</a>
+                    <a href="login.html" class="bttnAnimation">Ver cafeterias</a>
                 </div>
 
             </div>
@@ -80,14 +85,14 @@
                 </p>
 
                 <div class="cafeteriaBotao2">
-                    <a href="">Ver produtos</a>
+                    <a href="login.html" class="bttnAnimation">Ver produtos</a>
                 </div>
 
             </div>
             <div class="sessaoInfosImagens2">
-                <img src="img/index/cafeManha_600x900.png" alt="">
-                <img src="img/index/FrutasMesa_600x900.png" alt="">
-                <img src="img/index/image_6_600x900.png" alt="">
+                <img src="img/index/cafeManha_600x900.png" alt="" class="imagensAparecerDireita" style="--i:0">
+                <img src="img/index/FrutasMesa_600x900.png" alt="" class="imagensAparecerDireita" style="--i:1">
+                <img src="img/index/image_6_600x900.png" alt="" class="imagensAparecerDireita" style="--i:2">
             </div>
         
             
@@ -96,9 +101,9 @@
         </div>
     </section>
 
-    <section>
+    <section class="divulgarCadastroSection">
         <div class="divulgarLojasEntregadorContainer">
-            <div class="divulgarLojasEntregadorConteudo">
+            <div class="divulgarLojasEntregadorConteudo surgirParaEsquerda">
                 <div class="titulo">
                     Cadastre sua<br>loja
                 </div>
@@ -109,16 +114,19 @@
                     levar o melhor da sua cafeteria até seus clientes.
                 </p>
                 
-                <div class="botao botaoLoja">
-                    <a href="">Cadastrar</a>
+                <div class="botaoLoja">
+                    <a href="login.html" class="bttnAnimation">Cadastrar</a>
                 </div>
 
             </div>
-            <img src="" alt="">
+            <img src="img/index/cadastrarLoja.png" alt="não foi possível carregar a imagem" class="surgirParaDireita">
         </div>
 
         <div class="divulgarLojasEntregadorContainer">
-            <div class="divulgarLojasEntregadorConteudo">
+
+            <img src="img/index/cadastrarEntregador.png" alt="" class="surgirParaEsquerda">
+
+            <div class="divulgarLojasEntregadorConteudo surgirParaDireita">
                 <div class="titulo">
                     Se cadastre como<br>entregador
                 </div>
@@ -128,55 +136,79 @@
                     você poderá encontrar pedidos de diferentes estabelecimentos e organizar
                     suas entregas.
                 </p>
-
-                <div class="botao botaoEntregador">
-                    <a href="">Cadastrar</a>
+                <div class="botaoEntregadorCont">
+                    <div class="botaoEntregador">
+                        <a href="login.html" class="bttnAnimation">Cadastrar</a>
+                    </div>
                 </div>
 
             </div>
-            <img src="" alt="">
         </div>
     </section>
 
-    <section>
-        <div class="categoriasContainerIcons">
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
-            <div class="categoriaIcons">
-                <img src="icones/" alt="">
-            </div>
+    <section class="carouselSection">
+
+        <div class="carouselTitle">
+            Separamos os produtos em categorias
         </div>
-        <div class="sessaoInfosContainerInfos">
 
-                <div class="titulo">
-                    Separacao
+        <div class="carouselContainer">
+            <div class="categoriasContainerIcons">
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Bolo.svg" alt="">
+                    <p>Doces</p>
                 </div>
-
-                <p class="sessaoInfosParagrafo">
-                    Separamos os produtos em categorias para melhorar sua experiência
-                </p>
-
-                <div class="sessaoInfosBotao">
-                    <a href="cadastro.html">Ver produtos</a>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Cafe.svg" alt="">
+                    <p>Cafés</p>
                 </div>
-
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Copo.svg" alt="">
+                    <p>Bebidas</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Cupcake.svg" alt="">
+                    <p>Lanches da Tarde</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Pão.svg" alt="">
+                    <p>Lanches da Manhã</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Polilinhas.svg" alt="">
+                    <p>e Mais</p>
+                </div>
             </div>
+            <div aria-hidden class="categoriasContainerIcons">
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Bolo.svg" alt="">
+                    <p>Doces</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Cafe.svg" alt="">
+                    <p>Cafés</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Copo.svg" alt="">
+                    <p>Bebidas</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Cupcake.svg" alt="">
+                    <p>Lanches da Tarde</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Pão.svg" alt="">
+                    <p>Lanches da Manhã</p>
+                </div>
+                <div class="categoriaIcons">
+                    <img src="icones/iconesLanches/Polilinhas.svg" alt="">
+                    <p>e Mais</p>
+                </div>
+            </div>
+
+        </div>
+        
+                
     </section>
     
     </main>
