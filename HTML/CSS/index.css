@@ -68,6 +68,9 @@ a{
 }
 li{
     list-style-type: none;
+}
+.list{
+    list-style-type: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +96,7 @@ li{
     width: 100%;
 }
 .imageSection img{
-    width: 100%;
+    width: 110%;
     height: 100%;
 }
 .imageSectionText{
@@ -368,7 +371,7 @@ li{
     justify-content: center;
     align-items: center;
     gap: 40px;
-    animation: spin 10s linear infinite;
+    animation: spin 13s linear infinite;
     padding-left: 40px;
 }
 .carouselContainer:has(.categoriaIcons:hover) .categoriasContainerIcons{
@@ -381,14 +384,14 @@ li{
     height: 4rem;
 }
 .categoriaIcons{
-    width: 250px;
-    flex: 0 0 250px;
+    width: 200px;
+    flex: 0 0 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: var(--espacamento-medio);
-    font-size: var(--fonte-media);
+    font-size: 1.05rem;
     font-weight: bold;
     transition: var(--transicao-lenta);
     border: solid 4px var(--cor-laranja);
@@ -437,4 +440,57 @@ li{
 }
 .setaUp{
     width: 100%;
+}
+.bttnAnimation{
+    transition: var(--transicao-lenta);
+}
+.bttnAnimation:hover{
+    scale: 1.05;
+}
+footer{
+    background-color: var(--cor-marrom-claro);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    margin-top: var(--espacamento-padrao);
+    padding: var(--espacamento-grande) 0;
+}
+
+.footerSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--cor-texto-claro-alternativo);
+    text-align: center;
+}
+
+.footerSection .titulo{
+    width: 100%;
+    text-align: center;
+}
+
+.footerSectionLists{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espacamento-grande);
+    padding: 0;
+    margin: 0;
+}
+
+.footerSectionLists li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    width: 100%;
+    text-align: center;
+}
+
+.footerSectionLists li img{
+    height: 30px;
+    width: auto;
 }
