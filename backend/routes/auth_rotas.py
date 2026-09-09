@@ -44,5 +44,16 @@ def login():
 
 
 @auth_bp.route('/esqueci-senha', methods=['POST'])
-def esqueci_senha():
-  
+def esqueci():
+    dados = request.get_json()
+
+    usuario = Usuario.query.filter_by(email=dados['email']).first()
+
+    if usuario is None:
+        return {"error" : "Email nao encontrado"}
+    
+    usuario.senha = generate_password_hash(dados["nova_senha"])
+    db.session.commit() 
+
+    return {"mensagem" : "Senha redefinida com sucesso"}
+
