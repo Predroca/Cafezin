@@ -1,5 +1,4 @@
 from flask import Flask, request
-from flask import 
 from flask_cors import CORS
 from routes import auth_rotas , catalogo_bp
 
