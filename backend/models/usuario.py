@@ -5,8 +5,8 @@ class Usuario(db.Model):
     __tablename__ = "Usuario"
 
     cod_usuario = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(100), nullable=False)
-    senha = db.Column(db.String(255), nullable=False, unique=True)
+    email = db.Column(db.String(100), nullable=False, unique=True)
+    senha = db.Column(db.String(255), nullable=False)
     nome = db.Column(db.String(100), nullable=False)
     tipo_usuario = db.Column(
         db.Enum("Admin", "Comprador", "Loja", "Entregador"), nullable=False
