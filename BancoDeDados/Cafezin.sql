@@ -3,18 +3,19 @@ USE Cafezin;
 
 CREATE TABLE Usuario (
     cod_usuario INT PRIMARY KEY auto_increment,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     nome VARCHAR(100) NOT NULL,
-    tipo_usuario VARCHAR(30) NOT NULL,
-    telefone VARCHAR(20)
+    tipo_usuario ENUM('Admin','Comprador','Loja','Entregador') NOT NULL,
+    telefone VARCHAR(20),
+    foto_url VARCHAR(255)
 );
 
 CREATE TABLE Comprador (
     cod_comprador INT PRIMARY KEY auto_increment,
     cpf CHAR(11) NOT NULL,
     data_nasc DATE,
-    sexo CHAR(1),
+    sexo CHAR(1) CHECK (sexo in ('M', 'F', 'Outro')),
     cod_usuario INT NOT NULL,
 
     FOREIGN KEY (cod_usuario)
@@ -44,11 +45,10 @@ CREATE TABLE Comprador_Endereco (
 );
 
 CREATE TABLE Pagamento(
-	cod_pagamento INT PRIMARY KEY auto_increment,
-    tipo enum ('PIX','Boleto','Cartão','Dinheiro','Transferência'),
+    cod_pagamento INT PRIMARY KEY auto_increment,
+    tipo ENUM('PIX','Boleto','Cartão','Dinheiro','Transferência') NOT NULL,
     data datetime
 );
-
 
 CREATE TABLE Entregador (
     cod_entregador INT PRIMARY KEY auto_increment,
@@ -61,12 +61,12 @@ CREATE TABLE Entregador (
     FOREIGN KEY (cod_usuario)
         REFERENCES Usuario(cod_usuario),
 
-	FOREIGN KEY (cod_pagamento)
+    FOREIGN KEY (cod_pagamento)
         REFERENCES Pagamento(cod_pagamento)
 );
 
 CREATE TABLE Categoria (
-	cod_categoria INT PRIMARY KEY auto_increment,
+    cod_categoria INT PRIMARY KEY auto_increment,
     nome_categoria VARCHAR(255)
 );
 
@@ -90,7 +90,7 @@ CREATE TABLE Pedido (
 
     valor_frete DECIMAL(10,2),
     valor_total DECIMAL(10,2),
-	status varchar(50),
+    status ENUM('Pendente','Em preparo','Em andamento','Entregue','Cancelado') NOT NULL DEFAULT 'Pendente',
     cod_comprador INT NOT NULL,
     cod_loja INT NOT NULL,
     cod_end_entrega INT NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE Pedido (
     FOREIGN KEY (cod_end_entrega)
         REFERENCES Endereco(cod_endereco),
 
-	FOREIGN KEY (cod_pagamento)
+    FOREIGN KEY (cod_pagamento)
         REFERENCES Pagamento(cod_pagamento)
 );
 
@@ -116,12 +116,13 @@ CREATE TABLE Produto (
     descricao TEXT,
     preco DECIMAL(10,2) NOT NULL,
     disponibilidade BOOLEAN,
-	cod_categoria INT NULL,
+    cod_categoria INT NULL,
+    foto_url VARCHAR(255),
 
     FOREIGN KEY (cod_loja)
         REFERENCES Loja(cod_loja),
 
-	FOREIGN KEY (cod_categoria)
+    FOREIGN KEY (cod_categoria)
         REFERENCES Categoria(cod_categoria)
 );
 
@@ -145,7 +146,7 @@ CREATE TABLE Entrega (
     distancia DECIMAL(10,2),
     data_saida DATETIME,
     data_entrega DATETIME,
-    status VARCHAR(30),
+    status ENUM('Aguardando','Em rota','Concluída','Cancelada') NOT NULL DEFAULT 'Aguardando',
 
     cod_pedido INT NOT NULL,
     cod_entregador INT NOT NULL,
@@ -216,7 +217,8 @@ INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
 ('rafael.almeida@email.com', 'senha123', 'Rafael Almeida', 'Entregador', '32986334456'),
 ('contato@cafeteriadorenata.com', 'senha123', 'Cafeteria da Renata', 'Loja', '32337122885'),
 ('contato@padariabomgosto.com', 'senha123', 'Padaria Bom Gosto', 'Loja', '32337255410'),
-('contato@docedecasa.com', 'senha123', 'Doce de Casa', 'Loja', '32337390877');
+('contato@docedecasa.com', 'senha123', 'Doce de Casa', 'Loja', '32337390877'),
+('admin@cafezin.com', 'senha123', 'Administrador Cafezin', 'Admin', NULL);
 
 -- =========================================================
 -- ENDERECO
@@ -363,61 +365,3 @@ INSERT INTO AvaliacaoProduto (data, descricao, nota, horario, cod_produto, cod_c
 ('2025-01-11', 'Pão de queijo fresquinho e saboroso', 5, '13:25:00', 6, 2),
 ('2025-01-12', 'Brigadeiro muito doce para o meu gosto', 3, '19:30:00', 8, 3),
 ('2025-01-13', 'Bolo de chocolate úmido, ficou ótimo', 4, '11:00:00', 9, 4);
-
-
--- =============================================================================================
--- 													4										  --
--- Gerar um relatório dos comentários das avaliações de um produto com a nota maior ou igual a 3
--- =============================================================================================
-
-SELECT descricao
-FROM AvaliacaoProduto
-WHERE nota>= 3;
-
--- =========================================================================================
--- 											5 											  --
--- Gerar um relatório de todos os compradores que tiveram o status da entrega como 'Em rota'
--- =========================================================================================
-
-select c.*
-FROM comprador c, entrega e, pedido p
-where p.cod_comprador = c.cod_comprador AND p.cod_pedido = e.cod_pedido AND e.status='Em rota';
-
--- =================================================================================
--- 											6									  --
--- Gerar um relatório do valor total gasto por cada comprador do sistema em produtos 
--- =================================================================================
-
-SELECT u.nome, sum(p.valor_total) gastoTotal
-FROM usuario u, pedido p, comprador c
-WHERE u.cod_usuario = c.cod_usuario AND c.cod_comprador = p.cod_comprador
-GROUP BY 1;
-
--- =================================================================================================
--- 											2
---  selecionar o nome do comprador e a quantidade de produtos dos top 5 que mais gastaram no sistema
--- 									GUILHERME ALVES LOBIANCO
--- =================================================================================================
-
-create view topCompradores(nome, valorGasto) as 
-select u.nome, sum(p.valor_total+p.valor_frete) valorGasto
-from usuario u join comprador c on c.cod_usuario = u.cod_usuario join pedido p on p.cod_comprador = c.cod_comprador
-group by u.nome
-order by valorGasto desc
-limit 5;
-
-
-
- -- drop view topCompradores;
-select * from topCompradores;
-
--- ===========================================================================
--- 									3
---  O usuário João percebeu que inseriu o nome errado, então decidiu trocá-lo
--- 						GUILHERME ALVES LOBIANCO
--- ===========================================================================
-
-update topCompradores
-set nome = "João Silva Pereira Costa"
-where nome = 'João Silva';
-
