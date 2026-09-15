@@ -30,7 +30,7 @@ def registrar():
     db.session.add(novo_usuario)
     db.session.commit()
 
-    return {"menssage" : "usuario criado", "usuario" : novo_usuario.nome}
+    return {"menssagem" : "usuario criado", "usuario" : novo_usuario.nome}
 
 @auth_bp.route('/login', methods=['POST'])
 def login():

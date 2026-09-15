@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar-se</title>
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="CSS/cadastroComp.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="bodyCadastro d-none d-xl-block"></div>
+
+
+    <div class="erroLoginContainer" id="errorLogin">
+        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
+        <div class="errorLoginText">
+            <h4>Ops! Algo deu errado</h4>
+            <p>Usuário já criado. Faça login caso já possua uma conta</p>
+        </div>
+    </div>
+
+    
+    <div class="erroLoginContainer" id="diferentPsswd">
+        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
+        <div class="errorLoginText">
+            <h4>Ops! Algo deu errado</h4>
+            <p>Senhas diferentes. Por favor, insira a mesma senha 
+                em seus campos!
+            </p>
+        </div>
+    </div>
+
+
+    <img src="img/telaCadastroComprador/upCurve.svg" alt="" class="upCurve">
+    <img src="img/telaCadastroComprador/downCurve.svg" alt="" class="downCurve">
+
+
+    <form class="formLoginContainer px-4" action="/register" method="POST" id="loginForm">
+        <div class="titulo">Cadastrar-se</div>
+
+
+        <div class="inputsContainer">
+
+            <div class="inptLoginEmail">
+                <img src="icones/FormIcons/defaultProfile.svg" alt="não foi possível carregar a imagem" class="icons iconeEsq">
+                <input type="text" name="" id="nomeUser" class="formText px-5 py-2 form-control" placeholder="Nome de Usuário" required>
+            </div>
+            <div class="inptLoginEmail">
+                <img src="icones/FormIcons/email.svg" alt="não foi possível carregar a imagem" class="icons iconeEsq">
+                <input type="email" name="" id="email" class="formText px-5 py-2 form-control" placeholder="email" required>
+            </div>
+            <div class="inptLoginEmail">
+                <img src="icones/FormIcons/Cadeado.svg" alt="não foi possível carregar a imagem" class="icons iconeEsq">
+                <input type="password" class="formText px-5 py-2 form-control passwordCamp" id="password" placeholder="Digite sua nova senha" required>
+                <img src="icones/FormIcons/psswdEye.svg" alt="não foi possível carregar a imagem" class="icons iconeDir confPsswdEye" >
+            </div>
+            <div class="inptLoginEmail">
+                <img src="icones/FormIcons/Cadeado.svg" alt="não foi possível carregar a imagem" class="icons iconeEsq">
+                <input type="password" class="formText px-5 py-2 form-control passwordCamp" id="confirmPsswd" placeholder="Confirmar sua senha" required>
+                <img src="icones/FormIcons/psswdEye.svg" alt="não foi possível carregar a imagem" class="icons iconeDir confPsswdEye" >
+            </div>
+            <div class="inptLoginEmail">
+                <img src="icones/FormIcons/telefone.svg" alt="não foi possível carregar a imagem" class="icons iconeEsq">
+                <input type="text" name="" id="telefone" class="formText px-5 py-2 form-control" placeholder="Insira seu número">
+            </div>
+
+        </div>
+        <input type="submit" value="Entrar" class="botaoEntrar botao py-2" id="submit">
+        <div class="hr"></div>
+        <div class="cadastrarContainer">Já possui uma conta? <a href="login.html" class="cadastrar">Entrar</a></div>
+    </form>
+
+    <script src="JavaScript/formsFunctionality.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="JavaScript/CadastroScripts/cadastrar.js"></script>
+    <script src="JavaScript/CadastroScripts/enviarCadastro.js"></script>
+</body>
+</html>
