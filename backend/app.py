@@ -11,14 +11,14 @@ from config import Config
 
 
 app = Flask(__name__)
+
 CORS(app)
+
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.SQLALCHEMY_DATABASE_URI
 app.config["SECRET_KEY"] = Config.SECRET_KEY
 
 db.init_app(app)
 jwt.init_app(app)
-
-CORS(app)
 
 
 app.register_blueprint(auth_bp)
