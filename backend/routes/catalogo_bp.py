@@ -113,7 +113,7 @@ def criar_pedido():
         data_pedido=agora,
         valor_frete=VALOR_FRETE_PADRAO,
         valor_total=valor_total,
-        status="Confirmado",
+        status="Pendente",
         cod_comprador=cod_comprador,
         cod_loja=produto.cod_loja,
         cod_end_entrega=cod_endereco,
