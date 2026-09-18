@@ -196,7 +196,6 @@ body{
    to{transform: translateX(200%);opacity: 0; position: absolute; display: none;}
 }
 
-/* -------- Reutilizáveis em qualquer cartão de formulário -------- */
 @keyframes entradaCartao {
     from {
         opacity: 0;

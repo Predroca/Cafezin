@@ -1,15 +1,3 @@
-
-const user = {
-    email:'',
-    senha:'', 
-    nome:'', 
-    telefone:'',
-    cpf:'',
-    data_nasc:'',
-    sexo:''
-}
-
-
 const form = document.getElementById('loginForm');
 form.addEventListener('submit',(e)=>{
     e.preventDefault();

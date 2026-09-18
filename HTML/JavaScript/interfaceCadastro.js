@@ -1,11 +1,6 @@
-// interfaceCadastro.js
-// Responsável apenas pela camada visual/interativa da tela de cadastro.
-// Não lê nem envia dados ao servidor — isso continua 100% a cargo de
-// cadastrar.js e enviarCadastro.js, que não são alterados por este arquivo.
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ---------- Mostrar/ocultar senha ---------- */
+
     function configurarOlho(botaoId, inputId){
         const botao = document.getElementById(botaoId);
         const input = document.getElementById(inputId);
@@ -21,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarOlho('olhoSenha', 'password');
     configurarOlho('olhoConfirmar', 'confirmPsswd');
 
-    /* ---------- Feedback visual (não bloqueia nada, só estiliza) ---------- */
     function marcarCampo(input, valido){
         const wrapper = input.closest('.inptLoginEmail');
         if(!wrapper) return;
@@ -48,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ---------- Indicador de senhas iguais (apenas texto informativo) ---------- */
     const senhaInput = document.getElementById('password');
     const confirmarInput = document.getElementById('confirmPsswd');
     const mensagemSenha = document.getElementById('mensagemSenha');
@@ -74,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if(senhaInput) senhaInput.addEventListener('input', atualizarMensagemSenha);
     if(confirmarInput) confirmarInput.addEventListener('input', atualizarMensagemSenha);
 
-    /* ---------- Indicador de etapas ---------- */
     const dot1 = document.querySelector('.stepDot[data-step="1"]');
     const dot2 = document.querySelector('.stepDot[data-step="2"]');
     const linha = document.getElementById('stepLinha');
@@ -92,9 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if(linha) linha.classList.remove('preenchida');
     }
 
-    // O avanço de etapa (validação + troca de tela) é feito por enviarCadastro.js.
-    // Aqui apenas observamos quando a segunda seção passa a ficar visível para
-    // sincronizar o indicador visual, sem duplicar nenhuma regra de negócio.
     if(secao2){
         const observer = new MutationObserver(() => {
             const visivel = secao2.style.display && secao2.style.display !== 'none';
@@ -103,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(secao2, { attributes: true, attributeFilter: ['style'] });
     }
 
-    /* ---------- Botão voltar (etapa 2 -> etapa 1) ---------- */
     const botaoVoltar = document.getElementById('prevStep');
     if(botaoVoltar && secao1 && secao2){
         botaoVoltar.addEventListener('click', () => {
