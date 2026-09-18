@@ -15,7 +15,7 @@ CREATE TABLE Comprador (
     cod_comprador INT PRIMARY KEY auto_increment,
     cpf CHAR(11) NOT NULL,
     data_nasc DATE,
-    sexo CHAR(1) CHECK (sexo in ('M', 'F', 'Outro')),
+    sexo CHAR(1) CHECK (sexo in ('M', 'F')),
     cod_usuario INT NOT NULL,
 
     FOREIGN KEY (cod_usuario)

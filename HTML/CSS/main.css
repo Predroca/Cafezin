@@ -51,10 +51,13 @@
     --cor-texto-secundario: #7f6f62;
 
     /* =====================
-       CORES ADICIONAIS
+       CORES ADICIONAIS (paleta de azul das telas de login/cadastro)
     ===================== */
 
     --cor-azul: #748eac;
+    --cor-azul-marinho: #121244;
+    --cor-azul-medio: #83b8ff;
+    --cor-azul-claro: #bae6ff;
 
     /* =====================
        TAMANHOS DE FONTE
@@ -181,9 +184,40 @@ body{
 }
 
 @keyframes timingToRight{
-   from{width: 100%;}
+   from{width: 100%;position: absolute;}
    to{width:0;}
 }
-@keyframes disappear {
-   
+@keyframes disappearLeft {
+   from{transform: translateX(0);opacity: 1;}
+   to{transform: translateX(-200%);opacity: 0; position: absolute; display: none;}
+}
+@keyframes disappearRight {
+   from{transform: translateX(0);opacity: 1;}
+   to{transform: translateX(200%);opacity: 0; position: absolute; display: none;}
+}
+
+/* -------- Reutilizáveis em qualquer cartão de formulário -------- */
+@keyframes entradaCartao {
+    from {
+        opacity: 0;
+        transform: translateX(0) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-100%) scale(1);
+    }
+}
+
+@keyframes cairErro{
+    from{ opacity: 0; transform: translate(-50%, -12px); }
+    to{ opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

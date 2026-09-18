@@ -1,53 +1,338 @@
+/* =========================================================
+   Tela de Cadastro — Comprador
+   Reaproveita variáveis e keyframes de main.css. Os estados de
+   "campo válido/inválido" usam apenas a paleta azul/marrom do site
+   (sem verde ou vermelho fora da paleta).
+========================================================= */
 
+/* -------- Fundo -------- */
 .bodyCadastro{
-    position: absolute;
+    position: fixed;
+    inset: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../img/telaCadastroComprador/FundoCadastroComprador.png');
+    background-image:url('../img/telaCadastroComprador/FundoCadastroComprador.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     z-index: -1000;
 }
+.bodyCadastroOverlay{
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--espacamento-muito-grande);
+}
+.fraseBoasVindas{
+    font-family: 'Brasika', sans-serif;
+    position: absolute;
+    top: 25%;
+    color: var(--cor-texto-claro);
+    font-size: var(--fonte-titulo);
+    line-height: 1.25;
+    max-width: 480px;
+    text-shadow: 0 4px 18px rgba(0,0,0,0.35);
+}
+
 body{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: var(--espacamento-grande);
+    position: relative;
 }
+
+/* -------- Cartão do formulário -------- */
 .formLoginContainer{
-    max-width: 80%;
-    min-width: 33%;
-    width: 150px;
+    max-width: 92%;
+    width: 460px;
+    min-width: unset;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
+    gap: var(--espacamento-grande);
+    background-color: var(--cor-background);
+    padding: var(--espacamento-extra-grande) var(--espacamento-extra-grande);
+    border-radius: 22px;
     position: absolute;
-    right: 40px;
+    right: 4vw;
+    z-index: 999;
+    box-shadow: 0 20px 60px -15px rgba(45, 28, 22, 0.35);
+    border: 1px solid rgba(148, 70, 27, 0.08);
+    animation: entradaCartao 0.55s cubic-bezier(.2,.8,.25,1) both;
+    overflow: hidden;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 999;
 }
+
 .inputsContainer{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
+    justify-content: center;
+    align-items: center;
 }
-.icons{
-    width: 20px;
-}
+
 .upCurve{
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     height: 200px;
+    opacity: 1;
 }
 .downCurve{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 300px;
+    opacity: 1;
 }
-/* email, senha, nome, tipo_usuario(comprador), telefone(opcional)*/
+
+/* -------- Cabeçalho de cada etapa -------- */
+.cabecalhoEtapa{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    width: 100%;
+}
+.cabecalhoEtapa .titulo{
+    font-size: var(--fonte-titulo);
+}
+.subtitulo{
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+    text-align: center;
+}
+.botaoVoltar{
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--cor-bege-claro);
+    color: var(--cor-marrom-escuro-2);
+    cursor: pointer;
+    transition: background-color var(--transicao-rapida), transform var(--transicao-rapida);
+}
+.botaoVoltar:hover{
+    background-color: var(--cor-bege-destaque);
+    transform: translateX(-2px);
+}
+.botaoVoltar svg{ width: 18px; height: 18px; }
+
+/* -------- Indicador de etapas -------- */
+.stepIndicator{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+.stepDot{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--cor-texto-secundario);
+}
+.stepNumero{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fonte-pequena);
+    font-weight: 600;
+    background-color: var(--cor-bege-claro);
+    color: var(--cor-marrom-claro);
+    transition: background-color var(--transicao-normal), color var(--transicao-normal), box-shadow var(--transicao-normal);
+}
+.stepRotulo{
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+.stepDot.ativo .stepNumero{
+    background-color: var(--cor-azul-marinho);
+    color: var(--cor-texto-claro);
+    box-shadow: 0 0 0 4px rgba(18, 18, 68, 0.15);
+}
+.stepDot.ativo .stepRotulo{
+    color: var(--cor-marrom-escuro-2);
+    font-weight: 600;
+}
+.stepDot.concluido .stepNumero{
+    background-color: var(--cor-azul-medio);
+    color: var(--cor-azul-marinho);
+}
+.stepLinha{
+    flex: 1;
+    max-width: 70px;
+    height: 3px;
+    border-radius: 999px;
+    background-color: var(--cor-bege-claro);
+    position: relative;
+    overflow: hidden;
+    top: -12px;
+}
+.stepLinha::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 0%;
+    background-color: var(--cor-azul-marinho);
+    transition: width var(--transicao-lenta);
+}
+.stepLinha.preenchida::after{
+    width: 100%;
+}
+
+/* -------- Campos (input-group do Bootstrap) -------- */
+.inptLoginEmail{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.bi{
+    border: 1px solid #dee2e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    border-radius: 0.375rem 0rem 0rem 0.375rem;
+}
+
+.form-control:focus{
+    box-shadow: 0px 0px 2px 2px rgba(115, 174, 241, 0.142) !important;
+}
+.formText:focus{
+    outline: none;
+    border-color: var(--cor-azul-marinho) !important;
+    box-shadow: 0 0 0 4px rgba(18, 18, 68, 0.12);
+    z-index: 2;
+}
+
+/* estado de validação (aplicado via JS, apenas visual — não altera valores enviados) */
+.formText.is-valid,
+.formText.is-valid:focus{
+    border-color: var(--cor-azul-medio) !important;
+    background-color: rgba(131, 184, 255, 0.12);
+    background-image: none;
+}
+.formText.is-invalid,
+.formText.is-invalid:focus{
+    border-color: var(--cor-marrom-vermelhado) !important;
+    background-color: rgba(244, 58, 58, 0.182) !important;
+    background-image: none;
+}
+
+/* botão de mostrar/ocultar senha */
+.botaoOlho{
+    cursor: pointer;
+    transition: color var(--transicao-rapida);
+}
+.botaoOlho:hover{
+    color: var(--cor-azul-marinho);
+}
+
+.mensagemSenha{
+    width: 100%;
+    font-size: var(--fonte-muito-pequena);
+    text-align: left;
+    padding: 4px;
+    color: var(--cor-marrom-vermelhado);
+    transition: all var(--transicao-rapida);
+}
+.mensagemSenha.senhasConferem{
+    color: var(--cor-azul-marinho);
+}
+
+/* -------- Botões -------- */
+.botao{
+    gap: 8px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px -8px rgba(18, 18, 68, 0.45);
+}
+.botao:active{
+    transform: translateY(1px) scale(0.99);
+}
+.setaBotao{
+    width: 18px;
+    height: 18px;
+    transition: transform var(--transicao-rapida);
+}
+.botaoEntrar:hover .setaBotao{
+    transform: translateX(3px);
+}
+#submit{
+    border: none;
+}
+
+/* -------- Erros (mesma estrutura/IDs, apenas estilo refinado) -------- */
+.erroLoginContainer{
+    padding: 14px 22px 18px;
+    gap: 8px;
+    max-width: 90%;
+}
+.erroLoginContainer[style*="flex"]{
+    animation: cairErro 0.35s ease both;
+}
+.iconeErro{ width: 64px; }
+.errorLoginText h4{ font-size: var(--fonte-media); color: var(--cor-marrom-vermelhado); }
+.errorLoginText p{ font-size: var(--fonte-pequena); width: 90%; }
+
+/* -------- Etapas --------
+   O JS de envio (não alterado) define segundaSessao.style.display = 'grid'
+   ao avançar de etapa, então mantemos "grid" como o display usado aqui
+   para que o estilo inline aplicado por ele permaneça coerente com este
+   layout. */
+.primeiraSessao{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 22px;
+}
+.segundaSessao{
+    display: none;
+    grid-auto-flow: row;
+    justify-items: center;
+    align-items: stretch;
+    height: 100%;
+    width: 100%;
+    gap: 22px;
+}
+.segundaSessao>*, .primeiraSessao>*{
+    width: 100%;
+}
+
+/* -------- Responsivo -------- */
+@media (max-width: 1199px){
+    body{
+        justify-content: center;
+        padding: var(--espacamento-medio);
+    }
+}
+@media (max-width: 480px){
+    .formLoginContainer{
+        width: 100%;
+        padding: var(--espacamento-grande) var(--espacamento-medio);
+        border-radius: 16px;
+    }
+    .stepRotulo{ display: none; }
+    .upCurve, .downCurve{ display: none; }
+}
+

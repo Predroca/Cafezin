@@ -1,5 +1,5 @@
 async function registrarUser(email,senha,nome,telefone){
-    const response = await fetch('http://localhost:5000/register',{
+    const response = await fetch('http://localhost:5000/register/comprador',{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -8,7 +8,6 @@ async function registrarUser(email,senha,nome,telefone){
             "email":email,
             "senha":senha,
             "nome":nome,
-            "tipo_usuario":"Comprador",
             "telefone":telefone
         })
     })
