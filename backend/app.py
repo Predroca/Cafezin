@@ -6,6 +6,7 @@ from extensions import db, jwt
 from routes.auth_rotas import auth_bp
 from routes.catalogo_bp import catalogo_bp
 from routes.endereco import endereco_bp
+from routes.avaliacao_bp import avaliacao_bp
 
 from config import Config
 
@@ -24,6 +25,7 @@ jwt.init_app(app)
 app.register_blueprint(auth_bp)
 app.register_blueprint(catalogo_bp)
 app.register_blueprint(endereco_bp)
+app.register_blueprint(avaliacao_bp)
 
 
 @app.route("/health")
