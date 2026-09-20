@@ -9,27 +9,21 @@
     background-position: center;
     z-index: -1000;
 }
-.bodyCadastroOverlay{
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    padding: var(--espacamento-muito-grande);
-}
-.fraseBoasVindas{
-    font-family: 'Brasika', sans-serif;
+.bodyCadastro::after{
+    content: "";
     position: absolute;
-    top: 25%;
-    color: var(--cor-texto-claro);
-    font-size: var(--fonte-titulo);
-    line-height: 1.25;
-    max-width: 480px;
-    text-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    inset: 0;
+    background: linear-gradient(200deg, rgba(38,17,12,0.05) 30%, rgba(38,17,12,0.65) 100%);
+    pointer-events: none;
 }
 body{
     display: flex;
-    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100vh;
     width: 100%;
     position: relative;
+    z-index: 100000;
 }
 .formLoginContainer{
     max-width: 92%;
@@ -41,15 +35,13 @@ body{
     background-color: var(--cor-background);
     padding: var(--espacamento-extra-grande) var(--espacamento-extra-grande);
     border-radius: 22px;
-    right: 4vw;
     z-index: 999;
     box-shadow: 0 20px 60px -15px rgba(45, 28, 22, 0.35);
     border: 1px solid rgba(148, 70, 27, 0.08);
-    animation: entradaCartao 0.55s cubic-bezier(.2,.8,.25,1) both;
     overflow: hidden;
-    position: absolute;
-    top: 50%;
+    position: relative;
     transition: all 0.5s;
+    margin: auto;
 }
 
 .inputsContainer{
@@ -76,7 +68,7 @@ body{
     opacity: 1;
 }
 
-/* -------- Cabeçalho de cada etapa -------- */
+
 .cabecalhoEtapa{
     display: flex;
     flex-direction: column;
@@ -115,7 +107,7 @@ body{
 }
 .botaoVoltar svg{ width: 18px; height: 18px; }
 
-/* -------- Indicador de etapas -------- */
+
 .stepIndicator{
     display: flex;
     align-items: center;
@@ -182,7 +174,6 @@ body{
     width: 100%;
 }
 
-/* -------- Campos (input-group do Bootstrap) -------- */
 .inptLoginEmail{
     display: flex;
     justify-content: center;
@@ -198,30 +189,24 @@ body{
 }
 
 .form-control:focus{
-    box-shadow: 0px 0px 2px 2px rgba(115, 174, 241, 0.142) !important;
-}
-.formText:focus{
     outline: none;
-    border-color: var(--cor-azul-marinho) !important;
-    box-shadow: 0 0 0 4px rgba(18, 18, 68, 0.12);
+    border-color: rgba(115, 131, 235, 0.727) !important;
+    box-shadow: 0 0 0 4px rgba(182, 190, 244, 0.216) !important;
     z-index: 2;
 }
 
-/* estado de validação (aplicado via JS, apenas visual — não altera valores enviados) */
-.formText.is-valid,
-.formText.is-valid:focus{
+.form-control.is-valid,
+.form-control.is-valid:focus{
     border-color: var(--cor-azul-medio) !important;
     background-color: rgba(131, 184, 255, 0.12);
-    background-image: none;
 }
-.formText.is-invalid,
-.formText.is-invalid:focus{
+.form-control.is-invalid,
+.form-control.is-invalid:focus{
     border-color: var(--cor-marrom-vermelhado) !important;
     background-color: rgba(244, 58, 58, 0.182) !important;
     background-image: none;
 }
 
-/* botão de mostrar/ocultar senha */
 .botaoOlho{
     cursor: pointer;
     transition: color var(--transicao-rapida);
@@ -265,7 +250,6 @@ body{
     border: none;
 }
 
-/* -------- Erros (mesma estrutura/IDs, apenas estilo refinado) -------- */
 .erroLoginContainer{
     padding: 14px 22px 18px;
     gap: 8px;
@@ -278,11 +262,6 @@ body{
 .errorLoginText h4{ font-size: var(--fonte-media); color: var(--cor-marrom-vermelhado); }
 .errorLoginText p{ font-size: var(--fonte-pequena); width: 90%; }
 
-/* -------- Etapas --------
-   O JS de envio (não alterado) define segundaSessao.style.display = 'grid'
-   ao avançar de etapa, então mantemos "grid" como o display usado aqui
-   para que o estilo inline aplicado por ele permaneça coerente com este
-   layout. */
 .primeiraSessao{
     display: flex;
     flex-direction: column;
@@ -305,7 +284,7 @@ body{
     width: 100%;
 }
 
-/* -------- Responsivo -------- */
+
 @media (max-width: 1199px){
     body{
         justify-content: center;

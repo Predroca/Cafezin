@@ -1,49 +1,32 @@
-/* =========================================================
-   Tela de Login
-   Usa as variáveis de CSS.main.css. Os componentes (input-group,
-   form-control, botões) vêm do Bootstrap; aqui só ajustamos cores,
-   tamanhos e animações para manter a identidade visual da marca.
-========================================================= */
-
 *{
     font-family: "Poppins", sans-serif;
 }
 input::placeholder{
     font-size: 0.9rem;
 }
-
-.corpo{
+.bodyLogin{
+    position: fixed;
+    inset: 0;
     width: 100%;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-.body{
-    background-image: url(../img/telaLogin/Login.svg);
-    width:100%;
     height: 100%;
+    background-image: url(../img/telaLogin/Login.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
+    z-index: -1000;
+    transform-origin: center;
+}
+.bodyLogin::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(200deg, rgba(38,17,12,0.05) 30%, rgba(38,17,12,0.65) 100%);
+    pointer-events: none;
 }
 
-/* -------- Cartão do formulário -------- */
-.formLoginContainer{
-    height: fit-content;
-    min-width: 70%;
-    width: fit-content;
-    min-height: 80%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 2fr repeat(6, 1fr);
-    gap: 18px;
-    margin: auto;
-    animation: entradaCartao 0.5s cubic-bezier(.2,.8,.25,1) both;
-}
-.formLoginContainer>*{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.linhaEsqueciSenha{
+    width: 100%;
+    text-align: right;
 }
 
 .titulo{
@@ -64,53 +47,6 @@ input::placeholder{
     color: var(--cor-azul-marinho);
 }
 
-/* -------- Campos (input-group do Bootstrap) -------- */
-.inptLoginEmail{
-    height: 70%;
-    width: 100%;
-}
-.inptLoginEmail .iconeGrupo{
-    background-color: var(--cor-bege-claro);
-    border: solid 2px var(--cor-marrom-escuro-2);
-    color: var(--cor-marrom-claro);
-}
-.inptLoginEmail .formText{
-    border: solid 2px var(--cor-marrom-escuro-2);
-    border-left: none;
-    padding: var(--espacamento-medio);
-}
-.inptLoginEmail:has(.formText:focus-within) .iconeGrupo,
-.inptLoginEmail:focus-within .iconeGrupo{
-    border-color: var(--cor-azul-marinho);
-    color: var(--cor-azul-marinho);
-}
-.formText:focus{
-    outline: none;
-    border-color: var(--cor-azul-marinho) !important;
-    box-shadow: 0 0 0 4px rgba(18, 18, 68, 0.12);
-    z-index: 2;
-}
-.botaoOlho{
-    cursor: pointer;
-}
-.botaoOlho:hover{
-    color: var(--cor-azul-marinho);
-}
-
-/* estados de validação sem sair da paleta de cores do site */
-.formText.is-valid,
-.formText.is-valid:focus{
-    border-color: var(--cor-azul-medio) !important;
-    background-image: none;
-    box-shadow: 0 0 0 4px rgba(131, 184, 255, 0.2);
-}
-.formText.is-invalid,
-.formText.is-invalid:focus{
-    border-color: var(--cor-marrom-vermelhado) !important;
-    background-image: none;
-    box-shadow: 0 0 0 4px rgba(51, 19, 3, 0.12);
-}
-
 .hr{
     height: 3px;
     width: 80%;
@@ -120,10 +56,8 @@ input::placeholder{
     opacity: 1;
 }
 
-/* -------- Botão principal -------- */
+
 .botao{
-    min-height: 70%;
-    height: fit-content;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -160,7 +94,7 @@ input::placeholder{
     color: var(--cor-azul-marinho);
 }
 
-/* -------- Alerta de erro -------- */
+
 .erroLoginContainer{
     position: absolute;
     left: 50%;
@@ -214,17 +148,4 @@ input::placeholder{
     bottom: 0;
     border-radius: 20px;
     animation: timingToRight ease-out 4s;
-}
-
-/* -------- Responsivo -------- */
-@media (max-width: 1199px){
-    .corpo{
-        grid-template-columns: 1fr;
-    }
-}
-@media (max-width: 480px){
-    .formLoginContainer{
-        min-width: 92%;
-        padding: 0 var(--espacamento-medio);
-    }
 }

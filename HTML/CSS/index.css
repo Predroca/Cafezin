@@ -400,7 +400,7 @@ li{
     transition: var(--transicao-lenta);
     border: solid 4px var(--cor-laranja);
     padding: var(--espacamento-medio);
-    border-radius: var(--borda-arredondada-pequena);
+    border-radius: 50px;
     color: var(--cor-laranja);
 }
 .carouselContainer{
