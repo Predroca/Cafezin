@@ -8,6 +8,7 @@ Rotas (agora em JSON, sem templates):
 
 from datetime import datetime
 
+from sqlalchemy import func
 from flask import Blueprint, request
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -21,6 +22,8 @@ from models.comprador import Comprador
 from models.pagamento import Pagamento
 from models.pedido import Pedido
 from models.item_pedido import ItemPedido
+from models.produto_popularidade import ProdutoPopularidade
+from models.avaliacao_produto import AvaliacaoProduto
 
 catalogo_bp = Blueprint("catalogo", __name__)
 
@@ -152,4 +155,35 @@ def pedido_confirmacao(cod_pedido):
             }
             for item in pedido.itens
         ],
+    }
+
+
+NOTA_MINIMA = 3
+
+@catalogo_bp.route("/produtos/populares", methods=["GET"])
+def produtos_populares():
+    limite = request.args.get("limite", default=10, type=int)
+
+    resultados = (
+        db.session.query(Produto, ProdutoPopularidade.total_vendido)
+        .join(ProdutoPopularidade, Produto.cod_produto == ProdutoPopularidade.cod_produto)
+        .join(AvaliacaoProduto, Produto.cod_produto == AvaliacaoProduto.cod_produto)
+        .filter(Produto.disponibilidade.is_(True))
+        .group_by(Produto.cod_produto, ProdutoPopularidade.total_vendido)
+        .having(func.avg(AvaliacaoProduto.nota) >= NOTA_MINIMA)
+        .order_by(ProdutoPopularidade.total_vendido.desc())
+        .limit(limite)
+        .all()
+    )
+
+    return {
+        "produtos": [
+            {
+                "cod_produto": p.cod_produto,
+                "nome": p.nome,
+                "preco": float(p.preco),
+                "total_vendido": total_vendido,
+            }
+            for p, total_vendido in resultados
+        ]
     }
