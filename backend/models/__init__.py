@@ -13,6 +13,7 @@ from .entrega import Entrega
 from .avaliacao_entregador import AvaliacaoEntregador
 from .avaliacao_loja import AvaliacaoLoja
 from .avaliacao_produto import AvaliacaoProduto
+from .produto_popularidade import ProdutoPopularidade
  
 __all__ = [
     "Usuario",
@@ -30,5 +31,6 @@ __all__ = [
     "AvaliacaoEntregador",
     "AvaliacaoLoja",
     "AvaliacaoProduto",
+    "ProdutoPopularidade"
 ]
  
