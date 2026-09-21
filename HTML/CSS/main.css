@@ -113,6 +113,82 @@
     --transicao-lenta: 0.5s;
 }
 
+/* =====================
+    CSS DO FOOTER
+===================== */
+
+footer a {
+  text-decoration: none;
+  color: var(--cor-background-bege);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer .titulo {
+  font-family: "Brasika", sans-serif;
+  font-size: var(--fonte-grande);
+}
+
+footer .logo {
+  font-size: var(--fonte-media);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+footer{
+    background-color: var(--cor-marrom-claro);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    margin-top: var(--espacamento-padrao);
+    padding: var(--espacamento-grande) 0;
+}
+
+.footerSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: var(--cor-texto-claro-alternativo);
+    text-align: center;
+}
+
+.footerSection .titulo{
+    width: 100%;
+    text-align: center;
+}
+
+.footerSectionLists{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espacamento-grande);
+    padding: 0;
+    margin: 0;
+}
+
+.footerSectionLists li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    width: 100%;
+    text-align: center;
+}
+
+.footerSectionLists li img{
+    height: 30px;
+    width: auto;
+}
+
 *{
    padding: 0;
    margin: 0;
