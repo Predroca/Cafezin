@@ -104,10 +104,11 @@
 
 .textoSacola {
   font-size: var(--fonte-media);
-  margin-top: 2.5px;
-  margin-left: 10px;
   text-align: justify;
+  margin-top: 22%;
+  margin-left: 10%;
 }
+
 
 .perfilBotao {
   display: flex;
