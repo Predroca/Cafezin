@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerencie sua loja, seus produtos e seus pedidos no Cafézin.">
+    <title>Cafézin | Painel da loja</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexLoja.css">
+</head>
+<body id="topo">
+
+    <header class="navLoja">
+        <div class="container navLojaConteudo">
+            <a class="logoLoja" href="#topo" aria-label="Cafézin - painel da loja">Cafézin <span>Loja</span></a>
+
+            <nav class="navLinks" aria-label="Navegação do painel">
+                <a class="ativo" href="#painel">Painel</a>
+                <a href="#pedidos">Pedidos</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#minhaLoja">Minha loja</a>
+            </nav>
+
+            <div class="navAcoes">
+
+                <a class="notificacao" href="#pedidos" aria-label="3 pedidos aguardando">
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+
+                <a class="perfilLoja" href="#minhaLoja" aria-label="Abrir dados da loja">
+                    <i class="bi bi-shop" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="painelLoja" id="painel">
+            <div class="container painelConteudo">
+
+                <div class="painelTexto">
+                    <p class="painelSaudacao">Boa tarde, Boutique dos Pães</p>
+
+                    <h1>Fique por dentro do<br>que está acontecendo<br><span>agora</span></h1>
+
+                    <p>
+                        Acompanhe pedidos, atualize seu cardápio e cuide da sua loja com facilidade aqui.
+                    </p>
+                </div>
+
+                <div
+                    class="placeholderFoto painelFoto"
+                    role="img"
+                    aria-label="Espaço reservado para foto da fachada da loja"
+                >
+                    <i class="bi bi-shop-window"></i>
+                    <strong>Foto da loja</strong>
+                    <small>fachada ou balcão</small>
+                </div>
+
+            </div>
+
+            <div class="container">
+                <div class="listaEstatisticas">
+
+                    <div class="estat ">
+                        <i class="bi bi-receipt"></i>
+                        <div>
+                            <strong>18</strong>
+                            <span>Pedidos hoje</span>
+                        </div>
+                    </div>
+
+                    <div class="estat  destaque">
+                        <i class="bi bi-cash-coin"></i>
+                        <div>
+                            <strong>R$ 612,40</strong>
+                            <span>Faturado hoje</span>
+                        </div>
+                    </div>
+
+                    <div class="estat ">
+                        <i class="bi bi-box-seam"></i>
+                        <div>
+                            <strong>24</strong>
+                            <span>Produtos ativos</span>
+                        </div>
+                    </div>
+
+                    <div class="estat ">
+                        <i class="bi bi-star-fill"></i>
+                        <div>
+                            <strong>4,9</strong>
+                            <span>Avaliação média</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="secaoPadrao" id="pedidos" aria-labelledby="titulo-pedidos">
+            <div class="container">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-pedidos">Pedidos em andamento</h2>
+                        <p>Confirme, prepare e despache sem perder o ritmo.</p>
+                    </div>
+
+                    <a class="linkSecao" href="#">
+                        Ver histórico
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="listaPedidos">
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <span class="statusBadge novo">Pendente</span>
+                            <time>Há 2 min</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                            <div class="pedidoAcoes">
+                                <button type="button" class="botaoSecundario">Recusar</button>
+                                <button type="button" class="botaoPrimario">Aceitar</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <span class="statusBadge preparo">Em preparo</span>
+                            <time>Há 9 min</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            <div class="pedidoAcoes">
+                                <button type="button" class="botaoPrimario">
+                                    Marcar como pronto
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <span class="statusBadge pronto">Em andamento</span>
+                            <time>Há 14 min</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+
+                            <div class="pedidoAcoes">
+                                <button type="button" class="botaoSecundario">
+                                    Marcar como entregue
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="secaoPadrao secaoAlternada"
+            id="produtos"
+            aria-labelledby="titulo-produtos"
+        >
+            <div class="container">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-produtos">Seu cardápio</h2>
+                        <p>Ative, edite ou pause produtos a qualquer momento.</p>
+                    </div>
+
+                    <a class="linkSecao" href=" apio.html">
+                        <i class="bi bi-plus-circle"></i>
+                        Adicionar produto
+                    </a>
+                </div>
+
+                <div class="filtrosProdutos">
+                    <button type="button" class="ativo">Todos</button>
+                    <button type="button">Cafés</button>
+                    <button type="button">Doces</button>
+                    <button type="button">Bolos</button>
+                    <button type="button">Salgados</button>
+                    <button type="button">Bebidas</button>
+                    <button type="button">Pães</button>
+                    <button type="button">Indisponíveis</button>
+                </div>
+
+                <div class="listaProdutosLoja">
+
+                    <!-- Produto 1 -->
+                    <article class="produto Loja">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja dourada"
+                            role="img"
+                            aria-label="Espaço para foto do pão de queijo"
+                        >
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Pão de queijo artesanal</h3>
+
+                                <div class="disponibilidade">
+                                    <span>Disponível:</span>
+                                    <label class="miniToggle">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p>Porção com 6 unidades</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 14,50</strong>
+
+                                <div class="produtoAcoes">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!-- Produto 2 -->
+                    <article class="produto Loja">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja"
+                            role="img"
+                            aria-label="Espaço para foto do chocolate quente"
+                        >
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Chocolate quente cremoso</h3>
+
+                                <div class="disponibilidade">
+                                    <span>Disponível:</span>
+                                    <label class="miniToggle">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p>Com chocolate meio amargo</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 15,00</strong>
+
+                                <div class="produtoAcoes">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!-- Produto 3 -->
+                    <article class="produto Loja pausado">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja rosa"
+                            role="img"
+                            aria-label="Espaço para foto do bolo caseiro"
+                        >
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Bolo de cenoura caseiro</h3>
+
+                                <div class="disponibilidade">
+                                    <span>Disponível:</span>
+                                    <label class="miniToggle">
+                                        <input type="checkbox">
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p>Fatia generosa e fofinha</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 9,90</strong>
+
+                                <div class="produtoAcoes">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                    <!-- Produto 4 -->
+                    <article class="produto Loja">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja azul"
+                            role="img"
+                            aria-label="Espaço para foto do cappuccino"
+                        >
+                            <i class="bi bi-image"></i>
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Cappuccino cremoso</h3>
+
+                                <div class="disponibilidade">
+                                    <span>Disponível:</span>
+                                    <label class="miniToggle">
+                                        <input type="checkbox" checked>
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <p>Espresso, leite e espuma</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 12,90</strong>
+
+                                <div class="produtoAcoes">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+
+                </div>
+            <button type="button" class="botaoPrimario" id="botaoDisponibilidade">Salvar disponibilidade</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <section class="logo titulo footerSection">
+            Cafézin
+        </section>
+
+        <section class="footerSection">
+            <div class="titulo">Sua loja</div>
+
+            <ul class="footerSectionLists">
+                <li>
+                    <a href="#produtos">Gerenciar cardápio</a>
+                </li>
+
+                <li>
+                    <a href="#pedidos">Pedidos</a>
+                </li>
+
+                <li>
+                    <a href="canalAtendimento.html">Fale conosco</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="footerSection">
+            <div class="titulo">Contato</div>
+
+            <ul class="footerSectionLists">
+                <li>
+                    <img
+                        src="icones/iconesEmpresas/Instagram.svg"
+                        alt="Instagram"
+                    >
+                    @CafezinDSA
+                </li>
+
+                <li>
+                    <img
+                        src="icones/iconesEmpresas/Whatsapp.svg"
+                        alt="WhatsApp"
+                    >
+                    (34) 9 9999-9999
+                </li>
+            </ul>
+        </section>
+
+    </footer>
+
+</body>
+</html>
