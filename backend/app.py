@@ -26,7 +26,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(catalogo_bp)
 app.register_blueprint(endereco_bp)
 app.register_blueprint(avaliacao_bp)
-
+app.register_blueprint(produtoRegistro_bp)
 
 @app.route("/health")
 def health():
