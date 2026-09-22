@@ -1,380 +1,187 @@
 <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="CSS/main.css">
-  <link rel="stylesheet" href="CSS/IndexComp.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peça cafés, pães e doces pelo Cafézin.">
+    <title>Cafézin | Início</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexComp.css">
 </head>
+<body id="topo">
 
-<body>
- 
-  <header class="headerComprador">
-    <div class="logo">
-      <img src="img/indexComprador/Logo.svg" class="imagemLogo">
-    </div>
-    <div class="pesquisa">
-      <form class="formPesquisa">
-        <input class="barraPesquisa" type="text" placeholder="Pesquise por um produto ou loja aqui ...">
-        <button class="botaoPesquisa">
-          <img src="img/indexComprador/Lupa.svg" class="lupa">
-        </button>
-      </form>
-    </div>
-    <div class="sacola">
-      <button class="sacolaBotao" onclick="window.location.href='Sacola.html'">
-        <img src="img/indexComprador/Sacola.svg">
-        <p class="textoSacola"> Ver Sacola </p>
-      </button>
-    </div>
-    <button class="perfilBotao" onclick="window.location.href='PerfilComprador.html'">
-      <img src="img/indexComprador/FotoPerfil.svg" class="fotoPerfil">
-    </button>
-    ㅤ
-  </header>
-  <br>
+    <!-- Cabeçalho fixo: mantém a busca acessível em toda a navegação. -->
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="#topo" aria-label="Cafézin - página inicial">Cafézin</a>
 
-  <section class="anuncio">
-    <div class="videoAnun">
-      <div class="mensagem">
-        <span class="mensagemTexto"> Para começar o dia bem, que tal um <h1><u>Cafézin</u> ?</h1></span>
-        <button class="mensagemBotaoProdutos" onclick="window.location.href='#ProdutosRedirecionado'">Ver produtos</button>
-        <div class="espacamentoMenor"> </div>
-        <button class="mensagemBotaoLojas" onclick="window.location.href='#LojasRedirecionado'">Ver lojas</button>
-      </div>
+            <form class="buscaCabecalho" role="search">
+                <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input id="busca" type="search" placeholder="Busque por café, bolo ou cafeteria">
+                <button type="submit" aria-label="Pesquisar">
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
 
-      <video autoplay muted loop>
-        <source src="img/indexComprador/LatteAnun.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </section>
-  <div class="espacamento"></div>
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a class="ativo" href="#inicio">Início</a>
+                <a href="#cafeterias">Cafeterias</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#pedidos">Pedidos</a>
+            </nav>
 
-  <section class="produtosCategoria">
-    <div class="ExibTexto">
-      <h1 class="ExibH1"> Pesquisar por categoria </h1>
-      <p class="ExibP"> <u>Ver todas </u>&nbsp;> </p>
-    </div>
-
-    <div class="produtosCategoriaExib">
-      <img src="img/indexComprador/Café.svg">
-      <img src="img/indexComprador/Pães.svg">
-      <img src="img/indexComprador/Salgados.svg">
-      <img src="img/indexComprador/Doces.svg">
-      <img src="img/indexComprador/Bolos.svg">
-      <img src="img/indexComprador/Bebidas.svg">
-      <img src="img/indexComprador/MaisProdutos.svg">
-    </div>
-  </section>
-  <div class="espacamento"id="ProdutosRedirecionado"></div>
-
-  <div class="ExibTextoVerMais">
-    <h1 class="ExibH1"> Cafeterias abertas agora </h1>
-  </div>
-  <div class="espacamento"></div>
-
-  <section class="visualizarLoja">
-    <div class="lojaExib">
-      <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-
-      <div class="lojaExibInfos">
-        <div class="lojaNome">
-          Boutique dos pães
-        </div>
-
-        <div class="entregaInfo">
-          <img src="img/indexComprador/EntregaIcon.svg">
-          <b> 55-60 mins </b> &nbsp; • 12 km
-        </div>
-        <div class="entregaPreco">
-          Grátis
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="visualizarLojaProdutos">
-    <p class="ExibP2"> <u>Ver todos</u>&nbsp; > </p>
-
-    <div class="visualizarProdutos">
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplaresUltimo">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-    </div>
-  </section>
-
-  <!--começo-->
-  <div class="espacamento"></div>
-  <section class="visualizarLoja">
-    <div class="lojaExib">
-      <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-
-      <div class="lojaExibInfos">
-        <div class="lojaNome">
-          Boutique dos pães
-        </div>
-
-        <div class="entregaInfo">
-          <img src="img/indexComprador/EntregaIcon.svg">
-          <b> 55-60 mins </b> &nbsp; • 12 km
-        </div>
-        <div class="entregaPreco">
-          Grátis
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="visualizarLojaProdutos">
-    <p class="ExibP2"> <u>Ver todos</u>&nbsp; > </p>
-
-    <div class="visualizarProdutos">
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplares">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-      <section class="visualizarProdutosExemplaresUltimo">
-        <div class="exemplaresFoto"></div>
-        <div class="exemplaresTexto">
-          <h1> Chocolate quente cremoso </h1>
-          <span> Chocolate quente feito com leite integral e chocolate meio amargo</span>
-        </div>
-        <div class="exemplaresPedir">
-          <h1> R$ 15,00 </h1>
-          <button> <img src="img/indexComprador/Adicionar+.svg" class="imagemAdicionar"> </button>
-        </div>
-      </section>
-
-    </div>
-  </section>
-  <!--fim-->
-  <div class="espacamento" id="LojasRedirecionado"></div>
-
-  <div class="ExibTextoVerMais">
-    <h1 class="ExibH1"> Descubra lojas </h1>
-    <p class="ExibP"> <u>Ver todas </u>&nbsp;> </p>
-  </div>
-
-  <section class="descobrirLojas">
-
-    <div class="visualizarLojasDescobertasPrimeira">
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
+            <div class="navAcoes">
+                <a class="sacola" href="Sacola.html" aria-label="Sacola com três itens">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
             </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
         </div>
-      </section>
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
-            </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    </header>
 
-    <!--começo-->
-    <div class="visualizarLojasDescobertas">
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
-            </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
-            </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    <main>
+        <!-- Apresentação -->
+        <section class="heroComprador" id="inicio">
+            <div class="container heroConteudo">
+                <div class="heroTexto">
+                    <p class="heroSaudacao">Olá, Ana!</p>
+                    <h1>Para começar bem o dia,<br>que tal um <span>Cafézin</span>?</h1>
+                    <p>Encontre cafeterias, pães e doces preparados pertinho de você.</p>
 
-    <!--meio-->
-    <div class="visualizarLojasDescobertasUltima">
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
-            </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="visualizarLojaDescoberta">
-        <div class="lojaExib">
-          <img src="img/indexComprador/Cafeteria1Icon.svg" class="cafeteria1Icon">
-          <div class="lojaExibInfos">
-            <div class="lojaNome">
-              Boutique dos pães
-            </div>
-            <div class="entregaInfo">
-              <img src="img/indexComprador/EntregaIcon.svg">
-              <b> 55-60 mins </b> &nbsp; • 12 km
-            </div>
-            <div class="entregaPreco">
-              Grátis
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <!--fim-->
+                    <div class="heroVantagens">
+                        <span><i class="bi bi-bicycle"></i> Entrega rápida</span>
+                        <span><i class="bi bi-star-fill"></i> Lojas bem avaliadas</span>
+                    </div>
+                </div>
 
-  </section>
+                <!-- Substitua este bloco por uma imagem de destaque quando houver uma. -->
+                <div class="placeholderFoto heroFoto" role="img" aria-label="Espaço reservado para foto de destaque">
+                    <i class="bi bi-image"></i>
+                    <strong>Foto de destaque</strong>
+                    <small>cafés, pães ou ambiente</small>
+                </div>
+            </div>
+        </section>
 
+        <!-- Categorias -->
+        <section class="secaoPadrao" aria-labelledby="titulo-categorias">
+            <div class="container">
+                <div class="cabecalhoSecao">
+                    <h2 id="titulo-categorias">Peça por categoria</h2>
+                    <p>Escolha o que combina com seu momento.</p>
+                </div>
 
-  <footer>
-    <section class="logo titulo footerSection">
-      Cafézin
-    </section>
+                <div class="listaCategorias">
+                    <a class="categoria" href="#produtos"><span><img src="img/indexComprador/Café.svg" alt=""></span><b>Cafés</b></a>
+                    <a class="categoria doce" href="#produtos"><span><img src="img/indexComprador/Doces.svg" alt=""></span><b>Doces</b></a>
+                    <a class="categoria bolo" href="#produtos"><span><img src="img/indexComprador/Bolos.svg" alt=""></span><b>Bolos</b></a>
+                    <a class="categoria salgado" href="#produtos"><span><img src="img/indexComprador/Salgados.svg" alt=""></span><b>Salgados</b></a>
+                    <a class="categoria bebida" href="#produtos"><span><img src="img/indexComprador/Bebidas.svg" alt=""></span><b>Bebidas</b></a>
+                    <a class="categoria pao" href="#produtos"><span><img src="img/indexComprador/Pães.svg" alt=""></span><b>Pães</b></a>
+                </div>
+            </div>
+        </section>
 
-    <section class="footerSection">
-      <div class="titulo">Sobre nós</div>
-      <ul class="footerSectionLists">
-        <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
-        <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
-        <li><a href="canalAtendimento.html">Fale Conosco</a></li>
-        <li><a href="cafeDev.html">CaféDev</a></li>
-      </ul>
-    </section>
-    <section class="footerSection">
-      <div class="titulo">Contato</div>
-      <ul class="footerSectionLists">
-        <li>Redes sociais</li>
-        <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">@CafezinDSA</li>
-        <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter">@cafezin_dsa</li>
-        <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="Whatsapp">(34) 9 9999-9999</li>
-      </ul>
-    </section>
-  </footer>
+        <!-- Filtros visuais -->
+        <section class="secaoFiltros" aria-label="Filtros de lojas">
+            <div class="container filtros">
+                <span>Encontre seu favorito:</span>
+                <a href="#cafeterias"><i class="bi bi-truck"></i> Entrega grátis</a>
+                <a href="#cafeterias"><i class="bi bi-clock"></i> Até 30 min</a>
+                <a href="#cafeterias"><i class="bi bi-star"></i> Mais bem avaliadas</a>
+                <a href="#cafeterias"><i class="bi bi-cup-hot"></i> Café especial</a>
+            </div>
+        </section>
 
+        <!-- Lojas -->
+        <section class="secaoPadrao" id="cafeterias" aria-labelledby="titulo-cafeterias">
+            <div class="container">
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-cafeterias">Cafeterias em destaque</h2>
+                        <p>Preparadas para receber seu pedido.</p>
+                    </div>
+                    <a class="linkSecao" href="#">Ver todas <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+                <div class="listaLojas">
+                    <article class="lojaCard">
+                        <div class="placeholderFoto capaLoja" role="img" aria-label="Espaço para foto da Boutique dos Pães"><i class="bi bi-image"></i><span>Foto da loja</span></div>
+                        <div class="logoLoja">BP</div>
+                        <button class="favoritar" aria-label="Favoritar Boutique dos Pães"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Boutique dos Pães</h3><p>Padaria · Cafeteria</p><small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 20–35 min · R$ 3,99</small><b>Entrega grátis acima de R$ 25</b></div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="placeholderFoto capaLoja verde" role="img" aria-label="Espaço para foto da Grão e Cia"><i class="bi bi-image"></i><span>Foto da loja</span></div>
+                        <div class="logoLoja clara">G&amp;C</div>
+                        <button class="favoritar" aria-label="Favoritar Grão e Cia"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Grão &amp; Cia</h3><p>Cafeteria · Doceria</p><small><strong><i class="bi bi-star-fill"></i> 4,8</strong> · 25–40 min · R$ 4,99</small><b>Café especial da casa</b></div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="placeholderFoto capaLoja terracota" role="img" aria-label="Espaço para foto do Café Retiro"><i class="bi bi-image"></i><span>Foto da loja</span></div>
+                        <div class="logoLoja escura">CR</div>
+                        <button class="favoritar" aria-label="Favoritar Café Retiro"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Café Retiro</h3><p>Cafeteria artesanal</p><small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 15–25 min · R$ 2,99</small><b>10% no primeiro pedido</b></div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="placeholderFoto capaLoja escuro" role="img" aria-label="Espaço para foto do Empório do Café"><i class="bi bi-image"></i><span>Foto da loja</span></div>
+                        <div class="logoLoja marrom">EC</div>
+                        <button class="favoritar" aria-label="Favoritar Empório do Café"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Empório do Café</h3><p>Cafeteria · Padaria</p><small><strong><i class="bi bi-star-fill"></i> 4,7</strong> · 30–45 min · R$ 5,99</small><b>Frete grátis para você</b></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner promocional -->
+        <section class="bannerPromocao">
+            <div class="container bannerConteudo">
+                <i class="bi bi-bicycle" aria-hidden="true"></i>
+                <div><span>Só hoje</span><h2>Frete grátis para começar bem.</h2><p>Em pedidos acima de R$ 25 nas lojas participantes.</p></div>
+                <a href="#cafeterias">Aproveitar <i class="bi bi-arrow-up-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Produtos -->
+        <section class="secaoPadrao" id="produtos" aria-labelledby="titulo-produtos">
+            <div class="container">
+                <div class="cabecalhoSecao linha">
+                    <div><h2 id="titulo-produtos">Mais pedidos no Cafézin</h2><p>Uma seleção para pedir agora.</p></div>
+                    <a class="linkSecao" href="#">Ver produtos <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+                <div class="listaProdutos">
+                    <article class="produtoCard"><div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Empório do Café</p><h3>Chocolate quente cremoso</h3><span>Com chocolate meio amargo</span><strong>R$ 15,00</strong></div><button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button></article>
+                    <article class="produtoCard"><div class="placeholderFoto fotoProduto dourada" role="img" aria-label="Espaço para foto do pão de queijo"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Boutique dos Pães</p><h3>Pão de queijo artesanal</h3><span>Porção com 6 unidades</span><strong>R$ 14,50</strong></div><button class="adicionar" aria-label="Adicionar pão de queijo"><i class="bi bi-plus-lg"></i></button></article>
+                    <article class="produtoCard"><div class="placeholderFoto fotoProduto azul" role="img" aria-label="Espaço para foto do cappuccino"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Grão &amp; Cia</p><h3>Cappuccino cremoso</h3><span>Espresso, leite e espuma</span><strong>R$ 12,90</strong></div><button class="adicionar" aria-label="Adicionar cappuccino"><i class="bi bi-plus-lg"></i></button></article>
+                    <article class="produtoCard"><div class="placeholderFoto fotoProduto rosa" role="img" aria-label="Espaço para foto do bolo caseiro"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Café Retiro</p><h3>Bolo caseiro do dia</h3><span>Fatia generosa e fofinha</span><strong>R$ 9,90</strong></div><button class="adicionar" aria-label="Adicionar bolo"><i class="bi bi-plus-lg"></i></button></article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pedido recente -->
+        <section class="secaoEscura" id="pedidos" aria-labelledby="titulo-pedidos">
+            <div class="container pedidoRecente">
+                <div class="pedidoIcone"><i class="bi bi-arrow-repeat"></i></div>
+                <div><p>Um favorito seu</p><h2 id="titulo-pedidos">Que tal pedir de novo?</h2><span>Seu cappuccino cremoso da Grão &amp; Cia está te esperando.</span></div>
+                <a href="Sacola.html">Pedir novamente</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <section class="logo titulo footerSection">Cafézin</section>
+        <section class="footerSection"><div class="titulo">Sobre nós</div><ul class="footerSectionLists"><li><a href="cadastrarLoja.html">Cadastre sua loja</a></li><li><a href="cadastrarEntregador.html">Seja entregador</a></li><li><a href="canalAtendimento.html">Fale conosco</a></li></ul></section>
+        <section class="footerSection"><div class="titulo">Contato</div><ul class="footerSectionLists"><li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">@CafezinDSA</li><li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">(34) 9 9999-9999</li></ul></section>
+    </footer>
 </body>
+</html>
