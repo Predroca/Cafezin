@@ -65,7 +65,7 @@ def registrar_endereco(nome , cod_loja):
 
         return {"message": "produto criado", "cod_produto": end.cod_produto}, 201
     
-@produtoRegistro_bp.route("/deletar_produto/<int:cod_produto>", methods=["DELETE"])
+@produtoRegistro_bp.route("/deletar_produto/<int:cod_produto>", methods=["DELETE"]) #não usem essa rota a não ser em ultimo caso , pode deletar metade do banco de dados
 def deletar_produto(cod_produto):
 
     product = Produto.query.filter_by(cod_produto = cod_produto).first()
