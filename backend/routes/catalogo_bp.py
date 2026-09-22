@@ -187,3 +187,63 @@ def produtos_populares():
             for p, total_vendido in resultados
         ]
     }
+
+
+NOTA_MINIMA = 3
+LIMITE_PRODUTOS_POR_LOJA = 6
+
+@catalogo_bp.route("/lojas/populares", methods=["GET"])
+def lojas_populares():
+    limite = request.args.get("limite", default=3, type=int)
+    offset = request.args.get("offset", default=0, type=int)
+    incluir_produtos = request.args.get("incluir_produtos", default="true") == "true"
+
+    resultados = (
+        db.session.query(
+            Loja,
+            Usuario.nome,
+            LojaPopularidade.total_vendido,
+            func.avg(AvaliacaoLoja.nota).label("nota_media"),
+            func.count(AvaliacaoLoja.cod_avaliacao_loja).label("total_avaliacoes"),
+        )
+        .join(Usuario, Loja.cod_usuario == Usuario.cod_usuario)
+        .join(LojaPopularidade, Loja.cod_loja == LojaPopularidade.cod_loja)
+        .join(Pedido, Loja.cod_loja == Pedido.cod_loja)
+        .join(AvaliacaoLoja, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+        .group_by(Loja.cod_loja, Usuario.nome, LojaPopularidade.total_vendido)
+        .having(func.avg(AvaliacaoLoja.nota) >= NOTA_MINIMA)
+        .order_by(LojaPopularidade.total_vendido.desc())
+        .limit(limite)
+        .offset(offset)
+        .all()
+    )
+
+    lojas_json = []
+    for loja, nome, total_vendido, nota_media, total_avaliacoes in resultados:
+        loja_dict = {
+            "cod_loja": loja.cod_loja,
+            "nome": nome,
+            "total_vendido": total_vendido,
+            "nota_media": round(float(nota_media), 1),
+            "total_avaliacoes": total_avaliacoes,
+        }
+
+        if incluir_produtos:
+            produtos = (
+                Produto.query.filter_by(cod_loja=loja.cod_loja, disponibilidade=True)
+                .limit(LIMITE_PRODUTOS_POR_LOJA)
+                .all()
+            )
+            loja_dict["produtos"] = [
+                {
+                    "cod_produto": p.cod_produto,
+                    "nome": p.nome,
+                    "preco": float(p.preco),
+                    "foto_url": p.foto_url,
+                }
+                for p in produtos
+            ]
+
+        lojas_json.append(loja_dict)
+
+    return {"lojas": lojas_json}
