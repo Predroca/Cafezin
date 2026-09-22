@@ -437,6 +437,21 @@ button, input, select, textarea { font: inherit; }
 
 /* Filtros de produtos */
 
+.produtoLoja,
+.produto.Loja {
+    overflow: hidden;
+
+    border: 1px solid rgba(75, 54, 42, .12);
+
+    border-radius: var(--borda-arredondada-media);
+
+    background: var(--cor-background);
+
+    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
+
+    transition: opacity var(--transicao-rapida);
+}
+
 .filtrosProdutos {
     display: flex;
     gap: 10px;
