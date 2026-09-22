@@ -155,3 +155,68 @@ def deletar_produto(cod_produto):
     else:
         return{"message" : "Produto não encontrado."}
 
+@loja_bp.route("/loja/pedidos", methods=["GET"])
+@jwt_required()
+def listar_pedidos_loja():
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "essa loja nem existe"}, 404
+
+    status_filtro = request.args.getlist("status")
+
+    query = Pedido.query.filter_by(cod_loja=loja.cod_loja)
+    if status_filtro:
+        query = query.filter(Pedido.status.in_(status_filtro))
+    else:
+        query = query.filter(Pedido.status.in_(["Pendente", "Em preparo", "Em andamento"]))
+
+    pedidos = query.order_by(Pedido.data_pedido.asc()).all()
+
+    return {
+        "pedidos": [
+            {
+                "cod_pedido": p.cod_pedido,
+                "status": p.status,
+                "data_pedido": p.data_pedido.isoformat(),
+                "valor_total": float(p.valor_total),
+                "comprador": p.comprador.usuario.nome,
+                "itens": [
+                    {"produto": i.produto.nome, "quantidade": i.quantidade}
+                    for i in p.itens
+                ],
+            }
+            for p in pedidos
+        ]
+    }
+
+TRANSICOES_VALIDAS = {
+    "Pendente": {"aceitar": "Em preparo", "recusar": "Cancelado"},
+    "Em preparo": {"pronto": "Em andamento"},
+    "Em andamento": {"entregue": "Entregue"},
+}
+
+
+@loja_bp.route("/loja/pedidos/<int:cod_pedido>/status", methods=["PATCH"])
+@jwt_required()
+def atualizar_status_pedido(cod_pedido):
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "não achei a loja"}, 404
+
+    pedido = Pedido.query.get_or_404(cod_pedido)
+    if pedido.cod_loja != loja.cod_loja:
+        return {"error": "pedido não pertence a esta loja"}, 403
+
+    dados = request.get_json()
+    acao = dados.get("acao")
+
+    transicoes = TRANSICOES_VALIDAS.get(pedido.status, {})
+    novo_status = transicoes.get(acao)
+
+    if novo_status is None:
+        return {"error": f"ação '{acao}' inválida pra isso aqui '{pedido.status}'"}, 400
+
+    pedido.status = novo_status
+    db.session.commit()
+
+    return {"cod_pedido": pedido.cod_pedido, "status": pedido.status}
