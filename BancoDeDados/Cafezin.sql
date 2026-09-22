@@ -201,6 +201,20 @@ CREATE TABLE AvaliacaoProduto (
         REFERENCES Comprador(cod_comprador)
 );
 
+CREATE TABLE ProdutoPopularidade (
+    cod_produto INT PRIMARY KEY,
+    total_vendido INT NOT NULL DEFAULT 0,
+    atualizado_em DATETIME NOT NULL,
+    FOREIGN KEY (cod_produto) REFERENCES Produto(cod_produto)
+);
+
+CREATE TABLE LojaPopularidade (
+    cod_loja INT PRIMARY KEY,
+    total_vendido INT NOT NULL DEFAULT 0,
+    atualizado_em DATETIME NOT NULL,
+    FOREIGN KEY (cod_loja) REFERENCES Loja(cod_loja)
+);
+
 
 -- =========================================================
 -- USUARIO
