@@ -179,6 +179,7 @@ button, input, select { font: inherit; }
 }
 
 .cardResumo:hover{
+    cursor:pointer;
     transform: translateY(-4px);
     box-shadow: 0 14px 28px rgba(45, 28, 22, .13);
 }
