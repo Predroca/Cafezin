@@ -164,6 +164,8 @@ button, input, select { font: inherit; }
     border-radius: var(--borda-arredondada-media);
     background: var(--cor-background);
     box-shadow: 0 8px 22px rgba(45, 28, 22, .06);
+    transition: transform var(--transicao-rapida),
+                box-shadow var(--transicao-rapida);
 }
 
 .iconeResumo {
