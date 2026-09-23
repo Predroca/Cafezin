@@ -1,1 +1,862 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="description" content="Painel administrativo do Cafézin.">
+
+    <title>Cafézin | Administrador</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="CSS/main.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+</head>
+
+
+<body id="topo">
+
+
+    <header class="navAdministrador">
+
+        <div class="container navAdministradorConteudo">
+
+
+            <a class="logoAdministrador" href="#topo">
+                Cafézin
+            </a>
+
+
+            <nav class="navLinks" aria-label="Navegação administrativa">
+
+                <a class="ativo" href="#dashboard">
+                    <i class="bi bi-grid"></i>
+                    Dashboard
+                </a>
+
+                <a href="#usuarios">
+                    <i class="bi bi-people"></i>
+                    Usuários
+                </a>
+
+                <a href="#pedidos">
+                    <i class="bi bi-receipt"></i>
+                    Pedidos
+                </a>
+
+                <a href="#produtos">
+                    <i class="bi bi-cup-hot"></i>
+                    Produtos
+                </a>
+
+                <a href="#relatorios">
+                    <i class="bi bi-bar-chart"></i>
+                    Relatórios
+                </a>
+
+            </nav>
+
+
+            <div class="navAcoes">
+
+                <a class="perfilAdministrador"
+                   href="PerfilAdministrador.html"
+                   aria-label="Abrir perfil">
+
+                    <i class="bi bi-person-circle"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <section class="dashboardAdministrador" id="dashboard">
+
+            <div class="container">
+
+
+                <div class="cabecalhoDashboard">
+
+                    <div>
+
+                        <p class="saudacaoAdministrador">
+                            Painel administrativo
+                        </p>
+
+                        <h1>
+                            Olá, administrador!
+                        </h1>
+
+                        <p>
+                            Acompanhe o que está acontecendo no Cafézin.
+                        </p>
+
+                    </div>
+
+
+                    <div class="dataDashboard">
+
+                        <i class="bi bi-calendar3"></i>
+
+                        <span>
+                            22 de setembro de 2026
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="cardsResumo">
+
+
+                    <article class="cardResumo">
+
+                        <div class="iconeResumo">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Vendas hoje
+                            </span>
+
+                            <strong>
+                                R$ 2.845,90
+                            </strong>
+
+                            <small>
+                                <i class="bi bi-arrow-up"></i>
+                                12,5% em relação a ontem
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="cardResumo">
+
+                        <div class="iconeResumo">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Pedidos hoje
+                            </span>
+
+                            <strong>
+                                128
+                            </strong>
+
+                            <small>
+                                <i class="bi bi-arrow-up"></i>
+                                8 novos pedidos
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="cardResumo">
+
+                        <div class="iconeResumo">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Usuários cadastrados
+                            </span>
+
+                            <strong>
+                                1.284
+                            </strong>
+
+                            <small>
+                                <i class="bi bi-person-plus"></i>
+                                24 novos esta semana
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="cardResumo">
+
+                        <div class="iconeResumo">
+                            <i class="bi bi-shop"></i>
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Lojas cadastradas
+                            </span>
+
+                            <strong>
+                                47
+                            </strong>
+
+                            <small>
+                                <i class="bi bi-check-circle"></i>
+                                43 ativas
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="dashboardGrid">
+
+
+                    <section class="painelDashboard">
+
+                        <div class="cabecalhoPainel">
+
+                            <div>
+
+                                <h2>
+                                    Vendas
+                                </h2>
+
+                                <p>
+                                    Acompanhe o desempenho da plataforma.
+                                </p>
+
+                            </div>
+
+
+                            <select aria-label="Período das vendas" id="seletorPeriodo">
+
+                                <option value="7d">
+                                    Últimos 7 dias
+                                </option>
+
+                                <option value="30d">
+                                    Últimos 30 dias
+                                </option>
+
+                                <option value="ano">
+                                    Este ano
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="graficoContainer">
+                            <canvas id="graficoVendas"></canvas>
+                        </div>
+
+                    </section>
+
+
+                    <section class="painelDashboard">
+
+                        <div class="cabecalhoPainel">
+
+                            <div>
+
+                                <h2>
+                                    Usuários
+                                </h2>
+
+                                <p>
+                                    Distribuição dos usuários.
+                                </p>
+
+                            </div>
+
+
+                            <a href="#usuarios" class="linkPainel">
+
+                                Ver todos
+
+                                <i class="bi bi-arrow-right"></i>
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="usuariosResumo">
+
+
+                            <div class="usuarioTipo">
+
+                                <div class="usuarioTipoIcone">
+                                    <i class="bi bi-shop"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>47</strong>
+                                    <span>Lojas</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="usuarioTipo">
+
+                                <div class="usuarioTipoIcone">
+                                    <i class="bi bi-bicycle"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>86</strong>
+                                    <span>Entregadores</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="usuarioTipo">
+
+                                <div class="usuarioTipoIcone">
+                                    <i class="bi bi-person"></i>
+                                </div>
+
+                                <div>
+
+                                    <strong>1.151</strong>
+                                    <span>Compradores</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="secaoPadrao" id="usuarios">
+
+            <div class="container">
+
+
+                <div class="cabecalhoSecao">
+
+                    <h2>
+                        Usuários cadastrados
+                    </h2>
+
+                    <p>
+                        Gerencie os usuários que fazem parte do Cafézin.
+                    </p>
+
+                </div>
+
+
+                <div class="listaTiposUsuario">
+
+
+                    <a class="tipoUsuarioCard" href="usuariosLojas.html">
+
+                        <div class="tipoUsuarioIcone">
+                            <i class="bi bi-shop"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Lojas
+                            </h3>
+
+                            <p>
+                                Visualize e gerencie as cafeterias cadastradas.
+                            </p>
+
+                            <strong>
+                                47 lojas cadastradas
+                            </strong>
+
+                        </div>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+
+                    <a class="tipoUsuarioCard" href="usuariosEntregadores.html">
+
+                        <div class="tipoUsuarioIcone">
+                            <i class="bi bi-bicycle"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Entregadores
+                            </h3>
+
+                            <p>
+                                Visualize os entregadores cadastrados na plataforma.
+                            </p>
+
+                            <strong>
+                                86 entregadores cadastrados
+                            </strong>
+
+                        </div>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+
+                    <a class="tipoUsuarioCard" href="usuariosCompradores.html">
+
+                        <div class="tipoUsuarioIcone">
+                            <i class="bi bi-person"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Compradores
+                            </h3>
+
+                            <p>
+                                Visualize os compradores cadastrados no Cafézin.
+                            </p>
+
+                            <strong>
+                                1.151 compradores cadastrados
+                            </strong>
+
+                        </div>
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="secaoPadrao pedidosAdministrador" id="pedidos">
+
+            <div class="container">
+
+
+                <div class="cabecalhoSecao linha">
+
+                    <div>
+
+                        <h2>
+                            Pedidos recentes
+                        </h2>
+
+                        <p>
+                            Acompanhe os últimos pedidos realizados.
+                        </p>
+
+                    </div>
+
+
+                    <a class="linkSecao" href="pedidosAdministrador.html">
+
+                        Ver todos
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="tabelaContainer">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Pedido</th>
+                                <th>Comprador</th>
+                                <th>Loja</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                            <tr>
+
+                                <td>#00482</td>
+                                <td>Ana Souza</td>
+                                <td>Grão &amp; Cia</td>
+                                <td>R$ 42,80</td>
+
+                                <td>
+                                    <span class="status entregue">
+                                        Entregue
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>#00481</td>
+                                <td>Lucas Martins</td>
+                                <td>Café Retiro</td>
+                                <td>R$ 31,90</td>
+
+                                <td>
+                                    <span class="status andamento">
+                                        Em andamento
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>#00480</td>
+                                <td>Mariana Alves</td>
+                                <td>Boutique dos Pães</td>
+                                <td>R$ 58,40</td>
+
+                                <td>
+                                    <span class="status preparando">
+                                        Preparando
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>#00479</td>
+                                <td>João Pedro</td>
+                                <td>Empório do Café</td>
+                                <td>R$ 24,90</td>
+
+                                <td>
+                                    <span class="status entregue">
+                                        Entregue
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="secaoPadrao" id="produtos">
+
+            <div class="container">
+
+
+                <div class="cabecalhoSecao linha">
+
+                    <div>
+
+                        <h2>
+                            Produtos
+                        </h2>
+
+                        <p>
+                            Gerencie os produtos disponíveis na plataforma.
+                        </p>
+
+                    </div>
+
+
+                    <a class="linkSecao" href="produtosAdministrador.html">
+
+                        Gerenciar produtos
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+
+                <div class="produtosResumo">
+
+
+                    <div class="produtoResumoCard">
+
+                        <i class="bi bi-box-seam"></i>
+
+                        <strong>
+                            328
+                        </strong>
+
+                        <span>
+                            Produtos cadastrados
+                        </span>
+
+                    </div>
+
+
+                    <div class="produtoResumoCard">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        <strong>
+                            301
+                        </strong>
+
+                        <span>
+                            Produtos ativos
+                        </span>
+
+                    </div>
+
+
+                    <div class="produtoResumoCard">
+
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        <strong>
+                            27
+                        </strong>
+
+                        <span>
+                            Produtos inativos
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="secaoEscura" id="relatorios">
+
+            <div class="container relatoriosAdministrador">
+
+                <div>
+
+                    <p>
+                        Visão geral
+                    </p>
+
+                    <h2>
+                        Relatórios do Cafézin
+                    </h2>
+
+                    <span>
+                        Consulte informações detalhadas sobre vendas,
+                        pedidos e usuários da plataforma.
+                    </span>
+
+                </div>
+
+
+                <a href="relatoriosAdministrador.html">
+
+                    Acessar relatórios
+
+                    <i class="bi bi-arrow-up-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <section class="logo titulo footerSection">
+            Cafézin
+        </section>
+
+
+        <section class="footerSection">
+
+            <div class="titulo">
+                Administração
+            </div>
+
+            <ul class="footerSectionLists">
+
+                <li>
+                    <a href="#usuarios">
+                        Usuários
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#pedidos">
+                        Pedidos
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#produtos">
+                        Produtos
+                    </a>
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <section class="footerSection">
+
+            <div class="titulo">
+                Suporte
+            </div>
+
+            <ul class="footerSectionLists">
+
+                <li>
+                    <a href="canalAtendimento.html">
+                        Fale conosco
+                    </a>
+                </li>
+
+                <li>
+                    <a href="PerfilAdministrador.html">
+                        Meu perfil
+                    </a>
+                </li>
+
+            </ul>
+
+        </section>
+
+    </footer>
+
+
+    <script>
+
+        // Conjuntos de dados por período (valores em R$)
+        const dadosPorPeriodo = {
+            "7d": {
+                labels: ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"],
+                valores: [1800, 2480, 2160, 3120, 2720, 3680, 2920]
+            },
+            "30d": {
+                labels: ["sem 1", "sem 2", "sem 3", "sem 4"],
+                valores: [12400, 15800, 14100, 17650]
+            },
+            "ano": {
+                labels: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set"],
+                valores: [38000, 41200, 39500, 44800, 47200, 45100, 49800, 52300, 48900]
+            }
+        };
+
+        const ctx = document.getElementById("graficoVendas").getContext("2d");
+
+        const graficoVendas = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: dadosPorPeriodo["7d"].labels,
+                datasets: [{
+                    label: "Vendas (R$)",
+                    data: dadosPorPeriodo["7d"].valores,
+                    backgroundColor: "#e1a768",
+                    hoverBackgroundColor: "#b9772f",
+                    borderRadius: 7,
+                    maxBarThickness: 42
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (item) => "R$ " + item.parsed.y.toLocaleString("pt-BR")
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(75,54,42,.08)" },
+                        ticks: {
+                            color: "#7a6a5d",
+                            callback: (valor) => "R$ " + valor.toLocaleString("pt-BR")
+                        }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: "#7a6a5d" }
+                    }
+                }
+            }
+        });
+
+        document.getElementById("seletorPeriodo").addEventListener("change", (evento) => {
+            const dados = dadosPorPeriodo[evento.target.value];
+            graficoVendas.data.labels = dados.labels;
+            graficoVendas.data.datasets[0].data = dados.valores;
+            graficoVendas.update();
+        });
+
+    </script>
+
+</body>
+
+</html>
