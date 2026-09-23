@@ -8,6 +8,10 @@ a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 .container { width: 95%; margin: 0 auto; }
 
+.AdmTexto{
+    color:var(--cor-laranja-claro);
+}
+
 /* Navegação */
 
 .navAdministrador {
@@ -677,6 +681,3 @@ button, input, select { font: inherit; }
     }
 }
 
-.administrador{
-    color: var(--cor-laranja);
-}
