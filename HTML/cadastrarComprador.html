@@ -1,159 +1,302 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar-se</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <meta name="description" content="Peça cafés, pães e doces pelo Cafézin.">
+    <title>Cafézin | Início</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/login.css">
-    <link rel="stylesheet" href="CSS/cadastroComp.css">
+    <link rel="stylesheet" href="CSS/indexComp.css">
 </head>
-<body>
-    <div class="bodyCadastro d-none d-xl-block"></div>
+<body id="topo">
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="#topo" aria-label="Cafézin - página inicial">Cafézin</a>
 
-    <div class="erroLoginContainer" id="errorLogin">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Usuário já criado. Faça login caso já possua uma conta</p>
-        </div>
-    </div>
-
-    <div class="erroLoginContainer" id="preencherCampos">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Preencha todos os campos corretamente</p>
-        </div>
-    </div>
-
-    <div class="erroLoginContainer" id="diferentPsswd">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Senhas diferentes. Por favor, insira a mesma senha
-                em seus campos!
-            </p>
-        </div>
-    </div>
-
-    <form class="formLoginContainer px-4" action="/register/comprador" method="POST" id="loginForm" novalidate>
-
-        <div class="stepIndicator" id="stepIndicator" aria-hidden="true">
-            <div class="stepDot ativo" data-step="1">
-                <span class="stepNumero">1</span>
-                <span class="stepRotulo">Acesso</span>
-            </div>
-            <div class="stepLinha" id="stepLinha"></div>
-            <div class="stepDot" data-step="2">
-                <span class="stepNumero">2</span>
-                <span class="stepRotulo">Dados pessoais</span>
-            </div>
-        </div>
-
-        <div class="primeiraSessao" id="primeiraSessao">
-
-            <div class="cabecalhoEtapa">
-                <div class="titulo">Cadastrar-se</div>
-                <p class="subtitulo">Se torne um cliente Cafézin em poucas etapas</p>
-            </div>
-
-            <div class="inputsContainer">
-
-                <div class="input-group inptLoginEmail ">
-                    <i class="bi bi-person"></i>
-                    <input type="text" id="nomeUser" class="form-control py-2" placeholder="Nome de Usuário" required autocomplete="username">
-                </div>
-
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-envelope"></i>
-                    <input type="email" id="email" class="form-control py-2" placeholder="Email" required autocomplete="email">
-                </div>
-
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control passwordCamp py-2" id="password" placeholder="Digite sua nova senha" required autocomplete="new-password">
-                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="password" id="olhoSenha" aria-label="Mostrar senha" aria-pressed="false">
-                        <i class=" bi-eye-slash"></i>
-                    </button>
-                </div>
-
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control py-2 passwordCamp" id="confirmPsswd" placeholder="Confirmar sua senha" required autocomplete="new-password">
-                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="confirmPsswd" id="olhoConfirmar" aria-label="Mostrar senha" aria-pressed="false">
-                        <i class=" bi-eye-slash"></i>
-                    </button>
-                </div>
-                <p class="mensagemSenha" id="mensagemSenha"></p>
-
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-telephone"></i>
-                    <input type="text" id="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)">
-                </div>
-
-            </div>
-
-            <button type="button" class="botaoEntrar botao py-2" id="nextStep">
-                <span>Próxima etapa</span>
-                <svg class="setaBotao" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-
-            <div class="hr"></div>
-            <div class="cadastrarContainer">Já possui uma conta? <a href="login.html" class="cadastrar">Entrar</a></div>
-
-        </div>
-
-        <div class="segundaSessao" id="segundaSessao">
-
-            <div class="cabecalhoEtapa">
-                <button type="button" class="botaoVoltar" id="prevStep" aria-label="Voltar para a etapa anterior">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+            <form class="buscaCabecalho" role="search">
+                <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input id="busca" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
+                <button type="submit" aria-label="Pesquisar">
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
                 </button>
-                <div class="titulo">Falta pouco</div>
-                <p class="subtitulo">Agora só precisamos de mais alguns dados</p>
+            </form>
+
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a class="ativo" href="#inicio">Início</a>
+                <a href="#cafeterias">Cafeterias</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#pedidos">Pedidos</a>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola" href="Sacola.html" aria-label="Sacola com três itens">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
             </div>
+        </div>
+    </header>
 
-            <div class="inputsContainer">
+    <main>
+        <!-- Apresentação -->
+        <section class="heroComprador" id="inicio">
+            <div class="container heroConteudo">
+                <div class="heroTexto">
+                    <p class="heroSaudacao">Olá, Ana!</p>
+                    <h1>Para começar bem o dia,<br>que tal um <span>Cafézin</span>?</h1>
+                    <p>Encontre cafeterias, pães e doces preparados pertinho de você.</p>
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-card-text"></i>
-                    <input type="text" id="cpfUser" class="form-control py-2" placeholder="Insira seu CPF" required maxlength="11">
-                </div>
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-calendar3"></i>
-                    <input type="date" id="dataNascUser" class="form-control py-2" placeholder="Insira a data de nascimento" required>
-                </div>
-                <div class="input-group inptLoginEmail">
-                    <select name="opcoesSexo" id="opcoesSexo" class="form-select">
-                        <option value="" disabled selected>Selecionar Sexo</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="null">Outro</option>
-                    </select>
+                    <div class="heroVantagens">
+                        <span><i class="bi bi-bicycle"></i> Entrega rápida</span>
+                        <span><i class="bi bi-star-fill"></i> Lojas bem avaliadas</span>
+                    </div>
                 </div>
 
+                <!-- Substitua este bloco por uma imagem de destaque quando houver uma. -->
+                <div class="placeholderFoto heroFoto" role="img" aria-label="Espaço reservado para foto de destaque">
+                    <i class="bi bi-image"></i>
+                    <strong>Foto de destaque</strong>
+                    <small>cafés, pães ou ambiente</small>
+                </div>
             </div>
-            <input type="submit" value="Cadastrar" class="botaoEntrar botao py-2" id="submit">
-            <div class="hr"></div>
-            <div class="cadastrarContainer">Já possui uma conta? <a href="login.html" class="cadastrar">Entrar</a></div>
+        </section>
+
+        <!-- Categorias -->
+        <section class="secaoPadrao" aria-labelledby="titulo-categorias">
+            <div class="container">
+                <div class="cabecalhoSecao">
+                    <h2 id="titulo-categorias">Peça por categoria</h2>
+                    <p>Escolha o que combina com seu momento.</p>
+                </div>
+
+                <div class="listaCategorias">
+                    <a class="categoria" href="#produtos"><span><img src="img/indexComprador/Café.svg" alt=""></span><b>Cafés</b></a>
+                    <a class="categoria doce" href="#produtos"><span><img src="img/indexComprador/Doces.svg" alt=""></span><b>Doces</b></a>
+                    <a class="categoria bolo" href="#produtos"><span><img src="img/indexComprador/Bolos.svg" alt=""></span><b>Bolos</b></a>
+                    <a class="categoria salgado" href="#produtos"><span><img src="img/indexComprador/Salgados.svg" alt=""></span><b>Salgados</b></a>
+                    <a class="categoria bebida" href="#produtos"><span><img src="img/indexComprador/Bebidas.svg" alt=""></span><b>Bebidas</b></a>
+                    <a class="categoria pao" href="#produtos"><span><img src="img/indexComprador/Pães.svg" alt=""></span><b>Pães</b></a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Lojas -->
+        <section class="secaoPadraoCafeterias" id="cafeterias" aria-labelledby="titulo-cafeterias">
+            <div class="container">
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-cafeterias">Cafeterias em destaque</h2>
+                        <p>Preparadas para receber seu pedido.</p>
+                    </div>
+                    <a class="linkSecao" href="#">Ver todas <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+                <div class="listaLojas">
+                    <article class="lojaCard">
+                        <div class="logoLoja">BP</div>
+                        <button class="favoritar" aria-label="Favoritar Boutique dos Pães"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo">
+                            <h3>Boutique dos Pães</h3>
+                            <p>Padaria · Cafeteria</p>
+                            <small><strong><i class="bi bi-star-fill"></i><span class="notaLoja">4,9</span> </strong> · 20–35 min · R$ 3,99</small>
+                            <span><b>Entrega grátis acima de R$ 25</b></span>
+                        </div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="logoLoja clara">G&amp;C</div>
+                        <button class="favoritar" aria-label="Favoritar Grão e Cia"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Grão &amp; Cia</h3><p>Cafeteria · Doceria</p><small><strong><i class="bi bi-star-fill"></i> 4,8</strong> · 25–40 min · R$ 4,99</small><b>Café especial da casa</b></div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="logoLoja escura">CR</div>
+                        <button class="favoritar" aria-label="Favoritar Café Retiro"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Café Retiro</h3><p>Cafeteria artesanal</p><small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 15–25 min · R$ 2,99</small><b>10% no primeiro pedido</b></div>
+                    </article>
+
+                    <article class="lojaCard">
+                        <div class="logoLoja marrom">EC</div>
+                        <button class="favoritar" aria-label="Favoritar Empório do Café"><i class="bi bi-heart"></i></button>
+                        <div class="lojaInfo"><h3>Empório do Café</h3><p>Cafeteria · Padaria</p><small><strong><i class="bi bi-star-fill"></i> 4,7</strong> · 30–45 min · R$ 5,99</small><b>Frete grátis para você</b></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Produtos -->
+        <section class="secaoPadrao" id="produtos" aria-labelledby="titulo-produtos">
+            <div class="container">
+                <div class="cabecalhoSecao linha">
+                    <div><h2 id="titulo-produtos">Mais pedidos no Cafézin</h2><p>Uma seleção para pedir agora.</p></div>
+                    <a class="linkSecao" href="#">Ver produtos <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+                <div class="listaProdutos">
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="footerConteudo">
+
+            <section class="footerSection footerMarca">
+
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Sobre nós
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li>
+                        <a href="cadastrarLoja.html">
+                            Cadastre sua loja
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cadastrarEntregador.html">
+                            Seja entregador
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="canalAtendimento.html">
+                            Fale Conosco
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cafeDev.html">
+                            CaféDev
+                        </a>
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Contato
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li class="footerSubtitulo">
+                        Redes sociais
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
+                        <span>@CafezinDSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
+                        <span>@Cafezin_DSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
+                        <span>(34) 9 9999-9999</span>
+                    </li>
+
+                </ul>
+
+            </section>
 
         </div>
 
-    </form>
 
+        <div class="footerCopyright">
+
+            <p>
+                © 2026 Cafézin. Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="JavaScript/formsFunctionality.js"></script>
-    <script src="JavaScript/CadastroScripts/cadastrar.js"></script>
-    <script src="JavaScript/CadastroScripts/enviarCadastro.js"></script>
-    <script src="JavaScript/CadastroScripts/interfaceCadastro.js"></script>
+    <script src="JavaScript/Comprador/cardapio.js"></script>
 </body>
 </html>
