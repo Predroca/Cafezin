@@ -15,7 +15,7 @@ button, input {
     font: inherit;
 }
 .container {
-    width: min(1180px, calc(100% - 48px));
+    width: 95%;
     margin: 0 auto;
 }
 .visualmenteOculto {
@@ -31,7 +31,7 @@ button, input {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: var(--cor-marrom-medio);
+    background: var(--cor-marrom-escuro-2);
     box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
 }
 .navCompradorConteudo {
@@ -246,7 +246,9 @@ button, input {
 .listaCategorias {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
+    width: 60%;
+    margin: auto;
+    
 }
 .categoria {
     display: flex;
@@ -552,7 +554,7 @@ button, input {
 .secaoEscura {
     margin-top: 15px;
     padding: 55px 0;
-    background: var(--cor-marrom-escuro-2);
+    background: var(--cor-bege-destaque);
 }
 .pedidoRecente {
     display: grid;
@@ -566,30 +568,32 @@ button, input {
     height: 58px;
     place-items: center;
     border-radius: 50%;
-    background: rgba(232,190,144,.16);
-    color: var(--cor-laranja-claro);
+    background: rgba(38, 17, 12,.80);
+    color: var(--cor-bege-destaque);
     font-size: 1.6rem;
 }
 .pedidoRecente p {
     margin-bottom: 3px;
-    color: var(--cor-bege-destaque);
+    color: var(--cor-marrom-escuro-2);
     font-size: .72rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 .pedidoRecente h2 {
-    color: var(--cor-texto-claro);
+    color: var(--cor-marrom-escuro-2);
     font-size: var(--fonte-grande);
+    font-weight: 700;
 }
 .pedidoRecente span {
-    color: var(--cor-bege-claro);
+    color: var(--cor-marrom-escuro-2);
     font-size: var(--fonte-pequena);
+    font-weight: 700;
 }
 .pedidoRecente > a {
     padding: 11px 15px;
     border-radius: var(--borda-arredondada-pequena);
-    background: var(--cor-bege-destaque);
-    color: var(--cor-marrom-escuro-2);
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
     font-size: .75rem;
     font-weight: 700;
     white-space: nowrap;
@@ -702,4 +706,8 @@ footer {
     *, *::before, *::after {
         transition-duration: .01ms !important;
     }
+}
+
+.TextoPedir{
+    color: var(--cor-marrom-escuro-2);
 }
