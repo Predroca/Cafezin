@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar-se</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="CSS/cadastroLoja.css">
+    <
+</head>
+<body>
+    <div class="bodyCadastro d-none d-xl-block"></div>
+
+    <div class="erroLoginContainer" id="errorLogin">
+        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
+        <div class="errorLoginText">
+            <h4>Ops! Algo deu errado</h4>
+            <p>Usuário já criado. Faça login caso já possua uma conta</p>
+        </div>
+    </div>
+
+    <div class="erroLoginContainer" id="preencherCampos">
+        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
+        <div class="errorLoginText">
+            <h4>Ops! Algo deu errado</h4>
+            <p>Preencha todos os campos corretamente</p>
+        </div>
+    </div>
+
+    <div class="erroLoginContainer" id="diferentPsswd">
+        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
+        <div class="errorLoginText">
+            <h4>Ops! Algo deu errado</h4>
+            <p>Senhas diferentes. Por favor, insira a mesma senha
+                em seus campos!
+            </p>
+        </div>
+    </div>
+
+    <form class="formLoginContainer px-4" id="loginForm" novalidate>
+
+        <div class="stepIndicator" id="stepIndicator" aria-hidden="true">
+            <div class="stepDot ativo" data-step="1">
+                <span class="stepNumero">1</span>
+                <span class="stepRotulo">Acesso</span>
+            </div>
+            <div class="stepLinha" id="stepLinha"></div>
+            <div class="stepDot" data-step="2">
+                <span class="stepNumero">2</span>
+                <span class="stepRotulo">Dados do estabelecimento</span>
+            </div>
+        </div>
+
+        <div class="primeiraSessao" id="primeiraSessao">
+
+            <div class="cabecalhoEtapa">
+                <div class="titulo">Cadastrar-se</div>
+                <p class="subtitulo">Cadastre sua loja e alavanque suas vendas !</p>
+            </div>
+
+            <div class="inputsContainer">
+
+                <div class="input-group inptLoginEmail ">
+                    <i class="bi bi-person"></i>
+                    <input type="text" id="nomeUser" class="form-control py-2" placeholder="Nome de Usuário" required autocomplete="username">
+                </div>
+
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-envelope"></i>
+                    <input type="email" id="email" class="form-control py-2" placeholder="Email" required autocomplete="email">
+                </div>
+
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" class="form-control passwordCamp py-2" id="password" placeholder="Digite sua nova senha" required autocomplete="new-password">
+                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="password" id="olhoSenha" aria-label="Mostrar senha" aria-pressed="false">
+                        <i class=" bi-eye-slash"></i>
+                    </button>
+                </div>
+
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" class="form-control py-2 passwordCamp" id="confirmPsswd" placeholder="Confirmar sua senha" required autocomplete="new-password">
+                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="confirmPsswd" id="olhoConfirmar" aria-label="Mostrar senha" aria-pressed="false">
+                        <i class=" bi-eye-slash"></i>
+                    </button>
+                </div>
+                <p class="mensagemSenha" id="mensagemSenha"></p>
+
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-telephone"></i>
+                    <input type="text" id="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)">
+                </div>
+
+            </div>
+
+            <button type="button" class="botaoEntrar botao py-2" id="nextStep">
+                <span>Próxima etapa</span>
+                
+            </button>
+
+            <div class="hr"></div>
+            <div class="cadastrarContainer">Já possui uma loja cadastrada ? <a href="login.html" class="cadastrar">Entrar</a></div>
+
+        </div>
+
+        <div class="segundaSessao" id="segundaSessao">
+
+            <div class="cabecalhoEtapa">
+                <button type="button" class="botaoVoltar" id="prevStep" aria-label="Voltar para a etapa anterior">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="titulo">Falta pouco</div>
+                <p class="subtitulo">Agora só precisamos de mais alguns dados</p>
+            </div>
+
+            <div class="inputsContainer">
+
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-card-text"></i>
+                    <input type="text" id="cnpjUser" class="form-control py-2" placeholder="Insira o CNPJ de seu negócio" required maxlength="14">
+                </div>
+                <div class="input-group inptLoginEmail">
+                    <i class="bi bi-calendar3"></i>
+                    <input type="text" id="horaAberturaLoja" class="form-control py-2" placeholder="horario de abertura da loja : 'xx:xx:xx'"  required>
+                </div>
+                
+
+            </div>
+
+            <div class="inptEnderecoLoja">
+                
+                <input type="text"
+                    id="cepEnderecoLoja"
+                    class="form-control"
+                    maxlength="8"
+                    required
+                    placeholder="CEP">
+
+                <input type="text"
+                    id="ruaEnderecoLoja"
+                    class="form-control"
+                    required
+                    placeholder="Rua">
+
+                <input type="text"
+                    id="numEnderecoLoja"
+                    class="form-control"
+                    required
+                    placeholder="Número">
+
+                <input type="text"
+                    id="cidadeEnderecoLoja"
+                    class="form-control campoLarguraTotal"
+                    required
+                    placeholder="Cidade">
+
+                <input type="text"
+                    id="bairroEnderecoLoja"
+                    class="form-control"
+                    required
+                    placeholder="Bairro">
+
+                <input type="text"
+                    id="estadoEnderecoLoja"
+                    class="form-control"
+                    required
+                    placeholder="Estado">
+
+            </div>
+
+            <input type="submit" value="Cadastrar" class="botaoEntrar botao py-2" id="submit">
+            <div class="hr"></div>
+            <div class="cadastrarContainer">Já possui uma loja cadastrada ? <a href="login.html" class="cadastrar">Entrar</a></div>
+
+        </div>
+
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="JavaScript/formsFunctionality.js"></script>
+    <script src="JavaScript/CadastroScripts/enviarCadastroLoja.js"></script>
+    <script src="JavaScript/CadastroScripts/interfaceCadastro.js"></script>
+</body>
+</html>
