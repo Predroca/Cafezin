@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerencie suas entregas e acompanhe seus pedidos no Cafézin.">
+    <title>Cafézin | Painel do entregador</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexEntregador.css">
+</head>
+
+<body id="topo">
+
+    <header class="navLoja">
+        <div class="container navLojaConteudo">
+
+            <a
+                class="logoLoja"
+                href="#topo"
+                aria-label="Cafézin - painel do entregador"
+            >
+                Cafézin <span>Entregador</span>
+            </a>
+
+            <nav class="navLinks" aria-label="Navegação do painel">
+                <a class="ativo" href="#painel">Painel</a>
+                <a href="#pedidos">Entregas</a>
+                <a href="#minhaLoja">Minhas lojas</a>
+            </nav>
+
+            <div class="navAcoes">
+
+                <a
+                    class="notificacao"
+                    href="#pedidos"
+                    aria-label="3 entregas aguardando"
+                >
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+
+                <a
+                    class="perfil"
+                    href="PerfilEntregrador.html"
+                    aria-label="Abrir perfil"
+                >
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- =========================================
+             PAINEL PRINCIPAL
+             ========================================= -->
+
+        <section class="heroPainel" id="painel">
+
+            <div class="container heroPainelConteudo">
+
+                <div class="heroPainelTexto">
+
+                    <p class="heroPainelSaudacao">
+                        Boa tarde, Lucas Oliveira
+                    </p>
+
+                    <h1>
+                        Todas as suas <span>entregas</span>
+                        <br>
+                        em um só lugar
+                    </h1>
+
+                    <p>
+                        Aceite entregas, acompanhe o andamento e mantenha
+                        contato com as lojas que trabalham com você.
+                    </p>
+
+                </div>
+
+
+                <div class="resumoPainel">
+
+                    <div class="resumoPainelCard">
+                        <i class="bi bi-box-seam" aria-hidden="true"></i>
+                        <strong>2</strong>
+                        <span>Entregas pendentes</span>
+                    </div>
+
+                    <div class="resumoPainelCard">
+                        <i class="bi bi-check2-circle" aria-hidden="true"></i>
+                        <strong>5</strong>
+                        <span>Concluídas hoje</span>
+                    </div>
+
+                    <div class="resumoPainelCard">
+                        <i class="bi bi-star-fill" aria-hidden="true"></i>
+                        <strong>4,8</strong>
+                        <span>Avaliação média</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             SUAS ENTREGAS
+             ========================================= -->
+
+        <section
+            class="secaoPadrao"
+            id="pedidos"
+            aria-labelledby="titulo-entregas"
+        >
+
+            <div class="container">
+
+                <div class="cabecalhoSecao linha">
+
+                    <div>
+
+                        <h2 id="titulo-entregas">
+                            Suas entregas
+                        </h2>
+
+                        <p>
+                            Acompanhe suas entregas e mantenha tudo sob controle.
+                        </p>
+
+                    </div>
+
+                    <a class="linkSecao" href="#">
+                        Ver todas
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="listaEntregas">
+
+                    <!-- =================================
+                         ENTREGA 1
+                         ================================= -->
+
+                    <article class="entrega aguardando">
+
+                        <div class="entregaCabecalho">
+
+                            <span class="statusBadge aguardando">
+                                Aguardando retirada
+                            </span>
+
+                            <time>
+                                Há 2 min
+                            </time>
+
+                        </div>
+
+
+                        <div class="entregaInfo">
+
+                            <h3>
+                                Pedido de Ana Caroline
+                            </h3>
+
+
+                            <div class="entregaDado lojaEntrega">
+
+                                <i class="bi bi-shop"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Loja:
+                                    </span>
+
+                                    <strong>
+                                        Café da Praça
+                                    </strong>
+
+                                    <small>
+                                        (Rua Coronel Antônio Alves, 315)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado produtosEntrega">
+
+                                <i class="bi bi-bag"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Produtos:
+                                    </span>
+
+                                    <p>
+                                        <strong>
+                                            2x Pão de queijo artesanal,
+                                            1x Chocolate quente cremoso
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado enderecoEntrega">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Entrega:
+                                    </span>
+
+                                    <strong>
+                                        Av. Floriano Peixoto, 1250
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="entregaRodape">
+
+                            <strong>
+                                R$ 8,50
+                            </strong>
+
+                            <div class="entregaAcoes">
+
+                                <button
+                                    type="button"
+                                    class="botaoPrimario"
+                                >
+                                    Confirmar retirada
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================
+                         ENTREGA 2
+                         ================================= -->
+
+                    <article class="entrega retirado">
+
+                        <div class="entregaCabecalho">
+
+                            <span class="statusBadge retirado">
+                                Pedido retirado
+                            </span>
+
+                            <time>
+                                Há 9 min
+                            </time>
+
+                        </div>
+
+
+                        <div class="entregaInfo">
+
+                            <h3>
+                                Pedido de Marcos Vinícius
+                            </h3>
+
+
+                            <div class="entregaDado lojaEntrega">
+
+                                <i class="bi bi-shop"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Loja:
+                                    </span>
+
+                                    <strong>
+                                        Cafézin Central
+                                    </strong>
+
+                                    <small>
+                                        (Avenida Brasil, 742)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado produtosEntrega">
+
+                                <i class="bi bi-bag"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Produtos:
+                                    </span>
+
+                                    <p>
+                                        <strong>
+                                            1x Bolo de cenoura caseiro,
+                                            1x Cappuccino cremoso
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado enderecoEntrega">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Entrega:
+                                    </span>
+
+                                    <strong>
+                                        Rua Goiás, 438
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="entregaRodape">
+
+                            <strong>
+                                R$ 7,20
+                            </strong>
+
+                            <div class="entregaAcoes">
+
+                                <button
+                                    type="button"
+                                    class="botaoPrimario"
+                                >
+                                    Iniciar entrega
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================
+                         ENTREGA 3
+                         ================================= -->
+
+                    <article class="entrega caminho">
+
+                        <div class="entregaCabecalho">
+
+                            <span class="statusBadge caminho">
+                                A caminho
+                            </span>
+
+                            <time>
+                                Há 14 min
+                            </time>
+
+                        </div>
+
+
+                        <div class="entregaInfo">
+
+                            <h3>
+                                Pedido de Rafael Souza
+                            </h3>
+
+
+                            <div class="entregaDado lojaEntrega">
+
+                                <i class="bi bi-shop"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Loja:
+                                    </span>
+
+                                    <strong>
+                                        Doce Café
+                                    </strong>
+
+                                    <small>
+                                        (Rua Olegário Maciel, 108)
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado produtosEntrega">
+
+                                <i class="bi bi-bag"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Produtos:
+                                    </span>
+
+                                    <p>
+                                        <strong>
+                                            3x Pão de queijo artesanal
+                                        </strong>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="entregaDado enderecoEntrega">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <div>
+
+                                    <span class="dadoTitulo">
+                                        Entrega:
+                                    </span>
+
+                                    <strong>
+                                        Rua Santos Dumont, 782
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="entregaRodape">
+
+                            <strong>
+                                R$ 9,80
+                            </strong>
+
+                            <div class="entregaAcoes">
+
+
+
+                                <button
+                                    type="button"
+                                    class="botaoPrimario"
+                                >
+                                    Marcar como entregue
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             SUAS LOJAS
+             ========================================= -->
+
+        <section
+            class="secaoPadrao secaoAlternada"
+            id="minhaLoja"
+            aria-labelledby="titulo-lojas"
+        >
+
+            <div class="container">
+
+                <div class="cabecalhoSecao linha">
+
+                    <div>
+
+                        <h2 id="titulo-lojas">
+                            Suas lojas
+                        </h2>
+
+                        <p>
+                            Visualize as lojas para as quais você realiza entregas.
+                        </p>
+
+                    </div>
+
+                    <a class="linkSecao" href="#">
+                        Ver todas
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="listaLojas">
+
+                    <!-- =================================
+                         LOJA 1
+                         ================================= -->
+
+                    <article class="lojaEntregador">
+
+                        <div class="lojaImagem dourada">
+
+                            <i class="bi bi-shop"></i>
+
+                        </div>
+
+
+                        <div class="lojaInfo">
+
+                            <div class="lojaInfoCabecalho">
+
+                                <div>
+
+                                    <span class="statusLoja aberta">
+                                        Aberta
+                                    </span>
+
+                                    <h3>
+                                        Café da Praça
+                                    </h3>
+
+                                </div>
+
+                                <i class="bi bi-cup-hot lojaIcone"></i>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <span>
+                                    Rua Coronel Antônio Alves, 315
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-clock"></i>
+
+                                <span>
+                                    Horário: 08:00 às 18:00
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-box-seam"></i>
+
+                                <span>
+                                    18 entregas realizadas
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaRodape">
+
+                                <span>
+                                    Entrega desde março de 2026
+                                </span>
+
+                                <a
+                                    href="#"
+                                    class="botaoSecundario"
+                                >
+                                    Ver loja
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================
+                         LOJA 2
+                         ================================= -->
+
+                    <article class="lojaEntregador">
+
+                        <div class="lojaImagem azul">
+
+                            <i class="bi bi-shop"></i>
+
+                        </div>
+
+
+                        <div class="lojaInfo">
+
+                            <div class="lojaInfoCabecalho">
+
+                                <div>
+
+                                    <span class="statusLoja aberta">
+                                        Aberta
+                                    </span>
+
+                                    <h3>
+                                        Cafézin Central
+                                    </h3>
+
+                                </div>
+
+                                <i class="bi bi-cup-hot lojaIcone"></i>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <span>
+                                    Avenida Brasil, 742
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-clock"></i>
+
+                                <span>
+                                    Horário: 07:00 às 19:00
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-box-seam"></i>
+
+                                <span>
+                                    24 entregas realizadas
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaRodape">
+
+                                <span>
+                                    Entrega desde janeiro de 2026
+                                </span>
+
+                                <a
+                                    href="#"
+                                    class="botaoSecundario"
+                                >
+                                    Ver loja
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================
+                         LOJA 3
+                         ================================= -->
+
+                    <article class="lojaEntregador">
+
+                        <div class="lojaImagem rosa">
+
+                            <i class="bi bi-shop"></i>
+
+                        </div>
+
+
+                        <div class="lojaInfo">
+
+                            <div class="lojaInfoCabecalho">
+
+                                <div>
+
+                                    <span class="statusLoja aberta">
+                                        Aberta
+                                    </span>
+
+                                    <h3>
+                                        Doce Café
+                                    </h3>
+
+                                </div>
+
+                                <i class="bi bi-cup-hot lojaIcone"></i>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <span>
+                                    Rua Olegário Maciel, 108
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-clock"></i>
+
+                                <span>
+                                    Horário: 09:00 às 18:00
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-box-seam"></i>
+
+                                <span>
+                                    12 entregas realizadas
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaRodape">
+
+                                <span>
+                                    Entrega desde maio de 2026
+                                </span>
+
+                                <a
+                                    href="#"
+                                    class="botaoSecundario"
+                                >
+                                    Ver loja
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================
+                         LOJA 4
+                         ================================= -->
+
+                    <article class="lojaEntregador">
+
+                        <div class="lojaImagem verde">
+
+                            <i class="bi bi-shop"></i>
+
+                        </div>
+
+
+                        <div class="lojaInfo">
+
+                            <div class="lojaInfoCabecalho">
+
+                                <div>
+
+                                    <span class="statusLoja aberta">
+                                        Aberta
+                                    </span>
+
+                                    <h3>
+                                        Pão & Café
+                                    </h3>
+
+                                </div>
+
+                                <i class="bi bi-cup-hot lojaIcone"></i>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-geo-alt"></i>
+
+                                <span>
+                                    Rua Goiás, 520
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-clock"></i>
+
+                                <span>
+                                    Horário: 06:30 às 17:30
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaDado">
+
+                                <i class="bi bi-box-seam"></i>
+
+                                <span>
+                                    9 entregas realizadas
+                                </span>
+
+                            </div>
+
+
+                            <div class="lojaRodape">
+
+                                <span>
+                                    Entrega desde junho de 2026
+                                </span>
+
+                                <a
+                                    href="#"
+                                    class="botaoSecundario"
+                                >
+                                    Ver loja
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         RODAPÉ
+         ========================================= -->
+
+    <footer>
+
+        <section class="logo titulo footerSection">
+            Cafézin
+        </section>
+
+
+        <section class="footerSection">
+
+            <div class="titulo">
+                Entregador
+            </div>
+
+            <ul class="footerSectionLists">
+
+                <li>
+                    <a href="#minhaLoja">
+                        Minhas lojas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#pedidos">
+                        Entregas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="canalAtendimento.html">
+                        Fale conosco
+                    </a>
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <section class="footerSection">
+
+            <div class="titulo">
+                Contato
+            </div>
+
+            <ul class="footerSectionLists">
+
+                <li>
+
+                    <img
+                        src="icones/iconesEmpresas/Instagram.svg"
+                        alt="Instagram"
+                    >
+
+                    @CafezinDSA
+
+                </li>
+
+                <li>
+
+                    <img
+                        src="icones/iconesEmpresas/Whatsapp.svg"
+                        alt="WhatsApp"
+                    >
+
+                    (34) 9 9999-9999
+
+                </li>
+
+            </ul>
+
+        </section>
+
+    </footer>
+
+</body>
+</html>
