@@ -1,10 +1,4 @@
-/*
-    Painel do entregador — IndexEntregador
-*/
 
-/* =========================================
-   CONFIGURAÇÕES GERAIS
-   ========================================= */
 
 body {
     font-family: "Google Sans", sans-serif;
@@ -29,10 +23,6 @@ textarea {
     margin: 0 auto;
 }
 
-
-/* =========================================
-   NAVEGAÇÃO
-   ========================================= */
 
 .navLoja {
     position: sticky;
@@ -128,11 +118,6 @@ textarea {
     color: var(--cor-laranja-claro);
 }
 
-
-/* =========================================
-   PAINEL PRINCIPAL
-   ========================================= */
-
 .heroPainel {
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-texto-claro);
@@ -148,11 +133,6 @@ textarea {
     align-items: center;
     gap: 50px;
 }
-
-
-/* =========================================
-   TEXTO DO PAINEL
-   ========================================= */
 
 .heroPainelTexto {
     width: 100%;
@@ -198,10 +178,6 @@ textarea {
     text-align-last: center;
 }
 
-
-/* =========================================
-   CARDS DE RESUMO
-   ========================================= */
 
 .resumoPainel {
     width: 100%;
@@ -257,9 +233,7 @@ textarea {
 }
 
 
-/* =========================================
-   SEÇÕES
-   ========================================= */
+
 
 .secaoPadrao {
     padding: 62px 0;
@@ -311,9 +285,7 @@ textarea {
 }
 
 
-/* =========================================
-   BOTÕES
-   ========================================= */
+
 
 .botaoPrimario,
 .botaoSecundario {
@@ -358,9 +330,6 @@ textarea {
 }
 
 
-/* =========================================
-   ENTREGAS
-   ========================================= */
 
 .listaEntregas {
     display: grid;
@@ -393,9 +362,6 @@ textarea {
 }
 
 
-/* =========================================
-   CABEÇALHO DA ENTREGA
-   ========================================= */
 
 .entregaCabecalho {
     display: flex;
@@ -411,10 +377,6 @@ textarea {
     font-size: .68rem;
 }
 
-
-/* =========================================
-   STATUS DA ENTREGA
-   ========================================= */
 
 .statusBadge {
     padding: 4px 10px;
@@ -439,11 +401,6 @@ textarea {
     background: rgba(111, 174, 122, .18);
     color: #3d7048;
 }
-
-
-/* =========================================
-   INFORMAÇÕES DA ENTREGA
-   ========================================= */
 
 .entregaInfo h3 {
     margin-bottom: 14px;
@@ -518,11 +475,6 @@ textarea {
     line-height: 1.35;
 }
 
-
-/* =========================================
-   PRODUTOS DA ENTREGA
-   ========================================= */
-
 .produtosEntrega p {
     margin: 0;
 
@@ -540,10 +492,6 @@ textarea {
     margin-bottom: 0;
 }
 
-
-/* =========================================
-   RODAPÉ DA ENTREGA
-   ========================================= */
 
 .entregaRodape {
     display: flex;
@@ -572,10 +520,6 @@ textarea {
 }
 
 
-/* =========================================
-   SUAS LOJAS
-   ========================================= */
-
 .listaLojas {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -594,11 +538,6 @@ textarea {
 
     box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
 }
-
-
-/* =========================================
-   IMAGEM / ÍCONE DA LOJA
-   ========================================= */
 
 .lojaImagem {
     flex: 0 0 145px;
@@ -619,9 +558,6 @@ textarea {
 }
 
 
-/* =========================================
-   CORES DAS IMAGENS DAS LOJAS
-   ========================================= */
 
 .lojaImagem.dourada {
     background:
@@ -667,10 +603,6 @@ textarea {
         );
 }
 
-
-/* =========================================
-   INFORMAÇÕES DA LOJA
-   ========================================= */
 
 .lojaInfo {
     min-width: 0;
@@ -721,9 +653,7 @@ textarea {
 }
 
 
-/* =========================================
-   ÍCONE DO CABEÇALHO DA LOJA
-   ========================================= */
+
 
 .lojaIcone {
     flex: 0 0 20px;
@@ -743,9 +673,6 @@ textarea {
 }
 
 
-/* =========================================
-   DADOS DA LOJA
-   ========================================= */
 
 .lojaDado {
     display: flex;
@@ -777,9 +704,7 @@ textarea {
 }
 
 
-/* =========================================
-   RODAPÉ DOS CARDS DAS LOJAS
-   ========================================= */
+
 
 .lojaRodape {
     display: flex;
@@ -806,18 +731,12 @@ textarea {
 }
 
 
-/* =========================================
-   RODAPÉ
-   ========================================= */
 
 footer {
     margin-top: 0;
 }
 
 
-/* =========================================
-   RESPONSIVIDADE — 1050px
-   ========================================= */
 
 @media (max-width: 1050px) {
 
@@ -844,9 +763,7 @@ footer {
 }
 
 
-/* =========================================
-   RESPONSIVIDADE — 700px
-   ========================================= */
+
 
 @media (max-width: 700px) {
 
@@ -903,9 +820,6 @@ footer {
 }
 
 
-/* =========================================
-   RESPONSIVIDADE — 560px
-   ========================================= */
 
 @media (max-width: 560px) {
 
@@ -956,10 +870,6 @@ footer {
     }
 }
 
-
-/* =========================================
-   REDUÇÃO DE MOVIMENTO
-   ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
