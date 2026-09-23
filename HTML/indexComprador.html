@@ -18,7 +18,7 @@
             <form class="buscaCabecalho" role="search">
                 <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
                 <i class="bi bi-search" aria-hidden="true"></i>
-                <input id="busca" type="search" placeholder="Busque por café, bolo ou cafeteria">
+                <input id="busca" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
                 <button type="submit" aria-label="Pesquisar">
                     <i class="bi bi-arrow-right" aria-hidden="true"></i>
                 </button>
@@ -215,16 +215,114 @@
         <section class="secaoEscura" id="pedidos" aria-labelledby="titulo-pedidos">
             <div class="container pedidoRecente">
                 <div class="pedidoIcone"><i class="bi bi-arrow-repeat"></i></div>
-                <div><p>Um favorito seu</p><h2 id="titulo-pedidos">Que tal pedir de novo?</h2><span>Seu cappuccino cremoso da Grão &amp; Cia está te esperando.</span></div>
+                <div><p  class="TextoPedir">Um favorito seu</p><h2 id="titulo-pedidos"  class="TextoPedir">Que tal pedir de novo?</h2><span  class="TextoPedir">Seu cappuccino cremoso da Grão &amp; Cia está te esperando.</span></div>
                 <a href="Sacola.html">Pedir novamente</a>
             </div>
+
         </section>
     </main>
 
     <footer>
-        <section class="logo titulo footerSection">Cafézin</section>
-        <section class="footerSection"><div class="titulo">Sobre nós</div><ul class="footerSectionLists"><li><a href="cadastrarLoja.html">Cadastre sua loja</a></li><li><a href="cadastrarEntregador.html">Seja entregador</a></li><li><a href="canalAtendimento.html">Fale conosco</a></li></ul></section>
-        <section class="footerSection"><div class="titulo">Contato</div><ul class="footerSectionLists"><li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">@CafezinDSA</li><li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">(34) 9 9999-9999</li></ul></section>
+
+        <div class="footerConteudo">
+
+            <section class="footerSection footerMarca">
+
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Sobre nós
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li>
+                        <a href="cadastrarLoja.html">
+                            Cadastre sua loja
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cadastrarEntregador.html">
+                            Seja entregador
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="canalAtendimento.html">
+                            Fale Conosco
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cafeDev.html">
+                            CaféDev
+                        </a>
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Contato
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li class="footerSubtitulo">
+                        Redes sociais
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
+                        <span>@CafezinDSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
+                        <span>@Cafezin_DSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
+                        <span>(34) 9 9999-9999</span>
+                    </li>
+
+                </ul>
+
+            </section>
+
+        </div>
+
+
+        <div class="footerCopyright">
+
+            <p>
+                © 2026 Cafézin. Todos os direitos reservados.
+            </p>
+
+        </div>
+
     </footer>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/Comprador/cardapio.js"></script>
