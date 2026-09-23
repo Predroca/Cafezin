@@ -2,7 +2,7 @@
 async function pegaCardapioUser() {
     try{
 
-        const resposta = await fetch('http://localhost:5000/loja/populares');
+        const resposta = await fetch('http://localhost:5000/lojas/populares');
 
         if(!resposta.ok){
             throw new Error(`Erro na rede: ${resposta.status}`)

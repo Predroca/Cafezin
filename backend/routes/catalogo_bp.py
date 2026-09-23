@@ -14,16 +14,16 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from extensions import db
 from models.produto import Produto
-from models.categoria import Categoria
 from models.loja import Loja
 from models.usuario import Usuario
-from models.comprador_endereco import Comprador_Endereco
-from models.comprador import Comprador
 from models.pagamento import Pagamento
 from models.pedido import Pedido
 from models.item_pedido import ItemPedido
 from models.produto_popularidade import ProdutoPopularidade
 from models.avaliacao_produto import AvaliacaoProduto
+from models.avaliacao_loja import AvaliacaoLoja
+from models.loja_popularidade import LojaPopularidade
+
 
 catalogo_bp = Blueprint("catalogo", __name__)
 
