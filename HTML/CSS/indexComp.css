@@ -211,6 +211,9 @@ button, input {
 .secaoPadrao {
     padding: 62px 0;
 }
+.secaoPadraoCafeterias{
+    padding: 0}
+
 .cabecalhoSecao {
     margin-bottom: 25px;
 }
@@ -645,10 +648,10 @@ footer {
     .listaCategorias {
         grid-template-columns: repeat(3, 1fr);
     }
-    .secaoPadrao {
-        padding: 46px 0;
-    }
+
 }
+
+
 @media (max-width: 500px) {
     .perfil {
         display: none;
