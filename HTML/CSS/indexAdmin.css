@@ -17,7 +17,6 @@ button, input, select { font: inherit; }
     z-index: 10;
     background: var(--cor-marrom-escuro-2);
     box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
-    padding-top: env(safe-area-inset-top, 0px);
 }
 
 .navAdministradorConteudo {
@@ -32,6 +31,11 @@ button, input, select { font: inherit; }
     font-family: "Brasika", sans-serif;
     font-size: var(--fonte-grande);
     color: var(--cor-background-bege);
+}
+
+.logoAdiministrador span {
+    color: var(--cor-laranja-claro);
+    margin-left: 4px;
 }
 
 .navAdministrador .navLinks {
