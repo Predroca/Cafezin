@@ -1,191 +1,332 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar-se</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="CSS/main.css">
-    <link rel="stylesheet" href="CSS/login.css">
-    <link rel="stylesheet" href="CSS/cadastroLoja.css">
-    <
-</head>
-<body>
-    <div class="bodyCadastro d-none d-xl-block"></div>
+document.addEventListener("DOMContentLoaded", () => {
 
-    <div class="erroLoginContainer" id="errorLogin">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Usuário já criado. Faça login caso já possua uma conta</p>
-        </div>
-    </div>
+    const API_URL = "http://127.0.0.1:5000";
 
-    <div class="erroLoginContainer" id="preencherCampos">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Preencha todos os campos corretamente</p>
-        </div>
-    </div>
 
-    <div class="erroLoginContainer" id="diferentPsswd">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Senhas diferentes. Por favor, insira a mesma senha
-                em seus campos!
-            </p>
-        </div>
-    </div>
+    const form = document.getElementById("loginForm");
 
-    <form class="formLoginContainer px-4" id="loginForm" novalidate>
+    const primeiraSessao = document.getElementById("primeiraSessao");
+    const segundaSessao = document.getElementById("segundaSessao");
 
-        <div class="stepIndicator" id="stepIndicator" aria-hidden="true">
-            <div class="stepDot ativo" data-step="1">
-                <span class="stepNumero">1</span>
-                <span class="stepRotulo">Acesso</span>
-            </div>
-            <div class="stepLinha" id="stepLinha"></div>
-            <div class="stepDot" data-step="2">
-                <span class="stepNumero">2</span>
-                <span class="stepRotulo">Dados do estabelecimento</span>
-            </div>
-        </div>
+    const nextStep = document.getElementById("nextStep");
+    const prevStep = document.getElementById("prevStep");
 
-        <div class="primeiraSessao" id="primeiraSessao">
+    const nomeUser = document.getElementById("nomeUser");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const confirmPsswd = document.getElementById("confirmPsswd");
+    const telefone = document.getElementById("telefone");
 
-            <div class="cabecalhoEtapa">
-                <div class="titulo">Cadastrar-se</div>
-                <p class="subtitulo">Cadastre sua loja e alavanque suas vendas !</p>
-            </div>
+    const cnpjUser = document.getElementById("cnpjUser");
+    const horaAberturaLoja = document.getElementById("horaAberturaLoja");
 
-            <div class="inputsContainer">
+    const cep = document.getElementById("cepEnderecoLoja");
+    const rua = document.getElementById("ruaEnderecoLoja");
+    const numero = document.getElementById("numEnderecoLoja");
+    const cidade = document.getElementById("cidadeEnderecoLoja");
+    const bairro = document.getElementById("bairroEnderecoLoja");
+    const estado = document.getElementById("estadoEnderecoLoja");
 
-                <div class="input-group inptLoginEmail ">
-                    <i class="bi bi-person"></i>
-                    <input type="text" id="nomeUser" class="form-control py-2" placeholder="Nome de Usuário" required autocomplete="username">
-                </div>
+    const errorLogin = document.getElementById("errorLogin");
+    const preencherCampos = document.getElementById("preencherCampos");
+    const diferentPsswd = document.getElementById("diferentPsswd");
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-envelope"></i>
-                    <input type="email" id="email" class="form-control py-2" placeholder="Email" required autocomplete="email">
-                </div>
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control passwordCamp py-2" id="password" placeholder="Digite sua nova senha" required autocomplete="new-password">
-                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="password" id="olhoSenha" aria-label="Mostrar senha" aria-pressed="false">
-                        <i class=" bi-eye-slash"></i>
-                    </button>
-                </div>
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control py-2 passwordCamp" id="confirmPsswd" placeholder="Confirmar sua senha" required autocomplete="new-password">
-                    <button type="button" class="input-group-text botaoOlho" data-toggle-target="confirmPsswd" id="olhoConfirmar" aria-label="Mostrar senha" aria-pressed="false">
-                        <i class=" bi-eye-slash"></i>
-                    </button>
-                </div>
-                <p class="mensagemSenha" id="mensagemSenha"></p>
+    function esconderErros() {
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-telephone"></i>
-                    <input type="text" id="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)">
-                </div>
+        errorLogin.style.display = "none";
+        preencherCampos.style.display = "none";
+        diferentPsswd.style.display = "none";
 
-            </div>
+    }
 
-            <button type="button" class="botaoEntrar botao py-2" id="nextStep">
-                <span>Próxima etapa</span>
-                
-            </button>
 
-            <div class="hr"></div>
-            <div class="cadastrarContainer">Já possui uma loja cadastrada ? <a href="login.html" class="cadastrar">Entrar</a></div>
 
-        </div>
+    function mostrarErro(elemento) {
 
-        <div class="segundaSessao" id="segundaSessao">
+        esconderErros();
 
-            <div class="cabecalhoEtapa">
-                <button type="button" class="botaoVoltar" id="prevStep" aria-label="Voltar para a etapa anterior">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-                <div class="titulo">Falta pouco</div>
-                <p class="subtitulo">Agora só precisamos de mais alguns dados</p>
-            </div>
+        elemento.style.display = "flex";
 
-            <div class="inputsContainer">
+        setTimeout(() => {
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-card-text"></i>
-                    <input type="text" id="cnpjUser" class="form-control py-2" placeholder="Insira o CNPJ de seu negócio" required maxlength="14">
-                </div>
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-calendar3"></i>
-                    <input type="text" id="horaAberturaLoja" class="form-control py-2" placeholder="horario de abertura da loja : 'xx:xx:xx'"  required>
-                </div>
-                
+            elemento.style.display = "none";
 
-            </div>
+        }, 3800);
 
-            <div class="inptEnderecoLoja">
-                
-                <input type="text"
-                    id="cepEnderecoLoja"
-                    class="form-control"
-                    maxlength="8"
-                    required
-                    placeholder="CEP">
+    }
 
-                <input type="text"
-                    id="ruaEnderecoLoja"
-                    class="form-control"
-                    required
-                    placeholder="Rua">
 
-                <input type="text"
-                    id="numEnderecoLoja"
-                    class="form-control"
-                    required
-                    placeholder="Número">
 
-                <input type="text"
-                    id="cidadeEnderecoLoja"
-                    class="form-control campoLarguraTotal"
-                    required
-                    placeholder="Cidade">
+    function validarPrimeiraEtapa() {
 
-                <input type="text"
-                    id="bairroEnderecoLoja"
-                    class="form-control"
-                    required
-                    placeholder="Bairro">
+        esconderErros();
 
-                <input type="text"
-                    id="estadoEnderecoLoja"
-                    class="form-control"
-                    required
-                    placeholder="Estado">
+        const Femail = email.value.trim();
+        const Fsenha = password.value;
+        const ConfSenha = confirmPsswd.value;
+        const FnomeUser = nomeUser.value.trim();
 
-            </div>
 
-            <input type="submit" value="Cadastrar" class="botaoEntrar botao py-2" id="submit">
-            <div class="hr"></div>
-            <div class="cadastrarContainer">Já possui uma loja cadastrada ? <a href="login.html" class="cadastrar">Entrar</a></div>
+      
 
-        </div>
+        if (
+            Femail === "" ||
+            Fsenha === "" ||
+            ConfSenha === "" ||
+            FnomeUser === ""
+        ) {
 
-    </form>
+            mostrarErro(preencherCampos);
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="JavaScript/formsFunctionality.js"></script>
-    <script src="JavaScript/CadastroScripts/enviarCadastroLoja.js"></script>
-    <script src="JavaScript/CadastroScripts/interfaceCadastro.js"></script>
-</body>
-</html>
+            return false;
+
+        }
+
+
+  
+
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!regex.test(Femail)) {
+
+            mostrarErro(preencherCampos);
+
+            return false;
+
+        }
+
+        if (Fsenha !== ConfSenha) {
+            mostrarErro(diferentPsswd);
+            return false;
+
+        }
+        return true;
+    }
+
+
+    nextStep.addEventListener("click", () => {
+
+        console.log("Botão próxima etapa clicado");
+
+        if (!validarPrimeiraEtapa()) {
+            console.log("Primeira etapa inválida");
+            return;
+        }
+
+        console.log("Primeira etapa válida");
+        segundaSessao.style.display = "grid";
+
+        primeiraSessao.style.animation =
+            "disappearLeft 0.2s linear backwards";
+
+        segundaSessao.style.animation =
+            "aparecerDireita 0.2s linear backwards";
+
+
+
+        setTimeout(() => {
+            primeiraSessao.style.display = "none";
+            segundaSessao.style.position = "relative";
+
+        }, 200);
+
+    });
+
+
+    prevStep.addEventListener("click", () => {
+        console.log("Voltando para primeira etapa");
+        segundaSessao.style.animation =
+            "disappearRight 0.2s linear backwards";
+
+
+        primeiraSessao.style.display = "block";
+        primeiraSessao.style.animation =
+            "aparecerEsquerda 0.2s linear backwards";
+
+
+        setTimeout(() => {
+            segundaSessao.style.display = "none";
+        }, 200);
+    });
+
+
+    cnpjUser.addEventListener("input", () => {
+        cnpjUser.value = cnpjUser.value.replace(/\D/g, "");
+    });
+
+    cep.addEventListener("input", () => {
+        cep.value = cep.value.replace(/\D/g, "");
+    });
+
+
+    cep.addEventListener("blur", async () => {
+        const valorCEP = cep.value.replace(/\D/g, "");
+        if (valorCEP.length !== 8) {
+            return;
+        }
+
+
+        try {
+
+            const resposta = await fetch(
+                `https://viacep.com.br/ws/${valorCEP}/json/`
+            );
+
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao consultar CEP");
+            }
+            const dadosCEP = await resposta.json();
+            if (dadosCEP.erro) {
+                alert("CEP não encontrado.");
+                return;
+            }
+
+
+            rua.value = dadosCEP.logradouro || "";
+            bairro.value = dadosCEP.bairro || "";
+            cidade.value = dadosCEP.localidade || "";
+            estado.value = dadosCEP.uf || "";
+
+
+        } catch (erro) {
+
+            console.error("Erro ao consultar CEP:", erro);
+            alert("Não foi possível consultar o CEP.");
+
+        }
+
+    });
+
+
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+        console.log("Formulário enviado");
+
+        if (!validarPrimeiraEtapa()) {
+            return;
+        }
+
+        if (
+            cnpjUser.value.trim() === "" ||
+            horaAberturaLoja.value.trim() === "" ||
+            cep.value.trim() === "" ||
+            rua.value.trim() === "" ||
+            numero.value.trim() === "" ||
+            cidade.value.trim() === "" ||
+            bairro.value.trim() === "" ||
+            estado.value.trim() === ""
+        ) {
+
+            mostrarErro(preencherCampos);
+
+            return;
+
+        }
+
+        if (cnpjUser.value.length !== 14) {
+            alert("O CNPJ deve possuir 14 números.");
+            return;
+
+        }
+
+
+        const dadosCadastro = {
+
+            nome: nomeUser.value.trim(),
+            email: email.value.trim(),
+            senha: password.value,
+            telefone: telefone.value.trim() || null,
+            cnpj: cnpjUser.value.trim(),
+            horario_funcionamento:
+                horaAberturaLoja.value.trim(),
+            endereco: {
+                nome_logradouro: rua.value.trim(),
+                numero: numero.value.trim(),
+                bairro: bairro.value.trim(),
+                cidade: cidade.value.trim(),
+                estado: estado.value.trim(),
+                cep: cep.value.trim()
+            }
+
+        };
+        console.log("Dados que serão enviados:");
+        console.log(dadosCadastro);
+
+
+        const botaoSubmit = document.getElementById("submit");
+        botaoSubmit.disabled = true;
+        botaoSubmit.value = "Cadastrando...";
+
+
+        try {
+
+            const resposta = await fetch(
+        `${API_URL}/register/loja`, {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(dadosCadastro)
+    }
+);
+
+
+            const resultado = await resposta.json();
+            console.log("Resposta do servidor:");
+            console.log(resultado);
+
+            if (resposta.status === 409) {
+                mostrarErro(errorLogin);
+                return;
+
+            }
+
+            if (!resposta.ok) {
+
+                alert(
+                    resultado.error ||
+                    resultado.erro ||
+                    "Erro ao realizar cadastro."
+                );
+
+                return;
+
+            }
+
+
+            if (resposta.status === 201) {
+                alert(
+                    `Loja criada com sucesso! Bem-vindo, ${resultado.usuario}.`
+                );
+                window.location.href = "indexLoja.html";
+
+            }
+
+
+        } catch (erro) {
+
+            console.error(
+                "Erro ao conectar com o backend:",
+                erro
+            );
+
+            alert(
+                "Não foi possível conectar ao servidor Flask."
+            );
+
+        } finally {
+
+            botaoSubmit.disabled = false;
+            botaoSubmit.value = "Cadastrar";
+
+        }
+
+    });
+
+});
