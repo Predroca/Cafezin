@@ -98,7 +98,7 @@
                         </p>
 
                         <h1>
-                            Olá, administrador!
+                            Olá, <span class="administrador"> administrador! </span>
                         </h1>
 
                         <p>
@@ -692,15 +692,15 @@
 
                 <div>
 
-                    <p>
+                    <p class="TextoRelatorio">
                         Visão geral
                     </p>
 
-                    <h2>
+                    <h2 class="TextoRelatorio">
                         Relatórios do Cafézin
                     </h2>
 
-                    <span>
+                    <span class="TextoRelatorio">
                         Consulte informações detalhadas sobre vendas,
                         pedidos e usuários da plataforma.
                     </span>
@@ -723,67 +723,106 @@
     </main>
 
 
-    <footer>
+     <footer>
 
-        <section class="logo titulo footerSection">
-            Cafézin
-        </section>
+        <div class="footerConteudo">
 
+            <section class="footerSection footerMarca">
 
-        <section class="footerSection">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
 
-            <div class="titulo">
-                Administração
-            </div>
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
 
-            <ul class="footerSectionLists">
-
-                <li>
-                    <a href="#usuarios">
-                        Usuários
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#pedidos">
-                        Pedidos
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#produtos">
-                        Produtos
-                    </a>
-                </li>
-
-            </ul>
-
-        </section>
+            </section>
 
 
-        <section class="footerSection">
+            <section class="footerSection">
 
-            <div class="titulo">
-                Suporte
-            </div>
+                <div class="titulo">
+                    Sobre nós
+                </div>
 
-            <ul class="footerSectionLists">
+                <ul class="footerSectionLists">
 
-                <li>
-                    <a href="canalAtendimento.html">
-                        Fale conosco
-                    </a>
-                </li>
+                    <li>
+                        <a href="cadastrarLoja.html">
+                            Cadastre sua loja
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="PerfilAdministrador.html">
-                        Meu perfil
-                    </a>
-                </li>
+                    <li>
+                        <a href="cadastrarEntregador.html">
+                            Seja entregador
+                        </a>
+                    </li>
 
-            </ul>
+                    <li>
+                        <a href="canalAtendimento.html">
+                            Fale Conosco
+                        </a>
+                    </li>
 
-        </section>
+                    <li>
+                        <a href="cafeDev.html">
+                            CaféDev
+                        </a>
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Contato
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li class="footerSubtitulo">
+                        Redes sociais
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
+                        <span>@CafezinDSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
+                        <span>@Cafezin_DSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
+                        <span>(34) 9 9999-9999</span>
+                    </li>
+
+                </ul>
+
+            </section>
+
+        </div>
+
+
+        <div class="footerCopyright">
+
+            <p>
+                © 2026 Cafézin. Todos os direitos reservados.
+            </p>
+
+        </div>
 
     </footer>
 
