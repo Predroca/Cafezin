@@ -7,6 +7,7 @@ from routes.auth_rotas import auth_bp
 from routes.catalogo_bp import catalogo_bp
 from routes.endereco import endereco_bp
 from routes.avaliacao_bp import avaliacao_bp
+from routes.loja_bp import loja_bp
 
 from config import Config
 
@@ -26,7 +27,8 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(catalogo_bp)
 app.register_blueprint(endereco_bp)
 app.register_blueprint(avaliacao_bp)
-app.register_blueprint(produtoRegistro_bp)
+app.register_blueprint(loja_bp)
+
 
 @app.route("/health")
 def health():

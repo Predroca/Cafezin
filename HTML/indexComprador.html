@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="CSS/indexComp.css">
 </head>
 <body id="topo">
-
-    <!-- Cabeçalho fixo: mantém a busca acessível em toda a navegação. -->
     <header class="navComprador">
         <div class="container navCompradorConteudo">
             <a class="logoComprador" href="#topo" aria-label="Cafézin - página inicial">Cafézin</a>
@@ -112,28 +110,24 @@
 
                 <div class="listaLojas">
                     <article class="lojaCard">
-                        <div class="placeholderFoto capaLoja" role="img" aria-label="Espaço para foto da Boutique dos Pães"><i class="bi bi-image"></i><span>Foto da loja</span></div>
                         <div class="logoLoja">BP</div>
                         <button class="favoritar" aria-label="Favoritar Boutique dos Pães"><i class="bi bi-heart"></i></button>
                         <div class="lojaInfo"><h3>Boutique dos Pães</h3><p>Padaria · Cafeteria</p><small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 20–35 min · R$ 3,99</small><b>Entrega grátis acima de R$ 25</b></div>
                     </article>
 
                     <article class="lojaCard">
-                        <div class="placeholderFoto capaLoja verde" role="img" aria-label="Espaço para foto da Grão e Cia"><i class="bi bi-image"></i><span>Foto da loja</span></div>
                         <div class="logoLoja clara">G&amp;C</div>
                         <button class="favoritar" aria-label="Favoritar Grão e Cia"><i class="bi bi-heart"></i></button>
                         <div class="lojaInfo"><h3>Grão &amp; Cia</h3><p>Cafeteria · Doceria</p><small><strong><i class="bi bi-star-fill"></i> 4,8</strong> · 25–40 min · R$ 4,99</small><b>Café especial da casa</b></div>
                     </article>
 
                     <article class="lojaCard">
-                        <div class="placeholderFoto capaLoja terracota" role="img" aria-label="Espaço para foto do Café Retiro"><i class="bi bi-image"></i><span>Foto da loja</span></div>
                         <div class="logoLoja escura">CR</div>
                         <button class="favoritar" aria-label="Favoritar Café Retiro"><i class="bi bi-heart"></i></button>
                         <div class="lojaInfo"><h3>Café Retiro</h3><p>Cafeteria artesanal</p><small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 15–25 min · R$ 2,99</small><b>10% no primeiro pedido</b></div>
                     </article>
 
                     <article class="lojaCard">
-                        <div class="placeholderFoto capaLoja escuro" role="img" aria-label="Espaço para foto do Empório do Café"><i class="bi bi-image"></i><span>Foto da loja</span></div>
                         <div class="logoLoja marrom">EC</div>
                         <button class="favoritar" aria-label="Favoritar Empório do Café"><i class="bi bi-heart"></i></button>
                         <div class="lojaInfo"><h3>Empório do Café</h3><p>Cafeteria · Padaria</p><small><strong><i class="bi bi-star-fill"></i> 4,7</strong> · 30–45 min · R$ 5,99</small><b>Frete grátis para você</b></div>
@@ -160,10 +154,54 @@
                 </div>
 
                 <div class="listaProdutos">
-                    <article class="produtoCard"><div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Empório do Café</p><h3>Chocolate quente cremoso</h3><span>Com chocolate meio amargo</span><strong>R$ 15,00</strong></div><button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button></article>
-                    <article class="produtoCard"><div class="placeholderFoto fotoProduto dourada" role="img" aria-label="Espaço para foto do pão de queijo"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Boutique dos Pães</p><h3>Pão de queijo artesanal</h3><span>Porção com 6 unidades</span><strong>R$ 14,50</strong></div><button class="adicionar" aria-label="Adicionar pão de queijo"><i class="bi bi-plus-lg"></i></button></article>
-                    <article class="produtoCard"><div class="placeholderFoto fotoProduto azul" role="img" aria-label="Espaço para foto do cappuccino"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Grão &amp; Cia</p><h3>Cappuccino cremoso</h3><span>Espresso, leite e espuma</span><strong>R$ 12,90</strong></div><button class="adicionar" aria-label="Adicionar cappuccino"><i class="bi bi-plus-lg"></i></button></article>
-                    <article class="produtoCard"><div class="placeholderFoto fotoProduto rosa" role="img" aria-label="Espaço para foto do bolo caseiro"><i class="bi bi-image"></i><span>Foto do produto</span></div><div class="produtoInfo"><p>Café Retiro</p><h3>Bolo caseiro do dia</h3><span>Fatia generosa e fofinha</span><strong>R$ 9,90</strong></div><button class="adicionar" aria-label="Adicionar bolo"><i class="bi bi-plus-lg"></i></button></article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
+                    </article>
                 </div>
             </div>
         </section>
@@ -183,5 +221,7 @@
         <section class="footerSection"><div class="titulo">Sobre nós</div><ul class="footerSectionLists"><li><a href="cadastrarLoja.html">Cadastre sua loja</a></li><li><a href="cadastrarEntregador.html">Seja entregador</a></li><li><a href="canalAtendimento.html">Fale conosco</a></li></ul></section>
         <section class="footerSection"><div class="titulo">Contato</div><ul class="footerSectionLists"><li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">@CafezinDSA</li><li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">(34) 9 9999-9999</li></ul></section>
     </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="JavaScript/Comprador/cardapio.js"></script>
 </body>
 </html>
