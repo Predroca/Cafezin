@@ -7,7 +7,7 @@ body {
 
 a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
-.container { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+.container { width: 95%; margin: 0 auto; }
 
 /* Navegação */
 
@@ -484,8 +484,10 @@ button, input, select { font: inherit; }
 .secaoEscura {
     margin-top: 15px;
     padding: 55px 0;
-    background: var(--cor-marrom-escuro-2);
+    background: var(--cor-bege-destaque);
 }
+
+
 
 .relatoriosAdministrador {
     display: flex;
@@ -496,29 +498,31 @@ button, input, select { font: inherit; }
 
 .relatoriosAdministrador p {
     margin-bottom: 4px;
-    color: var(--cor-bege-destaque);
-    font-size: .7rem;
+    color: var(--cor-marrom-escuro-2);
+    font-size: .8rem;
     font-weight: 700;
     text-transform: uppercase;
 }
 
 .relatoriosAdministrador h2 {
     margin-bottom: 6px;
-    color: var(--cor-texto-claro);
+    color: var(--cor-marrom-escuro-2);
     font-family: "Brasika", sans-serif;
+
     font-size: var(--fonte-grande);
 }
 
 .relatoriosAdministrador span {
-    color: var(--cor-bege-claro);
+    color: var(--cor-marrom-escuro-2);
+       font-size: .8rem;
     font-size: var(--fonte-pequena);
 }
 
 .relatoriosAdministrador > a {
     padding: 11px 15px;
     border-radius: var(--borda-arredondada-pequena);
-    background: var(--cor-bege-destaque);
-    color: var(--cor-marrom-escuro-2);
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
     font-size: .75rem;
     font-weight: 700;
     white-space: nowrap;
@@ -635,4 +639,8 @@ button, input, select { font: inherit; }
     *::before {
         transition-duration: .01ms !important;
     }
+}
+
+.administrador{
+    color: var(--cor-laranja);
 }
