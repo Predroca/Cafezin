@@ -1,5 +1,3 @@
-
-
 body {
     font-family: "Google Sans", sans-serif;
     color: var(--cor-texto);
@@ -23,6 +21,10 @@ textarea {
     margin: 0 auto;
 }
 
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
 
 .navLoja {
     position: sticky;
@@ -118,6 +120,11 @@ textarea {
     color: var(--cor-laranja-claro);
 }
 
+
+/* =========================================================
+   PAINEL PRINCIPAL
+   ========================================================= */
+
 .heroPainel {
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-texto-claro);
@@ -128,10 +135,15 @@ textarea {
     min-height: 300px;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    /*
+     * O texto ocupa a parte esquerda.
+     * Os cards ocupam somente o espaço restante à direita.
+     */
+    grid-template-columns: 42% 58%;
 
     align-items: center;
-    gap: 50px;
+    gap: 0;
 }
 
 .heroPainelTexto {
@@ -179,16 +191,22 @@ textarea {
 }
 
 
+/* =========================================================
+   CARDS DO PAINEL
+   ========================================================= */
+
 .resumoPainel {
     width: 100%;
 
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
-    gap: 14px;
+    gap: 18px;
 
     align-items: center;
     justify-content: center;
+
+    padding: 0 20px;
 }
 
 .resumoPainelCard {
@@ -221,6 +239,10 @@ textarea {
 
     text-align: center;
 }
+/* Destaque da fatura */
+.destaque {
+    background: var(--cor-laranja-escuro);
+}
 
 .resumoPainelCard span {
     display: block;
@@ -233,7 +255,9 @@ textarea {
 }
 
 
-
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
 
 .secaoPadrao {
     padding: 62px 0;
@@ -285,7 +309,9 @@ textarea {
 }
 
 
-
+/* =========================================================
+   BOTÕES
+   ========================================================= */
 
 .botaoPrimario,
 .botaoSecundario {
@@ -330,6 +356,9 @@ textarea {
 }
 
 
+/* =========================================================
+   ENTREGAS
+   ========================================================= */
 
 .listaEntregas {
     display: grid;
@@ -361,8 +390,6 @@ textarea {
     border-left-color: #6fae7a;
 }
 
-
-
 .entregaCabecalho {
     display: flex;
     align-items: center;
@@ -376,7 +403,6 @@ textarea {
     color: var(--cor-texto-secundario);
     font-size: .68rem;
 }
-
 
 .statusBadge {
     padding: 4px 10px;
@@ -415,18 +441,6 @@ textarea {
 
     gap: 9px;
     margin-bottom: 13px;
-}
-
-.entregaDado > i {
-    flex: 0 0 16px;
-
-    width: 16px;
-    margin-top: 2px;
-
-    color: var(--cor-laranja-escuro);
-    font-size: .95rem;
-
-    text-align: center;
 }
 
 .entregaDado > i {
@@ -492,7 +506,6 @@ textarea {
     margin-bottom: 0;
 }
 
-
 .entregaRodape {
     display: flex;
     align-items: center;
@@ -520,6 +533,10 @@ textarea {
 }
 
 
+/* =========================================================
+   LOJAS
+   ========================================================= */
+
 .listaLojas {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -531,16 +548,16 @@ textarea {
 
     overflow: hidden;
 
-    border: 1px solid rgba(75, 54, 42, .12);
+    border: 1px solid rgba(75, 54, 42, .70);
     border-radius: var(--borda-arredondada-media);
 
     background: var(--cor-background);
 
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
+    box-shadow: 0 8px 22px rgba(45, 28, 22, .15);
 }
 
 .lojaImagem {
-    flex: 0 0 145px;
+    flex: 0 0 290px;
 
     min-height: 210px;
 
@@ -550,59 +567,34 @@ textarea {
 
     color: var(--cor-marrom-claro);
     font-size: 2rem;
-}
+}   
 
 .lojaImagem i {
     display: block;
     line-height: 1;
 }
 
-
-
 .lojaImagem.dourada {
-    background:
-        linear-gradient(
-            135deg,
-            #f3d9a7 0%,
-            #fff2d3 50%,
-            #cd9858 50%,
-            #f4d4a5
-        );
+    background-image: url(../img/indexEntregador/cafeteria1.jpg);
+
+  background-size: 100% 100%;
 }
 
 .lojaImagem.azul {
-    background:
-        linear-gradient(
-            135deg,
-            #c6dae1 0%,
-            #edf6f9 50%,
-            #82a7b5 50%,
-            #d2e6eb
-        );
+    background-image: url(../img/indexEntregador/cafeteria2.jpg);
+    
+  background-size: 100% 100%;   
 }
 
 .lojaImagem.rosa {
-    background:
-        linear-gradient(
-            135deg,
-            #ebcec8 0%,
-            #fff0ec 50%,
-            #bd7f6f 50%,
-            #efc7ba
-        );
+    background-image: url(../img/indexEntregador/cafeteria3.jpg);
+  background-size: 100% 100%;   
 }
 
 .lojaImagem.verde {
-    background:
-        linear-gradient(
-            135deg,
-            #cbdcc8 0%,
-            #eff7ed 50%,
-            #83a77d 50%,
-            #d4e5d0
-        );
+    background-image: url(../img/indexEntregador/cafeteria4.jpg);
+      background-size: 100% 100%;   
 }
-
 
 .lojaInfo {
     min-width: 0;
@@ -652,9 +644,6 @@ textarea {
     color: #3d7048;
 }
 
-
-
-
 .lojaIcone {
     flex: 0 0 20px;
 
@@ -672,15 +661,14 @@ textarea {
     line-height: 1;
 }
 
-
-
 .lojaDado {
     display: flex;
     align-items: center;
 
     gap: 10px;
     margin-bottom: 10px;
-    font-weight:500;    
+
+    font-weight: 500;
     color: var(--cor-marrom-claro);
     font-size: .74rem;
     line-height: 1.4;
@@ -703,9 +691,6 @@ textarea {
     text-align: center;
 }
 
-
-
-
 .lojaRodape {
     display: flex;
     align-items: center;
@@ -720,7 +705,7 @@ textarea {
 }
 
 .lojaRodape > span {
-    color: var(--cor-marrom-claro   );
+    color: var(--cor-marrom-claro);
     font-size: .65rem;
     line-height: 1.35;
 }
@@ -731,12 +716,18 @@ textarea {
 }
 
 
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer {
     margin-top: 0;
 }
 
 
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
 
 @media (max-width: 1050px) {
 
@@ -761,8 +752,6 @@ footer {
         padding: 14px 8px;
     }
 }
-
-
 
 
 @media (max-width: 700px) {
@@ -818,7 +807,6 @@ footer {
         padding: 46px 0;
     }
 }
-
 
 
 @media (max-width: 560px) {
