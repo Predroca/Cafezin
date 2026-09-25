@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Gerencie suas entregas e acompanhe seus pedidos no Cafézin.">
     <title>Cafézin | Painel do entregador</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    >
+
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/indexEntregador.css">
 </head>
@@ -14,6 +19,7 @@
 <body id="topo">
 
     <header class="navLoja">
+
         <div class="container navLojaConteudo">
 
             <a
@@ -24,11 +30,23 @@
                 Cafézin <span>Entregador</span>
             </a>
 
+
             <nav class="navLinks" aria-label="Navegação do painel">
-                <a class="ativo" href="#painel">Painel</a>
-                <a href="#pedidos">Entregas</a>
-                <a href="#minhaLoja">Minhas lojas</a>
+
+                <a class="ativo" href="#painel">
+                    Painel
+                </a>
+
+                <a href="#pedidos">
+                    Entregas
+                </a>
+
+                <a href="#minhaLoja">
+                    Minhas lojas
+                </a>
+
             </nav>
+
 
             <div class="navAcoes">
 
@@ -41,6 +59,7 @@
                     <span>3</span>
                 </a>
 
+
                 <a
                     class="perfil"
                     href="PerfilEntregrador.html"
@@ -52,6 +71,7 @@
             </div>
 
         </div>
+
     </header>
 
 
@@ -64,6 +84,7 @@
         <section class="heroPainel" id="painel">
 
             <div class="container heroPainelConteudo">
+
 
                 <div class="heroPainelTexto">
 
@@ -85,24 +106,84 @@
                 </div>
 
 
+                <!-- =================================
+                     RESUMO DO PAINEL
+                     ================================= -->
+
                 <div class="resumoPainel">
 
-                    <div class="resumoPainelCard">
-                        <i class="bi bi-box-seam" aria-hidden="true"></i>
-                        <strong>2</strong>
-                        <span>Entregas pendentes</span>
-                    </div>
 
                     <div class="resumoPainelCard">
-                        <i class="bi bi-check2-circle" aria-hidden="true"></i>
-                        <strong>5</strong>
-                        <span>Concluídas hoje</span>
+
+                        <i
+                            class="bi bi-box-seam"
+                            aria-hidden="true"
+                        ></i>
+
+                        <strong>
+                            2
+                        </strong>
+
+                        <span>
+                            Entregas pendentes
+                        </span>
+
                     </div>
 
+
                     <div class="resumoPainelCard">
-                        <i class="bi bi-star-fill" aria-hidden="true"></i>
-                        <strong>4,8</strong>
-                        <span>Avaliação média</span>
+
+                        <i
+                            class="bi bi-check2-circle"
+                            aria-hidden="true"
+                        ></i>
+
+                        <strong>
+                            5
+                        </strong>
+
+                        <span>
+                            Concluídas hoje
+                        </span>
+
+                    </div>
+
+
+                    <div class="resumoPainelCard">
+
+                        <i
+                            class="bi bi-star-fill"
+                            aria-hidden="true"
+                        ></i>
+
+                        <strong>
+                            4,8
+                        </strong>
+
+                        <span>
+                            Avaliação média
+                        </span>
+
+                    </div>
+
+
+                    <!-- CARD DESTAQUE -->
+
+                    <div class="resumoPainelCard destaque">
+
+                        <i
+                            class="bi bi-cash-coin"
+                            aria-hidden="true"
+                        ></i>
+
+                        <strong>
+                            R$ 47,20
+                        </strong>
+
+                        <span>
+                            Faturado hoje
+                        </span>
+
                     </div>
 
                 </div>
@@ -148,9 +229,8 @@
 
                 <div class="listaEntregas">
 
-                    <!-- =================================
-                         ENTREGA 1
-                         ================================= -->
+
+                    <!-- ENTREGA 1 -->
 
                     <article class="entrega aguardando">
 
@@ -262,9 +342,7 @@
                     </article>
 
 
-                    <!-- =================================
-                         ENTREGA 2
-                         ================================= -->
+                    <!-- ENTREGA 2 -->
 
                     <article class="entrega retirado">
 
@@ -376,9 +454,7 @@
                     </article>
 
 
-                    <!-- =================================
-                         ENTREGA 3
-                         ================================= -->
+                    <!-- ENTREGA 3 -->
 
                     <article class="entrega caminho">
 
@@ -475,8 +551,6 @@
 
                             <div class="entregaAcoes">
 
-
-
                                 <button
                                     type="button"
                                     class="botaoPrimario"
@@ -533,15 +607,12 @@
 
                 <div class="listaLojas">
 
-                    <!-- =================================
-                         LOJA 1
-                         ================================= -->
+
+                    <!-- LOJA 1 -->
 
                     <article class="lojaEntregador">
 
                         <div class="lojaImagem dourada">
-
-                            <i class="bi bi-shop"></i>
 
                         </div>
 
@@ -620,15 +691,11 @@
                     </article>
 
 
-                    <!-- =================================
-                         LOJA 2
-                         ================================= -->
+                    <!-- LOJA 2 -->
 
                     <article class="lojaEntregador">
 
                         <div class="lojaImagem azul">
-
-                            <i class="bi bi-shop"></i>
 
                         </div>
 
@@ -707,15 +774,11 @@
                     </article>
 
 
-                    <!-- =================================
-                         LOJA 3
-                         ================================= -->
+                    <!-- LOJA 3 -->
 
                     <article class="lojaEntregador">
 
                         <div class="lojaImagem rosa">
-
-                            <i class="bi bi-shop"></i>
 
                         </div>
 
@@ -794,15 +857,11 @@
                     </article>
 
 
-                    <!-- =================================
-                         LOJA 4
-                         ================================= -->
+                    <!-- LOJA 4 -->
 
                     <article class="lojaEntregador">
 
                         <div class="lojaImagem verde">
-
-                            <i class="bi bi-shop"></i>
 
                         </div>
 
@@ -893,15 +952,23 @@
          RODAPÉ
          ========================================= -->
 
- <footer>
+    <footer>
 
         <div class="footerConteudo">
 
             <section class="footerSection footerMarca">
 
-                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img
+                    src="img/FooterLogo.svg"
+                    alt="Cafézin"
+                    class="footerLogoTexto"
+                >
 
-                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+                <img
+                    src="img/FooterTitulo.svg"
+                    alt=""
+                    class="footerLogoImagem"
+                >
 
             </section>
 
@@ -997,4 +1064,5 @@
     </footer>
 
 </body>
+
 </html>
