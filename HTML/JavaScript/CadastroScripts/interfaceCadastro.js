@@ -1,15 +1,3 @@
-// interfaceCadastro.js
-// -----------------------------------------------------------------
-// Responsável apenas pela navegação "voltar" entre as etapas e pela
-// sincronização do indicador visual de progresso (stepDot/stepLinha).
-//
-// O olho de senha e a validação visual de campos agora vêm de
-// formsFunctionality.js (reaproveitados em qualquer formulário do
-// site). O avanço da etapa 1 -> 2 e o envio ao servidor continuam
-// 100% em enviarCadastro.js / cadastrar.js, sem nenhuma alteração
-// feita por este arquivo.
-// -----------------------------------------------------------------
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const dot1 = document.querySelector('.stepDot[data-step="1"]');
@@ -29,10 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if(linha) linha.classList.remove('preenchida');
     }
 
-    // enviarCadastro.js (não alterado) troca segundaSessao.style.display
-    // ao validar a etapa 1. Aqui apenas observamos essa mudança para
-    // manter o indicador de progresso em sincronia, sem duplicar
-    // nenhuma regra de negócio.
     if(secao2){
         const observer = new MutationObserver(() => {
             const visivel = secao2.style.display && secao2.style.display !== 'none';

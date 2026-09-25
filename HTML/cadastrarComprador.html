@@ -14,11 +14,20 @@
 <body>
     <div class="bodyCadastro d-none d-xl-block"></div>
 
-    <div class="erroLoginContainer" id="errorLogin">
-        <img src="icones/FormIcons/WrongCredential.png" alt="não foi possivel carregar a imagem" class="iconeErro">
-        <div class="errorLoginText">
-            <h4>Ops! Algo deu errado</h4>
-            <p>Usuário já criado. Faça login caso já possua uma conta</p>
+    <div class="alertaCafe" id="usuarioExistente" role="alertdialog" aria-labelledby="usuarioExistenteTitulo" aria-describedby="usuarioExistenteTexto">
+        <div class="alertaCafeIcone" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 10h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-4z"/>
+                <path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/>
+                <path class="vapor" d="M8 3v3"/>
+                <path class="vapor vapor2" d="M12 3v3"/>
+            </svg>
+        </div>
+        <h4 id="usuarioExistenteTitulo">Você já tem conta por aqui</h4>
+        <p id="usuarioExistenteTexto">Já existe um cadastro com esse e-mail, usuário ou CPF. Entre na sua conta ou revise os dados informados.</p>
+        <div class="alertaCafeAcoes">
+            <button type="button" class="alertaCafeBotao secundario" id="fecharUsuarioExistente">Revisar dados</button>
+            <a href="login.html" class="alertaCafeBotao primario">Fazer login</a>
         </div>
     </div>
 
@@ -152,7 +161,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="JavaScript/formsFunctionality.js"></script>
-    <script src="JavaScript/CadastroScripts/cadastrar.js"></script>
     <script src="JavaScript/CadastroScripts/enviarCadastro.js"></script>
     <script src="JavaScript/CadastroScripts/interfaceCadastro.js"></script>
 </body>

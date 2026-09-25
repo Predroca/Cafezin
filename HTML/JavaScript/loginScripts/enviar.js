@@ -26,6 +26,9 @@ async function takeAnswer() {
             else if(data.tipo_usuario==='Comprador'){
                 window.location.href='indexComprador.html';
             }
+            else if(data.tipo_usuario==='Entregador'){
+                window.location.href='indexEntregador.html'
+            }
         }
         
 }

@@ -301,3 +301,88 @@ body{
     .upCurve, .downCurve{ display: none; }
 }
 
+
+
+/* -------- Alerta: usuário já cadastrado -------- */
+.alertaCafe{
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
+    max-width: 92%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 26px 24px;
+    text-align: center;
+    background-color: var(--cor-background);
+    border: 1px solid rgba(148, 70, 27, 0.15);
+    border-radius: 22px;
+    box-shadow: 0 24px 60px -18px rgba(45, 28, 22, 0.55);
+    overflow: hidden;
+    z-index: 2000;
+}
+.alertaCafe.aberto{
+    display: flex;
+    animation: cairErro 0.35s ease both;
+}
+.alertaCafe::before{
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--cor-laranja-escuro), var(--cor-laranja-claro), var(--cor-bege-destaque));
+}
+.alertaCafeIcone{
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--cor-bege-claro);
+    color: var(--cor-laranja-escuro);
+    box-shadow: 0 0 0 6px rgba(232, 190, 144, 0.25);
+}
+.alertaCafeIcone svg{ width: 32px; height: 32px; }
+.alertaCafeIcone .vapor{ animation: vaporCafe 2.2s ease-in-out infinite; }
+.alertaCafeIcone .vapor2{ animation-delay: 0.6s; }
+@keyframes vaporCafe{
+    0%, 100%{ opacity: 0.2; transform: translateY(2px); }
+    50%{ opacity: 1; transform: translateY(-2px); }
+}
+.alertaCafe h4{
+    font-family: 'Brasika', sans-serif;
+    font-size: var(--fonte-grande);
+    color: var(--cor-marrom-escuro-2);
+}
+.alertaCafe p{
+    font-size: var(--fonte-pequena);
+    color: var(--cor-texto-secundario);
+    max-width: 300px;
+}
+.alertaCafeAcoes{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 6px;
+}
+.alertaCafeBotao{
+    flex: 1;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 20px;
+    font-size: var(--fonte-pequena);
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--transicao-normal), color var(--transicao-normal), transform var(--transicao-rapida);
+}
+.alertaCafeBotao:active{ transform: scale(0.98); }
+.alertaCafeBotao:focus-visible{ outline: 3px solid rgba(115, 131, 235, 0.55); outline-offset: 2px; }
+.alertaCafeBotao.primario{ background-color: var(--cor-azul-marinho); color: var(--cor-texto-claro); }
+.alertaCafeBotao.primario:hover{ background-color: var(--cor-azul-medio); color: var(--cor-azul-marinho); }
+.alertaCafeBotao.secundario{ background-color: var(--cor-bege-claro); color: var(--cor-marrom-escuro-2); }
+.alertaCafeBotao.secundario:hover{ background-color: var(--cor-bege-destaque); }

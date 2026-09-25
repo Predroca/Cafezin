@@ -68,25 +68,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const ConfSenha = confirmPsswd.value;
         const FnomeUser = nomeUser.value.trim();
 
-
-      
-
         if (
             Femail === "" ||
             Fsenha === "" ||
             ConfSenha === "" ||
             FnomeUser === ""
         ) {
-
             mostrarErro(preencherCampos);
-
             return false;
-
         }
-
-
-  
-
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!regex.test(Femail)) {
