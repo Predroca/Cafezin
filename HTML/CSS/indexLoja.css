@@ -200,9 +200,8 @@ button, input, select, textarea { font: inherit; }
     margin: 0 auto;
     position: relative;
     left: 0;
-    border: 2px dashed rgba(255, 243, 231, .48);
+    border: 2px solid white ;
     border-radius: var(--borda-arredondada-grande);
-    background: linear-gradient(135deg, rgba(225,167,104,.35), rgba(255,243,231,.12));
     color: var(--cor-bege-destaque);
 }
 
@@ -506,21 +505,25 @@ button, input, select, textarea { font: inherit; }
 
 
 .fotoProdutoLoja {
-    height: 120px;
-    background: linear-gradient(135deg, #efd5c1 0%, #fff6ee 50%, #bd8060 50%, #f0c2a6 100%);
-    color: var(--cor-marrom-claro);
+    height: 200px;
+    background-image: url(../img/indexLoja/ProdutoExemplar4.jpg);
+    background-size: 100% 100%;
 }
 
 .fotoProdutoLoja.dourada {
-    background: linear-gradient(135deg, #f3d9a7 0%, #fff2d3 50%, #cd9858 50%, #f4d4a5);
+
+    background-image: url(../img/indexLoja/ProdutoExemplar1.jpg);
+    background-size: 100% 100%;
 }
 
 .fotoProdutoLoja.azul {
-    background: linear-gradient(135deg, #c6dae1 0%, #edf6f9 50%, #82a7b5 50%, #d2e6eb);
+    background-image: url(../img/indexLoja/ProdutoExemplar2.jpg);
+    background-size: 100% 100%;
 }
 
 .fotoProdutoLoja.rosa {
-    background: linear-gradient(135deg, #ebcec8 0%, #fff0ec 50%, #bd7f6f 50%, #efc7ba);
+    background-image: url(../img/indexLoja/ProdutoExemplar3.jpg);
+    background-size: 100% 100%;
 }
 
 .fotoProdutoLoja i {
