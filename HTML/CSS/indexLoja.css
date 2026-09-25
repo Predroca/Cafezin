@@ -354,21 +354,9 @@ button, input, select, textarea { font: inherit; }
     border-radius: var(--borda-arredondada-media);
     background: var(--cor-background);
     border: 1px solid rgba(75,54,42,.12);
-    border-left: 4px solid var(--cor-cinza-claro);
     box-shadow: 0 8px 22px rgba(45,28,22,.07);
 }
 
-.pedido.novo {
-    border-left-color: var(--cor-laranja);
-}
-
-.pedido.preparo {
-    border-left-color: var(--cor-azul-medio);
-}
-
-.pedido.pronto {
-    border-left-color: #6fae7a;
-}
 
 .pedidoCabecalho {
     display: flex;
@@ -508,10 +496,11 @@ button, input, select, textarea { font: inherit; }
     height: 200px;
     background-image: url(../img/indexLoja/ProdutoExemplar4.jpg);
     background-size: 100% 100%;
+    object-fit: contain;
 }
 
 .fotoProdutoLoja.dourada {
-
+    object-fit: contain;
     background-image: url(../img/indexLoja/ProdutoExemplar1.jpg);
     background-size: 100% 100%;
 }
@@ -519,11 +508,13 @@ button, input, select, textarea { font: inherit; }
 .fotoProdutoLoja.azul {
     background-image: url(../img/indexLoja/ProdutoExemplar2.jpg);
     background-size: 100% 100%;
+    object-fit: contain;
 }
 
 .fotoProdutoLoja.rosa {
     background-image: url(../img/indexLoja/ProdutoExemplar3.jpg);
     background-size: 100% 100%;
+    object-fit: contain;
 }
 
 .fotoProdutoLoja i {
