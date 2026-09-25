@@ -651,6 +651,23 @@ footer {
 
 }
 
+.heroTexto {
+    text-align: center;
+}
+
+.heroTexto h1 {
+    margin: 0 auto 14px;
+}
+
+.heroTexto > p:not(.heroSaudacao) {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.heroVantagens {
+    justify-content: center;
+}
 
 @media (max-width: 500px) {
     .perfil {
