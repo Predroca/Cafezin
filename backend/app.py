@@ -8,6 +8,7 @@ from routes.catalogo_bp import catalogo_bp
 from routes.endereco import endereco_bp
 from routes.avaliacao_bp import avaliacao_bp
 from routes.loja_bp import loja_bp
+from routes.admin_bp import admin_bp
 
 from config import Config
 
@@ -28,6 +29,7 @@ app.register_blueprint(catalogo_bp)
 app.register_blueprint(endereco_bp)
 app.register_blueprint(avaliacao_bp)
 app.register_blueprint(loja_bp)
+app.register_blueprint(admin_bp)
 
 
 @app.route("/health")
