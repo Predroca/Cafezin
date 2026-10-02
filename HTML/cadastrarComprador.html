@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <form class="formLoginContainer px-4" action="/register/comprador" method="POST" id="loginForm" novalidate>
+    <form class="formLoginContainer px-4" id="loginForm" novalidate>
 
         <div class="stepIndicator" id="stepIndicator" aria-hidden="true">
             <div class="stepDot ativo" data-step="1">
@@ -61,49 +61,70 @@
             <div class="stepLinha" id="stepLinha"></div>
             <div class="stepDot" data-step="2">
                 <span class="stepNumero">2</span>
-                <span class="stepRotulo">Dados pessoais</span>
+                <span class="stepRotulo" id="rotuloEtapa2">Dados pessoais</span>
             </div>
         </div>
 
+        <!-- ================= STEP 1: dados comuns (Usuario) ================= -->
         <div class="primeiraSessao" id="primeiraSessao">
 
             <div class="cabecalhoEtapa">
                 <div class="titulo">Cadastrar-se</div>
-                <p class="subtitulo">Se torne um cliente Cafézin em poucas etapas</p>
+                <p class="subtitulo">Crie sua conta Cafézin em poucas etapas</p>
             </div>
 
             <div class="inputsContainer">
 
+                <fieldset class="seletorTipo" id="seletorTipo">
+                    <div class="opcaoTipo">
+                        <input type="radio" name="tipoUsuario" id="tipoComprador" value="comprador" required hidden>
+                        <label for="tipoComprador"><i class="bi-person" aria-hidden="true"></i><span>Comprador</span></label>
+                    </div>
+                    <div class="opcaoTipo">
+                        <input type="radio" name="tipoUsuario" id="tipoLoja" value="loja" hidden>
+                        <label for="tipoLoja"><i class="bi-shop" aria-hidden="true"></i><span>Loja</span></label>
+                    </div>
+                    <div class="opcaoTipo">
+                        <input type="radio" name="tipoUsuario" id="tipoEntregador" value="entregador" hidden>
+                        <label for="tipoEntregador"><i class=" bi-bicycle" aria-hidden="true"></i><span>Entregador</span></label>
+                    </div>
+                </fieldset>
+
+                <label class="visually-hidden" for="nomeUser">Nome de usuário</label>
                 <div class="input-group inptLoginEmail ">
                     <i class="bi bi-person"></i>
-                    <input type="text" id="nomeUser" class="form-control py-2" placeholder="Nome de Usuário" required autocomplete="username">
+                    <input type="text" id="nomeUser" name="nome" class="form-control py-2" placeholder="Nome de Usuário" required autocomplete="username">
                 </div>
 
+                <label class="visually-hidden" for="email">E-mail</label>
                 <div class="input-group inptLoginEmail">
                     <i class="bi bi-envelope"></i>
-                    <input type="email" id="email" class="form-control py-2" placeholder="Email" required autocomplete="email">
+                    <input type="email" id="email" name="email" class="form-control py-2" placeholder="Email" required autocomplete="email">
                 </div>
 
+                <label class="visually-hidden" for="password">Senha</label>
                 <div class="input-group inptLoginEmail">
                     <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control passwordCamp py-2" id="password" placeholder="Digite sua nova senha" required autocomplete="new-password">
+                    <input type="password" class="form-control passwordCamp py-2" id="password" name="senha" placeholder="Digite sua nova senha" required autocomplete="new-password">
                     <button type="button" class="input-group-text botaoOlho" data-toggle-target="password" id="olhoSenha" aria-label="Mostrar senha" aria-pressed="false">
                         <i class=" bi-eye-slash"></i>
                     </button>
                 </div>
 
+                <label class="visually-hidden" for="confirmPsswd">Confirmar senha</label>
                 <div class="input-group inptLoginEmail">
                     <i class="bi bi-lock"></i>
-                    <input type="password" class="form-control py-2 passwordCamp" id="confirmPsswd" placeholder="Confirmar sua senha" required autocomplete="new-password">
+                    <input type="password" class="form-control py-2 passwordCamp" id="confirmPsswd" name="confirmarSenha" placeholder="Confirmar sua senha" required autocomplete="new-password">
                     <button type="button" class="input-group-text botaoOlho" data-toggle-target="confirmPsswd" id="olhoConfirmar" aria-label="Mostrar senha" aria-pressed="false">
                         <i class=" bi-eye-slash"></i>
                     </button>
                 </div>
                 <p class="mensagemSenha" id="mensagemSenha"></p>
 
+                <label class="visually-hidden" for="telefone">Telefone (opcional)</label>
                 <div class="input-group inptLoginEmail">
                     <i class="bi bi-telephone"></i>
-                    <input type="text" id="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)">
+                    <input type="text" id="telefone" name="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)" inputmode="numeric" autocomplete="tel">
                 </div>
 
             </div>
@@ -120,6 +141,7 @@
 
         </div>
 
+        <!-- ================= STEP 2: dados específicos (muda conforme o tipo) ================= -->
         <div class="segundaSessao" id="segundaSessao">
 
             <div class="cabecalhoEtapa">
@@ -129,26 +151,105 @@
                     </svg>
                 </button>
                 <div class="titulo">Falta pouco</div>
-                <p class="subtitulo">Agora só precisamos de mais alguns dados</p>
+                <p class="subtitulo" id="subtituloEtapa2">Agora só precisamos de mais alguns dados</p>
             </div>
 
             <div class="inputsContainer">
 
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-card-text"></i>
-                    <input type="text" id="cpfUser" class="form-control py-2" placeholder="Insira seu CPF" required maxlength="11">
+                <!-- Comum a COMPRADOR e ENTREGADOR -->
+                <div class="grupoCampos d-none" data-tipos="comprador entregador">
+                    <label class="visually-hidden" for="cpfUser">CPF</label>
+                    <div class="input-group inptLoginEmail">
+                        <i class="bi bi-card-text"></i>
+                        <input type="text" id="cpfUser" name="cpf" class="form-control py-2" placeholder="Insira seu CPF" required maxlength="11" inputmode="numeric">
+                    </div>
+
+                    <label class="visually-hidden" for="dataNascUser">Data de nascimento</label>
+                    <div class="input-group inptLoginEmail">
+                        <i class="bi bi-calendar3"></i>
+                        <input type="date" id="dataNascUser" name="dataNascimento" class="form-control py-2" placeholder="Insira a data de nascimento" required>
+                    </div>
                 </div>
-                <div class="input-group inptLoginEmail">
-                    <i class="bi bi-calendar3"></i>
-                    <input type="date" id="dataNascUser" class="form-control py-2" placeholder="Insira a data de nascimento" required>
+
+                <!-- Só COMPRADOR -->
+                <div class="grupoCampos d-none" data-tipos="comprador">
+                    <label class="visually-hidden" for="opcoesSexo">Sexo</label>
+                    <div class="input-group inptLoginEmail">
+                        <select name="sexo" id="opcoesSexo" class="form-select" required>
+                            <option value="" disabled selected>Selecionar Sexo</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Feminino</option>
+                            <option value="null">Outro</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="input-group inptLoginEmail">
-                    <select name="opcoesSexo" id="opcoesSexo" class="form-select">
-                        <option value="" disabled selected>Selecionar Sexo</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="null">Outro</option>
-                    </select>
+
+                <!-- Só LOJA -->
+                <div class="grupoCampos d-none" data-tipos="loja">
+                    <label class="visually-hidden" for="ruaLoja">Nome da rua</label>
+                    <div class="input-group inptLoginEmail">
+                        <i class="bi bi-signpost"></i>
+                        <input type="text" id="ruaLoja" name="rua" class="form-control py-2" placeholder="Nome da rua" required autocomplete="address-line1">
+                    </div>
+
+                    <div class="linhaDupla">
+                        <label class="visually-hidden" for="numeroLoja">Número do estabelecimento</label>
+                        <input type="text" id="numeroLoja" name="numero" class="form-control py-2" placeholder="Número" required>
+
+                        <label class="visually-hidden" for="bairroLoja">Bairro</label>
+                        <input type="text" id="bairroLoja" name="bairro" class="form-control py-2" placeholder="Bairro" required>
+
+                        <label class="visually-hidden" for="cidadeLoja">Cidade</label>
+                        <input type="text" id="cidadeLoja" name="cidade" class="form-control py-2" placeholder="Cidade" required autocomplete="address-level2">
+
+                        <label class="visually-hidden" for="estadoLoja">Estado</label>
+                        <select id="estadoLoja" name="estado" class="form-select" required>
+                            <option value="" disabled selected>Estado</option>
+                            <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                            <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                            <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                            <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                            <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                            <option>SP</option><option>SE</option><option>TO</option>
+                        </select>
+
+                        <label class="visually-hidden" for="cepLoja">CEP</label>
+                        <input type="text" id="cepLoja" name="cep" class="form-control py-2" placeholder="CEP" required maxlength="8" inputmode="numeric" autocomplete="postal-code">
+
+                        <label class="visually-hidden" for="cnpjLoja">CNPJ</label>
+                        <input type="text" id="cnpjLoja" name="cnpj" class="form-control py-2" placeholder="CNPJ" required maxlength="14" inputmode="numeric">
+                    </div>
+
+                    <div class="linhaDupla">
+                        <div class="campoRotulado">
+                            <label class="rotuloMini" for="abreLoja">Abre às</label>
+                            <input type="time" id="abreLoja" name="horarioAbertura" class="form-control py-2" required>
+                        </div>
+                        <div class="campoRotulado">
+                            <label class="rotuloMini" for="fechaLoja">Fecha às</label>
+                            <input type="time" id="fechaLoja" name="horarioFechamento" class="form-control py-2" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Só ENTREGADOR -->
+                <div class="grupoCampos d-none" data-tipos="entregador">
+                    <label class="visually-hidden" for="cnhEntregador">CNH</label>
+                    <div class="input-group inptLoginEmail">
+                        <i class="bi bi-card-heading"></i>
+                        <input type="text" id="cnhEntregador" name="cnh" class="form-control py-2" placeholder="Número da CNH" required maxlength="11" inputmode="numeric">
+                    </div>
+
+                    <label class="visually-hidden" for="pagamentoEntregador">Tipo de pagamento</label>
+                    <div class="input-group inptLoginEmail">
+                        <select id="pagamentoEntregador" name="tipoPagamento" class="form-select" required>
+                            <option value="" disabled selected>Tipo de pagamento</option>
+                            <option value="pix">Pix</option>
+                            <option value="transferencia">Transferência bancária</option>
+                            <option value="dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
                 </div>
 
             </div>
