@@ -472,6 +472,17 @@ button, input, select, textarea { font: inherit; }
     color: white;
 }
 
+.filtrosProdutos button:hover{
+    background: var(--cor-marrom-claro);
+    border-color: transparent;
+}
+
+.filtrosProdutos button:active{
+    background: var(--cor-laranja-escuro);
+    border-color: transparent;
+    color: white;
+}
+
 /* Produtos do lojista */
 
 .listaProdutosLoja {
