@@ -1,22 +1,5 @@
-const API_URL = 'http://localhost:5000';
-
-async function cadastrar(user, email, senha, telefone, cpf, nasc, sexo) {
-    // email senha nome telefone cpf nasc sexo
-    const resposta = await fetch(`${API_URL}/register/comprador`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            'email': email,
-            'senha': senha,
-            'nome': user,
-            'telefone': telefone,
-            'cpf': cpf,
-            'data_nasc': nasc,
-            'sexo': sexo
-        })
-    });
-    return resposta;
-}
+/* Cadastro Cafézin: somente front-end (sem backend por enquanto).
+   Quando for integrar, o ponto de envio é o "TODO backend" no final do arquivo. */
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -25,21 +8,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const DURACAO_ERRO = 3800;       // ms — tempo dos alertas simples
     const SENHA_MIN = 6;             // tamanho mínimo da senha
 
+    // Textos do Step 2 para cada tipo de usuário
+    const TEXTOS_ETAPA2 = {
+        '':         { rotulo: 'Dados pessoais',     subtitulo: 'Agora só precisamos de mais alguns dados' },
+        comprador:  { rotulo: 'Dados pessoais',     subtitulo: 'Agora só precisamos de mais alguns dados' },
+        loja:       { rotulo: 'Dados da loja',      subtitulo: 'Conte para a gente onde sua loja fica' },
+        entregador: { rotulo: 'Dados do entregador', subtitulo: 'Precisamos de alguns dados para as suas entregas' }
+    };
+
     /* ---------------- Elementos ---------------- */
     const form = document.getElementById('loginForm');
     const primeiraSessao = document.getElementById('primeiraSessao');
     const segundaSessao = document.getElementById('segundaSessao');
     const nextStep = document.getElementById('nextStep');
-    const botaoSubmit = document.getElementById('submit');
 
+    // Step 1 (comuns)
+    const seletorTipo = document.getElementById('seletorTipo');
     const nomeUser = document.getElementById('nomeUser');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const confirmPsswd = document.getElementById('confirmPsswd');
     const telefone = document.getElementById('telefone');
+
+    // Step 2: comprador / entregador
     const cpfUser = document.getElementById('cpfUser');
     const dataNascUser = document.getElementById('dataNascUser');
     const opcoesSexo = document.getElementById('opcoesSexo');
+    const cnhEntregador = document.getElementById('cnhEntregador');
+    const pagamentoEntregador = document.getElementById('pagamentoEntregador');
+
+    // Step 2: loja
+    const ruaLoja = document.getElementById('ruaLoja');
+    const numeroLoja = document.getElementById('numeroLoja');
+    const bairroLoja = document.getElementById('bairroLoja');
+    const cidadeLoja = document.getElementById('cidadeLoja');
+    const estadoLoja = document.getElementById('estadoLoja');
+    const cepLoja = document.getElementById('cepLoja');
+    const cnpjLoja = document.getElementById('cnpjLoja');
+    const abreLoja = document.getElementById('abreLoja');
+    const fechaLoja = document.getElementById('fechaLoja');
+
+    const gruposEtapa2 = document.querySelectorAll('.grupoCampos');
+    const rotuloEtapa2 = document.getElementById('rotuloEtapa2');
+    const subtituloEtapa2 = document.getElementById('subtituloEtapa2');
 
     const preencherCampos = document.getElementById('preencherCampos');
     const diferentPsswd = document.getElementById('diferentPsswd');
@@ -56,6 +67,41 @@ document.addEventListener('DOMContentLoaded', () => {
         alerta.dataset.padrao = p.textContent.trim().replace(/\s+/g, ' ');
     });
 
+    /* ---------------- Tipo de usuário ---------------- */
+
+    // Devolve "comprador", "loja", "entregador" ou "" (nada escolhido)
+    function tipoSelecionado() {
+        const marcado = form.querySelector('input[name="tipoUsuario"]:checked');
+        return marcado ? marcado.value : '';
+    }
+
+    // Monta o Step 2 para o tipo escolhido:
+    // mostra os grupos do tipo e esconde + desabilita (disabled) os demais.
+    function montarEtapa2(tipo) {
+        gruposEtapa2.forEach((grupo) => {
+            const ativo = grupo.dataset.tipos.split(' ').includes(tipo);
+
+            grupo.classList.toggle('d-none', !ativo);
+
+            grupo.querySelectorAll('input, select').forEach((campo) => {
+                campo.disabled = !ativo;                       // desabilitado = ignorado
+                campo.classList.remove('is-invalid', 'is-valid');
+            });
+        });
+
+        rotuloEtapa2.textContent = TEXTOS_ETAPA2[tipo].rotulo;
+        subtituloEtapa2.textContent = TEXTOS_ETAPA2[tipo].subtitulo;
+    }
+
+    form.querySelectorAll('input[name="tipoUsuario"]').forEach((radio) => {
+        radio.addEventListener('change', () => {
+            seletorTipo.classList.remove('is-invalid');
+            montarEtapa2(tipoSelecionado());
+        });
+    });
+
+    montarEtapa2(tipoSelecionado());   // estado inicial (também cobre F5 com rádio marcado)
+
     /* ---------------- Alertas ---------------- */
     function esconderErros() {
         clearTimeout(timerErro);
@@ -68,12 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
         alerta.querySelector('p').textContent = mensagem || alerta.dataset.padrao;
         alerta.style.display = 'flex';
         timerErro = setTimeout(() => { alerta.style.display = 'none'; }, DURACAO_ERRO);
-    }
-
-    function abrirAlertaUsuarioExistente() {
-        esconderErros();
-        usuarioExistente.classList.add('aberto');
-        fecharUsuarioExistente.focus();
     }
 
     function fecharAlertaUsuarioExistente() {
@@ -133,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function validarEtapa1() {
         const tel = telefone.value.trim();
         return checar([
+            [seletorTipo, tipoSelecionado() !== '', 'Escolha se você é comprador, loja ou entregador.'],
             [nomeUser, nomeUser.value.trim().length >= 3, 'O nome de usuário precisa ter ao menos 3 caracteres.'],
             [email, regexEmail.test(email.value.trim()), 'Digite um e-mail válido.'],
             [password, password.value.length >= SENHA_MIN, `A senha precisa ter ao menos ${SENHA_MIN} caracteres.`],
@@ -143,26 +184,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function validarEtapa2() {
-        return checar([
-            [cpfUser, cpfValido(cpfUser.value), 'CPF inválido. Confira os 11 números.'],
-            [dataNascUser, dataValida(dataNascUser.value), 'Informe uma data de nascimento válida.'],
-            [opcoesSexo, ['M', 'F', 'null'].includes(opcoesSexo.value), 'Selecione uma opção de sexo.']
-        ]);
+        const tipo = tipoSelecionado();
+        if (tipo === '') return false;
+
+        const regras = [];
+
+        if (tipo === 'comprador' || tipo === 'entregador') {
+            regras.push([cpfUser, cpfValido(cpfUser.value), 'CPF inválido. Confira os 11 números.']);
+            regras.push([dataNascUser, dataValida(dataNascUser.value), 'Informe uma data de nascimento válida.']);
+        }
+
+        if (tipo === 'comprador') {
+            regras.push([opcoesSexo, ['M', 'F', 'null'].includes(opcoesSexo.value), 'Selecione uma opção de sexo.']);
+        }
+
+        if (tipo === 'loja') {
+            regras.push([ruaLoja, ruaLoja.value.trim().length >= 3, 'Informe o nome da rua.']);
+            regras.push([numeroLoja, numeroLoja.value.trim() !== '', 'Informe o número do estabelecimento.']);
+            regras.push([bairroLoja, bairroLoja.value.trim() !== '', 'Informe o bairro.']);
+            regras.push([cidadeLoja, cidadeLoja.value.trim() !== '', 'Informe a cidade.']);
+            regras.push([estadoLoja, estadoLoja.value !== '', 'Selecione o estado.']);
+            regras.push([cepLoja, /^\d{8}$/.test(cepLoja.value), 'CEP inválido. Use os 8 números.']);
+            regras.push([cnpjLoja, /^\d{14}$/.test(cnpjLoja.value), 'CNPJ inválido. Use os 14 números.']);
+            regras.push([abreLoja, abreLoja.value !== '', 'Informe o horário de abertura.']);
+            regras.push([fechaLoja, fechaLoja.value !== '', 'Informe o horário de fechamento.']);
+        }
+
+        if (tipo === 'entregador') {
+            regras.push([cnhEntregador, /^\d{11}$/.test(cnhEntregador.value), 'CNH inválida. Use os 11 números.']);
+            regras.push([pagamentoEntregador, pagamentoEntregador.value !== '', 'Selecione o tipo de pagamento.']);
+        }
+
+        return checar(regras);
     }
 
-    /* ---------------- Máscaras simples ---------------- */
-    cpfUser.addEventListener('input', () => {
-        cpfUser.value = cpfUser.value.replace(/\D/g, '').slice(0, 11);
-    });
-    telefone.addEventListener('input', () => {
-        telefone.value = telefone.value.replace(/\D/g, '').slice(0, 11);
-    });
+    /* ---------------- Máscaras simples (só números) ---------------- */
+    function somenteNumeros(campo, limite) {
+        campo.addEventListener('input', () => {
+            campo.value = campo.value.replace(/\D/g, '').slice(0, limite);
+        });
+    }
+    somenteNumeros(cpfUser, 11);
+    somenteNumeros(telefone, 11);
+    somenteNumeros(cnpjLoja, 14);
+    somenteNumeros(cepLoja, 8);
+    somenteNumeros(cnhEntregador, 11);
 
     // tira o destaque vermelho assim que a pessoa volta a editar o campo
-    [password, telefone, cpfUser, dataNascUser].forEach((campo) => {
+    [password, telefone].forEach((campo) => {
         campo.addEventListener('input', () => campo.classList.remove('is-invalid'));
     });
-    opcoesSexo.addEventListener('change', () => opcoesSexo.classList.remove('is-invalid'));
+    segundaSessao.querySelectorAll('input, select').forEach((campo) => {
+        campo.addEventListener('input', () => campo.classList.remove('is-invalid'));
+        campo.addEventListener('change', () => campo.classList.remove('is-invalid'));
+    });
 
     /* ---------------- Slide entre etapas ---------------- */
     function trocarEtapa(saindo, entrando, displayEntrada, animSaida, animEntrada) {
@@ -212,14 +287,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function avancar() {
         if (transitando || !validarEtapa1()) return;
+        montarEtapa2(tipoSelecionado());   // garante que o Step 2 está certo antes de aparecer
         trocarEtapa(primeiraSessao, segundaSessao, 'grid', 'disappearLeft', 'aparecerDireita');
-        setTimeout(() => cpfUser.focus(), DURACAO_TRANSICAO);
+        setTimeout(() => {
+            const primeiroCampo = segundaSessao.querySelector('input:not(:disabled), select:not(:disabled)');
+            if (primeiroCampo) primeiroCampo.focus();
+        }, DURACAO_TRANSICAO);
     }
 
     nextStep.addEventListener('click', avancar);
 
-    /* ---------------- Envio ---------------- */
-    form.addEventListener('submit', async (event) => {
+    /* ---------------- Envio (sem backend) ---------------- */
+
+    // Monta o objeto só com os campos do tipo escolhido (Usuario + subclasse)
+    function montarDados() {
+        const tipo = tipoSelecionado();
+
+        // atributos de Usuario (comuns). A senha fica de fora de propósito para não ir ao console.
+        const dados = {
+            tipo: tipo,
+            nome: nomeUser.value.trim(),
+            email: email.value.trim(),
+            telefone: telefone.value.trim() || null
+        };
+
+        if (tipo === 'comprador' || tipo === 'entregador') {
+            dados.cpf = cpfUser.value;
+            dados.dataNascimento = dataNascUser.value;
+        }
+        if (tipo === 'comprador') {
+            dados.sexo = opcoesSexo.value === 'null' ? null : opcoesSexo.value;
+        }
+        if (tipo === 'loja') {
+            dados.rua = ruaLoja.value.trim();
+            dados.numero = numeroLoja.value.trim();
+            dados.bairro = bairroLoja.value.trim();
+            dados.cidade = cidadeLoja.value.trim();
+            dados.estado = estadoLoja.value;
+            dados.cep = cepLoja.value;
+            dados.cnpj = cnpjLoja.value;
+            dados.horarioFuncionamento = abreLoja.value + ' às ' + fechaLoja.value;
+        }
+        if (tipo === 'entregador') {
+            dados.cnh = cnhEntregador.value;
+            dados.tipoPagamento = pagamentoEntregador.value;
+        }
+        return dados;
+    }
+
+    form.addEventListener('submit', (event) => {
         event.preventDefault();
 
         // Enter na etapa 1 apenas avança (com a mesma validação do botão)
@@ -230,44 +346,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!validarEtapa2()) return;
 
-        botaoSubmit.disabled = true;
-        botaoSubmit.value = 'Cadastrando...';
+        const dados = montarDados();
+        console.log('Cadastro validado (sem backend):', dados);
+        alert('Cadastro de ' + dados.tipo + ' validado! Veja os dados no console (F12).');
 
-        try {
-            const resp = await cadastrar(
-                nomeUser.value.trim(),
-                email.value.trim(),
-                password.value,
-                telefone.value.trim() || null,
-                cpfUser.value,
-                dataNascUser.value,
-                opcoesSexo.value === 'null' ? null : opcoesSexo.value
-            );
-
-            if (resp.status === 409) {
-                abrirAlertaUsuarioExistente();
-                return;
-            }
-
-            if (!resp.ok) {
-                let mensagem = 'Não foi possível concluir o cadastro. Tente novamente.';
-                try {
-                    const dados = await resp.json();
-                    mensagem = dados.error || dados.erro || mensagem;
-                } catch (_) { /* resposta sem JSON */ }
-                mostrarErro(preencherCampos, mensagem);
-                return;
-            }
-
-            window.location.href = 'indexComprador.html';
-
-        } catch (erro) {
-            console.error('Erro ao conectar com o servidor:', erro);
-            mostrarErro(preencherCampos, 'Não foi possível conectar ao servidor. Tente novamente em instantes.');
-        } finally {
-            botaoSubmit.disabled = false;
-            botaoSubmit.value = 'Cadastrar';
-        }
+        // TODO backend: aqui entra o fetch/POST quando você for integrar.
     });
-
 });
