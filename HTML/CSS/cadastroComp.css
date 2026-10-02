@@ -380,6 +380,28 @@ body{
     cursor: pointer;
     transition: background-color var(--transicao-normal), color var(--transicao-normal), transform var(--transicao-rapida);
 }
+.seletorTipo{
+    width: fit-content;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-bege-claro);
+    color: var(--cor-marrom-claro);
+    border-radius:50px;
+    gap: 30px;
+}
+.opcaoTipo{
+    display: flex;
+}
+.opcaoTipo label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
 .alertaCafeBotao:active{ transform: scale(0.98); }
 .alertaCafeBotao:focus-visible{ outline: 3px solid rgba(115, 131, 235, 0.55); outline-offset: 2px; }
 .alertaCafeBotao.primario{ background-color: var(--cor-azul-marinho); color: var(--cor-texto-claro); }
