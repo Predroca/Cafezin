@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerencie seus dados, endereços, pedidos e cafeterias favoritas no Cafézin.">
+    <title>Cafézin | Meu perfil</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexComp.css">
+    <link rel="stylesheet" href="CSS/perfilComprador.css">
+
+</head>
+<body id="topo">
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="indexComprador.html" aria-label="Cafézin - página inicial">Cafézin</a>
+
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a href="indexComprador.html#inicio">Início</a>
+                <a href="indexComprador.html#cafeterias">Cafeterias</a>
+                <a href="indexComprador.html#produtos">Produtos</a>
+                <a href="#pedidos" data-ir-aba="pedidos">Pedidos</a>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola" href="Sacola.html" aria-label="Sacola com três itens">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+                <a class="perfil perfilAtivo" href="PerfilComprador.html" aria-label="Meu perfil" aria-current="page">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="perfilCorpo" aria-label="Meu perfil">
+            <div class="container perfilGrade">
+
+                <!-- Coluna lateral: identidade + menu das categorias -->
+                <aside class="perfilLateral">
+                    <a class="botaoVoltar" href="indexComprador.html" id="botaoVoltar">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar para o início
+                    </a>
+
+                    <div class="perfilIdentidade">
+                        <div class="avatarArea">
+                            <div class="avatar" id="avatar" aria-hidden="true">A</div>
+                            <label class="avatarEditar" for="avatarArquivo" title="Trocar foto">
+                                <i class="bi bi-camera-fill" aria-hidden="true"></i>
+                                <span class="visualmenteOculto">Trocar foto de perfil</span>
+                            </label>
+                            <input class="visualmenteOculto" id="avatarArquivo" type="file" accept="image/*">
+                        </div>
+
+                        <div class="perfilIdentidadeTexto">
+                            <h1 id="perfilNome">Ana</h1>
+                            <p class="perfilEmail" id="perfilEmail">ana@email.com</p>
+                        </div>
+
+                        <ul class="perfilResumo" aria-label="Resumo da conta">
+                            <li><strong id="resumoPedidos">0</strong><span>pedidos</span></li>
+                            <li><strong id="resumoFavoritas">0</strong><span>favoritas</span></li>
+                            <li><strong id="resumoEnderecos">0</strong><span>endereços</span></li>
+                        </ul>
+                    </div>
+
+                    <nav class="perfilAbas" aria-label="Categorias do perfil">
+                        <a class="aba ativa" href="#painel-dados" data-aba="dados" aria-current="true">
+                            <i class="bi bi-person" aria-hidden="true"></i> Meus dados
+                        </a>
+                        <a class="aba" href="#painel-enderecos" data-aba="enderecos">
+                            <i class="bi bi-geo-alt" aria-hidden="true"></i> Endereços
+                        </a>
+                        <a class="aba" href="#painel-pedidos" data-aba="pedidos">
+                            <i class="bi bi-receipt" aria-hidden="true"></i> Meus pedidos
+                        </a>
+                        <a class="aba" href="#painel-favoritas" data-aba="favoritas">
+                            <i class="bi bi-heart" aria-hidden="true"></i> Favoritas
+                        </a>
+                    </nav>
+
+                    <button class="botaoSair" type="button" id="abrirSair">
+                        <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair da conta
+                    </button>
+                </aside>
+
+                <!-- Área com scroll: uma "tela" por categoria -->
+                <div class="perfilPaineis" id="perfilPaineis" tabindex="0" role="region" aria-label="Conteúdo do perfil. Role para ver as categorias.">
+
+                    <!-- Meus dados -->
+                    <section class="painel" id="painel-dados" aria-labelledby="titulo-dados">
+                        <div class="cabecalhoSecao">
+                            <h2 id="titulo-dados">Meus dados</h2>
+                            <p>Mantenha suas informações atualizadas para receber seus pedidos sem erro.</p>
+                        </div>
+
+                        <form class="formPerfil" id="formDados" novalidate>
+                            <div class="campo">
+                                <label for="campoNome">Nome completo</label>
+                                <input id="campoNome" name="nome" type="text" autocomplete="name" required minlength="3">
+                                <small class="erroCampo" data-erro-para="campoNome"></small>
+                            </div>
+
+                            <div class="campo">
+                                <label for="campoEmail">E-mail</label>
+                                <input id="campoEmail" name="email" type="email" autocomplete="email" required>
+                                <small class="erroCampo" data-erro-para="campoEmail"></small>
+                            </div>
+
+                            <div class="campo">
+                                <label for="campoTelefone">Telefone</label>
+                                <input id="campoTelefone" name="telefone" type="tel" autocomplete="tel" inputmode="numeric" placeholder="(34) 9 9999-9999" required>
+                                <small class="erroCampo" data-erro-para="campoTelefone"></small>
+                            </div>
+
+                            <div class="campo">
+                                <label for="campoNascimento">Data de nascimento</label>
+                                <input id="campoNascimento" name="nascimento" type="date" autocomplete="bday">
+                            </div>
+
+                            <div class="formAcoes">
+                                <button class="botaoPrimario" type="submit">Salvar alterações</button>
+                                <button class="botaoSecundario" type="button" id="descartarDados">Descartar</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Endereços -->
+                    <section class="painel" id="painel-enderecos" aria-labelledby="titulo-enderecos">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2 id="titulo-enderecos">Endereços</h2>
+                                <p>Escolha onde quer receber seus cafés.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" id="alternarNovoEndereco" aria-expanded="false" aria-controls="formEndereco">
+                                <i class="bi bi-plus-lg" aria-hidden="true"></i> Novo endereço
+                            </button>
+                        </div>
+
+                        <form class="formPerfil formEndereco" id="formEndereco" novalidate hidden>
+                            <div class="campo">
+                                <label for="endApelido">Nome do endereço</label>
+                                <input id="endApelido" type="text" placeholder="Casa, trabalho..." required>
+                            </div>
+                            <div class="campo largo">
+                                <label for="endRua">Rua</label>
+                                <input id="endRua" type="text" autocomplete="address-line1" required>
+                            </div>
+                            <div class="campo">
+                                <label for="endNumero">Número</label>
+                                <input id="endNumero" type="text" inputmode="numeric" required>
+                            </div>
+                            <div class="campo">
+                                <label for="endBairro">Bairro</label>
+                                <input id="endBairro" type="text" required>
+                            </div>
+                            <div class="campo">
+                                <label for="endCidade">Cidade</label>
+                                <input id="endCidade" type="text" autocomplete="address-level2" required>
+                            </div>
+                            <small class="erroCampo erroForm" id="erroEndereco"></small>
+                            <div class="formAcoes">
+                                <button class="botaoPrimario" type="submit">Salvar endereço</button>
+                                <button class="botaoSecundario" type="button" id="cancelarEndereco">Cancelar</button>
+                            </div>
+                        </form>
+
+                        <ul class="listaEnderecos" id="listaEnderecos"></ul>
+                    </section>
+
+                    <!-- Pedidos -->
+                    <section class="painel" id="painel-pedidos" aria-labelledby="titulo-pedidos">
+                        <div class="cabecalhoSecao">
+                            <h2 id="titulo-pedidos">Meus pedidos</h2>
+                            <p>Acompanhe o que está a caminho e peça de novo o que você gostou.</p>
+                        </div>
+                        <ul class="listaPedidos" id="listaPedidos"></ul>
+                    </section>
+
+                    <!-- Favoritas -->
+                    <section class="painel" id="painel-favoritas" aria-labelledby="titulo-favoritas">
+                        <div class="cabecalhoSecao">
+                            <h2 id="titulo-favoritas">Cafeterias favoritas</h2>
+                            <p>As lojas que você mais gosta, sempre à mão.</p>
+                        </div>
+                        <ul class="listaFavoritas" id="listaFavoritas"></ul>
+                    </section>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Confirmação de saída -->
+    <dialog class="modalSair" id="modalSair" aria-labelledby="modalSairTitulo">
+        <div class="modalSairIcone" aria-hidden="true"><i class="bi bi-box-arrow-right"></i></div>
+        <h2 id="modalSairTitulo">Sair da sua conta?</h2>
+        <p>Você volta para a página inicial e precisa entrar de novo para fazer pedidos.</p>
+        <div class="modalSairAcoes">
+            <button class="botaoSecundario" type="button" id="cancelarSair">Continuar logada(o)</button>
+            <button class="botaoPerigo" type="button" id="confirmarSair">Sair</button>
+        </div>
+    </dialog>
+
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+    <footer>
+        <div class="footerConteudo">
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+
+    <script src="JavaScript/Comprador/perfilComprador.js"></script>
+</body>
+</html>
