@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Veja os detalhes do produto no Cafézin.">
+    <title>Cafézin | Produto</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <!-- indexComp.css traz o header, o footer e os cards de produto que esta página reaproveita -->
+    <link rel="stylesheet" href="CSS/indexComp.css">
+    <link rel="stylesheet" href="CSS/produto.css">
+
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+</head>
+<body id="topo">
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="indexComprador.html" aria-label="Cafézin - página inicial">Cafézin</a>
+
+            <form class="buscaCabecalho" role="search">
+                <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input id="busca" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
+                <button type="submit" aria-label="Pesquisar">
+                    <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </form>
+
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a href="indexComprador.html#inicio">Início</a>
+                <a href="indexComprador.html#cafeterias">Cafeterias</a>
+                <a class="ativo" href="indexComprador.html#produtos">Produtos</a>
+                <a href="indexComprador.html#pedidos">Pedidos</a>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola" href="Sacola.html" aria-label="Sacola com três itens">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="paginaProduto">
+        <div class="container">
+
+            <!-- Trilha de navegação -->
+            <nav class="migalhas" aria-label="Você está aqui">
+                <a href="indexComprador.html">Início</a>
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                <a href="indexComprador.html#produtos">Produtos</a>
+                <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                <span aria-current="page" id="migalhaProduto">Chocolate quente cremoso</span>
+            </nav>
+
+            <!-- Detalhe do produto -->
+            <section class="produtoDetalhe" aria-labelledby="produtoNome">
+
+                <!-- Foto: troque o conteúdo por <img src="foto_url"> quando houver imagem -->
+                <div class="placeholderFoto produtoFoto" id="produtoFoto" role="img" aria-label="Espaço reservado para a foto do produto">
+                    <i class="bi bi-image" aria-hidden="true"></i>
+                    <strong>Foto do produto</strong>
+                    <small>campo foto_url</small>
+                </div>
+
+                <!-- Informações -->
+                <div class="produtoResumo">
+                    <a class="produtoLoja" id="produtoLoja" href="#">
+                        <i class="bi bi-shop" aria-hidden="true"></i>
+                        <span>Empório do Café</span>
+                    </a>
+
+                    <h1 class="produtoTitulo" id="produtoNome">Chocolate quente cremoso</h1>
+
+                    <div class="avaliacaoResumo">
+                        <span class="estrelas" aria-hidden="true">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+                        <strong id="produtoNota">4,7</strong>
+                        <a href="#avaliacoes">(<span id="produtoTotalAvaliacoes">32</span> avaliações)</a>
+                    </div>
+
+                    <p class="produtoPreco" id="produtoPreco">R$ 15,00</p>
+
+                    <span class="selo disponivel" id="produtoDisponibilidade">
+                        <i class="bi bi-check-circle-fill" aria-hidden="true"></i> Disponível
+                    </span>
+
+                    <p class="produtoDescricao" id="produtoDescricao">
+                        Chocolate quente preparado na hora, com cacau de verdade e textura aveludada.
+                        Servido bem quentinho, ideal para acompanhar um pão de queijo ou um bolo da casa.
+                    </p>
+
+                    <div class="areaCompra">
+                        <div class="seletorQuantidade" role="group" aria-label="Quantidade">
+                            <button type="button" id="diminuirQuantidade" aria-label="Diminuir quantidade">
+                                <i class="bi bi-dash-lg" aria-hidden="true"></i>
+                            </button>
+                            <output id="quantidade" aria-live="polite">1</output>
+                            <button type="button" id="aumentarQuantidade" aria-label="Aumentar quantidade">
+                                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <button class="botaoSacola" id="botaoAdicionar" type="button" data-preco="15.00">
+                            <i class="bi bi-bag-plus" aria-hidden="true"></i>
+                            Adicionar à sacola · <span id="totalItem">R$ 15,00</span>
+                        </button>
+                    </div>
+
+                    <ul class="produtoExtras">
+                        <li><i class="bi bi-bicycle" aria-hidden="true"></i> Entrega em 20–35 min</li>
+                        <li><i class="bi bi-receipt" aria-hidden="true"></i> Frete R$ 5,00</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <!-- Avaliações -->
+        <section class="secaoPadrao secaoAvaliacoes" id="avaliacoes" aria-labelledby="titulo-avaliacoes">
+            <div class="container">
+                <div class="cabecalhoSecao">
+                    <h2 id="titulo-avaliacoes">Avaliações</h2>
+                    <p>O que quem já pediu achou deste produto.</p>
+                </div>
+
+                <div class="avaliacoesLayout">
+                    <div class="notaGeral">
+                        <strong>4,7</strong>
+                        <span class="estrelas" aria-hidden="true">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </span>
+                        <small>32 avaliações</small>
+                    </div>
+
+                    <div class="listaAvaliacoes">
+                        <article class="avaliacaoItem">
+                            <div class="avaliacaoTopo">
+                                <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Nome do comprador</h3>
+                                    <small>12/09/2026</small>
+                                </div>
+                                <span class="estrelas" aria-label="Nota 5 de 5">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                                </span>
+                            </div>
+                            <p>Texto da avaliação. Aqui aparece o campo descricao de AvaliacaoProduto.</p>
+                        </article>
+
+                        <article class="avaliacaoItem">
+                            <div class="avaliacaoTopo">
+                                <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Nome do comprador</h3>
+                                    <small>03/09/2026</small>
+                                </div>
+                                <span class="estrelas" aria-label="Nota 4 de 5">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star"></i>
+                                </span>
+                            </div>
+                            <p>Texto da avaliação. Aqui aparece o campo descricao de AvaliacaoProduto.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mais da loja (reaproveita .listaProdutos e .produtoCard da home) -->
+        <section class="secaoPadrao secaoMaisDaLoja" aria-labelledby="titulo-mais-loja">
+            <div class="container">
+                <div class="cabecalhoSecao">
+                    <h2 id="titulo-mais-loja">Mais de Empório do Café</h2>
+                    <p>Outras opções da mesma cafeteria.</p>
+                </div>
+
+                <div class="listaProdutos">
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto dourada" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto rosa" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto azul" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footerConteudo">
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="JavaScript/Comprador/produto.js"></script>
+</body>
+</html>
