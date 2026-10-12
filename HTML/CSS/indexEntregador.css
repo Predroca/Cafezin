@@ -31,7 +31,7 @@ textarea {
     top: 0;
     z-index: 10;
     background: var(--cor-marrom-escuro-2);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+
 }
 
 .navLojaConteudo {
@@ -125,13 +125,14 @@ textarea {
    PAINEL PRINCIPAL
    ========================================================= */
 
-.heroPainel {
+.Painel {
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
+    padding-top: 40px;
 }
 
-.heroPainelConteudo {
+.PainelConteudo {
     min-height: 300px;
 
     display: grid;
@@ -146,13 +147,13 @@ textarea {
     gap: 0;
 }
 
-.heroPainelTexto {
+.PainelTexto {
     width: 100%;
-    padding: 55px 0 30px;
+    padding: 30px 0 30px;
     text-align: center;
 }
 
-.heroPainelSaudacao {
+.PainelSaudacao {
     margin-bottom: 12px;
 
     color: var(--cor-bege-destaque);
@@ -161,7 +162,7 @@ textarea {
     text-align: center;
 }
 
-.heroPainelTexto h1 {
+.PainelTexto h1 {
     max-width: 600px;
     margin: 0 auto 22px;
 
@@ -172,11 +173,11 @@ textarea {
     text-align: center;
 }
 
-.heroPainelTexto h1 span {
+.PainelTexto h1 span {
     color: var(--cor-laranja-claro);
 }
 
-.heroPainelTexto > p:not(.heroPainelSaudacao) {
+.PainelTexto > p:not(.PainelSaudacao) {
     max-width: 440px;
 
     margin-left: auto;
@@ -218,7 +219,7 @@ textarea {
     min-height: 145px;
     padding: 18px 10px;
 
-    border-radius: var(--borda-arredondada-media);
+    border-radius: var(--borda-arredondada-pequena);
     background: rgba(255, 243, 231, .07);
     border: 1px solid rgba(255, 243, 231, .14);
 
@@ -369,26 +370,16 @@ textarea {
 .entrega {
     padding: 18px;
 
-    border-radius: var(--borda-arredondada-media);
+    border-radius: var(--borda-arredondada-pequena);
 
     background: var(--cor-background);
-    border: 1px solid rgba(75, 54, 42, .12);
-    border-left: 4px solid var(--cor-cinza-claro);
 
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
+    border: 1px solid rgba(75, 54, 42, .30);
+
+
 }
 
-.entrega.aguardando {
-    border-left-color: var(--cor-laranja);
-}
 
-.entrega.retirado {
-    border-left-color: var(--cor-azul-medio);
-}
-
-.entrega.caminho {
-    border-left-color: #6fae7a;
-}
 
 .entregaCabecalho {
     display: flex;
@@ -549,11 +540,10 @@ textarea {
     overflow: hidden;
 
     border: 1px solid rgba(75, 54, 42, .70);
-    border-radius: var(--borda-arredondada-media);
+    border-radius: var(--borda-arredondada-pequena);
 
     background: var(--cor-background);
 
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .15);
 }
 
 .lojaImagem {
@@ -765,26 +755,26 @@ footer {
         gap: 12px;
     }
 
-    .heroPainelConteudo {
+    .PainelConteudo {
         min-height: auto;
         display: block;
     }
 
-    .heroPainelTexto {
+    .PainelTexto {
         padding: 40px 0 30px;
         text-align: center;
     }
 
-    .heroPainelSaudacao {
+    .PainelSaudacao {
         text-align: center;
     }
 
-    .heroPainelTexto h1 {
+    .PainelTexto h1 {
         text-align: center;
         line-height: 1.5;
     }
 
-    .heroPainelTexto > p:not(.heroPainelSaudacao) {
+    .PainelTexto > p:not(.PainelSaudacao) {
         margin-left: auto;
         margin-right: auto;
 
