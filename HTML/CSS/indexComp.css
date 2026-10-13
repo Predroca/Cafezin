@@ -337,23 +337,26 @@ button, input {
     color: var(--cor-laranja);
 }
 /* Lojas */
-.listaLojas, .listaProdutos {
+.listaLojas{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+.listaProdutos{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
     gap: 18px;
 }
 .lojaCard, .produtoCard {
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(75,54,42,.12);
-    border-radius: var(--borda-arredondada-media);
+    border-radius: 5px;
     background: var(--cor-background);
-    box-shadow: 0 8px 22px rgba(45,28,22,.07);
     transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
 }
 .lojaCard:hover, .produtoCard:hover {
-    box-shadow: 0 14px 28px rgba(45,28,22,.13);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
 }
 
 .capaLoja i {
@@ -607,6 +610,9 @@ button, input {
 footer {
     margin-top: 0;
 }
+.produtoCard{
+    max-width: 300px;
+}
 @media (max-width: 1050px) {
     .navLinks {
         display: none;
@@ -730,4 +736,4 @@ footer {
 
 .TextoPedir{
     color: var(--cor-marrom-escuro-2);
-}
+}   
