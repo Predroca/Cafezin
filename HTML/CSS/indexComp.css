@@ -1,76 +1,104 @@
+/*
+Página inicial do comprador
+Identidade: usa as variáveis de CSS e a tipografia definidas em main.css.
+*/
 body {
     font-family: "Google Sans", sans-serif;
     color: var(--cor-texto);
     background: var(--cor-background);
 }
-
 a {
     color: inherit;
     text-decoration: none;
 }
-
-button,
-input,
-select,
-textarea {
+button, input {
     font: inherit;
 }
-
 .container {
     width: 95%;
     margin: 0 auto;
 }
-
-
-/* =========================================================
-   NAVBAR
-   ========================================================= */
-
-.navLoja {
+.visualmenteOculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+/* Navegação */
+.navComprador {
     position: sticky;
     top: 0;
     z-index: 10;
     background: var(--cor-marrom-escuro-2);
     box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
 }
-
-.navLojaConteudo {
+.navCompradorConteudo {
     min-height: 76px;
     display: flex;
     align-items: center;
     gap: var(--espacamento-grande);
 }
-
-.logoLoja {
+.logoComprador {
     flex: 0 0 auto;
     font-family: "Brasika", sans-serif;
     font-size: var(--fonte-grande);
     color: var(--cor-background-bege);
 }
-
-.logoLoja span {
-    margin-left: 4px;
-    color: var(--cor-laranja-claro);
+.buscaCabecalho {
+    height: 42px;
+    width: min(330px, 30vw);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 5px 4px 14px;
+    border: 1px solid rgba(255, 243, 231, .18);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background);
 }
-
+.buscaCabecalho > i {
+    color: var(--cor-laranja-escuro);
+}
+.buscaCabecalho input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: .78rem;
+}
+.buscaCabecalho input::placeholder {
+    color: var(--cor-texto-secundario);
+}
+.buscaCabecalho button {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 7px;
+    background: var(--cor-laranja);
+    color: var(--cor-texto-claro);
+    cursor: pointer;
+}
+.buscaCabecalho button:hover {
+    background: var(--cor-laranja-escuro);
+}
 .navLinks {
     display: flex;
     gap: var(--espacamento-grande);
-    margin-left: var(--espacamento-muito-grande);
+    margin-left: auto;
 }
-
 .navLinks a {
     position: relative;
     padding: 7px 0;
     color: var(--cor-bege-claro);
     font-size: var(--fonte-pequena);
 }
-
-.navLinks a:hover,
-.navLinks .ativo {
+.navLinks a:hover, .navLinks .ativo {
     color: var(--cor-texto-claro);
 }
-
 .navLinks .ativo::after {
     content: "";
     position: absolute;
@@ -81,791 +109,625 @@ textarea {
     border-radius: 999px;
     background: var(--cor-laranja-claro);
 }
-
 .navAcoes {
     display: flex;
     align-items: center;
-    gap: var(--espacamento-grande);
-    margin-left: auto;
+    gap: var(--espacamento-medio);
 }
-
-.notificacao,
-.perfil {
+.sacola, .perfil {
     position: relative;
     color: var(--cor-background-bege);
     font-size: 1.3rem;
 }
-
-.notificacao span {
+.sacola span {
     position: absolute;
     top: -7px;
     right: -9px;
-
     display: grid;
-    place-items: center;
-
     width: 17px;
     height: 17px;
-
+    place-items: center;
     border-radius: 50%;
     background: var(--cor-laranja);
-
     color: white;
     font-size: .62rem;
     font-weight: 700;
 }
-
-.notificacao:hover,
-.perfil:hover {
+.sacola:hover, .perfil:hover {
     color: var(--cor-laranja-claro);
 }
-
-
-/* =========================================================
-   PAINEL PRINCIPAL
-   ========================================================= */
-
-.heroPainel {
+/* Hero */
+.heroComprador {
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-texto-claro);
-    padding-bottom: 40px;
-    padding-top: 40px;
 }
-
-.heroPainelConteudo {
-    min-height: 300px;
-
+.heroConteudo {
+    min-height: 370px;
     display: grid;
-
-    /*
-     * O texto ocupa a parte esquerda.
-     * Os cards ocupam somente o espaço restante à direita.
-     */
-    grid-template-columns: 42% 58%;
-
+    grid-template-columns: 1.2fr .8fr;
     align-items: center;
-    gap: 0;
+    gap: 50px;
 }
-
-.heroPainelTexto {
-    width: 100%;
-
-    text-align: center;
+.heroTexto {
+    padding: 55px 0;
 }
-
-.heroPainelSaudacao {
-    margin-bottom: 12px;
-
+.heroSaudacao {
+    margin-bottom: 6px;
     color: var(--cor-bege-destaque);
     font-size: var(--fonte-media);
-
-    text-align: center;
 }
-
-.heroPainelTexto h1 {
-    max-width: 600px;
-    margin: 0 auto 22px;
-
+.heroTexto h1 {
+    margin: 0 0 14px;
     font-family: "Brasika", sans-serif;
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    line-height: 1.25;
-
-    text-align: center;
+    font-size: clamp(2.4rem, 4vw, 3.5rem);
+    line-height: 1.1;
 }
-
-.heroPainelTexto h1 span {
+.heroTexto h1 span {
     color: var(--cor-laranja-claro);
 }
-
-.heroPainelTexto > p:not(.heroPainelSaudacao) {
-    max-width: 440px;
-
-    margin-left: auto;
-    margin-right: auto;
-
+.heroTexto > p:not(.heroSaudacao) {
+    max-width: 480px;
     color: var(--cor-bege-claro);
     font-size: var(--fonte-normal);
     line-height: 1.55;
-
-    text-align: justify;
-    text-align-last: center;
 }
-
-
-/* =========================================================
-   CARDS DO PAINEL
-   ========================================================= */
-
-.resumoPainel {
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-
+.heroVantagens {
+    display: flex;
+    flex-wrap: wrap;
     gap: 18px;
-
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 20px;
+    margin-top: 22px;
+    color: var(--cor-bege-destaque);
+    font-size: var(--fonte-pequena);
 }
-
-.resumoPainelCard {
+.heroVantagens i {
+    color: var(--cor-laranja-claro);
+}
+/* Placeholders: troque o conteúdo por <img> quando receber as fotos finais. */
+.placeholderFoto {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    min-height: 145px;
-    padding: 18px 10px;
-
-    border-radius: var(--borda-arredondada-pequena);
-    background: rgba(255, 243, 231, .07);
-    border: 1px solid rgba(255, 243, 231, .14);
-
+    gap: 6px;
     text-align: center;
 }
-
-.resumoPainelCard i {
-    color: var(--cor-laranja-claro);
-    font-size: 1.5rem;
+.heroFoto {
+    min-height: 245px;
+    border: 2px dashed rgba(255, 243, 231, .48);
+    border-radius: var(--borda-arredondada-grande);
+    background: linear-gradient(135deg, rgba(225,167,104,.35), rgba(255,243,231,.12));
+    color: var(--cor-bege-destaque);
 }
-
-.resumoPainelCard strong {
-    display: block;
-
-    color: var(--cor-texto-claro);
-    font-size: var(--fonte-grande);
-    line-height: 1;
-
-    text-align: center;
+.heroFoto i {
+    font-size: 3.2rem;
 }
-/* Destaque da fatura */
-.destaque {
-    background: var(--cor-laranja-escuro);
+.heroFoto strong {
+    font-size: var(--fonte-media);
 }
-
-.resumoPainelCard span {
-    display: block;
-
+.heroFoto small {
     color: var(--cor-bege-claro);
-    font-size: .74rem;
-    line-height: 1.3;
-
-    text-align: center;
 }
-
-
-/* =========================================================
-   SEÇÕES
-   ========================================================= */
-
+/* Estrutura de seções */
 .secaoPadrao {
     padding: 62px 0;
 }
-
-.secaoAlternada {
-    background: var(--cor-background-alternativo);
-}
+.secaoPadraoCafeterias{
+    padding: 0}
 
 .cabecalhoSecao {
     margin-bottom: 25px;
 }
-
 .cabecalhoSecao.linha {
     display: flex;
     align-items: end;
     justify-content: space-between;
     gap: 20px;
 }
-
-.cabecalhoSecao h2 {
+.cabecalhoSecao h2, .pedidoRecente h2 {
     color: var(--cor-laranja-escuro);
-
     font-family: "Brasika", sans-serif;
     font-size: var(--fonte-titulo);
 }
-
 .cabecalhoSecao p {
     margin-top: 4px;
-
     color: var(--cor-texto-secundario);
     font-size: var(--fonte-pequena);
 }
-
 .linkSecao {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-
     color: var(--cor-laranja-escuro);
     font-size: var(--fonte-pequena);
     font-weight: 700;
-
     white-space: nowrap;
 }
-
 .linkSecao:hover {
     color: var(--cor-laranja);
 }
-
-
-/* =========================================================
-   BOTÕES
-   ========================================================= */
-
-.botaoPrimario,
-.botaoSecundario {
-    padding: 10px 16px;
-
-    border-radius: var(--borda-arredondada-pequena);
-
-    font-size: .78rem;
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background var(--transicao-rapida),
-        color var(--transicao-rapida);
-
+.linkSecao i {
+    margin-left: 4px;
+}
+/* Categorias */
+.listaCategorias {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 60%;
+    margin: auto;
+    
+}
+.categoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 8px;
+    border-radius: var(--borda-arredondada-media);
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+    text-align: center;
+    transition: transform var(--transicao-rapida), background var(--transicao-rapida);
+}
+.categoria:hover {
+    background: rgba(225, 167, 104, .14);
+    color: var(--cor-marrom-escuro-2);
+    transform: translateY(-3px);
+}
+.categoria > span {
+    display: grid;
+    width: 76px;
+    height: 70px;
+    place-items: center;
+    border-radius: 18px 18px 10px 10px;
+    background: #f8e4cf;
+}
+.categoria img {
+    width: 75%;
+    height: 75%;
+    object-fit: contain;
+}
+.categoria.doce > span {
+    background: #f7ded9;
+}
+.categoria.bolo > span {
+    background: #f7e8bf;
+}
+.categoria.salgado > span {
+    background: #dfead9;
+}
+.categoria.bebida > span {
+    background: #dce8ee;
+}
+.categoria.pao > span {
+    background: #f1dfcf;
+}
+/* Filtros */
+.secaoFiltros {
+    padding-bottom: 6px;
+}
+.filtros {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    overflow-x: auto;
+    padding: 16px 0;
+    border-top: 1px solid rgba(75,54,42,.14);
+    border-bottom: 1px solid rgba(75,54,42,.14);
+    scrollbar-width: none;
+}
+.filtros::-webkit-scrollbar {
+    display: none;
+}
+.filtros > span {
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
     white-space: nowrap;
 }
-
-.botaoPrimario {
-    border: none;
-
-    background: var(--cor-laranja-escuro);
-    color: white;
-}
-
-.botaoPrimario:hover {
-    background: var(--cor-laranja);
-}
-
-.botaoSecundario {
-    background: transparent;
-
-    border: 1px solid rgba(75, 54, 42, .25);
-
+.filtros a {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    border: 1px solid rgba(115,70,48,.25);
+    border-radius: 999px;
     color: var(--cor-marrom-claro);
+    font-size: .75rem;
+    font-weight: 600;
 }
-
-.botaoSecundario:hover {
+.filtros a:hover {
     background: var(--cor-background-alternativo);
     color: var(--cor-laranja-escuro);
 }
-
-
-/* =========================================================
-   ENTREGAS
-   ========================================================= */
-
-.listaEntregas {
+.filtros i {
+    color: var(--cor-laranja);
+}
+/* Lojas */
+.listaLojas, .listaProdutos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 18px;
 }
-
-.entrega {
-    padding: 18px;
-
+.lojaCard, .produtoCard {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(75,54,42,.12);
     border-radius: var(--borda-arredondada-media);
-
     background: var(--cor-background);
-
-
-
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
+    box-shadow: 0 8px 22px rgba(45,28,22,.07);
+    transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+.lojaCard:hover, .produtoCard:hover {
+    box-shadow: 0 14px 28px rgba(45,28,22,.13);
+    transform: translateY(-4px);
 }
 
-.entrega.aguardando {
-
+.capaLoja i {
+    font-size: 1.7rem;
 }
-
-.entrega.retirado {
-
-}
-
-.entrega.caminho {
-
-}
-
-.entregaCabecalho {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 10px;
-    margin-bottom: 14px;
-}
-
-.entregaCabecalho time {
-    color: var(--cor-texto-secundario);
+.capaLoja span, .fotoProduto span {
     font-size: .68rem;
-}
-
-.statusBadge {
-    padding: 4px 10px;
-
-    border-radius: 999px;
-
-    font-size: .64rem;
     font-weight: 700;
-}
-
-.statusBadge.aguardando {
-    background: rgba(184, 116, 79, .15);
-    color: var(--cor-laranja-escuro);
-}
-
-.statusBadge.retirado {
-    background: rgba(131, 184, 255, .18);
-    color: var(--cor-azul-marinho);
-}
-
-.statusBadge.caminho {
-    background: rgba(111, 174, 122, .18);
-    color: #3d7048;
-}
-
-.entregaInfo h3 {
-    margin-bottom: 14px;
-
-    color: var(--cor-marrom-escuro-2);
-    font-size: var(--fonte-media);
-}
-
-.entregaDado {
-    display: flex;
-    align-items: flex-start;
-
-    gap: 9px;
-    margin-bottom: 13px;
-}
-
-.entregaDado > i {
-    flex: 0 0 18px;
-
-    width: 18px;
-    height: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 2px;
-
-    color: var(--cor-laranja-escuro);
-    font-size: .95rem;
-    line-height: 1;
-
-    text-align: center;
-}
-
-.dadoTitulo {
-    margin-bottom: 2px;
-
-    color: var(--cor-marrom-claro);
-    font-size: .65rem;
-    font-weight: 700;
-
     text-transform: uppercase;
-    letter-spacing: .03em;
 }
-
-.lojaEntrega strong,
-.enderecoEntrega strong {
+.lojaCard{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    justify-content: center;
+    align-items: center;
+    padding-left: var(--espacamento-medio);
+    padding-right: var(--espacamento-medio);
+    cursor: pointer;
+}
+.logoLoja {
+    display: grid;
+    width: 70px;
+    height: 70px;
+    place-items: center;
+    border: 3px solid var(--cor-background);
+    border-radius: 50%;
+    background: var(--cor-bege-destaque);
     color: var(--cor-marrom-escuro-2);
     font-size: .76rem;
-    font-weight: 700;
-    line-height: 1.35;
+    font-weight: 800;
 }
-
-.lojaEntrega small {
-    margin-top: 2px;
-
-    color: var(--cor-marrom-principal);
-    font-size: .69rem;
-    line-height: 1.35;
+.logoLoja.clara {
+    background: #f0e2d3;
 }
-
-.produtosEntrega p {
-    margin: 0;
-
+.logoLoja.escura {
+    background: var(--cor-laranja-escuro);
+    color: white;
+}
+.logoLoja.marrom {
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
+}
+.favoritar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: grid;
+    width: 31px;
+    height: 31px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
     color: var(--cor-marrom-claro);
-    font-size: .74rem;
-    line-height: 1.45;
+    cursor: pointer;
+    transition: all 0.3s;
 }
-
-.produtosEntrega p strong {
+.favoritar:hover {
+    background-color: #b44747;
+    color: white;
+}
+.lojaInfo {
+    padding: 31px 14px 15px;
+}
+.lojaInfo h3 {
     color: var(--cor-marrom-escuro-2);
-    font-weight: 700;
-}
-
-.enderecoEntrega {
-    margin-bottom: 0;
-}
-
-.entregaRodape {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 10px;
-    margin-top: 18px;
-    padding-top: 14px;
-
-    border-top: 1px solid rgba(75, 54, 42, .10);
-}
-
-.entregaRodape strong {
-    color: var(--cor-marrom-claro);
     font-size: var(--fonte-normal);
 }
-
-.entregaAcoes {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 8px;
-    flex-wrap: wrap;
+.lojaInfo p {
+    margin: 4px 0 8px;
+    color: var(--cor-texto-secundario);
+    font-size: .72rem;
 }
-
-
-/* =========================================================
-   LOJAS
-   ========================================================= */
-
-.listaLojas {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+.lojaInfo small {
+    color: var(--cor-texto-secundario);
+    font-size: .7rem;
 }
-
-.lojaEntregador {
-    display: flex;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(75, 54, 42, .70);
-    border-radius: var(--borda-arredondada-media);
-
-    background: var(--cor-background);
-
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .15);
-}
-
-.lojaImagem {
-    flex: 0 0 290px;
-
-    min-height: 210px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.lojaInfo small strong {
     color: var(--cor-marrom-claro);
-    font-size: 2rem;
-}   
-
-.lojaImagem i {
+}
+.lojaInfo small i {
+    color: var(--cor-laranja);
+}
+.lojaInfo b {
     display: block;
-    line-height: 1;
+    overflow: hidden;
+    margin-top: 10px;
+    color: var(--cor-laranja-escuro);
+    font-size: .64rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
-.lojaImagem.dourada {
-    background-image: url(../img/indexEntregador/cafeteria1.jpg);
-  
-  background-size: 100% 100%;
+/* Promoção */
+.bannerPromocao {
+    padding: 15px 0 34px;
 }
-
-.lojaImagem.azul {
-    background-image: url(../img/indexEntregador/cafeteria2.jpg);
-    
-  background-size: 100% 100%;   
-}
-
-.lojaImagem.rosa {
-    background-image: url(../img/indexEntregador/cafeteria3.jpg);
-  background-size: 100% 100%;   
-}
-
-.lojaImagem.verde {
-    background-image: url(../img/indexEntregador/cafeteria4.jpg);
-      background-size: 100% 100%;   
-}
-
-.lojaInfo {
-    min-width: 0;
-    flex: 1;
-
-    padding: 18px;
-}
-
-.lojaInfoCabecalho {
+.bannerConteudo {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    gap: 10px;
-    margin-bottom: 16px;
+    align-items: center;
+    gap: 18px;
+    padding: 23px 30px;
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-laranja-escuro);
+    color: white;
 }
-
-.lojaInfoCabecalho > div {
-    min-width: 0;
+.bannerConteudo > i {
+    font-size: 2.3rem;
+    color: var(--cor-bege-destaque);
 }
-
-.lojaInfoCabecalho h3 {
-    margin-top: 7px;
-
+.bannerConteudo span {
+    color: var(--cor-bege-destaque);
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.bannerConteudo h2 {
+    margin: 2px 0;
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+}
+.bannerConteudo p {
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena);
+}
+.bannerConteudo a {
+    margin-left: auto;
+    padding: 10px 13px;
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background-bege);
+    color: var(--cor-laranja-escuro);
+    font-size: .75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+/* Produtos */
+.fotoProduto {
+    height: 165px;
+    background: linear-gradient(135deg, #efd5c1 0%, #fff6ee 50%, #bd8060 50%, #f0c2a6 100%);
+    color: var(--cor-marrom-claro);
+}
+.fotoProduto.dourada {
+    background: linear-gradient(135deg, #f3d9a7 0%, #fff2d3 50%, #cd9858 50%, #f4d4a5);
+}
+.fotoProduto.azul {
+    background: linear-gradient(135deg, #c6dae1 0%, #edf6f9 50%, #82a7b5 50%, #d2e6eb);
+}
+.fotoProduto.rosa {
+    background: linear-gradient(135deg, #ebcec8 0%, #fff0ec 50%, #bd7f6f 50%, #efc7ba);
+}
+.fotoProduto i {
+    font-size: 1.8rem;
+}
+.produtoInfo {
+    padding: 14px 48px 15px 14px;
+}
+.produtoInfo p {
+    color: var(--cor-laranja-escuro);
+    font-size: .66rem;
+    font-weight: 700;
+}
+.produtoInfo h3 {
+    height: 36px;
+    margin: 3px 0;
     color: var(--cor-marrom-escuro-2);
-    font-size: var(--fonte-media);
+    font-size: var(--fonte-pequena);
     line-height: 1.25;
 }
-
-.statusLoja {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 21px;
-    padding: 4px 9px;
-
-    border-radius: 999px;
-
-    font-size: .62rem;
-    font-weight: 700;
-    line-height: 1;
+.produtoInfo > span {
+    display: block;
+    overflow: hidden;
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
-
-.statusLoja.aberta {
-    background: rgba(111, 174, 122, .18);
-    color: #3d7048;
-}
-
-.lojaIcone {
-    flex: 0 0 20px;
-
-    width: 20px;
-    height: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 2px;
-
-    color: var(--cor-laranja);
-    font-size: 1.1rem;
-    line-height: 1;
-}
-
-.lojaDado {
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-    margin-bottom: 10px;
-
-    font-weight: 500;
+.produtoInfo strong {
+    display: block;
+    margin-top: 9px;
     color: var(--cor-marrom-claro);
-    font-size: .74rem;
-    line-height: 1.4;
+    font-size: var(--fonte-pequena);
 }
-
-.lojaDado i {
-    flex: 0 0 18px;
-
-    width: 18px;
-    height: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.adicionar {
+    position: absolute;
+    right: 13px;
+    bottom: 14px;
+    display: grid;
+    width: 33px;
+    height: 33px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: var(--cor-background-alternativo);
     color: var(--cor-laranja-escuro);
-    font-size: .9rem;
-    line-height: 1;
-
-    text-align: center;
+    cursor: pointer;
 }
-
-.lojaRodape {
-    display: flex;
+.adicionar:hover {
+    background: var(--cor-laranja-escuro);
+    color: white;
+}
+/* Pedido recente */
+.secaoEscura {
+    margin-top: 15px;
+    padding: 55px 0;
+    background: var(--cor-bege-destaque);
+}
+.pedidoRecente {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
     align-items: center;
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-top: 18px;
-    padding-top: 13px;
-
-    border-top: 1px solid rgba(75, 54, 42, .10);
+    gap: 18px;
 }
-
-.lojaRodape > span {
-    color: var(--cor-marrom-claro);
-    font-size: .65rem;
-    line-height: 1.35;
+.pedidoIcone {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(38, 17, 12,.80);
+    color: var(--cor-bege-destaque);
+    font-size: 1.6rem;
 }
-
-.lojaRodape .botaoSecundario {
-    padding: 8px 12px;
-    font-size: .70rem;
+.pedidoRecente p {
+    margin-bottom: 3px;
+    color: var(--cor-marrom-escuro-2);
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
 }
-
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-
+.pedidoRecente h2 {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-grande);
+    font-weight: 700;
+}
+.pedidoRecente span {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+}
+.pedidoRecente > a {
+    padding: 11px 15px;
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
+    font-size: .75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.pedidoRecente > a:hover {
+    background: var(--cor-laranja-claro);
+}
 footer {
     margin-top: 0;
 }
-
-
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
-
 @media (max-width: 1050px) {
-
     .navLinks {
         display: none;
     }
-
-    .listaEntregas {
+    .buscaCabecalho {
+        width: min(450px, 48vw);
+        margin-left: auto;
+    }
+    .listaLojas, .listaProdutos {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .listaLojas {
-        grid-template-columns: 1fr;
-    }
-
-    .resumoPainel {
-        gap: 10px;
-    }
-
-    .resumoPainelCard {
-        min-height: 135px;
-        padding: 14px 8px;
-    }
 }
-
-
 @media (max-width: 700px) {
-
     .container {
         width: min(100% - 32px, 1180px);
     }
-
-    .navLojaConteudo {
+    .navCompradorConteudo {
         min-height: 66px;
         gap: 12px;
     }
-
-    .heroPainelConteudo {
+    .logoComprador {
+        font-size: var(--fonte-media);
+    }
+    .buscaCabecalho {
+        flex: 1;
+        width: auto;
+        margin-left: 0;
+    }
+    .heroConteudo {
         min-height: auto;
         display: block;
     }
-
-    .heroPainelTexto {
-        padding: 40px 0 30px;
-        text-align: center;
+    .heroTexto {
+        padding: 45px 0;
     }
-
-    .heroPainelSaudacao {
-        text-align: center;
+    .heroFoto {
+        display: none;
     }
-
-    .heroPainelTexto h1 {
-        text-align: center;
-        line-height: 1.5;
-    }
-
-    .heroPainelTexto > p:not(.heroPainelSaudacao) {
-        margin-left: auto;
-        margin-right: auto;
-
-        text-align: justify;
-        text-align-last: center;
-    }
-
-    .resumoPainel {
+    .listaCategorias {
         grid-template-columns: repeat(3, 1fr);
-
-        max-width: 550px;
-        margin: 0 auto;
     }
 
-    .resumoPainelCard {
-        min-height: 125px;
-    }
-
-    .secaoPadrao {
-        padding: 46px 0;
-    }
 }
 
+.heroTexto {
+    text-align: center;
+}
 
-@media (max-width: 560px) {
+.heroTexto h1 {
+    margin: 0 auto 14px;
+}
 
-    .listaEntregas {
-        grid-template-columns: 1fr;
+.heroTexto > p:not(.heroSaudacao) {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.heroVantagens {
+    justify-content: center;
+}
+
+@media (max-width: 500px) {
+    .perfil {
+        display: none;
     }
-
+    .buscaCabecalho input {
+        font-size: .68rem;
+    }
+    .heroTexto h1 {
+        font-size: 2.35rem;
+    }
+    .heroVantagens {
+        gap: 10px;
+        font-size: .7rem;
+    }
     .cabecalhoSecao.linha {
         align-items: start;
-        flex-direction: column;
     }
-
-    .resumoPainel {
-        gap: 8px;
+    .listaLojas {
+        grid-template-columns: 1fr;
     }
-
-    .resumoPainelCard {
-        min-height: 110px;
-        padding: 10px 5px;
+    .listaProdutos {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: none;
     }
-
-    .resumoPainelCard strong {
-        font-size: var(--fonte-media);
+    .produtoCard {
+        min-width: 220px;
     }
-
-    .resumoPainelCard span {
-        font-size: .65rem;
+    .bannerConteudo {
+        align-items: start;
+        padding: 22px 18px;
     }
-
-    .lojaEntregador {
-        flex-direction: column;
+    .bannerConteudo > i {
+        font-size: 1.7rem;
     }
-
-    .lojaImagem {
-        min-height: 130px;
-        flex-basis: 130px;
+    .bannerConteudo p {
+        line-height: 1.3;
     }
-
-    .lojaRodape {
-        align-items: flex-start;
-        flex-direction: column;
+    .bannerConteudo a {
+        display: none;
     }
-
-    .lojaRodape .botaoSecundario {
-        width: 100%;
-        justify-content: center;
-        text-align: center;
+    .pedidoRecente {
+        grid-template-columns: 1fr;
+    }
+    .pedidoRecente > a {
+        justify-self: start;
+    }
+    footer {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: .01ms !important;
     }
 }
 
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        transition-duration: .01ms !important;
-    }
-
+.TextoPedir{
+    color: var(--cor-marrom-escuro-2);
 }
