@@ -31,7 +31,7 @@ textarea {
     top: 0;
     z-index: 10;
     background: var(--cor-marrom-escuro-2);
-
+    border-bottom: 1px solid rgba(255, 243, 231, .14);
 }
 
 .navLojaConteudo {
@@ -130,6 +130,7 @@ textarea {
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
     padding-top: 40px;
+
 }
 
 .PainelConteudo {
@@ -343,18 +344,18 @@ textarea {
     background: var(--cor-laranja);
 }
 
-.botaoSecundario {
-    background: transparent;
-
-    border: 1px solid rgba(75, 54, 42, .25);
-
-    color: var(--cor-marrom-claro);
-}
-
 .botaoSecundario:hover {
-    background: var(--cor-background-alternativo);
-    color: var(--cor-laranja-escuro);
+    background: var(--cor-laranja);
 }
+
+.botaoSecundario {
+    border: none;
+
+    background: var(--cor-laranja-escuro);
+    color: white;
+}
+
+
 
 
 /* =========================================================
