@@ -410,14 +410,20 @@ textarea {
     color: var(--cor-laranja-escuro);
 }
 
-.statusBadge.retirado {
+.statusBadge.entregue {
     background: rgba(131, 184, 255, .18);
     color: var(--cor-azul-marinho);
+
 }
 
-.statusBadge.caminho {
-    background: rgba(111, 174, 122, .18);
-    color: #3d7048;
+.entrega.entregue button{
+        background: transparent;
+        border: 1px solid rgba(75, 54, 42, .25);
+        color: var(--cor-marrom-claro);
+}
+
+.entrega.aguardando{
+        border: 1px solid rgba(75, 54, 42, .30);
 }
 
 .entregaInfo h3 {
