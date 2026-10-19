@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,7 +39,7 @@
                     <i class="bi bi-bag" aria-hidden="true"></i>
                     <span>3</span>
                 </a>
-                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                <a class="perfil" id="linkPerfil" href="PerfilComprador.html" title="Meu perfil" aria-label="Abrir meu perfil">
                     <i class="bi bi-person-circle" aria-hidden="true"></i>
                 </a>
             </div>
@@ -50,7 +51,7 @@
         <section class="heroComprador" id="inicio">
             <div class="container heroConteudo">
                 <div class="heroTexto">
-                    <p class="heroSaudacao">Olá, Ana!</p>
+                    <p class="heroSaudacao" id="saudacaoComprador">Olá, Ana!</p>
                     <h1>Para começar bem o dia,<br>que tal um <span>Cafézin</span>?</h1>
                     <p>Encontre cafeterias, pães e doces preparados pertinho de você.</p>
 
@@ -60,12 +61,7 @@
                     </div>
                 </div>
 
-                <!-- Substitua este bloco por uma imagem de destaque quando houver uma. -->
-                <div class="placeholderFoto heroFoto" role="img" aria-label="Espaço reservado para foto de destaque">
-                    <i class="bi bi-image"></i>
-                    <strong>Foto de destaque</strong>
-                    <small>cafés, pães ou ambiente</small>
-                </div>
+          
             </div>
         </section>
 
@@ -178,6 +174,7 @@
                         </div>
                         <button class="adicionar" aria-label="Adicionar chocolate quente"><i class="bi bi-plus-lg"></i></button>
                     </article>
+                    
                     <article class="produtoCard">
                         <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do chocolate quente">
                             <i class="bi bi-image"></i>
@@ -334,6 +331,18 @@
         </div>
 
     </footer>
+    <!-- Mostra o nome salvo na página de perfil (mantém "Ana" se não houver nenhum) -->
+    <script>
+        (function () {
+            try {
+                var perfil = JSON.parse(localStorage.getItem("cafezinPerfil") || "{}");
+                if (perfil.nome) {
+                    document.getElementById("saudacaoComprador").textContent =
+                        "Olá, " + perfil.nome.trim().split(/\s+/)[0] + "!";
+                }
+            } catch (e) { /* mantém a saudação padrão */ }
+        })();
+    </script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="JavaScript/Comprador/cardapio.js"></script>
 </body>
