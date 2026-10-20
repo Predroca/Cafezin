@@ -67,6 +67,39 @@ def catalogo():
     }
 
 
+@catalogo_bp.route("/lojas", methods=["GET"])
+def catalogo_lojas():
+
+    lojas = ( db.session.query (
+            Loja,
+            Usuario.nome,
+            func.avg(AvaliacaoLoja.nota).label("nota_media"),
+            func.count(AvaliacaoLoja.cod_avaliacao_loja).label("total_avaliacoes"),
+        ).join(Usuario, Loja.cod_usuario == Usuario.cod_usuario)
+        .outerjoin(Pedido, Pedido.cod_loja == Loja.cod_loja)
+        .outerjoin(AvaliacaoLoja, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+        .group_by(Loja.cod_loja, Usuario.nome)
+        .all()
+    )
+
+
+    mostrar_lojas = []
+    for loja, nome, nota_media, total_avaliacoes in lojas:
+        loja_map = {
+            "cod_loja": loja.cod_loja,
+            "nome": nome,
+            "nota_media": round(float(nota_media or 0), 1),
+            "total_avaliacoes": total_avaliacoes,
+        }
+
+        mostrar_lojas.append(loja_map)
+
+    return {"lojas": mostrar_lojas}
+
+
+
+
+
 @catalogo_bp.route("/produtos/<int:cod_produto>", methods=["GET"])
 def produto_detalhe(cod_produto):
     produto = Produto.query.get_or_404(cod_produto)
