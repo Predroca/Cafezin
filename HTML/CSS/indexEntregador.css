@@ -776,10 +776,6 @@ footer {
         text-align: center;
     }
 
-    .PainelTexto h1 {
-        text-align: center;
-        line-height: 1.5;
-    }
 
     .PainelTexto > p:not(.PainelSaudacao) {
         margin-left: auto;
