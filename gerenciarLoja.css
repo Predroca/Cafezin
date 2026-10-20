@@ -1,0 +1,576 @@
+/*
+   Telas de gerenciamento da loja: Criar produto, Editar produto e Perfil da loja.
+   Complementa main.css (variáveis, fontes, rodapé) e indexLoja.css (navegação,
+   botões, campos de formulário, toggle, cabeçalho de seção). Só traz o que
+   essas folhas ainda não oferecem.
+*/
+
+.visualmenteOculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+:focus-visible {
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+}
+
+/* Item ativo do ícone da loja na navegação */
+
+.perfilLoja.ativo {
+    color: var(--cor-laranja-claro);
+}
+
+/* Faixa de título da página (mesma base escura do painel da loja) */
+
+.cabecalhoPagina {
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-texto-claro);
+    padding: 34px 0 40px;
+}
+
+.linkVoltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255, 243, 231, .3);
+    border-radius: var(--borda-arredondada-completa);
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena);
+    font-weight: 600;
+    transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.linkVoltar:hover {
+    background: var(--cor-bege-destaque);
+    color: var(--cor-marrom-escuro-2);
+}
+
+.linkVoltar i {
+    transition: transform var(--transicao-rapida);
+}
+
+.linkVoltar:hover i {
+    transform: translateX(-3px);
+}
+
+.cabecalhoPaginaLinha {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.cabecalhoPagina .painelSaudacao {
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.cabecalhoPagina h1 {
+    margin: 0 0 10px;
+    font-family: "Brasika", sans-serif;
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+    line-height: 1.12;
+}
+
+.cabecalhoPagina h1 span {
+    color: var(--cor-laranja-claro);
+}
+
+.cabecalhoPagina p.descricaoPagina {
+    max-width: 560px;
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-normal);
+    line-height: 1.55;
+}
+
+.selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--borda-arredondada-completa);
+    background: rgba(225, 167, 104, .18);
+    color: var(--cor-bege-destaque);
+    font-size: .7rem;
+    font-weight: 700;
+}
+
+/* Estrutura da página */
+
+.gradePagina {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.gradePagina.perfil {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+}
+
+.colunaPrincipal,
+.colunaLateral {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    animation: entradaCartao var(--transicao-lenta) ease both;
+}
+
+.colunaLateral {
+    position: sticky;
+    top: 100px;
+    animation-delay: .08s;
+}
+
+/* Cartões de grupo de campos */
+
+.cartaoGrupo {
+    margin: 0;
+    padding: 24px;
+    border: 1px solid rgba(75, 54, 42, .12);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background);
+    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
+    min-width: 0;
+}
+
+.cartaoGrupoCabecalho {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(75, 54, 42, .22);
+}
+
+.cartaoGrupoIcone {
+    display: grid;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(184, 116, 79, .15);
+    color: var(--cor-laranja-escuro);
+    font-size: 1.15rem;
+}
+
+.cartaoGrupoCabecalho h2 {
+    color: var(--cor-laranja-escuro);
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    line-height: 1.1;
+}
+
+.cartaoGrupoCabecalho p,
+.cartaoGrupoCabecalho .subtituloGrupo {
+    display: block;
+    margin-top: 3px;
+    color: var(--cor-texto-secundario);
+    font-size: .78rem;
+}
+
+legend.cartaoGrupoCabecalho {
+    float: left;
+}
+
+legend.cartaoGrupoCabecalho + * {
+    clear: both;
+}
+
+/* Campos (complementa .campoFormLoja de indexLoja.css) */
+
+.camposGrade {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 16px;
+}
+
+.camposGrade .campoFormLojaLargo {
+    grid-column: 1 / -1;
+}
+
+.campoFormLoja label .obrigatorio {
+    margin-left: 2px;
+    color: var(--cor-laranja-escuro);
+}
+
+.campoFormLoja label .opcional {
+    margin-left: 6px;
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+    font-weight: 400;
+}
+
+.campoFormLoja input,
+.campoFormLoja select,
+.campoFormLoja textarea {
+    transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+
+.campoFormLoja input:hover,
+.campoFormLoja select:hover,
+.campoFormLoja textarea:hover {
+    border-color: var(--cor-laranja);
+}
+
+.campoFormLoja textarea {
+    min-height: 120px;
+}
+
+.campoFormLoja .dica {
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+}
+
+.campoPrefixo {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background);
+    transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+
+.campoPrefixo:hover {
+    border-color: var(--cor-laranja);
+}
+
+.campoPrefixo:focus-within {
+    border-color: var(--cor-laranja);
+    box-shadow: 0 0 0 3px rgba(225, 167, 104, .25);
+}
+
+.campoPrefixo > span {
+    display: grid;
+    place-items: center;
+    padding: 0 12px;
+    border-right: 1px solid rgba(75, 54, 42, .15);
+    background: var(--cor-bege-claro);
+    border-radius: var(--borda-arredondada-pequena) 0 0 var(--borda-arredondada-pequena);
+    color: var(--cor-marrom-claro);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.campoPrefixo input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+}
+
+.campoPrefixo input:hover,
+.campoPrefixo input:focus {
+    border: none;
+    box-shadow: none;
+}
+
+/* Disponibilidade (usa .miniToggle de indexLoja.css em tamanho maior) */
+
+.campoDisponibilidade {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid rgba(75, 54, 42, .16);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background-alternativo);
+}
+
+.campoDisponibilidade strong {
+    display: block;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+}
+
+.campoDisponibilidade small {
+    display: block;
+    margin-top: 2px;
+    color: var(--cor-texto-secundario);
+    font-size: .72rem;
+}
+
+.campoDisponibilidade .miniToggle {
+    width: 46px;
+    height: 26px;
+}
+
+.campoDisponibilidade .miniToggle span::after {
+    width: 20px;
+    height: 20px;
+}
+
+.campoDisponibilidade .miniToggle input:checked + span::after {
+    transform: translateX(20px);
+}
+
+.campoDisponibilidade .miniToggle input:focus-visible + span {
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+}
+
+/* Foto do produto */
+
+.areaFoto {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 220px;
+    padding: 20px;
+    border: 2px dashed rgba(75, 54, 42, .3);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background-alternativo);
+    color: var(--cor-marrom-claro);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transicao-normal), background var(--transicao-normal), transform var(--transicao-normal);
+}
+
+.areaFoto:hover {
+    border-color: var(--cor-laranja);
+    background: var(--cor-background-bege);
+}
+
+.areaFoto:focus-within {
+    border-color: var(--cor-laranja-escuro);
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+}
+
+.areaFoto i {
+    color: var(--cor-laranja);
+    font-size: 2.4rem;
+    transition: transform var(--transicao-normal);
+}
+
+.areaFoto:hover i {
+    transform: translateY(-3px);
+}
+
+.areaFoto strong {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+}
+
+.areaFoto small {
+    color: var(--cor-texto-secundario);
+    font-size: .72rem;
+}
+
+/* Ações da página */
+
+.cartaoAcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cartaoAcoes > p {
+    margin-bottom: 4px;
+    color: var(--cor-texto-secundario);
+    font-size: .74rem;
+    line-height: 1.5;
+}
+
+.cartaoAcoes .botaoPrimario,
+.cartaoAcoes .botaoSecundario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: var(--altura-botao);
+    font-size: var(--fonte-pequena);
+    transition: background var(--transicao-rapida), color var(--transicao-rapida), transform var(--transicao-rapida);
+}
+
+.cartaoAcoes .botaoPrimario:hover {
+    background: var(--cor-marrom-medio);
+}
+
+.cartaoAcoes .botaoPrimario:active,
+.cartaoAcoes .botaoSecundario:active {
+    transform: scale(.97);
+}
+
+/* Aviso informativo (tela de edição) */
+
+.avisoInformativo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(184, 116, 79, .3);
+    border-radius: var(--borda-arredondada-media);
+    background: rgba(225, 167, 104, .12);
+    color: var(--cor-marrom-claro);
+    font-size: .8rem;
+    line-height: 1.5;
+}
+
+.avisoInformativo i {
+    color: var(--cor-laranja-escuro);
+    font-size: 1.1rem;
+}
+
+/* Perfil da loja */
+
+.avatarLoja {
+    display: grid;
+    flex: 0 0 auto;
+    width: 112px;
+    height: 112px;
+    place-items: center;
+    overflow: hidden;
+    border: 4px solid var(--cor-bege-destaque);
+    border-radius: 50%;
+    background: var(--cor-laranja);
+    color: var(--cor-texto-claro);
+    font-size: 2.8rem;
+}
+
+.avatarLoja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cartaoIdentidade {
+    align-items: center;
+    text-align: center;
+}
+
+.cartaoIdentidade .avatarLoja {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 16px;
+    border-color: var(--cor-bege-claro);
+    font-size: 3.2rem;
+}
+
+.cartaoIdentidade h2 {
+    color: var(--cor-marrom-escuro-2);
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+}
+
+.cartaoIdentidade p {
+    margin: 6px 0 14px;
+    color: var(--cor-texto-secundario);
+    font-size: .78rem;
+}
+
+.cartaoIdentidade .selo {
+    background: rgba(184, 116, 79, .15);
+    color: var(--cor-laranja-escuro);
+}
+
+.cartaoIdentidade .cartaoAcoes {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 54, 42, .22);
+}
+
+.listaDados {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 24px;
+}
+
+.listaDados .largo {
+    grid-column: 1 / -1;
+}
+
+.listaDados .triplo {
+    grid-column: span 1;
+}
+
+.listaDados dt {
+    margin-bottom: 4px;
+    color: var(--cor-texto-secundario);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+.listaDados dd {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-normal);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.listaDados dd.valorVazio {
+    color: var(--cor-marrom-claro);
+    opacity: .55;
+}
+
+.listaDados dd small {
+    display: block;
+    margin-top: 2px;
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+    font-weight: 400;
+}
+
+.listaDados > div {
+    padding: 12px 14px;
+    border: 1px solid rgba(75, 54, 42, .1);
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background-alternativo);
+    transition: border-color var(--transicao-rapida), background var(--transicao-rapida);
+}
+
+.listaDados > div:hover {
+    border-color: var(--cor-laranja);
+    background: var(--cor-background-bege);
+}
+
+.listaDados.endereco {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Ajustes de largura */
+
+@media (max-width: 1050px) {
+    .gradePagina,
+    .gradePagina.perfil {
+        grid-template-columns: 1fr;
+    }
+
+    .colunaLateral {
+        position: static;
+    }
+}
+
+@media (max-width: 700px) {
+    .cabecalhoPaginaLinha {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 560px) {
+    .camposGrade,
+    .listaDados,
+    .listaDados.endereco {
+        grid-template-columns: 1fr;
+    }
+
+    .cartaoGrupo {
+        padding: 18px;
+    }
+}
