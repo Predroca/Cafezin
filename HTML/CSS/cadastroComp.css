@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    z-index: -10000;
+    z-index: -1000;
 }
 .bodyCadastro::after{
     content: "";
@@ -20,15 +20,14 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: auto;
+    height: 100vh;
     width: 100%;
     position: relative;
     z-index: 100000;
-    min-height: 100vh;
 }
 .formLoginContainer{
     max-width: 92%;
-    width: 480px;
+    width: 460px;
     min-width: unset;
     display: flex;
     flex-direction: column;
@@ -41,19 +40,20 @@ body{
     border: 1px solid rgba(148, 70, 27, 0.08);
     overflow: hidden;
     position: relative;
-    transition: none;
+    transition: all 0.5s;
     margin: auto;
 }
 
 .inputsContainer{
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 18px;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
 }
 
-/*.upCurve{
+.upCurve{
     position: fixed;
     top: 0;
     right: 0;
@@ -66,7 +66,7 @@ body{
     left: 0;
     width: 300px;
     opacity: 1;
-}*/
+}
 
 
 .cabecalhoEtapa{
@@ -300,21 +300,7 @@ body{
     .stepRotulo{ display: none; }
     .upCurve, .downCurve{ display: none; }
 }
-.upCurve{
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: clamp(80px, 25vw, 200px);
-    pointer-events: none;
-}
 
-.downCurve{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: clamp(120px, 40vw, 300px);
-    pointer-events: none;
-}
 
 
 /* -------- Alerta: usuário já cadastrado -------- */
@@ -422,68 +408,3 @@ body{
 .alertaCafeBotao.primario:hover{ background-color: var(--cor-azul-medio); color: var(--cor-azul-marinho); }
 .alertaCafeBotao.secundario{ background-color: var(--cor-bege-claro); color: var(--cor-marrom-escuro-2); }
 .alertaCafeBotao.secundario:hover{ background-color: var(--cor-bege-destaque); }
-
-/* ===== 3.2 Compactação: grade de campos ===== */
-.inputsContainer .campoCheio,
-.inputsContainer > .grupoCampos,
-.inputsContainer > .seletorTipo,
-.inputsContainer > .mensagemSenha{
-    grid-column: 1 / -1;
-}
-.inputsContainer > .seletorTipo{ justify-self: center; }
-.inputsContainer > *,
-.grupoCampos > *{ min-width: 0; }
-
-.grupoCampos{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-.grupoCampos .linhaDupla{ display: contents; }
-
-.inputsContainer .form-control,
-.inputsContainer .form-select{
-    padding-top: 0.4rem !important;
-    padding-bottom: 0.4rem !important;
-    font-size: 0.9rem;
-}
-.inptLoginEmail > .bi{ width: 38px; }
-.inputsContainer .botaoOlho{
-    padding-left: 0.55rem;
-    padding-right: 0.55rem;
-}
-
-.subtitulo{ margin: 0; }
-.mensagemSenha{
-    margin: 0;
-    padding: 0 4px;
-    min-height: 1.1rem;
-    line-height: 1.1rem;
-}
-.seletorTipo{
-    padding: 6px 16px;
-    gap: 18px;
-}
-
-@media (max-width: 440px){
-    .inputsContainer,
-    .grupoCampos{ grid-template-columns: 1fr; }
-}
-
-/* ===== 3.1 Transição: keyframes do sentido inverso (voltar) ===== */
-@keyframes disappearRight{
-    from{ opacity: 1; transform: translateX(0); }
-    to{ opacity: 0; transform: translateX(40px); }
-}
-@keyframes aparecerEsquerda{
-    from{ opacity: 0; transform: translateX(-40px); }
-    to{ opacity: 1; transform: translateX(0); }
-}
-
-@media (prefers-reduced-motion: reduce){
-    .formLoginContainer,
-    .formLoginContainer *{
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-    }
-}
