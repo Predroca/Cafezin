@@ -7,7 +7,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    z-index: -1;
+    z-index: -10000;
 }
 .bodyCadastro::after{
     content: "";
@@ -20,10 +20,11 @@ body{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 100vh;
+    height: auto;
     width: 100%;
     position: relative;
     z-index: 100000;
+    min-height: 100vh;
 }
 .formLoginContainer{
     max-width: 92%;
@@ -31,9 +32,9 @@ body{
     min-width: unset;
     display: flex;
     flex-direction: column;
-    gap: 14px; /*var(--espacamento-grande);*/
+    gap: var(--espacamento-grande);
     background-color: var(--cor-background);
-    padding: 20px 28px /*var(--espacamento-extra-grande) var(--espacamento-extra-grande)*/;
+    padding: var(--espacamento-extra-grande) var(--espacamento-extra-grande);
     border-radius: 22px;
     z-index: 999;
     box-shadow: 0 20px 60px -15px rgba(45, 28, 22, 0.35);
@@ -48,7 +49,7 @@ body{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 18px;
     align-items: start;
 }
 
@@ -268,7 +269,7 @@ body{
     align-items: center;
     height: 100%;
     width: 100%;
-    gap: 14px;
+    gap: 22px;
 }
 .segundaSessao{
     display: none;
@@ -277,7 +278,7 @@ body{
     align-items: stretch;
     height: 100%;
     width: 100%;
-    gap: 14px;
+    gap: 22px;
 }
 .segundaSessao>*, .primeiraSessao>*{
     width: 100%;
@@ -297,9 +298,23 @@ body{
         border-radius: 16px;
     }
     .stepRotulo{ display: none; }
-    .upCurve, .downCurve{ display: none; }
+    /*.upCurve, .downCurve{ display: none; }*/
+}
+.upCurve{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: clamp(80px, 25vw, 200px);
+    pointer-events: none;
 }
 
+.downCurve{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: clamp(120px, 40vw, 300px);
+    pointer-events: none;
+}
 
 
 /* -------- Alerta: usuário já cadastrado -------- */
