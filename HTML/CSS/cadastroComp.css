@@ -31,9 +31,9 @@ body{
     min-width: unset;
     display: flex;
     flex-direction: column;
-    gap: var(--espacamento-grande);
+    gap: 14px /*var(--espacamento-grande);*/
     background-color: var(--cor-background);
-    padding: var(--espacamento-extra-grande) var(--espacamento-extra-grande);
+    padding: 20px 28px /*var(--espacamento-extra-grande) var(--espacamento-extra-grande)*/;
     border-radius: 22px;
     z-index: 999;
     box-shadow: 0 20px 60px -15px rgba(45, 28, 22, 0.35);
@@ -48,7 +48,7 @@ body{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
     justify-content: center;
     align-items: center;
 }
@@ -269,7 +269,7 @@ body{
     align-items: center;
     height: 100%;
     width: 100%;
-    gap: 22px;
+    gap: 14px;
 }
 .segundaSessao{
     display: none;
@@ -278,7 +278,7 @@ body{
     align-items: stretch;
     height: 100%;
     width: 100%;
-    gap: 22px;
+    gap: 14px;
 }
 .segundaSessao>*, .primeiraSessao>*{
     width: 100%;
