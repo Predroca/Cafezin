@@ -417,20 +417,18 @@ button, input, select, textarea { font: inherit; }
     font-weight: 700;
 }
 
-.statusBadge.novo {
+.statusBadge.aguardando {
     background: rgba(184,116,79,.15);
     color: var(--cor-laranja-escuro);
 }
 
-.statusBadge.preparo {
-    background: rgba(131,184,255,.18);
+.statusBadge.entregue {
+    background: rgba(131, 184, 255, .18);
     color: var(--cor-azul-marinho);
+
 }
 
-.statusBadge.pronto {
-    background: rgba(111,174,122,.18);
-    color: #3d7048;
-}
+
 
 .pedido h3 {
     font-size: var(--fonte-pequena);
