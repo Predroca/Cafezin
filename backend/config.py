@@ -15,3 +15,8 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get("SECRET_KEY", "cafezin-dev-secret")
+
+    # coisa de foto
+    UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
+    MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5 MB
+    EXTENSOES_PERMITIDAS = {"png", "jpg", "jpeg", "webp"}
