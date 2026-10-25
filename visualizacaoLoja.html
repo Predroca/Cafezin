@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Conheça a cafeteria, confira suas informações e leia as avaliações no Cafézin.">
+  <title>Cafézin | Visualizar loja</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="CSS/main.css">
+  <link rel="stylesheet" href="CSS/indexComp.css">
+  <link rel="stylesheet" href="CSS/visualizacaoLoja.css">
+</head>
+
+<body id="topo">
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+  <header class="navComprador">
+    <div class="container navCompradorConteudo">
+      <a class="logoComprador" href="indexComprador.html" aria-label="Cafézin - página inicial">Cafézin</a>
+      <form class="buscaCabecalho" role="search" action="indexComprador.html#cafeterias">
+        <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input id="busca" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
+        <button type="submit" aria-label="Pesquisar"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+      </form>
+      <nav class="navLinks" aria-label="Navegação principal">
+        <a href="indexComprador.html#inicio">Início</a><a href="indexComprador.html#pedidos">Loja</a><a
+          href="visualizacaoLoja.html#avaliacoes">Avaliações</a>
+      </nav>
+      <div class="navAcoes">
+        <a class="sacola" href="Sacola.html" aria-label="Abrir sacola"><i class="bi bi-bag" aria-hidden="true"></i></a>
+        <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil"><i class="bi bi-person-circle"
+            aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="paginaLoja">
+    <div class="container">
+      <nav class="migalhasLoja" aria-label="Você está aqui">
+        <a href="indexComprador.html">Início</a><i class="bi bi-chevron-right" aria-hidden="true"></i><span aria-current="page">Empório do Café</span>
+      </nav>
+
+      <section class="lojaDetalhe" aria-labelledby="lojaNome">
+        <div class="lojaBanner" role="img" aria-label="Banner"></i><span>BANNER DA LOJA</span></div>
+        <div class="lojaResumo">
+          <div class="lojaMarca" aria-hidden="true">EC</div>
+          <div class="lojaResumoTexto">
+            <span class="seloLoja"><i class="bi bi-shop" aria-hidden="true"></i>Aberta</span>
+            <h1 id="lojaNome">Empório do Café</h1>
+            <p class="lojaCategoria">Cafeteria · Padaria</p>
+            <div class="avaliacaoResumoLoja"><span class="estrelasLoja" aria-label="4,1 de 5 estrelas"><i
+                  class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                  class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span><strong>4,1</strong><a
+                href="#avaliacoes">(27 avaliações)</a></div>
+            <p class="lojaDescricao">Um cantinho acolhedor para aproveitar cafés, bebidas quentinhas e acompanhamentos
+              preparados com carinho.</p>
+            <div class="lojaIndicadores">
+              <span><i class="bi bi-clock" aria-hidden="true"></i> 30–45 min</span>
+              <span><i class="bi bi-bicycle" aria-hidden="true"></i> Frete R$ 5,99</span>
+              <span><i class="bi bi-check-circle-fill" aria-hidden="true"></i> Recebendo pedidos</span>
+              <span><i class="bi bi-calendar-week" aria-hidden="true"></i> Funcionamento: 07:00 às 19:00</span>
+              <span><i class="bi bi-envelope" aria-hidden="true"></i> contato@emporiodocafe.com.br</span>
+              <span><i class="bi bi-telephone" aria-hidden="true"></i> (34) 3333-3333</span>
+              <span><i class="bi bi-geo-alt" aria-hidden="true"></i> Rua das Flores, 120 · Centro</span>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+    </div>
+
+    <section class="secaoAvaliacoesLoja" id="avaliacoes" aria-labelledby="titulo-avaliacoes">
+      <div class="container">
+        <div class="cabecalhoAvaliacoesLoja">
+          <div>
+            <h2 id="titulo-avaliacoes">Avaliações da loja</h2>
+            <p>Veja como outros clientes avaliaram sua experiência.</p>
+          </div> </a>
+        </div>
+        <div class="avaliacoesLayoutLoja">
+          <aside class="notaGeralLoja" aria-label="Nota geral da loja"><strong>4,1</strong><span class="estrelasLoja"
+              aria-hidden="true"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                class="bi bi-star-half"></i></span><small>27 avaliações</small>
+
+          </aside>
+          <div class="listaAvaliacoesLoja">
+            <article class="avaliacaoItemLoja">
+              <div class="avaliacaoTopoLoja"><i class="bi bi-person-circle" aria-hidden="true"></i>
+                <div>
+                  <h3>Mariana S.</h3><small>Há 2 dias</small>
+                </div><span class="estrelasLoja" aria-label="5 de 5 estrelas"><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i></span>
+              </div>
+              <p>O café chegou bem embalado e estava delicioso. Gostei muito da qualidade e do cuidado com o pedido!</p>
+            </article>
+            <article class="avaliacaoItemLoja">
+              <div class="avaliacaoTopoLoja"><i class="bi bi-person-circle" aria-hidden="true"></i>
+                <div>
+                  <h3>Rafael M.</h3><small>Há 5 dias</small>
+                </div><span class="estrelasLoja" aria-label="5 de 5 estrelas"><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i></span>
+              </div>
+              <p>Ótimas opções no cardápio e entrega dentro do prazo. Com certeza vou pedir novamente.</p>
+            </article>
+            <article class="avaliacaoItemLoja">
+              <div class="avaliacaoTopoLoja"><i class="bi bi-person-circle" aria-hidden="true"></i>
+                <div>
+                  <h3>Camila R.</h3><small>Há 1 semana</small>
+                </div><span class="estrelasLoja" aria-label="4 de 5 estrelas"><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                    class="bi bi-star"></i></span>
+              </div>
+              <p>Produtos muito gostosos e atendimento atencioso. Só gostaria de ter mais opções de bebidas geladas.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+            <section class="secaoPadrao secaoMaisDaLoja" aria-labelledby="titulo-mais-loja">
+            <div class="container">
+                <div class="cabecalhoSecao">
+                    <h2 id="titulo-mais-loja">Mais de Empório do Café</h2>
+                    <p>Outras opções da mesma cafeteria.</p>
+                </div>
+
+                <div class="listaProdutos">
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto dourada" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto rosa" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    <article class="produtoCard">
+                        <div class="placeholderFoto fotoProduto azul" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <p class="lojaNome">Empório do Café</p>
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <strong class="preco">R$ 00,00</strong>
+                        </div>
+                        <button class="adicionar" aria-label="Adicionar produto"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                </div>
+            </div>
+        </section>
+  </main>
+
+
+
+  <footer>
+    <div class="footerConteudo">
+      <section class="footerSection footerMarca"><img src="img/FooterLogo.svg" alt="Cafézin"
+          class="footerLogoTexto"><img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem"></section>
+      <section class="footerSection">
+        <div class="titulo">Sobre nós</div>
+        <ul class="footerSectionLists">
+          <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+          <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+          <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+          <li><a href="cafeDev.html">CaféDev</a></li>
+        </ul>
+      </section>
+      <section class="footerSection">
+        <div class="titulo">Contato</div>
+        <ul class="footerSectionLists">
+          <li class="footerSubtitulo">Redes sociais</li>
+          <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+          <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+          <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+        </ul>
+      </section>
+    </div>
+    <div class="footerCopyright">
+      <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
