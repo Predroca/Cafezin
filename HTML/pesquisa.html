@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pesquise cafeterias e produtos no Cafézin.">
+  <title>Cafézin | Pesquisa</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="CSS/main.css">
+  <link rel="stylesheet" href="CSS/indexComp.css">
+  <link rel="stylesheet" href="CSS/pesquisa.css">
+</head>
+<body id="topo">
+  <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+
+  <header class="navComprador">
+    <div class="container navCompradorConteudo">
+      <a class="logoComprador" href="indexComprador.html#topo" aria-label="Cafézin - página inicial">Cafézin</a>
+      <form id="formBusca" class="buscaCabecalho" role="search" action="pesquisa.html" method="get">
+        <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+        <i class="bi bi-search" aria-hidden="true"></i>
+        <input id="busca" name="q" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
+        <button type="submit" aria-label="Pesquisar"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+      </form>
+      <nav class="navLinks" aria-label="Navegação principal">
+        <a href="indexComprador.html#inicio">Início</a>
+        <a href="indexComprador.html#cafeterias">Cafeterias</a>
+        <a href="indexComprador.html#produtos">Produtos</a>
+        <a href="indexComprador.html#pedidos">Pedidos</a>
+      </nav>
+      <div class="navAcoes">
+        <a class="sacola" href="Sacola.html" aria-label="Abrir sacola"><i class="bi bi-bag" aria-hidden="true"></i></a>
+        <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil"><i class="bi bi-person-circle" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="paginaPesquisa">
+    <div class="container conteudoPesquisa">
+      <h1 class="tituloPesquisa">Buscando por <span id="termoPesquisa"></span></h1>
+
+      <div class="abasPesquisa" role="tablist" aria-label="Tipo de resultado">
+        <button class="abaPesquisa ativa" id="abaLojas" type="button" role="tab" aria-selected="true" aria-controls="painelPesquisa" data-tipo="Lojas">Lojas</button>
+        <button class="abaPesquisa" id="abaItens" type="button" role="tab" aria-selected="false" aria-controls="painelPesquisa" data-tipo="Itens">Itens</button>
+      </div>
+
+      <section id="painelPesquisa" class="painelPesquisa" role="tabpanel" aria-labelledby="abaLojas">
+        <div class="filtrosPesquisa" id="filtrosLojas" aria-label="Filtros de lojas">
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Ordenar <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Entrega Grátis</button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Vale-refeição <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Distância <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Entrega Parceira</button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Super Cafeterias</button>
+          <button class="filtroPesquisa" type="button" aria-pressed="false">Filtros <i class="bi bi-sliders" aria-hidden="true"></i></button>
+
+        </div>
+        <div class="filtrosPesquisa filtrosItens" id="filtrosItens" aria-label="Categorias de produtos" hidden>
+          <span class="rotuloCategoriasPesquisa">Categorias:</span>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Cafés">Cafés</button>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Doces">Doces</button>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Bolos">Bolos</button>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Salgados">Salgados</button>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Bebidas">Bebidas</button>
+          <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Pães">Pães</button>
+
+        </div>
+
+        <div class="resultadosPesquisa" aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+    <script src="JavaScript/Comprador/Pesquisa.js"></script>
+</body>
+</html>
