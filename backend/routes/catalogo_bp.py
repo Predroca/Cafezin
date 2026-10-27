@@ -1,11 +1,3 @@
-"""
-Rotas (agora em JSON, sem templates):
-  GET  /produtos                       -> catálogo de produtos (filtro opcional ?categoria=)
-  GET  /produtos/<cod_produto>         -> detalhe de um produto (com média de avaliação)
-  POST /pedidos                        -> registra o pedido no banco (Pagamento + Pedido + ItemPedido)
-  GET  /pedidos/<cod_pedido>           -> confirmação com os dados do pedido registrado
-"""
-
 from datetime import datetime
 
 from sqlalchemy import func
@@ -61,6 +53,7 @@ def catalogo():
                 "preco": float(p.preco),
                 "loja": p.loja.usuario.nome,
                 "cod_categoria": p.cod_categoria,
+                "foto_url": p.foto_url,
             }
             for p in produtos
         ]
@@ -95,9 +88,6 @@ def catalogo_lojas():
         mostrar_lojas.append(loja_map)
 
     return {"lojas": mostrar_lojas}
-
-
-
 
 
 @catalogo_bp.route("/produtos/<int:cod_produto>", methods=["GET"])
