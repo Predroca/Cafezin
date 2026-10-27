@@ -1,0 +1,184 @@
+/* Página de pesquisa do Cafézin: estrutura inspirada na referência enviada e cabeçalho do comprador. */
+.paginaPesquisa {
+  min-height: calc(100vh - 76px);
+  background: var(--cor-background);
+  color: var(--cor-marrom-escuro-2);
+  font-family: "Poppins", sans-serif;
+}
+
+.conteudoPesquisa {
+  width: min(1500px, 88%);
+  padding-top: 44px;
+}
+
+.tituloPesquisa {
+  margin: 0;
+  color: var(--cor-marrom-escuro-2);
+  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  line-height: 1.35;
+  font-family: "Brasika", sans-serif;
+  font-weight: 400;
+}
+
+.tituloPesquisa span {
+  color: var(--cor-laranja-escuro);
+}
+
+.abasPesquisa {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--cor-bege-claro);
+    font-family: "Poppins", sans-serif;
+}
+
+.abaPesquisa {
+  position: relative;
+  min-width: 98px;
+  padding: 15px 22px 17px;
+  border: 0;
+  background: transparent;
+  color: var(--cor-texto-secundario);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.abaPesquisa::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: transparent;
+  content: "";
+}
+
+.abaPesquisa.ativa {
+  color: var(--cor-laranja-escuro);
+}
+
+.abaPesquisa.ativa::after {
+  background: var(--cor-laranja);
+}
+
+.abaPesquisa:focus-visible,
+.filtroPesquisa:focus-visible {
+  outline: 2px solid var(--cor-laranja);
+  outline-offset: 3px;
+}
+
+.painelPesquisa {
+  min-height: 540px;
+}
+
+.filtrosPesquisa {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.filtroPesquisa {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: var(    --espacamento-pequeno);
+  padding: 0 12px;
+  border: 1px solid var(--cor-bege-claro);
+  border-radius: var(--borda-arredondada-pequena);
+  background: var(--cor-background);
+  color: var(--cor-marrom-principal);
+  font: inherit;
+  font-size: .95rem;
+  white-space: nowrap;
+  cursor: pointer;
+
+}
+
+.filtroPesquisa i {
+  font-size: .85rem;
+}
+
+.filtroPesquisa.selecionado {
+  border-color: var(--cor-laranja);
+  background: var(--cor-background-bege);
+  color: var(--cor-laranja-escuro);
+}
+
+.filtroLimpar {
+  padding-inline: 25px;
+}
+
+.rotuloCategoriasPesquisa {
+  margin-right: 4px;
+  color: var(--cor-marrom-principal);
+  font-size: var(--fonte-pequena);
+  font-weight: 700;
+}
+
+.filtroCategoria.selecionado {
+  box-shadow: inset 0 0 0 1px var(--cor-laranja);
+}
+
+.resultadosPesquisa {
+  min-height: 420px;
+}
+
+.filtrosPesquisa[hidden] {
+  display: none;
+}
+
+@media (min-width: 1600px) {
+  .conteudoPesquisa {
+    width: min(1500px, 88%);
+  }
+}
+
+@media (max-width: 800px) {
+  .conteudoPesquisa {
+    width: 92%;
+    padding-top: 30px;
+  }
+
+  .filtrosPesquisa {
+    gap: 8px;
+  }
+
+  .filtroPesquisa {
+    min-height: 43px;
+    padding-inline: 17px;
+    font-size: .88rem;
+  }
+
+  .abaPesquisa {
+    min-width: 88px;
+  }
+}
+
+@media (max-width: 520px) {
+  .tituloPesquisa {
+    font-size: 1.35rem;
+  }
+
+  .abaPesquisa {
+    padding: 13px 17px 15px;
+  }
+
+  .filtrosPesquisa {
+    gap: 7px;
+  }
+
+  .filtroPesquisa {
+    min-height: 39px;
+    padding-inline: 13px;
+    font-size: .8rem;
+  }
+
+  .resultadosPesquisa {
+    min-height: 360px;
+  }
+}
