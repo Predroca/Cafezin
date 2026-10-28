@@ -73,7 +73,8 @@ CREATE TABLE Categoria (
 CREATE TABLE Loja (
     cod_loja INT PRIMARY KEY auto_increment,
     cnpj CHAR(14) NOT NULL,
-    horario_funcionamento time,
+    horario_abertura time,
+    horario_fecha time,
     cod_endereco INT NOT NULL,
     cod_usuario INT NOT NULL,
 
@@ -82,6 +83,16 @@ CREATE TABLE Loja (
 
     FOREIGN KEY (cod_usuario)
         REFERENCES Usuario(cod_usuario)
+);
+
+CREATE TABLE LojaFavorita (
+    cod_favorito INT PRIMARY KEY auto_increment,
+    cod_loja INT NOT NULL,
+    cod_comprador INT NOT NULL
+
+    FOREIGN KEY (cod_loja) REFERENCES Loja(cod_loja),
+    FOREIGN KEY (cod_comprador) REFERENCES Comprador(cod_comprador),
+    UNIQUE (cod_comprador, cod_loja)
 );
 
 CREATE TABLE Pedido (
@@ -223,8 +234,8 @@ CREATE TABLE LojaPopularidade (
 -- Usuários 1-12 mantidos igual como antes. Senhas dos novos usuários (13-31) seguem
 -- o mesmo formato ( bruno.carvalho123, padaria.estreladourada123, gabriel.martins123 etc.).
 -- =========================================================
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone, foto_url) VALUES
-('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384', '/uploads/usuarios/82a6b341e7394b7c830fe298f1d985c8.jpg'),
+INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
+('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384'),
 ('maria.souza@email.com', 'scrypt:32768:8:1$A9O17HTDRSsNm2Qg$2f047ab698200bf2d632a034769e5aef6169570a7bca77f5e2d47600cfe686a5d88d0c9b3a5bd40064204f5843b3b1280860c653a561296d59e24dcdbd2ee4ad', 'Maria Souza', 'Comprador', '32992348821'),
 ('carlos.lima@email.com', 'scrypt:32768:8:1$zVaPz5qYU1y1RlmZ$64eb2297c8207eec638060290e231d0c5f6f5dc0a411d3853cd1b063de8681456879f1e405cdf2369e3118e274b5229c3e924545714a34254bc2bf624e3f47f8', 'Carlos Lima', 'Comprador', '32993451167'),
 ('ana.pereira@email.com', 'scrypt:32768:8:1$spJ5UpbWyFo8r3FO$7ac8c4c4a4c64b7f482c4efaad4e60e9b6c162e345b691942da9858916c6ba65267a815ccd1e4d06a7666d56b0b232118ca4db5f2f3cb7dee5839e369533992a', 'Ana Pereira', 'Comprador', '32994567290'),
@@ -299,7 +310,7 @@ INSERT INTO Pagamento (tipo, data) VALUES
 ('PIX', '2025-01-10 09:15:00'),
 ('Cartão', '2025-01-11 12:30:00'),
 ('Dinheiro', '2025-01-12 18:45:00'),
-('Boleto', '2025-01-13 08:00:00'),
+('Boleto', '2025-01-13 10:50:00'), 
 ('Transferência', '2025-01-14 14:20:00'),
 ('PIX', '2025-01-15 19:05:00'),
 ('PIX', '2025-06-01 10:00:00'),
@@ -318,17 +329,14 @@ INSERT INTO Pagamento (tipo, data) VALUES
 ('Dinheiro', '2026-09-23 11:10:00'),
 ('PIX', '2026-09-23 11:55:00'),
 ('Cartão', '2026-09-22 09:40:00'),
-('Boleto', '2026-09-23 14:15:00');
-
--- Pagamentos dos pedidos de demonstração de amanhã (24-30 => pedidos 19-25)
-INSERT INTO Pagamento (tipo, data) VALUES
+('Boleto', '2026-09-23 14:15:00'),
 ('PIX', '2026-09-23 07:10:00'),
 ('Cartão', '2026-09-23 07:55:00'),
 ('Dinheiro', '2026-09-23 09:05:00'),
 ('PIX', '2026-09-23 09:35:00'),
 ('Transferência', '2026-09-23 07:25:00'),
 ('PIX', '2026-09-23 08:40:00'),
-('Boleto', '2026-09-23 09:15:00');
+('Boleto', '2026-09-23 11:15:00');
 
 -- =========================================================
 -- CATEGORIA
@@ -405,6 +413,18 @@ INSERT INTO Loja (cnpj, horario_funcionamento, cod_endereco, cod_usuario) VALUES
 ('84269371000734', '09:00:00', 16, 25), -- 11 Confeitaria Doce Encanto
 ('95371482000819', '08:30:00', 17, 26); -- 12 Empório das Bebidas
 
+INSERT INTO LojaFavorita (cod_loja, cod_comprador) VALUES
+(1, 1), (5, 1), (8, 1),
+(2, 2), (7, 2), (12, 2),
+(3, 3), (6, 3), (9, 3),
+(11, 4), (1, 4),
+(4, 5), (2, 5),
+(1, 6), (5, 6),
+(1, 7),
+(1, 8), (10, 8),
+(7, 9), (9, 9),
+(2, 10), (6, 10);
+
 -- =========================================================
 -- PRODUTO
 -- Loja 1 = Cafeteria da Renata | Loja 2 = Padaria Bom Gosto | Loja 3 = Doce de Casa
@@ -415,7 +435,7 @@ INSERT INTO Loja (cnpj, horario_funcionamento, cod_endereco, cod_usuario) VALUES
 -- Loja 12 = Empório das Bebidas
 -- =========================================================
 INSERT INTO Produto (cod_loja, nome, descricao, preco, disponibilidade, cod_categoria, foto_url) VALUES
-(1, 'Café Expresso', 'Café expresso tradicional', 6.50, TRUE, 1, '/uploads/produtos/87896cebe4cd42cbadb77fe32c918900.jpg'),
+(1, 'Café Expresso', 'Café expresso tradicional', 6.50, TRUE, 1),
 (1, 'Cappuccino', 'Cappuccino cremoso com canela', 9.00, TRUE, 1),
 (1, 'Café com Leite', 'Café com leite quente', 7.00, TRUE, 1),
 (1, 'Torta de Limão', 'Fatia de torta de limão', 8.50, FALSE, 3),
@@ -494,7 +514,7 @@ INSERT INTO Pedido (data_pedido, valor_frete, valor_total, status, cod_comprador
 ('2025-01-10 09:10:00', 5.00, 27.00, 'Entregue', 1, 1, 1, 1),
 ('2025-01-11 12:25:00', 6.00, 21.40, 'Entregue', 2, 2, 2, 2),
 ('2025-01-12 18:40:00', 4.50, 9.50, 'Entregue', 3, 3, 3, 3),
-('2025-01-13 07:55:00', 7.00, 22.50, 'Em andamento', 4, 3, 4, 4),
+('2025-01-13 10:55:00', 7.00, 22.50, 'Em andamento', 4, 3, 4, 4),
 ('2025-01-14 14:15:00', 5.50, 12.50, 'Cancelado', 5, 1, 5, 5),
 ('2025-01-15 19:00:00', 4.00, 19.00, 'Entregue', 1, 3, 1, 6),
 ('2026-09-22 08:30:00', 4.50, 22.00, 'Entregue',     1, 5,  1, 12), 
@@ -508,19 +528,14 @@ INSERT INTO Pedido (data_pedido, valor_frete, valor_total, status, cod_comprador
 ('2026-09-23 11:15:00', 5.00, 31.50, 'Em preparo',   4, 1,  4, 20), 
 ('2026-09-23 12:00:00', 6.00, 26.00, 'Pendente',     5, 2,  5, 21), 
 ('2026-09-22 09:45:00', 5.00, 25.00, 'Cancelado',    1, 10, 1, 22), 
-('2026-09-23 14:20:00', 4.50, 22.50, 'Entregue',     2, 3,  2, 23); 
-
--- =========================================================
--- Pedidos de demonstração para amanhã (2026-09-23)
--- =========================================================
-INSERT INTO Pedido (data_pedido, valor_frete, valor_total, status, cod_comprador, cod_loja, cod_end_entrega, cod_pagamento) VALUES
+('2026-09-23 14:20:00', 4.50, 22.50, 'Entregue',     2, 3,  2, 23),
 ('2026-09-23 07:15:00', 5.00, 27.00, 'Entregue',     6, 1, 18, 24), -- 19
 ('2026-09-23 08:00:00', 4.50, 29.50, 'Entregue',     7, 1, 19, 25), -- 20
 ('2026-09-23 09:10:00', 5.00, 31.50, 'Em andamento', 8, 1, 20, 26), -- 21
 ('2026-09-23 09:40:00', 4.00, 28.50, 'Em preparo',   9, 1, 21, 27), -- 22
 ('2026-09-23 07:30:00', 5.50, 16.50, 'Entregue',    10, 2, 22, 28), -- 23
 ('2026-09-23 08:45:00', 4.00, 19.50, 'Entregue',     6, 5, 18, 29), -- 24
-('2026-09-23 09:20:00', 6.00, 36.00, 'Pendente',     9, 7, 21, 30); -- 25
+('2026-09-23 11:20:00', 6.00, 36.00, 'Pendente', 9, 7, 21, 30);  -- 25
 
 -- =========================================================
 -- ITEMPEDIDO
@@ -582,7 +597,7 @@ INSERT INTO Entrega (distancia, data_saida, data_entrega, status, cod_pedido, co
 (3.2, '2025-01-10 09:20:00', '2025-01-10 09:45:00', 'Concluída', 1, 1),
 (5.0, '2025-01-11 12:35:00', '2025-01-11 13:05:00', 'Concluída', 2, 2),
 (2.1, '2025-01-12 18:50:00', '2025-01-12 19:10:00', 'Concluída', 3, 3),
-(4.4, '2025-01-13 08:05:00', NULL, 'Em rota', 4, 1),
+(4.4, '2025-01-13 11:05:00', NULL, 'Em rota', 4, 1),
 (2.8, '2026-09-22 08:35:00', '2026-09-22 08:55:00', 'Concluída', 7, 2),
 (4.1, '2026-09-22 12:20:00', '2026-09-22 12:50:00', 'Concluída', 8, 4),
 (1.9, '2026-09-22 07:15:00', '2026-09-22 07:35:00', 'Concluída', 11, 5),
