@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from extensions import db
+from permissoes import tipo_requerido
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date
 from sqlalchemy import func
@@ -31,7 +32,7 @@ def loja_do_usuario_logado():
     return loja
 
 @loja_bp.route("/loja/produtos", methods=["GET"])
-@jwt_required()
+@tipo_requerido("Loja")
 def meus_produtos():
     loja = loja_do_usuario_logado()
     if loja is None:
@@ -65,7 +66,7 @@ def meus_produtos():
     }
 
 @loja_bp.route("/loja/dashboard", methods=["GET"])
-@jwt_required()
+@tipo_requerido("Loja")
 def dashboard():
     loja = loja_do_usuario_logado()
     if loja is None:
@@ -103,7 +104,7 @@ def dashboard():
      
 #/<string:nome>/<int:cod_loja>
 @loja_bp.route("/registrar_produto/<int:cod_loja>/<string:nome>", methods=["POST"])
-@jwt_required()
+@tipo_requerido("Loja")
 def registrar_endereco(nome , cod_loja):
         
         dados = request.get_json()
@@ -156,7 +157,7 @@ def deletar_produto(cod_produto):
         return{"message" : "Produto não encontrado."}
 
 @loja_bp.route("/loja/pedidos", methods=["GET"])
-@jwt_required()
+@tipo_requerido("Loja")
 def listar_pedidos_loja():
     loja = loja_do_usuario_logado()
     if loja is None:
@@ -197,7 +198,7 @@ TRANSICOES_VALIDAS = {
 
 
 @loja_bp.route("/loja/pedidos/<int:cod_pedido>/status", methods=["PATCH"])
-@jwt_required()
+@tipo_requerido("Loja")
 def atualizar_status_pedido(cod_pedido):
     loja = loja_do_usuario_logado()
     if loja is None:
