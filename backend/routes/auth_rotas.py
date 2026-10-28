@@ -87,7 +87,8 @@ def registrar_loja():
 
     loja = Loja (
         cnpj = dados["cnpj"],
-        horario_funcionamento=dados.get('horario_funcionamento'),
+        horario_abertura=dados.get('horario_abertura'),
+        horario_fecha=dados.get('horario_fecha'),
         cod_endereco=endereco.cod_endereco,
         cod_usuario=novo_usuario.cod_usuario
     )
