@@ -223,8 +223,8 @@ CREATE TABLE LojaPopularidade (
 -- Usuários 1-12 mantidos igual como antes. Senhas dos novos usuários (13-31) seguem
 -- o mesmo formato ( bruno.carvalho123, padaria.estreladourada123, gabriel.martins123 etc.).
 -- =========================================================
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
-('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384'),
+INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone, foto_url) VALUES
+('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384', '/uploads/usuarios/82a6b341e7394b7c830fe298f1d985c8.jpg'),
 ('maria.souza@email.com', 'scrypt:32768:8:1$A9O17HTDRSsNm2Qg$2f047ab698200bf2d632a034769e5aef6169570a7bca77f5e2d47600cfe686a5d88d0c9b3a5bd40064204f5843b3b1280860c653a561296d59e24dcdbd2ee4ad', 'Maria Souza', 'Comprador', '32992348821'),
 ('carlos.lima@email.com', 'scrypt:32768:8:1$zVaPz5qYU1y1RlmZ$64eb2297c8207eec638060290e231d0c5f6f5dc0a411d3853cd1b063de8681456879f1e405cdf2369e3118e274b5229c3e924545714a34254bc2bf624e3f47f8', 'Carlos Lima', 'Comprador', '32993451167'),
 ('ana.pereira@email.com', 'scrypt:32768:8:1$spJ5UpbWyFo8r3FO$7ac8c4c4a4c64b7f482c4efaad4e60e9b6c162e345b691942da9858916c6ba65267a815ccd1e4d06a7666d56b0b232118ca4db5f2f3cb7dee5839e369533992a', 'Ana Pereira', 'Comprador', '32994567290'),
@@ -414,8 +414,8 @@ INSERT INTO Loja (cnpj, horario_funcionamento, cod_endereco, cod_usuario) VALUES
 -- Loja 10 = Pão Nosso             | Loja 11 = Confeitaria Doce Encanto
 -- Loja 12 = Empório das Bebidas
 -- =========================================================
-INSERT INTO Produto (cod_loja, nome, descricao, preco, disponibilidade, cod_categoria) VALUES
-(1, 'Café Expresso', 'Café expresso tradicional', 6.50, TRUE, 1),
+INSERT INTO Produto (cod_loja, nome, descricao, preco, disponibilidade, cod_categoria, foto_url) VALUES
+(1, 'Café Expresso', 'Café expresso tradicional', 6.50, TRUE, 1, '/uploads/produtos/87896cebe4cd42cbadb77fe32c918900.jpg'),
 (1, 'Cappuccino', 'Cappuccino cremoso com canela', 9.00, TRUE, 1),
 (1, 'Café com Leite', 'Café com leite quente', 7.00, TRUE, 1),
 (1, 'Torta de Limão', 'Fatia de torta de limão', 8.50, FALSE, 3),
