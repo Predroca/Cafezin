@@ -222,6 +222,8 @@ button, input {
 
 .cabecalhoSecao {
     margin-bottom: 55px;
+    align-items: center;
+    justify-content: center;
 }
 .cabecalhoSecao.linha {
     display: flex;
@@ -229,7 +231,10 @@ button, input {
     justify-content: space-between;
     gap: 20px;
 }
-.cabecalhoSecao h2, .pedidoRecente h2 {
+.cabecalhoSecao h2 {
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
     color: var(--cor-laranja-escuro);
     font-family: "Brasika", sans-serif;
     font-size: var(--fonte-titulo-grande);
@@ -328,11 +333,13 @@ button, input {
 }
 /* Lojas */
 .listaLojas, .listaProdutos {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
     gap: 18px;
+        
 }
 .produtoCard {
+    width: 16%;
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(75,54,42,.12);
@@ -347,6 +354,14 @@ button, input {
     transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
 }
 
+.lojaCardOut {
+    width: 20%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(75,54,42,.12);
+    background: var(--cor-background);
+    transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
 
 .OutrasLojasCard{
     position: relative;
@@ -366,8 +381,7 @@ button, input {
 
 .fotoLojaOut{
     height: 165px;
-    width: 165px;
-    border-radius: 50%;
+    width: 200px;
     margin: 0 auto;
     background: linear-gradient(135deg, #efd5c1 0%, #fff6ee 50%, #bd8060 50%, #f0c2a6 100%);
     color: var(--cor-marrom-claro);
@@ -409,6 +423,10 @@ button, input {
     cursor: pointer;
 }
 
+.lojaCardOut:hover, .produtoCard:hover {
+    cursor: pointer;
+}
+
 .capaLoja i {
     font-size: 1.7rem;
 }
@@ -418,6 +436,16 @@ button, input {
     text-transform: uppercase;
 }
 .lojaCard{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    justify-content: center;
+    align-items: center;
+    padding-left: var(--espacamento-medio);
+    padding-right: var(--espacamento-medio);
+    cursor: pointer;
+}
+
+.lojaCardOut{
     display: grid;
     grid-template-columns: 1fr 4fr;
     justify-content: center;
@@ -446,6 +474,32 @@ button, input {
     color: white;
 }
 .logoLoja.marrom {
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
+}
+
+
+.logoLojaOut {
+    display: grid;
+    width: 70px;
+    height: 70px;
+    place-items: center;
+    border: 3px solid var(--cor-background);
+    border-radius: 50%;
+    background: var(--cor-bege-destaque);
+    color: var(--cor-marrom-escuro-2);
+    font-size: .76rem;
+    font-weight: 800;
+}
+
+.logoLojaOut.clara {
+    background: #f0e2d3;
+}
+.logoLojaOut.escura {
+    background: var(--cor-laranja-escuro);
+    color: white;
+}
+.logoLojaOut.marrom {
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-bege-destaque);
 }
@@ -752,7 +806,7 @@ footer {
         scrollbar-width: none;
     }
     .produtoCard {
-        min-width: 220px;
+        min-width: 200px;
     }
     .bannerConteudo {
         align-items: start;
@@ -830,27 +884,12 @@ footer {
     scroll-behavior: smooth;
 }
 
-.listaLojasWrapper::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 65px;
-
-    background: linear-gradient(
-        to right,
-        rgba(255, 253, 251, 0),
-        #fffdfb
-    );
-
-    pointer-events: none;
-}
-
 #containerOutLoja{
-    width: 85%;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    margin-bottom: 100px;
+
 }
 /* Gradiente no final da área visível */
 
@@ -902,22 +941,42 @@ footer {
 /* Cada card mantém sua largura */
 
 
-/* Degradê na extremidade direita */
+/* Degradês nas extremidades: aparecem só quando há mais conteúdo naquele lado.
+   As classes .temEsquerda / .temDireita são ligadas pelo JavaScript. */
+.listaLojasWraper::before,
 .listaLojasWraper::after {
     content: "";
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 10px;
-
     width: 70px;
+    z-index: 2; /* acima dos cards, abaixo das setas (z-index: 5) */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.listaLojasWraper::before {
+    left: 0;
+    background: linear-gradient(
+        to left,
+        rgba(255, 253, 251, 0),
+        #fffdfb
+    );
+}
+
+.listaLojasWraper::after {
+    right: 0;
     background: linear-gradient(
         to right,
         rgba(255, 253, 251, 0),
         #fffdfb
     );
+}
 
-    pointer-events: none;
+.listaLojasWraper.temEsquerda::before,
+.listaLojasWraper.temDireita::after {
+    opacity: 1;
 }
 
 .listaLojasWraper {
