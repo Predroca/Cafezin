@@ -5,6 +5,7 @@ from flask import Blueprint, current_app, request, send_from_directory
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from extensions import db
+from permissoes import tipo_requerido
 from models.loja import Loja
 from models.produto import Produto
 from models.usuario import Usuario
@@ -45,7 +46,7 @@ def _arquivo_da_requisicao():
 
 
 @upload_bp.route("/loja/produtos/<int:cod_produto>/foto", methods=["POST"])
-@jwt_required()
+@tipo_requerido("Loja")
 def foto_produto(cod_produto):
     loja = Loja.query.filter_by(cod_usuario=int(get_jwt_identity())).first()
     produto = db.get_or_404(Produto, cod_produto)
@@ -69,7 +70,7 @@ def foto_produto(cod_produto):
     return {"foto_url": caminho}, 200
 
 @upload_bp.route("/perfil/foto", methods=["POST"])
-@jwt_required()
+@tipo_requerido("Comprador", "Loja", "Entregador", "Admin")
 def foto_perfil():
     usuario = db.get_or_404(Usuario, int(get_jwt_identity()))
 
@@ -98,4 +99,3 @@ def servir_foto(subpasta, nome):
 def arquivo_grande_demais(_erro):
     return {"error": "arquivo muito grande (máximo 5 MB)"}, 413
     
-
