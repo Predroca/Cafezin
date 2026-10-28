@@ -7,6 +7,7 @@ from models.comprador import Comprador
 from models.comprador_endereco import Comprador_Endereco
 
 from extensions import db
+from permissoes import tipo_requerido
 
 
 endereco_bp = Blueprint("endereco", __name__)
@@ -45,7 +46,7 @@ def registrar_endereco():
     
     
 @endereco_bp.route("/enderecos", methods=["GET"])
-@jwt_required()
+@tipo_requerido("Comprador")
 def listar_enderecos():
     cod_usuario = get_jwt_identity()
 
