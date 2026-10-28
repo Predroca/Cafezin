@@ -5,6 +5,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.exc import SQLAlchemyError
 
 from extensions import db
+from permissoes import tipo_requerido
 from models.pedido import Pedido
 from models.comprador import Comprador
 from models.avaliacao_produto import AvaliacaoProduto
@@ -45,7 +46,7 @@ def _validar_nota(dados):
 
 
 @avaliacao_bp.route('/pedidos/<int:cod_pedido>/avaliar/produto', methods=['POST'])
-@jwt_required()
+@tipo_requerido("Comprador")
 def avaliar_prod(cod_pedido):
     dados = request.get_json()
 
@@ -77,7 +78,7 @@ def avaliar_prod(cod_pedido):
     return {"message": "avaliação de produto registrada"}, 201
 
 @avaliacao_bp.route("/pedidos/<int:cod_pedido>/avaliar/loja", methods=["POST"])
-@jwt_required()
+@tipo_requerido("Comprador")
 def avaliar_loja(cod_pedido):
     dados = request.get_json()
 
@@ -102,7 +103,7 @@ def avaliar_loja(cod_pedido):
     return {"message": "avaliação de loja registrada"}, 201
 
 @avaliacao_bp.route("/pedidos/<int:cod_pedido>/avaliar/entregador", methods=["POST"])
-@jwt_required()
+@tipo_requerido("Comprador")
 def avaliar_entregador(cod_pedido):
     dados = request.get_json()
 
