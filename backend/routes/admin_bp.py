@@ -9,10 +9,13 @@ from models.usuario import Usuario
 from models.pedido import Pedido
 from models.loja import Loja
 
+from permissoes import tipo_requerido
+
 admin_bp = Blueprint("admin", __name__)
 
 
 @admin_bp.route("/admin/dashboard", methods=["GET"])
+@tipo_requerido("Admin")
 def informacoes():
 
     hoje = date.today()
