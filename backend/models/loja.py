@@ -6,7 +6,8 @@ class Loja(db.Model):
 
     cod_loja = db.Column(db.Integer, primary_key=True)
     cnpj = db.Column(db.CHAR(14), nullable=False)
-    horario_funcionamento = db.Column(db.Time)
+    horario_abertura = db.Column(db.Time)
+    horario_fecha = db.Column(db.Time)
     cod_endereco = db.Column(db.Integer, db.ForeignKey("Endereco.cod_endereco"), nullable=False)
     cod_usuario = db.Column(db.Integer, db.ForeignKey("Usuario.cod_usuario"), nullable=False)
 
