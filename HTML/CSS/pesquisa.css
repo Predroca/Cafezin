@@ -1,4 +1,3 @@
-/* Página de pesquisa do Cafézin: estrutura inspirada na referência enviada e cabeçalho do comprador. */
 .paginaPesquisa {
   min-height: calc(100vh - 76px);
   background: var(--cor-background);
@@ -104,9 +103,7 @@
 }
 
 .filtroPesquisa.selecionado {
-  border-color: var(--cor-laranja);
-  background: var(--cor-background-bege);
-  color: var(--cor-laranja-escuro);
+  /* botar estilo aq dps */
 }
 
 .filtroLimpar {
