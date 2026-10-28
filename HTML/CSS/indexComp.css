@@ -143,12 +143,17 @@ button, input {
 }
 .heroConteudo {
     min-height: 370px;
-    display: grid;
+    display: flex;
     grid-template-columns: 1.2fr .8fr;
     align-items: center;
     gap: 50px;
+    justify-content: center;
+    align-items: center;
 }
 .heroTexto {
+    align-items: center;
+    justify-content: center;
+
     padding: 55px 0;
 }
 .heroSaudacao {
@@ -212,7 +217,8 @@ button, input {
     padding: 62px 0;
 }
 .secaoPadraoCafeterias{
-    padding: 0}
+    padding: 0
+}
 
 .cabecalhoSecao {
     margin-bottom: 55px;
@@ -340,6 +346,65 @@ button, input {
     background: var(--cor-background);
     transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
 }
+
+
+.OutrasLojasCard{
+    position: relative;
+    overflow: hidden;
+    
+    background: var(--cor-background);
+    transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+.placeholderOutLoja{
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+}
+
+.fotoLojaOut{
+    height: 165px;
+    width: 165px;
+    border-radius: 50%;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #efd5c1 0%, #fff6ee 50%, #bd8060 50%, #f0c2a6 100%);
+    color: var(--cor-marrom-claro);
+}
+
+.outraLojasInfo {
+    padding: 14px 15px 14px 15px;
+}
+.outraLojasInfo p {
+    color: var(--cor-laranja-escuro);
+    font-size: .66rem;
+    font-weight: 700;
+}
+.outraLojasInfo h3 {
+    height: 36px;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+    line-height: 1.25;
+    text-align: center;
+}
+.outraLojasInfo > span {
+    display: block;
+    overflow: hidden;
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+    text-overflow: ellipsis;
+    text-align: center;
+    white-space: nowrap;
+}
+.outraLojasInfo strong {
+    display: block;
+    margin-top: 9px;
+    color: var(--cor-marrom-claro);
+    font-size: var(--fonte-pequena);
+    text-align: center;
+}
+
 .lojaCard:hover, .produtoCard:hover {
     cursor: pointer;
 }
@@ -481,6 +546,7 @@ button, input {
     height: 165px;
     background: linear-gradient(135deg, #efd5c1 0%, #fff6ee 50%, #bd8060 50%, #f0c2a6 100%);
     color: var(--cor-marrom-claro);
+
 }
 .fotoProduto.dourada {
     background: linear-gradient(135deg, #f3d9a7 0%, #fff2d3 50%, #cd9858 50%, #f4d4a5);
@@ -595,6 +661,8 @@ button, input {
 footer {
     margin-top: 0;
 }
+
+
 @media (max-width: 1050px) {
     .navLinks {
         display: none;
@@ -727,6 +795,66 @@ footer {
     border-bottom: 1px solid rgba(75,54,42,.12);
     padding-bottom: 58px;
 }
+
+.lojaOutBloco {
+    position: relative;
+    max-height: 600px; /* Altura visível da seção */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Lista de produtos */
+.listaProdutosLoja {
+    position: relative;
+}
+
+.listaLojasOut {
+    position: relative;
+    display: grid;
+    grid-auto-flow: column;
+
+    /* Largura de cada card */
+    grid-auto-columns: 260px;
+
+    /* Uma única linha horizontal */
+    grid-template-rows: 1fr;
+
+    gap: 18px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-bottom: 12px;
+
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+}
+
+.listaLojasWrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 65px;
+
+    background: linear-gradient(
+        to right,
+        rgba(255, 253, 251, 0),
+        #fffdfb
+    );
+
+    pointer-events: none;
+}
+
+#containerOutLoja{
+    width: 85%;
+    margin: 0 auto;
+}
+/* Gradiente no final da área visível */
+
+
 .lojaTopo {
     display: flex;
     align-items: center;
@@ -737,16 +865,134 @@ footer {
 .lojaTopo .lojaCard {
     flex: 0 1 460px;
 }
+
+
 .listaProdutosLoja {
     grid-template-columns: repeat(5, 1fr);
+}
+
+
+.listaLojasWraper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Lista horizontal de cafeterias/produtos */
+.listaLojasOut {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 18px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+}
+
+.listaLojasOut .OutrasLojasCard {
+    flex: 0 0 260px;
+}
+
+/* Chrome, Edge e Safari */
+.listaLojasOut {
+    scrollbar-width: none;
+}
+
+/* Cada card mantém sua largura */
+
+
+/* Degradê na extremidade direita */
+.listaLojasWraper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 10px;
+
+    width: 70px;
+    background: linear-gradient(
+        to right,
+        rgba(255, 253, 251, 0),
+        #fffdfb
+    );
+
+    pointer-events: none;
+}
+
+.listaLojasWraper {
+    position: relative;
+}
+
+/* Estilo geral das setas */
+.setaLojas {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #eadbd2;
+    border-radius: 50%;
+    background: #fffdfb;
+    color: #9f4c22;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+
+    transition: background 0.2s, transform 0.2s;
+}
+
+.setaLojas:hover {
+    background: #f7e8de;
+}
+
+.setaLojas:active {
+    transform: translateY(-50%) scale(0.94);
+}
+
+.setaLojasEsquerda {
+    left: 10px;
+}
+
+.setaLojasDireita {
+    right: 10px;
+}
+
+/* Esconde as setas em telas pequenas, se preferir deslizar com o dedo */
+@media (max-width: 600px) {
+    .setaLojas {
+        display: none;
+    }
+}
+@media (max-width: 600px) {
+    .listaLojasOut .OutrasLojasCard {
+        flex-basis: 78vw;
+    }
+
+    .listaLojasOut {
+        gap: 12px;
+    }
 }
 @media (max-width: 1050px) {
     .listaProdutosLoja {
         grid-template-columns: repeat(3, 1fr);
     }
+    .listaLojasOut {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 @media (max-width: 700px) {
     .listaProdutosLoja {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .listaLojasOut {
         grid-template-columns: repeat(2, 1fr);
     }
 }
