@@ -1,3 +1,4 @@
+-- drop database cafezin;
 CREATE DATABASE Cafezin;
 USE Cafezin;
 
@@ -88,7 +89,7 @@ CREATE TABLE Loja (
 CREATE TABLE LojaFavorita (
     cod_favorito INT PRIMARY KEY auto_increment,
     cod_loja INT NOT NULL,
-    cod_comprador INT NOT NULL
+    cod_comprador INT NOT NULL,
 
     FOREIGN KEY (cod_loja) REFERENCES Loja(cod_loja),
     FOREIGN KEY (cod_comprador) REFERENCES Comprador(cod_comprador),
@@ -399,19 +400,19 @@ INSERT INTO Entregador (cpf, data_nasc, cnh, cod_pagamento, cod_usuario) VALUES
 -- LOJA (cod_usuario 9 a 11 | endereços 6 a 8)
 -- NOVAS LOJAS: cod_usuario 18 a 26 | endereços 9 a 17
 -- =========================================================
-INSERT INTO Loja (cnpj, horario_funcionamento, cod_endereco, cod_usuario) VALUES
-('08765432000156', '07:00:00', 6, 9),
-('19876543000167', '06:30:00', 7, 10),
-('27654398000178', '10:00:00', 8, 11),
-('18452037000185', '06:00:00', 9, 18),  -- 4  Padaria Estrela Dourada
-('27913846000162', '07:30:00', 10, 19), -- 5  Cafeteria Trilho Real
-('39184756000271', '08:00:00', 11, 20), -- 6  Doceria Sabor Mineiro
-('46582917000348', '11:00:00', 12, 21), -- 7  Hamburgueria Point 33
-('58374920000455', '12:00:00', 13, 22), -- 8  Sorveteria Gelato Real
-('61947582000523', '07:00:00', 14, 23), -- 9  Theatro Café
-('73158249000617', '06:30:00', 15, 24), -- 10 Pão Nosso
-('84269371000734', '09:00:00', 16, 25), -- 11 Confeitaria Doce Encanto
-('95371482000819', '08:30:00', 17, 26); -- 12 Empório das Bebidas
+INSERT INTO Loja (cnpj,horario_abertura,horario_fecha,cod_endereco,cod_usuario) VALUES
+('08765432000156', '07:00:00', '18:00:00', 6, 9),
+('19876543000167', '06:30:00', '19:30:00', 7, 10),
+('27654398000178', '10:00:00', '20:00:00', 8, 11),
+('18452037000185', '06:00:00', '18:00:00', 9, 18),  -- 4: Padaria Estrela Dourada
+('27913846000162', '07:30:00', '19:00:00', 10, 19), -- 5: Cafeteria Trilho Real
+('39184756000271', '08:00:00', '18:00:00', 11, 20), -- 6: Doceria Sabor Mineiro
+('46582917000348', '11:00:00', '23:00:00', 12, 21), -- 7: Hamburgueria Point 33
+('58374920000455', '12:00:00', '22:00:00', 13, 22), -- 8: Sorveteria Gelato Real
+('61947582000523', '07:00:00', '20:00:00', 14, 23), -- 9: Theatro Café
+('73158249000617', '06:30:00', '18:00:00', 15, 24), -- 10: Pão Nosso
+('84269371000734', '09:00:00', '19:00:00', 16, 25), -- 11: Confeitaria Doce Encanto
+('95371482000819', '08:30:00', '20:00:00', 17, 26); -- 12: Empório das Bebidas
 
 INSERT INTO LojaFavorita (cod_loja, cod_comprador) VALUES
 (1, 1), (5, 1), (8, 1),
@@ -434,7 +435,7 @@ INSERT INTO LojaFavorita (cod_loja, cod_comprador) VALUES
 -- Loja 10 = Pão Nosso             | Loja 11 = Confeitaria Doce Encanto
 -- Loja 12 = Empório das Bebidas
 -- =========================================================
-INSERT INTO Produto (cod_loja, nome, descricao, preco, disponibilidade, cod_categoria, foto_url) VALUES
+INSERT INTO Produto (cod_loja, nome, descricao, preco, disponibilidade, cod_categoria) VALUES
 (1, 'Café Expresso', 'Café expresso tradicional', 6.50, TRUE, 1),
 (1, 'Cappuccino', 'Cappuccino cremoso com canela', 9.00, TRUE, 1),
 (1, 'Café com Leite', 'Café com leite quente', 7.00, TRUE, 1),
@@ -656,3 +657,4 @@ INSERT INTO AvaliacaoProduto (data, descricao, nota, horario, cod_produto, cod_c
 ('2026-09-23', 'Excelente para começar o dia', 5, '07:50:00', 1, 6),
 ('2026-09-23', 'Cappuccino cremoso, adorei', 5, '08:05:00', 2, 7),
 ('2026-09-23', 'Muito bom, mas achei meio doce', 4, '08:55:00', 18, 6);
+
