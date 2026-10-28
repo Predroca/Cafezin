@@ -6,6 +6,7 @@ from .pagamento import Pagamento
 from .entregador import Entregador
 from .categoria import Categoria
 from .loja import Loja
+from .loja_favorita import LojaFavorita
 from .produto import Produto
 from .pedido import Pedido
 from .item_pedido import ItemPedido
@@ -25,6 +26,7 @@ __all__ = [
     "Entregador",
     "Categoria",
     "Loja",
+    "LojaFavorita"
     "Produto",
     "Pedido",
     "ItemPedido",
