@@ -428,18 +428,29 @@ button, input, select, textarea { font: inherit; }
 
 }
 
+.dadoTitulo {
+    margin-bottom: 2px;
 
+    color: var(--cor-marrom-claro);
+    font-size: .65rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
 
 .pedido h3 {
-    font-size: var(--fonte-pequena);
+    font-size: var(--fonte-media);
     color: var(--cor-marrom-escuro-2);
     margin-bottom: 4px;
+    
 }
 
 .pedido p {
-    color: var(--cor-texto-secundario);
+    color: var(--cor-marrom-escuro-2);
     font-size: .76rem;
     margin-bottom: 14px;
+    font-weight: 700;
 }
 
 .pedidoRodape {
