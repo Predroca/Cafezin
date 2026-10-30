@@ -1,0 +1,132 @@
+
+body {
+    font-family: "Google Sans", sans-serif;
+    color: var(--cor-texto);
+    background: var(--cor-background)
+}
+
+.cabecalhoGestor {
+    padding: 34px 0 38px;
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-texto-claro)
+}
+
+.cabecalhoGestor .linkVoltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena)
+}
+
+.cabecalhoGestor .painelSaudacao {
+    margin-bottom: 10px;
+    color: var(--cor-bege-destaque);
+    font-size: var(--fonte-pequena)
+}
+
+.cabecalhoGestor .selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 11px;
+    border: 1px solid rgba(255, 243, 231, .2);
+    border-radius: 999px;
+    background: rgba(255, 243, 231, .08)
+}
+
+.cabecalhoGestor h1 {
+    margin-bottom: 10px;
+    font-family: "Brasika", sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2
+}
+
+.cabecalhoGestor h1 span {
+    color: var(--cor-laranja-claro)
+}
+
+.descricaoPagina {
+    max-width: 650px;
+    color: var(--cor-bege-claro);
+    line-height: 1.55
+}
+
+.secaoPedidosLoja {
+    padding-bottom: 48px
+}
+
+.secaoEntregas {
+    padding-top: 48px
+}
+
+.contadorSecao {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(148, 70, 27, .09);
+    color: var(--cor-laranja-escuro);
+    font-size: .76rem;
+    font-weight: 700
+}
+
+
+
+
+
+
+.trilhoEntregas .entrega {
+    display: flex;
+    flex-direction: column
+}
+
+.trilhoEntregas .entregaInfo {
+    flex: 1
+}
+
+.trilhoEntregas .entregaRodape {
+    margin-top: 18px
+}
+
+.avisoSomenteLeitura {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--cor-texto-secundario);
+    font-size: .7rem;
+    font-weight: 600;
+    text-align: right
+}
+
+.pedido[data-status="Em andamento"] {
+    border-color: rgba(111, 174, 122, .55)
+}
+
+.pedido[data-status="Em andamento"] .statusBadge {
+    background: rgba(111, 174, 122, .16);
+    color: #3d7048
+}
+
+.pedido p {
+    color: var(--cor-marrom-escuro-2);
+    font-size: .76rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+}
+
+@media(max-width:700px) {
+    .cabecalhoGestor {
+        padding: 28px 0 32px
+    }
+
+    .cabecalhoSecao.linha {
+        align-items: flex-start
+    }
+
+    .trilhoPedidos,
+    .trilhoEntregas {
+        grid-auto-columns: minmax(270px, 86vw)
+    }
+}
+
