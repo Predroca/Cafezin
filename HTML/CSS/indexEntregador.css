@@ -861,3 +861,37 @@ footer {
     }
 
 }
+
+.indexEntregador .listaEntregas {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+    align-items: stretch;
+    gap: 18px;
+}
+
+.mapaEntrega {
+
+    min-height: 100%;
+    
+    overflow: auto;
+    border: 1px solid rgba(75, 54, 42, .30);
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background);
+
+
+}
+
+.mapaEntrega h3 {
+    margin: 0;
+    padding: 14px 18px;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-media);
+}
+
+.mapaEntrega iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
