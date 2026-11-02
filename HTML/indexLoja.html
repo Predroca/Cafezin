@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +10,8 @@
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/indexLoja.css">
 
-    <div vw class="enabled">
-        <div vw-access-button class="active"></div>
-        <div vw-plugin-wrapper>
-            <div class="vw-plugin-top-wrapper"></div>
-        </div>
-    </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
 </head>
-
 <body id="topo">
 
     <header class="navLoja">
@@ -31,7 +22,7 @@
                 <a class="ativo" href="#painel">Painel</a>
                 <a href="#pedidos">Pedidos</a>
                 <a href="#produtos">Produtos</a>
-
+                <a href="#minhaLoja">Minha loja</a>
             </nav>
 
             <div class="navAcoes">
@@ -111,14 +102,10 @@
 
                 <div class="cabecalhoSecao linha">
                     <div>
-                        <h2 id="titulo-pedidos">Pedidos recentes</h2>
+                        <h2 id="titulo-pedidos">Pedidos em andamento</h2>
                         <p>Confirme, prepare e despache sem perder o ritmo.</p>
                     </div>
 
-                    <a class="linkSecao" href="gestorPedidos.html">
-                        Abrir gestor
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
                 </div>
 
                 <div class="listaPedidos">
@@ -129,9 +116,8 @@
                             <time>Há 2 min</time>
                         </div>
 
-                        <h3>Pedido de Ana Clara</h3>
-                        <span class="dadoTitulo">Produtos:</span>
-                        <p>2x Pão de queijo artesanal, 1x Chocolate quente cremoso</p>
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
 
                         <div class="pedidoRodape">
                             <strong>R$ 44,00</strong>
@@ -150,9 +136,8 @@
                             <time>Há 9 min</time>
                         </div>
 
-                        <h3>Pedido de Rafael Souza</h3>
-                        <span class="dadoTitulo">Produtos:</span>
-                        <p>1x Bolo de cenoura caseiro, 1x Cappuccino cremoso</p>
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
 
                         <div class="pedidoRodape">
                             <strong>R$ 22,80</strong>
@@ -167,12 +152,11 @@
 
                     <article class="pedido  pronto">
                         <div class="pedidoCabecalho">
-                            <span class="statusBadge entregue">Entregue</span>
+                            <span class="statusBadge entregue">A caminho</span>
                             <time>Há 14 min</time>
                         </div>
 
-                        <h3>Pedido de Marcos Vinícius</h3>
-                        <span class="dadoTitulo">Produtos:</span>
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
                         <p>3x Pão de queijo artesanal</p>
 
                         <div class="pedidoRodape">
@@ -180,7 +164,7 @@
 
                             <div class="pedidoAcoes">
                                 <button type="button" class="botaoSecundario">
-                                    Ver pedido
+                                    Marcar como entregue
                                 </button>
                             </div>
                         </div>
@@ -190,7 +174,75 @@
             </div>
         </section>
 
-        <section class="secaoPadrao secaoAlternada" id="produtos" aria-labelledby="titulo-produtos">
+
+        <section class="secaoPadrao" id="pedidos" aria-labelledby="titulo-pedidos">
+            <div class="container">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-pedidos">Pedidos finalizados</h2>
+                        <p>Vizualize todo o histórico de pedidos.</p>
+                    </div>
+
+                    <a class="linkSecao" href="historicoPedidos.html">
+                        Ver todos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="listaPedidos">
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section
+            class="secaoPadrao secaoAlternada"
+            id="produtos"
+            aria-labelledby="titulo-produtos"
+        >
             <div class="container">
 
                 <div class="cabecalhoSecao linha">
@@ -221,8 +273,11 @@
                     <!-- Produto 1 -->
                     <article class="produto Loja">
 
-                        <div class="placeholderFoto fotoProdutoLoja dourada" role="img"
-                            aria-label="Espaço para foto do pão de queijo">
+                        <div
+                            class="placeholderFoto fotoProdutoLoja dourada"
+                            role="img"
+                            aria-label="Espaço para foto do pão de queijo"
+                        >
 
                         </div>
 
@@ -240,7 +295,10 @@
                                 <strong>R$ 15,00</strong>
 
                                 <div class="produtoAcoes">
-                                    <button type="button" aria-label="Editar produto">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
                                         <i class="bi bi-pencil"></i>
                                     </button>
                                 </div>
@@ -252,8 +310,11 @@
                     <!-- Produto 2 -->
                     <article class="produto Loja">
 
-                        <div class="placeholderFoto fotoProdutoLoja" role="img"
-                            aria-label="Espaço para foto do chocolate quente">
+                        <div
+                            class="placeholderFoto fotoProdutoLoja"
+                            role="img"
+                            aria-label="Espaço para foto do chocolate quente"
+                        >
 
                         </div>
 
@@ -271,7 +332,10 @@
                                 <strong>R$ 25,00</strong>
 
                                 <div class="produtoAcoes">
-                                    <button type="button" aria-label="Editar produto">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
                                         <i class="bi bi-pencil"></i>
                                     </button>
                                 </div>
@@ -283,8 +347,11 @@
                     <!-- Produto 3 -->
                     <article class="produto Loja pausado">
 
-                        <div class="placeholderFoto fotoProdutoLoja rosa" role="img"
-                            aria-label="Espaço para foto do bolo caseiro">
+                        <div
+                            class="placeholderFoto fotoProdutoLoja rosa"
+                            role="img"
+                            aria-label="Espaço para foto do bolo caseiro"
+                        >
 
                         </div>
 
@@ -302,7 +369,10 @@
                                 <strong>R$ 5,90</strong>
 
                                 <div class="produtoAcoes">
-                                    <button type="button" aria-label="Editar produto">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
                                         <i class="bi bi-pencil"></i>
                                     </button>
                                 </div>
@@ -314,8 +384,11 @@
                     <!-- Produto 4 -->
                     <article class="produto Loja">
 
-                        <div class="placeholderFoto fotoProdutoLoja azul" role="img"
-                            aria-label="Espaço para foto do cappuccino">
+                        <div
+                            class="placeholderFoto fotoProdutoLoja azul"
+                            role="img"
+                            aria-label="Espaço para foto do cappuccino"
+                        >
 
                         </div>
 
@@ -333,7 +406,10 @@
                                 <strong>R$ 11,99</strong>
 
                                 <div class="produtoAcoes">
-                                    <button type="button" aria-label="Editar produto">
+                                    <button
+                                        type="button"
+                                        aria-label="Editar produto"
+                                    >
                                         <i class="bi bi-pencil"></i>
                                     </button>
                                 </div>
@@ -350,7 +426,7 @@
 
     </main>
 
-    <footer>
+   <footer>
 
         <div class="footerConteudo">
 
@@ -413,17 +489,26 @@
                     </li>
 
                     <li>
-                        <img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
                         <span>@CafezinDSA</span>
                     </li>
 
                     <li>
-                        <img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter">
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
                         <span>@Cafezin_DSA</span>
                     </li>
 
                     <li>
-                        <img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
                         <span>(34) 9 9999-9999</span>
                     </li>
 
@@ -445,5 +530,4 @@
     </footer>
 
 </body>
-
 </html>
