@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerencie sua loja, seus produtos e seus pedidos no Cafézin.">
+    <title>Cafézin | Painel da loja</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexLoja.css">
+    <link rel="stylesheet" href="CSS/historicoPedidos.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="JavaScript/Loja/historicoPedidos.js" defer></script>
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+</head>
+<body id="topo">
+
+    <header class="navLoja">
+        <div class="container navLojaConteudo">
+            <a class="logoLoja" href="#topo" aria-label="Cafézin - painel da loja">Cafézin <span>Loja</span></a>
+
+            <nav class="navLinks" aria-label="Navegação do painel">
+                <a class="ativo" href="#painel">Painel</a>
+                <a href="#pedidos">Pedidos</a>
+                <a href="#produtos">Produtos</a>
+                <a href="#minhaLoja">Minha loja</a>
+            </nav>
+
+            <div class="navAcoes">
+
+                <a class="notificacao" href="#pedidos" aria-label="3 pedidos aguardando">
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+
+                <a class="perfilLoja" href="#minhaLoja" aria-label="Abrir dados da loja">
+                    <i class="bi bi-shop" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- =========================================
+             PAINEL PRINCIPAL
+             ========================================= -->
+
+        <section class="painelLoja" id="painelHistorico">
+            <div class="container painelConteudoHistorico">
+
+                <div class="painelTextoHistorico">
+
+                    <h1>Veja todos os <span>pedidos</span> já feitos</h1>
+                </div>
+        </section>
+
+    
+        <section class="secaoPadrao" id="HistoricoDePedidos" aria-labelledby="titulo-pedidos">
+            <div class="containerPedidosDia" id="pedidosDia">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-pedidos">Quarta-feira</h2>
+                        <p><span id="diaSessãoHistorico">04</span> de <span id="mes">Novembro</span> , <span id="ano">2026</span></p>
+                    </div>
+
+                    <a class="linkSecao" href="historicoPedidos.html">
+                        Ver todos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="listaPedidos">
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <div class="containerPedidosDia" id="pedidosDia">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-pedidos">Quinta-feira</h2>
+                        <p><span id="diaSessãoHistorico">05</span> de <span id="mes">Novembro</span> , <span id="ano">2026</span></p>
+                    </div>
+
+                    <a class="linkSecao" href="historicoPedidos.html">
+                        Ver todos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="listaPedidos">
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <div class="containerPedidosDia" id="pedidosDia">
+
+                <div class="cabecalhoSecao linha">
+                    <div>
+                        <h2 id="titulo-pedidos">Sexta-feira</h2>
+                        <p><span id="diaSessãoHistorico">06</span> de <span id="mes">Novembro</span> , <span id="ano">2026</span></p>
+                    </div>
+
+                    <a class="linkSecao" href="historicoPedidos.html">
+                        Ver todos
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="listaPedidos">
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+                        </div>
+                    </article>
+
+                    <article class="pedido  novo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4821 · Ana Clara</h3>
+                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 44,00</strong>
+
+                        </div>
+                    </article>
+
+                    <article class="pedido  preparo">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4819 · Rafael Souza</h3>
+                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 22,80</strong>
+
+                            
+                        </div>
+                    </article>
+
+                    <article class="pedido  pronto">
+                        <div class="pedidoCabecalho">
+                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
+                        </div>
+
+                        <h3>Pedido #4816 · Marcos Vinícius</h3>
+                        <p>3x Pão de queijo artesanal</p>
+
+                        <div class="pedidoRodape">
+                            <strong>R$ 43,50</strong>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <!-- 
+    footer
+    -->
+
+    
+   <footer>
+
+        <div class="footerConteudo">
+
+            <section class="footerSection footerMarca">
+
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Sobre nós
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li>
+                        <a href="cadastrarLoja.html">
+                            Cadastre sua loja
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cadastrarEntregador.html">
+                            Seja entregador
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="canalAtendimento.html">
+                            Fale Conosco
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="cafeDev.html">
+                            CaféDev
+                        </a>
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">
+                    Contato
+                </div>
+
+                <ul class="footerSectionLists">
+
+                    <li class="footerSubtitulo">
+                        Redes sociais
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
+                        <span>@CafezinDSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
+                        <span>@Cafezin_DSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
+                        <span>(34) 9 9999-9999</span>
+                    </li>
+
+                </ul>
+
+            </section>
+
+        </div>
+
+
+        <div class="footerCopyright">
+
+            <p>
+                © 2026 Cafézin. Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
