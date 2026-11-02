@@ -1,0 +1,29 @@
+.painelTextoHistorico{
+    margin-left:auto;
+    text-align: center;
+}
+.painelTextoHistorico p{
+    font-family: sans-serif;
+}
+.painelTextoHistorico h1{
+    max-width: 600px;
+  margin: 0 auto 22px;
+  font-family: "Brasika", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.25;
+  text-align: center;
+}
+.painelTextoHistorico h1 span{
+    color: var(--cor-laranja-claro);
+}
+.painelConteudoHistorico{
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.containerPedidosDia{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 97%;
+}
