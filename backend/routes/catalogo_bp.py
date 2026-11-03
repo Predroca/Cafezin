@@ -10,6 +10,7 @@ from models.loja import Loja
 from models.usuario import Usuario
 from models.pagamento import Pagamento
 from models.pedido import Pedido
+from models.categoria import Categoria
 from models.item_pedido import ItemPedido
 from models.produto_popularidade import ProdutoPopularidade
 from models.avaliacao_produto import AvaliacaoProduto
@@ -270,3 +271,39 @@ def lojas_populares():
         lojas_json.append(loja_dict)
 
     return {"lojas": lojas_json}
+
+@catalogo_bp.route("/categorias/<int:cod_categoria>/lojas", methods=["GET"])
+def lojas_da_categoria(cod_categoria):
+    categoria = db.session.get(Categoria, cod_categoria)
+    if categoria is None:
+        return {"error" : "categoria não encontrada"}, 404
+    
+    linhas = (
+        db.session.query(Produto, Loja, Usuario)
+        .join(Loja, Loja.cod_loja == Produto.cod_loja)
+        .join(Usuario, Usuario.cod_usuario == Loja.cod_usuario)
+        .filter(
+            Produto.cod_categoria == cod_categoria,
+            Produto.disponibilidade.is_(True),
+        )
+        .order_by(Produto.nome)
+        .all()
+    )
+
+    lojas = {}
+
+    for produto, loja, usuario in linhas:
+        entrada = lojas.setdefault(loja.cod_loja, {
+            "cod_loja" : loja.cod_loja,
+            "nome" : usuario.nome,
+            "foto_url" : usuario.foto_url,
+            "produtos" : [],
+        })
+        entrada["produtos"].append({
+            "cod_produto" : produto.cod_produto,
+            "nome" : produto.nome,
+            "preco" : float(produto.preco),
+            "foto_url" : produto.foto_url,
+        })
+
+    return {"categoria" : categoria.nome_categoria, "lojas" : list(lojas.values())}
