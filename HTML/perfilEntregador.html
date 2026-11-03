@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Edite seus dados pessoais e as informações da sua conta de entregador no Cafézin.">
+
+    <title>Cafézin | Perfil do entregador</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexEntregador.css">
+    <link rel="stylesheet" href="CSS/perfilEntregador.css">
+    
+</head>
+
+<body id="topo" class="perfilEntregador">
+
+    <!-- CABEÇALHO -->
+    <header class="navLoja">
+        <div class="container navLojaConteudo">
+
+            <a class="logoLoja"
+               href="indexEntregador.html#topo"
+               aria-label="Cafézin - painel do entregador">
+
+                Cafézin <span>Entregador</span>
+            </a>
+
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a href="indexEntregador.html#topo">Início</a>
+                <a href="indexEntregador.html#pedidos">Entregas</a>
+                <a href="indexEntregador.html#lojas">Lojas</a>
+            </nav>
+
+            <div class="navAcoes">
+
+                <a class="notificacao"
+                   href="indexEntregador.html#pedidos"
+                   aria-label="Ver entregas">
+
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                </a>
+
+                <a class="perfil perfilEntregadorAtivo"
+                   href="perfilEntregador.html"
+                   aria-label="Meu perfil"
+                   aria-current="page">
+
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="perfilCorpo">
+
+        <div class="container perfilGrade">
+
+            <!-- MENU LATERAL -->
+            <aside class="perfilLateral">
+
+                <a class="botaoVoltar" href="indexEntregador.html">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                    Voltar para o início
+                </a>
+
+
+                <!-- IDENTIDADE DO ENTREGADOR -->
+                <div class="perfilIdentidade">
+
+                    <div class="avatarArea">
+
+                        <div class="avatar" id="avatar" aria-hidden="true">
+                            L
+                        </div>
+
+                        <label class="avatarEditar"
+                               for="avatarArquivo"
+                               title="Trocar foto">
+
+                            <i class="bi bi-camera-fill" aria-hidden="true"></i>
+
+                            <span class="visualmenteOculto">
+                                Trocar foto de perfil
+                            </span>
+                        </label>
+
+                        <input
+                            class="visualmenteOculto"
+                            id="avatarArquivo"
+                            type="file"
+                            accept="image/*"
+                        >
+
+                    </div>
+
+                    <div class="perfilIdentidadeTexto">
+
+                        <h1 id="perfilNome">Lucas Oliveira</h1>
+
+                        <p class="perfilEmail" id="perfilEmail">
+                            E-mail não informado
+                        </p>
+
+                        <span class="perfilTipoConta">
+                            <i class="bi bi-bicycle" aria-hidden="true"></i>
+                            Entregador
+                        </span>
+
+                    </div>
+                </div>
+
+
+                <!-- NAVEGAÇÃO DO PERFIL -->
+                <nav class="perfilAbas" aria-label="Seções do perfil">
+
+                    <a class="aba ativa"
+                       href="#painel-dados"
+                       data-aba="dados"
+                       aria-current="page">
+
+                        <i class="bi bi-person" aria-hidden="true"></i>
+                        Meus dados
+                    </a>
+
+                    <a class="aba"
+                       href="#painel-conta"
+                       data-aba="conta">
+
+                        <i class="bi bi-shield-lock" aria-hidden="true"></i>
+                        Dados da conta
+                    </a>
+
+                    <a class="aba"
+                       href="#painel-entregador"
+                       data-aba="entregador">
+
+                        <i class="bi bi-bicycle" aria-hidden="true"></i>
+                        Dados de entregador
+                    </a>
+
+                </nav>
+
+
+                <a class="botaoSair" href="login.html">
+                    <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
+                    Sair da conta
+                </a>
+
+            </aside>
+
+
+            <!-- PAINÉIS EDITÁVEIS -->
+            <div
+                class="perfilPaineis"
+                id="perfilPaineis"
+                tabindex="0"
+                role="region"
+                aria-label="Conteúdo do perfil. Role para ver as seções."
+            >
+
+                <!-- MEUS DADOS -->
+                <section
+                    class="painel"
+                    id="painel-dados"
+                    aria-labelledby="titulo-dados"
+                >
+
+                    <div class="cabecalhoSecao">
+
+                        <h2 id="titulo-dados">Meus dados</h2>
+
+                        <p>
+                            Mantenha seus dados pessoais atualizados.
+                        </p>
+
+                    </div>
+
+
+                    <form class="formPerfil" id="formDados" novalidate>
+
+                        <div class="campo">
+
+                            <label for="campoNome">Nome completo</label>
+
+                            <input
+                                id="campoNome"
+                                name="nome"
+                                type="text"
+                                autocomplete="name"
+                                value="Lucas Oliveira"
+                                required
+                                minlength="3"
+                            >
+
+                            <small
+                                class="erroCampo"
+                                data-erro-para="campoNome"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="campoEmail">E-mail</label>
+
+                            <input
+                                id="campoEmail"
+                                name="email"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="seuemail@exemplo.com"
+                                required
+                            >
+
+                            <small
+                                class="erroCampo"
+                                data-erro-para="campoEmail"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="campoTelefone">Telefone</label>
+
+                            <input
+                                id="campoTelefone"
+                                name="telefone"
+                                type="tel"
+                                autocomplete="tel"
+                                inputmode="tel"
+                                placeholder="(34) 9 9999-9999"
+                                required
+                            >
+
+                            <small
+                                class="erroCampo"
+                                data-erro-para="campoTelefone"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="campoNascimento">
+                                Data de nascimento
+                            </label>
+
+                            <input
+                                id="campoNascimento"
+                                name="nascimento"
+                                type="date"
+                                autocomplete="bday"
+                            >
+
+                        </div>
+
+
+                        <div class="formAcoes">
+
+                            <button class="botaoPrimario" type="submit">
+                                Salvar alterações
+                            </button>
+
+                            <button
+                                class="botaoSecundario"
+                                type="button"
+                                id="descartarDados"
+                            >
+                                Descartar
+                            </button>
+
+                        </div>
+
+                        <p
+                            class="mensagemFormulario"
+                            id="mensagemDados"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </form>
+
+                </section>
+
+
+                <!-- DADOS DA CONTA -->
+                <section
+                    class="painel"
+                    id="painel-conta"
+                    aria-labelledby="titulo-conta"
+                >
+
+                    <div class="cabecalhoSecao">
+
+                        <h2 id="titulo-conta">Dados da conta</h2>
+
+                        <p>
+                            Atualize os dados usados para acessar o Cafézin.
+                        </p>
+
+                    </div>
+
+
+                    <form class="formPerfil" id="formConta" novalidate>
+
+                        <div class="campo largo">
+
+                            <label for="contaEmail">E-mail de acesso</label>
+
+                            <input
+                                id="contaEmail"
+                                name="emailAcesso"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="seuemail@exemplo.com"
+                                required
+                            >
+
+                            <small
+                                class="erroCampo"
+                                data-erro-para="contaEmail"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="senhaAtual">Senha atual</label>
+
+                            <input
+                                id="senhaAtual"
+                                name="senhaAtual"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Digite sua senha atual"
+                            >
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="novaSenha">Nova senha</label>
+
+                            <input
+                                id="novaSenha"
+                                name="novaSenha"
+                                type="password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                placeholder="Mínimo de 8 caracteres"
+                            >
+
+                            <small
+                                class="erroCampo"
+                                data-erro-para="novaSenha"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="formAcoes">
+
+                            <button class="botaoPrimario" type="submit">
+                                Salvar dados da conta
+                            </button>
+
+                            <button
+                                class="botaoSecundario"
+                                type="button"
+                                id="descartarConta"
+                            >
+                                Descartar
+                            </button>
+
+                        </div>
+
+
+                        <p
+                            class="mensagemFormulario"
+                            id="mensagemConta"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </form>
+
+                </section>
+
+
+                <!-- DADOS DO ENTREGADOR -->
+                <section
+                    class="painel"
+                    id="painel-entregador"
+                    aria-labelledby="titulo-entregador"
+                >
+
+                    <div class="cabecalhoSecao">
+
+                        <h2 id="titulo-entregador">
+                            Dados de entregador
+                        </h2>
+
+                        <p>
+                            Informações adicionais para organizar suas entregas.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        class="formPerfil"
+                        id="formEntregador"
+                        novalidate
+                    >
+
+                        <div class="campo">
+
+                            <label for="campopagamento">
+                                Tipo de pagamento
+                            </label>
+
+                            <select id="campopagamento" name="pagamento">
+
+                                <option value="">
+                                    Selecione uma opção
+                                </option>
+
+                                <option value="Pix">Pix</option>
+                                <option value="Boleto">Boleto</option>
+                                <option value="Cartão">Cartão</option>
+                                <option value="Dinheiro">Dinheiro</option>
+                                <option value="Transferência">Transferência</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo">
+
+                            <label for="campoPlaca">
+                                Placa do veículo (se aplicável)
+                            </label>
+
+                            <input
+                                id="campoPlaca"
+                                name="placa"
+                                type="text"
+                                maxlength="8"
+                                placeholder="ABC1D23"
+                            >
+
+                        </div>
+
+
+
+
+                        <div class="formAcoes">
+
+                            <button class="botaoPrimario" type="submit">
+                                Salvar alterações
+                            </button>
+
+                            <button
+                                class="botaoSecundario"
+                                type="button"
+                                id="descartarEntregador"
+                            >
+                                Descartar
+                            </button>
+
+                        </div>
+
+
+                        <p
+                            class="mensagemFormulario"
+                            id="mensagemEntregador"
+                            role="status"
+                            aria-live="polite"
+                        ></p>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <div class="footerConteudo">
+
+            <section class="footerSection footerMarca">
+
+                <img
+                    src="img/FooterLogo.svg"
+                    alt="Cafézin"
+                    class="footerLogoTexto"
+                >
+
+                <img
+                    src="img/FooterTitulo.svg"
+                    alt=""
+                    class="footerLogoImagem"
+                >
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">Sobre nós</div>
+
+                <ul class="footerSectionLists">
+
+                    <li>
+                        <a href="cadastrarLoja.html">Cadastre sua loja</a>
+                    </li>
+
+                    <li>
+                        <a href="cadastrarEntregador.html">Seja entregador</a>
+                    </li>
+
+                    <li>
+                        <a href="canalAtendimento.html">Fale Conosco</a>
+                    </li>
+
+                    <li>
+                        <a href="cafeDev.html">CaféDev</a>
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <section class="footerSection">
+
+                <div class="titulo">Contato</div>
+
+                <ul class="footerSectionLists">
+
+                    <li class="footerSubtitulo">Redes sociais</li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Instagram.svg"
+                            alt="Instagram"
+                        >
+                        <span>@CafezinDSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Twitter.svg"
+                            alt="Twitter"
+                        >
+                        <span>@Cafezin_DSA</span>
+                    </li>
+
+                    <li>
+                        <img
+                            src="icones/iconesEmpresas/Whatsapp.svg"
+                            alt="WhatsApp"
+                        >
+                        <span>(34) 9 9999-9999</span>
+                    </li>
+
+                </ul>
+
+            </section>
+
+        </div>
+
+
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+
+
+    <!-- ACESSIBILIDADE VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="JavaScript/Entregador/perfilEntregador.js"></script>
+
+</body>
+</html>
