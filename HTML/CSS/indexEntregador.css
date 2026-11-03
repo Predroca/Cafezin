@@ -364,7 +364,7 @@ textarea {
 
 .listaEntregas {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 2fr);
     gap: 18px;
 }
 
@@ -872,14 +872,19 @@ footer {
 .mapaEntrega {
 
     min-height: 100%;
-    
-    overflow: auto;
+
+
     border: 1px solid rgba(75, 54, 42, .30);
     border-radius: var(--borda-arredondada-pequena);
     background: var(--cor-background);
 
+}
+
+.indexEntregador .listaEntregas .entrega{
 
 }
+
+
 
 .mapaEntrega h3 {
     margin: 0;
@@ -891,7 +896,7 @@ footer {
 .mapaEntrega iframe {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 81%;
     border: 0;
 }
 
