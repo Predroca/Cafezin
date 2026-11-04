@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar-se</title>
+    <title>Cafézin | Criar conta</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
@@ -13,7 +13,10 @@
 
     <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
 </head>
-<body>
+<body class="paginaCadastro">
+    <header class="cabecalhoCadastro">
+        <a class="marcaCadastro" href="index.html">Cafézin</a> 
+    </header>
     <div class="bodyCadastro d-none d-xl-block"></div>
 
     <div class="alertaCafe" id="usuarioExistente" role="alertdialog" aria-labelledby="usuarioExistenteTitulo" aria-describedby="usuarioExistenteTexto">
@@ -68,25 +71,20 @@
         <!-- ================= STEP 1: dados comuns (Usuario) ================= -->
         <div class="primeiraSessao" id="primeiraSessao">
 
-            <div class="cabecalhoEtapa">
-                <div class="titulo">Cadastrar-se</div>
-                <p class="subtitulo">Crie sua conta Cafézin em poucas etapas</p>
-            </div>
-
             <div class="inputsContainer">
 
-                <fieldset class="seletorTipo" id="seletorTipo">
+                <fieldset class="seletorTipo" id="seletorTipo"><legend class="visually-hidden">Escolha o tipo da sua conta</legend>
                     <div class="opcaoTipo">
-                        <input type="radio" name="tipoUsuario" id="tipoComprador" value="comprador" required hidden>
-                        <label for="tipoComprador"><i class="bi-person" aria-hidden="true"></i><span>Comprador</span></label>
+                        <input type="radio" name="tipoUsuario" id="tipoComprador" value="comprador" class="radioBttn visually-hidden" required checked>
+                        <label for="tipoComprador"><i class="bi bi-person" aria-hidden="true"></i><span>Comprador</span></label>
                     </div>
                     <div class="opcaoTipo">
-                        <input type="radio" name="tipoUsuario" id="tipoLoja" value="loja" hidden>
-                        <label for="tipoLoja"><i class="bi-shop" aria-hidden="true"></i><span>Loja</span></label>
+                        <input type="radio" name="tipoUsuario" id="tipoLoja" value="loja" class="radioBttn visually-hidden">
+                        <label for="tipoLoja"><i class="bi bi-shop" aria-hidden="true"></i><span>Loja</span></label>
                     </div>
                     <div class="opcaoTipo">
-                        <input type="radio" name="tipoUsuario" id="tipoEntregador" value="entregador" hidden>
-                        <label for="tipoEntregador"><i class=" bi-bicycle" aria-hidden="true"></i><span>Entregador</span></label>
+                        <input type="radio" name="tipoUsuario" id="tipoEntregador" value="entregador" class="radioBttn visually-hidden">
+                        <label for="tipoEntregador"><i class="bi bi-bicycle" aria-hidden="true"></i><span>Entregador</span></label>
                     </div>
                 </fieldset>
 
@@ -121,8 +119,7 @@
                 </div>
                 <p class="mensagemSenha" id="mensagemSenha"></p>
 
-                <label class="visually-hidden" for="telefone">Telefone (opcional)</label>
-                <div class="input-group inptLoginEmail">
+                <div class="input-group inptLoginEmail loginTelefone">
                     <i class="bi bi-telephone"></i>
                     <input type="text" id="telefone" name="telefone" class="form-control py-2" placeholder="Insira seu número (opcional)" inputmode="numeric" autocomplete="tel">
                 </div>
@@ -154,7 +151,7 @@
                 <p class="subtitulo" id="subtituloEtapa2">Agora só precisamos de mais alguns dados</p>
             </div>
 
-            <div class="inputsContainer">
+            <div class="inputsContainer2">
 
                 <!-- Comum a COMPRADOR e ENTREGADOR -->
                 <div class="grupoCampos d-none" data-tipos="comprador entregador">
@@ -186,51 +183,77 @@
 
                 <!-- Só LOJA -->
                 <div class="grupoCampos d-none" data-tipos="loja">
-                    <label class="visually-hidden" for="ruaLoja">Nome da rua</label>
-                    <div class="input-group inptLoginEmail">
-                        <i class="bi bi-signpost"></i>
-                        <input type="text" id="ruaLoja" name="rua" class="form-control py-2" placeholder="Nome da rua" required autocomplete="address-line1">
-                    </div>
-
-                    <div class="linhaDupla">
-                        <label class="visually-hidden" for="numeroLoja">Número do estabelecimento</label>
-                        <input type="text" id="numeroLoja" name="numero" class="form-control py-2" placeholder="Número" required>
-
-                        <label class="visually-hidden" for="bairroLoja">Bairro</label>
-                        <input type="text" id="bairroLoja" name="bairro" class="form-control py-2" placeholder="Bairro" required>
-
-                        <label class="visually-hidden" for="cidadeLoja">Cidade</label>
-                        <input type="text" id="cidadeLoja" name="cidade" class="form-control py-2" placeholder="Cidade" required autocomplete="address-level2">
-
-                        <label class="visually-hidden" for="estadoLoja">Estado</label>
-                        <select id="estadoLoja" name="estado" class="form-select" required>
-                            <option value="" disabled selected>Estado</option>
-                            <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
-                            <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
-                            <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
-                            <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
-                            <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
-                            <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
-                            <option>SP</option><option>SE</option><option>TO</option>
-                        </select>
-
-                        <label class="visually-hidden" for="cepLoja">CEP</label>
-                        <input type="text" id="cepLoja" name="cep" class="form-control py-2" placeholder="CEP" required maxlength="8" inputmode="numeric" autocomplete="postal-code">
-
-                        <label class="visually-hidden" for="cnpjLoja">CNPJ</label>
-                        <input type="text" id="cnpjLoja" name="cnpj" class="form-control py-2" placeholder="CNPJ" required maxlength="14" inputmode="numeric">
-                    </div>
-
-                    <div class="linhaDupla">
-                        <div class="campoRotulado">
-                            <label class="rotuloMini" for="abreLoja">Abre às</label>
-                            <input type="time" id="abreLoja" name="horarioAbertura" class="form-control py-2" required>
+                    <section class="cadastroLoja" aria-labelledby="tituloEnderecoLoja">
+                        <div class="cabecalhoLoja">
+                            <div>
+                                <span class="etiquetaLoja">Sua cafeteria</span>
+                                <h2 id="tituloEnderecoLoja">Onde a gente encontra sua loja?</h2>
+                            </div>
+                            <i class="bi bi-shop-window" aria-hidden="true"></i>
                         </div>
-                        <div class="campoRotulado">
-                            <label class="rotuloMini" for="fechaLoja">Fecha às</label>
-                            <input type="time" id="fechaLoja" name="horarioFechamento" class="form-control py-2" required>
+                        <div class="enderecoLojaLayout">
+                            <div class="gridEnderecoLoja">
+                                <div class="campoLoja ruaLoja">
+                                    <label for="ruaLoja">Rua</label>
+                                    <div class="input-group">
+                                        <i class="bi bi-signpost" aria-hidden="true"></i>
+                                        <input type="text" id="ruaLoja" name="rua" class="form-control py-2" placeholder="Nome da rua" required autocomplete="address-line1">
+                                    </div>
+                                </div>
+                                <div class="campoLoja">
+                                    <label for="numeroLoja">Número</label>
+                                    <input type="text" id="numeroLoja" name="numero" class="form-control py-2" placeholder="Número" required>
+                                </div>
+                                <div class="campoLoja">
+                                    <label for="bairroLoja">Bairro</label>
+                                    <input type="text" id="bairroLoja" name="bairro" class="form-control py-2" placeholder="Bairro" required>
+                                </div>
+                                <div class="campoLoja">
+                                    <label for="cidadeLoja">Cidade</label>
+                                    <input type="text" id="cidadeLoja" name="cidade" class="form-control py-2" placeholder="Cidade" required autocomplete="address-level2">
+                                </div>
+                                <div class="campoLoja">
+                                    <label for="estadoLoja">Estado</label>
+                                    <select id="estadoLoja" name="estado" class="form-select" required>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                                        <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                                        <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                                        <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                                        <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                                        <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                                        <option>SP</option><option>SE</option><option>TO</option>
+                                    </select>
+                                </div>
+                                <div class="campoLoja cepLoja">
+                                    <label for="cepLoja">CEP</label>
+                                    <input type="text" id="cepLoja" name="cep" class="form-control py-2" placeholder="00000-000" required maxlength="8" inputmode="numeric" autocomplete="postal-code">
+                                </div>
+                            </div>
+                            <aside class="mapaLoja" aria-label="Prévia visual do endereço da loja">
+                                <div class="topoMapaLoja">
+                                    <div>
+                                        <span class="etiquetaLoja">Localização</span>
+                                        <p id="mapaLojaMensagem" aria-live="polite">Preencha o endereço para ver a prévia.</p>
+                                    </div>
+                                </div>
+                            </aside>
                         </div>
-                    </div>
+                        <div class="dadosLoja">
+                            <div class="campoLoja">
+                                <label for="cnpjLoja">CNPJ</label>
+                                <input type="text" id="cnpjLoja" name="cnpj" class="form-control py-2" placeholder="CNPJ" required maxlength="14" inputmode="numeric">
+                            </div>
+                            <div class="campoLoja">
+                                <label for="abreLoja">Abre às</label>
+                                <input type="time" id="abreLoja" name="horarioAbertura" class="form-control py-2" required>
+                            </div>
+                            <div class="campoLoja">
+                                <label for="fechaLoja">Fecha às</label>
+                                <input type="time" id="fechaLoja" name="horarioFechamento" class="form-control py-2" required>
+                            </div>
+                        </div>
+                    </section>
                 </div>
 
                 <!-- Só ENTREGADOR -->
@@ -268,3 +291,4 @@
     <script src="JavaScript/CadastroScripts/interfaceCadastro.js"></script>
 </body>
 </html>
+
