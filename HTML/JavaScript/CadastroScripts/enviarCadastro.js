@@ -1,6 +1,3 @@
-/* Cadastro Cafézin: somente front-end (sem backend por enquanto).
-   Quando for integrar, o ponto de envio é o "TODO backend" no final do arquivo. */
-
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------------- Configurações ---------------- */
@@ -10,15 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Textos do Step 2 para cada tipo de usuário
     const TEXTOS_ETAPA2 = {
-        '':         { rotulo: 'Dados pessoais',     subtitulo: 'Agora só precisamos de mais alguns dados' },
-        comprador:  { rotulo: 'Dados pessoais',     subtitulo: 'Agora só precisamos de mais alguns dados' },
-        loja:       { rotulo: 'Dados da loja',      subtitulo: 'Conte para a gente onde sua loja fica' },
-        entregador: { rotulo: 'Dados do entregador', subtitulo: 'Precisamos de alguns dados para as suas entregas' }
+        comprador: { rotulo: 'comprador', subtitulo: 'Agora só precisamos de mais alguns dados' },
+        loja: { rotulo: 'loja', subtitulo: 'Conte para a gente onde sua loja fica' },
+        entregador: { rotulo: 'entregador', subtitulo: 'Precisamos de alguns dados para as suas entregas' }
     };
 
     /* ---------------- Elementos ---------------- */
     const form = document.getElementById('loginForm');
-    const primeiraSessao = document.getElementById('primeiraSessao');
     const segundaSessao = document.getElementById('segundaSessao');
     const nextStep = document.getElementById('nextStep');
 
@@ -69,10 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------------- Tipo de usuário ---------------- */
 
-    // Devolve "comprador", "loja", "entregador" ou "" (nada escolhido)
+    // Comprador é a opção inicial até outro tipo ser escolhido.
     function tipoSelecionado() {
-        const marcado = form.querySelector('input[name="tipoUsuario"]:checked');
-        return marcado ? marcado.value : '';
+        return form.querySelector('input[name="tipoUsuario"]:checked')?.value || 'comprador';
     }
 
     // Monta o Step 2 para o tipo escolhido:
@@ -185,8 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function validarEtapa2() {
         const tipo = tipoSelecionado();
-        if (tipo === '') return false;
-
         const regras = [];
 
         if (tipo === 'comprador' || tipo === 'entregador') {
@@ -240,55 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* ---------------- Slide entre etapas ---------------- */
-    function trocarEtapa(saindo, entrando, displayEntrada, animSaida, animEntrada) {
-        transitando = true;
-
-        // 1) congela a altura atual do card e a posição da seção que sai
-        const alturaInicial = form.offsetHeight;
-        const topo = saindo.offsetTop;
-        const esquerda = saindo.offsetLeft;
-        const largura = saindo.offsetWidth;
-        const alturaSaindo = saindo.offsetHeight;
-
-        form.style.transition = `height ${DURACAO_TRANSICAO}ms ease`;
-        form.style.height = alturaInicial + 'px';
-
-        // 2) a seção que sai vira "flutuante" e desliza para a esquerda
-        Object.assign(saindo.style, {
-            position: 'absolute',
-            top: topo + 'px',
-            left: esquerda + 'px',
-            width: largura + 'px',
-            height: alturaSaindo + 'px',
-            animation: `${animSaida} ${DURACAO_TRANSICAO}ms ease-in forwards`
-        });
-
-        // 3) a seção que entra ocupa o lugar e desliza vindo da direita
-        entrando.style.height = 'auto';
-        entrando.style.display = displayEntrada;
-        entrando.style.animation = `${animEntrada} ${DURACAO_TRANSICAO}ms ease-out backwards`;
-
-        // 4) o card se ajusta suavemente à altura da nova etapa
-        const alturaFinal = entrando.offsetTop + entrando.offsetHeight
-            + parseFloat(getComputedStyle(form).paddingBottom);
-        form.style.height = alturaFinal + 'px';
-
-        // 5) limpa tudo ao final
-        setTimeout(() => {
-            saindo.style.display = 'none';
-            ['position', 'top', 'left', 'width', 'height', 'animation'].forEach((p) => { saindo.style[p] = ''; });
-            entrando.style.height = '';
-            entrando.style.animation = '';
-            form.style.height = '';
-            form.style.transition = '';
-            transitando = false;
-        }, DURACAO_TRANSICAO);
+    function trocarEtapa() {
+        window.transicionarCadastro(true);
     }
 
     function avancar() {
         if (transitando || !validarEtapa1()) return;
         montarEtapa2(tipoSelecionado());   // garante que o Step 2 está certo antes de aparecer
-        trocarEtapa(primeiraSessao, segundaSessao, 'grid', 'disappearLeft', 'aparecerDireita');
+        trocarEtapa();
         setTimeout(() => {
             const primeiroCampo = segundaSessao.querySelector('input:not(:disabled), select:not(:disabled)');
             if (primeiroCampo) primeiroCampo.focus();
@@ -296,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     nextStep.addEventListener('click', avancar);
+
 
     /* ---------------- Envio (sem backend) ---------------- */
 
