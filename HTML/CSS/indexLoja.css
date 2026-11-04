@@ -602,7 +602,7 @@ button, input, select, textarea { font: inherit; }
     gap: 6px;
 }
 
-.produtoAcoes button {
+.produtoAcoes a {
     display: grid;
     place-items: center;
     width: 29px;
@@ -614,7 +614,7 @@ button, input, select, textarea { font: inherit; }
     cursor: pointer;
 }
 
-.produtoAcoes button:hover {
+.produtoAcoes a:hover {
     background: var(--cor-background-alternativo);
     color: var(--cor-laranja-escuro);
 }
