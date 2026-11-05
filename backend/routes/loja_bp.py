@@ -5,11 +5,14 @@ from permissoes import tipo_requerido
 from sqlalchemy.exc import SQLAlchemyError
 from datetime import date
 from sqlalchemy import func
+from sqlalchemy.orm import joinedload
 
 from models.produto import Produto
 from models.loja import Loja
 from models.pedido import Pedido
 from models.avaliacao_loja import AvaliacaoLoja
+from models.comprador import Comprador
+from models.item_pedido import ItemPedido
 
 
 loja_bp = Blueprint("loja", __name__)
@@ -221,3 +224,34 @@ def atualizar_status_pedido(cod_pedido):
     db.session.commit()
 
     return {"cod_pedido": pedido.cod_pedido, "status": pedido.status}
+
+@loja_bp.route("/loja/pedidos/todos", methods=["GET"])
+@tipo_requerido("Loja")
+def listar_todos_pedidos_loja():
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+
+    pedidos = (
+        Pedido.query.filter_by(cod_loja=loja.cod_loja)
+        .options(
+            joinedload(Pedido.comprador).joinedload(Comprador.usuario),
+            joinedload(Pedido.itens).joinedload(ItemPedido.produto),
+        )
+        .order_by(Pedido.data_pedido.desc())
+        .all()
+    )
+
+    return [
+        {
+            "nomeCliente": p.comprador.usuario.nome,
+            "codigoPedido": p.cod_pedido,
+            "horario": p.data_pedido.strftime("%H:%M"),
+            "produtosPedido": [i.produto.nome for i in p.itens],
+            "dia": p.data_pedido.day,
+            "mes": p.data_pedido.month,
+            "ano": p.data_pedido.year,
+            "valorDoPedido": float(p.valor_total),
+        }
+        for p in pedidos
+    ]
