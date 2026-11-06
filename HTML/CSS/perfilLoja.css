@@ -1,0 +1,467 @@
+/* Ajustes do perfil da loja sobre os componentes compartilhados do perfil. */
+
+#topo {
+    overflow-y: auto;
+}
+
+.perfilGrade {
+    grid-template-columns: minmax(250px, 1fr) minmax(0, 3fr);
+}
+
+.avatarLojaIcone {
+    position: relative;
+    background: var(--cor-laranja-escuro);
+}
+
+.avatarLojaIcone > i {
+    font-size: 2.6rem;
+}
+
+.avatarLojaIcone img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.cabecalhoSecao.linha {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.cabecalhoSecao.linha > div {
+    min-width: 0;
+}
+
+.cabecalhoSecao.linha > button {
+    flex: 0 0 auto;
+}
+
+.cabecalhoSecao.linha > .botaoSecundario {
+    border-color: rgba(115, 70, 48, .35);
+    color: var(--cor-marrom-escuro-2);
+}
+
+
+.listaDados.dadosLoja {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 28px;
+    margin: 0;
+}
+
+.listaDados.dadosLoja > div {
+    min-width: 0;
+}
+
+.listaDados.dadosLoja .largo {
+    grid-column: 1 / -1;
+}
+
+.notaDados {
+    margin-top: 12px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-muito-pequena);
+}
+
+.fotoLojaStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fotoLojaMiniatura {
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(75, 54, 42, .16);
+    border-radius: var(--borda-arredondada-pequena);
+    object-fit: cover;
+}
+
+.modalEditar {
+    width: min(620px, calc(100% - 32px));
+    max-width: 620px;
+    max-height: min(90vh, 780px);
+    margin: auto;
+    padding: 28px;
+    overflow: auto;
+    border: 1px solid rgba(75, 54, 42, .16);
+    border-radius: var(--borda-arredondada-grande);
+    background: var(--cor-background);
+    color: var(--cor-marrom-escuro-2);
+    box-shadow: 0 24px 60px rgba(38, 17, 12, .4);
+}
+
+.modalEditar::backdrop {
+    background: rgba(38, 17, 12, .62);
+    backdrop-filter: blur(2px);
+}
+
+.modalEditar[open] {
+    animation: entradaModalLoja var(--transicao-normal) ease both;
+}
+
+@keyframes entradaModalLoja {
+    from { opacity: 0; transform: translateY(10px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modalEditarCabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(75, 54, 42, .14);
+}
+
+.modalEditarCabecalho > div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.modalEditarIcone {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cor-bege-claro);
+    color: var(--cor-laranja-escuro);
+    font-size: 1.2rem;
+}
+
+.modalEditarCabecalho h2 {
+    color: var(--cor-laranja-escuro);
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    line-height: 1.2;
+}
+
+.modalEditarCabecalho p {
+    margin-top: 5px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+    line-height: 1.45;
+}
+
+.botaoFecharModal {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(75, 54, 42, .18);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--cor-marrom-escuro-2);
+    cursor: pointer;
+    transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.botaoFecharModal:hover {
+    background: var(--cor-background-alternativo);
+    color: var(--cor-laranja-escuro);
+}
+
+.formPerfilLoja {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px 20px;
+}
+
+.formPerfilLoja .largo {
+    grid-column: 1 / -1;
+}
+
+.formPerfilLoja .campo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formPerfilLoja .ajudaCampo {
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-muito-pequena);
+}
+
+.horariosSemana {
+    display: grid;
+    grid-column: 1 / -1;
+    gap: 9px;
+    min-width: 0;
+    margin: 3px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.horariosSemana legend {
+    margin-bottom: 10px;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+
+}
+
+.horariosSemana legend small {
+    margin-left: 6px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-muito-pequena);
+}
+
+.horarioDia {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) minmax(110px, auto) minmax(210px, 1.6fr);
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid rgba(75, 54, 42, .14);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background);
+}
+
+.horarioDiaNome {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+}
+
+.horarioControle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-muito-pequena);
+
+    cursor: pointer;
+}
+
+.horarioControle input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.horarioControleTrilho {
+    position: relative;
+    width: 36px;
+    height: 21px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: #c9c0b8;
+    transition: background var(--transicao-rapida);
+}
+
+.horarioControleTrilho::after {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    content: "";
+    transition: transform var(--transicao-rapida);
+}
+
+.horarioControle input:checked + .horarioControleTrilho {
+    background: #6fae7a;
+}
+
+.horarioControle input:checked + .horarioControleTrilho::after {
+    transform: translateX(15px);
+}
+
+.horarioControle input:focus-visible + .horarioControleTrilho {
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+}
+
+.horarioCampos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.campoHorario {
+    display: grid;
+    gap: 4px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-muito-pequena);
+}
+
+.campoHorario input {
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    padding: 0 8px;
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background);
+    color: var(--cor-texto);
+}
+
+.campoHorario input:focus {
+    outline: 0;
+    border-color: var(--cor-laranja-escuro);
+    box-shadow: 0 0 0 3px rgba(225, 167, 104, .3);
+}
+
+.campoHorario input:disabled {
+    background: var(--cor-background-alternativo);
+    color: var(--cor-texto-secundario);
+    cursor: not-allowed;
+}
+
+.campoHorario input[aria-invalid="true"] {
+    border-color: #b44747;
+    background: #fdf3f1;
+}
+
+.erroDia {
+    grid-column: 1 / -1;
+    min-height: 0;
+}
+
+.erroHorario {
+    grid-column: 1 / -1;
+    min-height: 0;
+}
+
+.modalEditarAcoes {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 1 / -1;
+    margin-top: 7px;
+}
+
+.modalEditarAcoes .botaoSecundario {
+    border-color: rgba(115, 70, 48, .35);
+    color: var(--cor-marrom-escuro-2);
+}
+
+.modalEditarAcoes .botaoSecundario:hover {
+    color: var(--cor-laranja-escuro);
+}
+
+.aviso {
+    z-index: 1200;
+}
+
+@media (max-width: 860px) {
+    .perfilGrade {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .perfilLateralLoja {
+        overflow: visible;
+        padding: 16px;
+    }
+
+    .perfilLateralLoja .perfilIdentidade {
+        padding: 16px 0;
+    }
+
+    .perfilLateralLoja .perfilAbas {
+        flex-direction: row;
+        overflow-x: auto;
+        margin-bottom: 0;
+        scrollbar-width: none;
+    }
+
+    .perfilLateralLoja .perfilAbas::-webkit-scrollbar {
+        display: none;
+    }
+
+    .perfilLateralLoja .aba {
+        width: auto;
+        flex: 0 0 auto;
+        max-width: 220px;
+        white-space: nowrap;
+    }
+
+    .perfilPaineis {
+        height: 72vh;
+        min-height: 440px;
+    }
+
+    .horarioDia {
+        grid-template-columns: minmax(130px, 1fr) auto;
+    }
+
+    .horarioCampos {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 700px) {
+    .perfilCorpo {
+        padding: 16px 0;
+    }
+
+    .perfilPaineis .painel {
+        padding: 24px 18px 32px;
+    }
+
+    .cabecalhoSecao.linha {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cabecalhoSecao.linha > button {
+        align-self: flex-start;
+    }
+
+    .cartaoDadosLoja {
+        padding: 18px;
+    }
+
+    .modalEditar .horarioDia {
+        gap: 10px 8px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .perfilGrade.container {
+        padding: 14px;
+    }
+
+    .listaDados.dadosLoja,
+    .formPerfilLoja {
+        grid-template-columns: 1fr;
+    }
+
+    .listaDados.dadosLoja .largo,
+    .formPerfilLoja .largo,
+    .modalEditarAcoes {
+        grid-column: 1;
+    }
+
+    .modalEditar {
+        padding: 22px 18px;
+    }
+
+    .modalEditarAcoes {
+        flex-direction: column-reverse;
+    }
+
+    .modalEditarAcoes > button {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modalEditar[open] {
+        animation: none;
+    }
+}
