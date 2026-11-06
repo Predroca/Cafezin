@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Veja as informações cadastrais da sua loja no Cafézin.">
+    <meta name="description" content="Consulte e edite os dados cadastrados da sua loja no Cafézin.">
     <title>Cafézin | Perfil da loja</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/indexLoja.css">
     <link rel="stylesheet" href="CSS/gerenciarLoja.css">
+    <link rel="stylesheet" href="CSS/perfilComprador.css">
+    <link rel="stylesheet" href="CSS/perfilLoja.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body id="topo">
-    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
-
     <header class="navLoja">
         <div class="container navLojaConteudo">
             <a class="logoLoja" href="indexLoja.html#topo" aria-label="Cafézin - painel da loja">Cafézin <span>Loja</span></a>
@@ -29,7 +29,6 @@
                 <a class="notificacao" href="indexLoja.html#pedidos" aria-label="Ir para os pedidos">
                     <i class="bi bi-bell" aria-hidden="true"></i>
                 </a>
-
                 <a class="perfilLoja ativo" href="perfilLoja.html" aria-label="Abrir dados da loja" aria-current="page">
                     <i class="bi bi-shop" aria-hidden="true"></i>
                 </a>
@@ -38,240 +37,466 @@
     </header>
 
     <main>
+        <section class="perfilCorpo" aria-label="Perfil da loja">
+            <div class="container perfilGrade">
+                <aside class="perfilLateral perfilLateralLoja" aria-label="Identidade e categorias do perfil da loja">
+                    <a class="botaoVoltar" href="indexLoja.html#painel">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar para o painel
+                    </a>
 
-        <section class="cabecalhoPagina" aria-label="Perfil da loja">
-            <div class="container">
-                <a class="linkVoltar" href="indexLoja.html#painel">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>
-                    Voltar para o painel
-                </a>
-
-                <p class="painelSaudacao"><span class="selo"><i class="bi bi-shop" aria-hidden="true"></i> Minha loja</span></p>
-                <h1>Perfil da <span>loja</span></h1>
-                <p class="descricaoPagina">Confira as informações cadastradas da sua loja no Cafézin.</p>
-            </div>
-        </section>
-
-        <section class="secaoPadrao secaoAlternada" aria-label="Informações cadastrais da loja">
-            <div class="container">
-                <div class="gradePagina perfil">
-
-                    <aside class="colunaLateral">
-                        <section class="cartaoGrupo cartaoIdentidade" aria-label="Identidade da loja">
-                            <div class="avatarLoja" role="img" aria-label="Foto da loja">
+                    <div class="perfilIdentidade perfilLojaIdentidade">
+                        <div class="avatarArea">
+                            <div class="avatar avatarLojaIcone" id="avatarLoja" aria-hidden="true">
                                 <i class="bi bi-shop" aria-hidden="true"></i>
+                                <img id="fotoLoja" alt="Foto da loja" hidden>
                             </div>
+                        </div>
 
-                            <h2>Nome da loja</h2>
-                            <p>Foto e nome exibidos para os clientes</p>
-                            <span class="selo"><i class="bi bi-patch-check" aria-hidden="true"></i> Conta de loja</span>
-
-                            <div class="cartaoAcoes">
-                                <button type="button" class="botaoPrimario">
-                                    <i class="bi bi-pencil" aria-hidden="true"></i>
-                                    Editar dados da loja
-                                </button>
-                                <a class="botaoSecundario" href="indexLoja.html#produtos">Ver cardápio</a>
-                            </div>
-                        </section>
-                    </aside>
-
-                    <div class="colunaPrincipal">
-
-                        <section class="cartaoGrupo" aria-labelledby="tituloIdentificacao">
-                            <div class="cartaoGrupoCabecalho">
-                                <span class="cartaoGrupoIcone"><i class="bi bi-building" aria-hidden="true"></i></span>
-                                <div>
-                                    <h2 id="tituloIdentificacao">Identificação</h2>
-                                    <p>Dados do estabelecimento</p>
-                                </div>
-                            </div>
-
-                            <dl class="listaDados">
-                            <div class="largo">
-                                <dt>Nome da loja</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>CNPJ</dt>
-                                <dd class="valorVazio">—
-                                    <small>14 dígitos, somente números</small></dd>
-                            </div>
-                            <div>
-                                <dt>Horário de funcionamento</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            </dl>
-                        </section>
-
-                        <section class="cartaoGrupo" aria-labelledby="tituloContato">
-                            <div class="cartaoGrupoCabecalho">
-                                <span class="cartaoGrupoIcone"><i class="bi bi-telephone" aria-hidden="true"></i></span>
-                                <div>
-                                    <h2 id="tituloContato">Contato</h2>
-                                    <p>Como falar com a loja</p>
-                                </div>
-                            </div>
-
-                            <dl class="listaDados">
-                            <div>
-                                <dt>E-mail</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>Telefone</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            </dl>
-                        </section>
-
-                        <section class="cartaoGrupo" aria-labelledby="tituloEndereco">
-                            <div class="cartaoGrupoCabecalho">
-                                <span class="cartaoGrupoIcone"><i class="bi bi-geo-alt" aria-hidden="true"></i></span>
-                                <div>
-                                    <h2 id="tituloEndereco">Endereço</h2>
-                                    <p>Onde a loja está localizada</p>
-                                </div>
-                            </div>
-
-                            <dl class="listaDados endereco">
-                            <div class="largo">
-                                <dt>Rua</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>Número</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>Bairro</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>Cidade</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>Estado</dt>
-                                <dd class="valorVazio">—</dd>
-                            </div>
-                            <div>
-                                <dt>CEP</dt>
-                                <dd class="valorVazio">—
-                                    <small>8 dígitos, somente números</small></dd>
-                            </div>
-                            </dl>
-                        </section>
-
+                        <div class="perfilIdentidadeTexto">
+                            <h1 id="nomeLoja">Nome da loja</h1>
+                            <p class="perfilEmail">Perfil do estabelecimento</p>
+                        </div>  
                     </div>
+
+                    <nav class="perfilAbas" aria-label="Categorias do perfil" role="tablist" aria-orientation="vertical">
+                        <a class="aba ativa" id="aba-identificacao" href="#painel-identificacao" data-aba="identificacao" role="tab" aria-controls="painel-identificacao" aria-current="true" aria-selected="true" tabindex="0">
+                            <i class="bi bi-building" aria-hidden="true"></i> Identificação
+                        </a>
+                        <a class="aba" id="aba-contato" href="#painel-contato" data-aba="contato" role="tab" aria-controls="painel-contato" aria-selected="false" tabindex="-1">
+                            <i class="bi bi-envelope" aria-hidden="true"></i> Contato e acesso
+                        </a>
+                        <a class="aba" id="aba-endereco" href="#painel-endereco" data-aba="endereco" role="tab" aria-controls="painel-endereco" aria-selected="false" tabindex="-1">
+                            <i class="bi bi-geo-alt" aria-hidden="true"></i> Endereço
+                        </a>
+                        <a class="aba" id="aba-funcionamento" href="#painel-funcionamento" data-aba="funcionamento" role="tab" aria-controls="painel-funcionamento" aria-selected="false" tabindex="-1">
+                            <i class="bi bi-clock" aria-hidden="true"></i> Funcionamento
+                        </a>
+                    </nav>
+                    <button class="botaoSair" type="button" id="abrirSair">
+                        <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair da conta
+                    </button>
+                </aside>
+
+                <div class="perfilPaineis" id="perfilPaineis" tabindex="0" role="region" aria-label="Dados da loja. Role para ver as categorias.">
+                    <section class="painel" id="painel-identificacao" role="tabpanel" aria-labelledby="aba-identificacao" tabindex="0">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2>Identificação</h2>
+                                <p>Nome, CNPJ e imagem apresentados no perfil da loja.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-identificacao">
+                                <i class="bi bi-pencil" aria-hidden="true"></i> Editar dados
+                            </button>
+                        </div>
+
+                        <section class="cartaoDadosLoja" aria-label="Dados de identificação">
+                            <dl class="listaDados dadosLoja">
+                                <div>
+                                    <dt>Nome da loja</dt>
+                                    <dd><span data-valor-para="nome">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>CNPJ</dt>
+                                    <dd><span data-valor-para="cnpj">Não informado</span></dd>
+                                </div>
+                                <div class="dadoFoto">
+                                    <dt>Descrição da loja</dt>
+                                    <dd class="statusFotoLoja">
+                                        <span class="fotoLojaStatus">
+                                            <img class="fotoLojaMiniatura" id="miniaturaFotoLoja" alt="Prévia da foto da loja" hidden>
+                                            <span id="statusFotoLoja">Não informada</span>
+                                        </span>
+                                    </dd>
+                                </div>
+                            </dl>
+                        </section>
+                    </section>
+
+                    <section class="painel" id="painel-contato" role="tabpanel" aria-labelledby="aba-contato" tabindex="0">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2>Contato e acesso</h2>
+                                <p>E-mail e telefone vinculados à conta da loja.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-contato">
+                                <i class="bi bi-pencil" aria-hidden="true"></i> Editar dados
+                            </button>
+                        </div>
+
+                        <section class="cartaoDadosLoja" aria-label="Contato da loja">
+                            <dl class="listaDados dadosLoja">
+                                <div>
+                                    <dt>E-mail</dt>
+                                    <dd><span data-valor-para="email">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Telefone</dt>
+                                    <dd><span data-valor-para="telefone">Não informado</span></dd>
+                                </div>
+                            </dl>
+                        </section>
+                        <p class="notaDados">A senha não é exibida nesta página.</p>
+                    </section>
+
+                    <section class="painel" id="painel-endereco" role="tabpanel" aria-labelledby="aba-endereco" tabindex="0">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2>Endereço</h2>
+                                <p>Localização cadastrada para o estabelecimento.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-endereco">
+                                <i class="bi bi-pencil" aria-hidden="true"></i> Editar dados
+                            </button>
+                        </div>
+
+                        <section class="cartaoDadosLoja" aria-label="Endereço da loja">
+                            <dl class="listaDados dadosLoja endereco">
+                                <div class="largo">
+                                    <dt>Logradouro</dt>
+                                    <dd><span data-valor-para="nome_logradouro">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Número</dt>
+                                    <dd><span data-valor-para="numero">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Bairro</dt>
+                                    <dd><span data-valor-para="bairro">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Cidade</dt>
+                                    <dd><span data-valor-para="cidade">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Estado</dt>
+                                    <dd><span data-valor-para="estado">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>CEP</dt>
+                                    <dd><span data-valor-para="cep">Não informado</span></dd>
+                                </div>
+                            </dl>
+                        </section>
+                    </section>
+
+                    <section class="painel" id="painel-funcionamento" role="tabpanel" aria-labelledby="aba-funcionamento" tabindex="0">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2>Funcionamento</h2>
+                                <p>Horário de funcionamento cadastrado para a loja.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-funcionamento">
+                                <i class="bi bi-pencil" aria-hidden="true"></i> Editar dados
+                            </button>
+                        </div>
+
+                        <section class="cartaoDadosLoja" aria-label="Horário de funcionamento">
+                            <dl class="listaDados dadosLoja">
+                                <div>
+                                    <dt>Horário cadastrado</dt>
+                                    <dd><span data-valor-para="horario_funcionamento">Não informado</span></dd>
+                                </div>
+                                <div class="largo">
+                                    <dt>Agenda semanal</dt>
+                                    <dd><span id="resumoHorario">Não informada</span></dd>
+                                </div>
+                            </dl>
+                        </section>
+                    </section>
                 </div>
             </div>
         </section>
-
     </main>
 
-   <footer>
-
-        <div class="footerConteudo">
-
-            <section class="footerSection footerMarca">
-
-                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
-
-                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
-
-            </section>
-
-
-            <section class="footerSection">
-
-                <div class="titulo">
-                    Sobre nós
-                </div>
-
-                <ul class="footerSectionLists">
-
-                    <li>
-                        <a href="cadastrarLoja.html">
-                            Cadastre sua loja
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="cadastrarEntregador.html">
-                            Seja entregador
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="canalAtendimento.html">
-                            Fale Conosco
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="cafeDev.html">
-                            CaféDev
-                        </a>
-                    </li>
-
-                </ul>
-
-            </section>
-
-
-            <section class="footerSection">
-
-                <div class="titulo">
-                    Contato
-                </div>
-
-                <ul class="footerSectionLists">
-
-                    <li class="footerSubtitulo">
-                        Redes sociais
-                    </li>
-
-                    <li>
-                        <img
-                            src="icones/iconesEmpresas/Instagram.svg"
-                            alt="Instagram"
-                        >
-                        <span>@CafezinDSA</span>
-                    </li>
-
-                    <li>
-                        <img
-                            src="icones/iconesEmpresas/Twitter.svg"
-                            alt="Twitter"
-                        >
-                        <span>@Cafezin_DSA</span>
-                    </li>
-
-                    <li>
-                        <img
-                            src="icones/iconesEmpresas/Whatsapp.svg"
-                            alt="WhatsApp"
-                        >
-                        <span>(34) 9 9999-9999</span>
-                    </li>
-
-                </ul>
-
-            </section>
-
+    <dialog class="modalSair" id="modalSair" aria-labelledby="modalSairTitulo">
+        <div class="modalSairIcone" aria-hidden="true"><i class="bi bi-box-arrow-right"></i></div>
+        <h2 id="modalSairTitulo">Sair da sua conta?</h2>
+        <p>Você voltará para a página inicial e precisará entrar novamente para acessar o painel da loja.</p>
+        <div class="modalSairAcoes">
+            <button class="botaoSecundario" type="button" id="cancelarSair">Continuar na conta</button>
+            <button class="botaoPerigo" type="button" id="confirmarSair">Sair da conta</button>
         </div>
+    </dialog>
 
+    <dialog class="modalEditar" id="modal-identificacao" aria-labelledby="titulo-modal-identificacao">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-building"></i></span>
+                <div>
+                    <h2 id="titulo-modal-identificacao">Editar identificação</h2>
+                    <p>Atualize os dados de identificação da loja.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <form class="formPerfilLoja" data-formulario="identificacao">
+            <div class="campo">
+                <label for="campoNomeLoja">Nome da loja</label>
+                <input id="campoNomeLoja" name="nome" type="text" maxlength="100" autocomplete="organization" required>
+            </div>
+            <div class="campo">
+                <label for="campoCnpjLoja">CNPJ</label>
+                <input id="campoCnpjLoja" name="cnpj" type="text" inputmode="numeric" maxlength="14" pattern="[0-9]{14}" aria-describedby="ajudaCnpjLoja" required>
+                <small class="ajudaCampo" id="ajudaCnpjLoja">Informe os 14 dígitos, sem pontuação.</small>
+            </div>
+            <div class="campo largo">
+                <label for="campoFotoLoja">Descrição da loja</label>
+                <input id="campoFotoLoja" name="foto_url" type="text" maxlength="255" placeholder="Insira uma nova descrição chamativa">
+            </div>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar alterações</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="modalEditar" id="modal-contato" aria-labelledby="titulo-modal-contato">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-envelope"></i></span>
+                <div>
+                    <h2 id="titulo-modal-contato">Editar contato e acesso</h2>
+                    <p>Atualize os dados de contato vinculados à conta.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <form class="formPerfilLoja" data-formulario="contato">
+            <div class="campo">
+                <label for="campoEmailLoja">E-mail</label>
+                <input id="campoEmailLoja" name="email" type="email" maxlength="100" autocomplete="email" required>
+            </div>
+            <div class="campo">
+                <label for="campoTelefoneLoja">Telefone</label>
+                <input id="campoTelefoneLoja" name="telefone" type="tel" maxlength="20" autocomplete="tel">
+            </div>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar alterações</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="modalEditar" id="modal-endereco" aria-labelledby="titulo-modal-endereco">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-geo-alt"></i></span>
+                <div>
+                    <h2 id="titulo-modal-endereco">Editar endereço</h2>
+                    <p>Atualize a localização cadastrada para a loja.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <form class="formPerfilLoja" data-formulario="endereco">
+            <div class="campo largo">
+                <label for="campoLogradouroLoja">Logradouro</label>
+                <input id="campoLogradouroLoja" name="nome_logradouro" type="text" maxlength="100" autocomplete="address-line1" required>
+            </div>
+            <div class="campo">
+                <label for="campoNumeroLoja">Número</label>
+                <input id="campoNumeroLoja" name="numero" type="text" maxlength="10" autocomplete="address-line2">
+            </div>
+            <div class="campo">
+                <label for="campoBairroLoja">Bairro</label>
+                <input id="campoBairroLoja" name="bairro" type="text" maxlength="50">
+            </div>
+            <div class="campo">
+                <label for="campoCidadeLoja">Cidade</label>
+                <input id="campoCidadeLoja" name="cidade" type="text" maxlength="50" autocomplete="address-level2">
+            </div>
+            <div class="campo">
+                <label for="campoEstadoLoja">Estado</label>
+                <input id="campoEstadoLoja" name="estado" type="text" inputmode="text" maxlength="2" pattern="[A-Za-z]{2}" autocomplete="address-level1" aria-describedby="ajudaEstadoLoja">
+                <small class="ajudaCampo" id="ajudaEstadoLoja">Informe a sigla com duas letras.</small>
+            </div>
+            <div class="campo">
+                <label for="campoCepLoja">CEP</label>
+                <input id="campoCepLoja" name="cep" type="text" inputmode="numeric" maxlength="8" pattern="[0-9]{8}" autocomplete="postal-code" aria-describedby="ajudaCepLoja">
+                <small class="ajudaCampo" id="ajudaCepLoja">Informe os 8 dígitos, sem pontuação.</small>
+            </div>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar alterações</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="modalEditar" id="modal-funcionamento" aria-labelledby="titulo-modal-funcionamento">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-clock"></i></span>
+                <div>
+                    <h2 id="titulo-modal-funcionamento">Editar funcionamento</h2>
+                    <p>Informe o horário de funcionamento cadastrado para a loja.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <form class="formPerfilLoja" data-formulario="funcionamento">
+            <div class="campo">
+                <label for="campoHorarioLoja">Horário cadastrado</label>
+                <input id="campoHorarioLoja" name="horario_funcionamento" type="time">
+            </div>
+            <fieldset class="horariosSemana">
+                <legend>Agenda semanal <small>Salva neste navegador</small></legend>
+
+                <div class="horarioDia" data-dia="segunda">
+                    <strong class="horarioDiaNome">Segunda-feira</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir às segundas-feiras">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="terca">
+                    <strong class="horarioDiaNome">Terça-feira</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir às terças-feiras">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="quarta">
+                    <strong class="horarioDiaNome">Quarta-feira</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir às quartas-feiras">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="quinta">
+                    <strong class="horarioDiaNome">Quinta-feira</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir às quintas-feiras">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="sexta">
+                    <strong class="horarioDiaNome">Sexta-feira</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir às sextas-feiras">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="sabado">
+                    <strong class="horarioDiaNome">Sábado</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir aos sábados">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+
+                <div class="horarioDia" data-dia="domingo">
+                    <strong class="horarioDiaNome">Domingo</strong>
+                    <label class="horarioControle">
+                        <input type="checkbox" data-aberto aria-label="Abrir aos domingos">
+                        <span class="horarioControleTrilho" aria-hidden="true"></span>
+                        <span data-status-dia>Fechado</span>
+                    </label>
+                    <div class="horarioCampos">
+                        <label class="campoHorario"><span>Abertura</span><input type="time" data-abertura disabled></label>
+                        <label class="campoHorario"><span>Fechamento</span><input type="time" data-fechamento disabled></label>
+                    </div>
+                    <small class="erroCampo erroDia" aria-live="polite"></small>
+                </div>
+            </fieldset>
+            <small class="erroCampo erroHorario" id="erroHorario" aria-live="polite"></small>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar alterações</button>
+                <button class="botaoSecundario" type="button" id="descartarHorario">Descartar alterações</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+    <footer>
+        <div class="footerConteudo">
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+        </div>
 
         <div class="footerCopyright">
-
-            <p>
-                © 2026 Cafézin. Todos os direitos reservados.
-            </p>
-
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
         </div>
-
     </footer>
 
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+    <script src="JavaScript/Loja/perfilLoja.js"></script>
 </body>
 </html>
