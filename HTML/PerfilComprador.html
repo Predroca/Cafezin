@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/indexComp.css">
     <link rel="stylesheet" href="CSS/perfilComprador.css">
+    <link rel="stylesheet" href="CSS/gerenciarLoja.css">
+    <link rel="stylesheet" href="CSS/perfilLoja.css">
 
 </head>
 <body id="topo">
@@ -91,42 +93,38 @@
                 <!-- Área com scroll: uma "tela" por categoria -->
                 <div class="perfilPaineis" id="perfilPaineis" tabindex="0" role="region" aria-label="Conteúdo do perfil. Role para ver as categorias.">
 
-                    <!-- Meus dados -->
-                    <section class="painel" id="painel-dados" aria-labelledby="titulo-dados">
-                        <div class="cabecalhoSecao">
-                            <h2 id="titulo-dados">Meus dados</h2>
-                            <p>Mantenha suas informações atualizadas para receber seus pedidos sem erro.</p>
+                    <!-- Identificação do comprador -->
+                    <section class="painel" id="painel-dados" role="tabpanel" aria-labelledby="titulo-dados">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2 id="titulo-dados">Identificação</h2>
+                                <p>Dados pessoais vinculados à sua conta de comprador.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-identificacao">
+                                <i class="bi bi-pencil" aria-hidden="true"></i> Editar dados
+                            </button>
                         </div>
 
-                        <form class="formPerfil" id="formDados" novalidate>
-                            <div class="campo">
-                                <label for="campoNome">Nome completo</label>
-                                <input id="campoNome" name="nome" type="text" autocomplete="name" required minlength="3">
-                                <small class="erroCampo" data-erro-para="campoNome"></small>
-                            </div>
-
-                            <div class="campo">
-                                <label for="campoEmail">E-mail</label>
-                                <input id="campoEmail" name="email" type="email" autocomplete="email" required>
-                                <small class="erroCampo" data-erro-para="campoEmail"></small>
-                            </div>
-
-                            <div class="campo">
-                                <label for="campoTelefone">Telefone</label>
-                                <input id="campoTelefone" name="telefone" type="tel" autocomplete="tel" inputmode="numeric" placeholder="(34) 9 9999-9999" required>
-                                <small class="erroCampo" data-erro-para="campoTelefone"></small>
-                            </div>
-
-                            <div class="campo">
-                                <label for="campoNascimento">Data de nascimento</label>
-                                <input id="campoNascimento" name="nascimento" type="date" autocomplete="bday">
-                            </div>
-
-                            <div class="formAcoes">
-                                <button class="botaoPrimario" type="submit">Salvar alterações</button>
-                                <button class="botaoSecundario" type="button" id="descartarDados">Descartar</button>
-                            </div>
-                        </form>
+                        <section class="cartaoDadosLoja" aria-label="Dados de identificação do comprador">
+                            <dl class="listaDados dadosLoja">
+                                <div>
+                                    <dt>Nome completo</dt>
+                                    <dd><span data-comprador-valor="nome">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>E-mail</dt>
+                                    <dd><span data-comprador-valor="email">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Telefone</dt>
+                                    <dd><span data-comprador-valor="telefone">Não informado</span></dd>
+                                </div>
+                                <div>
+                                    <dt>Data de nascimento</dt>
+                                    <dd><span data-comprador-valor="nascimento">Não informada</span></dd>
+                                </div>
+                            </dl>
+                        </section>
                     </section>
 
                     <!-- Endereços -->
@@ -140,34 +138,6 @@
                                 <i class="bi bi-plus-lg" aria-hidden="true"></i> Novo endereço
                             </button>
                         </div>
-
-                        <form class="formPerfil formEndereco" id="formEndereco" novalidate hidden>
-                            <div class="campo">
-                                <label for="endApelido">Nome do endereço</label>
-                                <input id="endApelido" type="text" placeholder="Casa, trabalho..." required>
-                            </div>
-                            <div class="campo largo">
-                                <label for="endRua">Rua</label>
-                                <input id="endRua" type="text" autocomplete="address-line1" required>
-                            </div>
-                            <div class="campo">
-                                <label for="endNumero">Número</label>
-                                <input id="endNumero" type="text" inputmode="numeric" required>
-                            </div>
-                            <div class="campo">
-                                <label for="endBairro">Bairro</label>
-                                <input id="endBairro" type="text" required>
-                            </div>
-                            <div class="campo">
-                                <label for="endCidade">Cidade</label>
-                                <input id="endCidade" type="text" autocomplete="address-level2" required>
-                            </div>
-                            <small class="erroCampo erroForm" id="erroEndereco"></small>
-                            <div class="formAcoes">
-                                <button class="botaoPrimario" type="submit">Salvar endereço</button>
-                                <button class="botaoSecundario" type="button" id="cancelarEndereco">Cancelar</button>
-                            </div>
-                        </form>
 
                         <ul class="listaEnderecos" id="listaEnderecos"></ul>
                     </section>
@@ -194,6 +164,105 @@
             </div>
         </section>
     </main>
+
+    <dialog class="modalEditar" id="modal-endereco" aria-labelledby="titulo-modal-endereco">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-geo-alt"></i></span>
+                <div>
+                    <h2 id="titulo-modal-endereco">Novo endereço</h2>
+                    <p>Preencha os dados do local de entrega.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" id="fecharModalEndereco" aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="formPerfilLoja" id="formEndereco" novalidate>
+            <div class="campo">
+                <label for="endApelido">Nome do endereço</label>
+                <input id="endApelido" type="text" placeholder="Ex.: Minha casa" required>
+            </div>
+            <div class="campo">
+                <label for="endTipo">Tipo de endereço</label>
+                <select id="endTipo" required>
+                    <option value="" selected disabled>Selecione uma opção</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Trabalho">Trabalho</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="endRua">Rua</label>
+                <input id="endRua" type="text" autocomplete="address-line1" required>
+            </div>
+            <div class="campo">
+                <label for="endNumero">Número</label>
+                <input id="endNumero" type="text" inputmode="numeric" required>
+            </div>
+            <div class="campo">
+                <label for="endBairro">Bairro</label>
+                <input id="endBairro" type="text" required>
+            </div>
+            <div class="campo">
+                <label for="endCidade">Cidade</label>
+                <input id="endCidade" type="text" autocomplete="address-level2" required>
+            </div>
+            <div class="campo">
+                <label for="endEstado">Estado</label>
+                <input id="endEstado" type="text" inputmode="text" maxlength="2" pattern="[A-Za-z]{2}" autocomplete="address-level1" title="Informe a sigla com duas letras, como MG" required>
+            </div>
+            <div class="campo">
+                <label for="endCep">Cep</label>
+                <input id="endCep" type="text" inputmode="numeric" maxlength="9" pattern="[0-9]{5}-?[0-9]{3}" autocomplete="postal-code" placeholder="00000-000" title="Informe os 8 dígitos do CEP" required>
+            </div>
+            <small class="erroCampo erroForm" id="erroEndereco"></small>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit">Salvar endereço</button>
+                <button class="botaoSecundario" type="button" id="cancelarEndereco">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog class="modalEditar" id="modal-identificacao" aria-labelledby="titulo-modal-identificacao">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-person-vcard"></i></span>
+                <div>
+                    <h2 id="titulo-modal-identificacao">Editar identificação</h2>
+                    <p>Atualize seus dados pessoais de comprador.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <form class="formPerfilLoja" id="formIdentificacaoComprador">
+            <div class="campo">
+                <label for="campoNomeComprador">Nome completo</label>
+                <input id="campoNomeComprador" name="nome" type="text" maxlength="100" autocomplete="name" required minlength="3">
+            </div>
+            <div class="campo">
+                <label for="campoEmailComprador">E-mail</label>
+                <input id="campoEmailComprador" name="email" type="email" maxlength="120" autocomplete="email" required>
+            </div>
+            <div class="campo">
+                <label for="campoTelefoneComprador">Telefone</label>
+                <input id="campoTelefoneComprador" name="telefone" type="tel" maxlength="20" autocomplete="tel" inputmode="tel" placeholder="(34) 9 9999-9999">
+            </div>
+            <div class="campo">
+                <label for="campoNascimentoComprador">Data de nascimento</label>
+                <input id="campoNascimentoComprador" name="nascimento" type="date" autocomplete="bday">
+            </div>
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Salvar alterações</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+            <p class="mensagemFormulario" id="mensagemIdentificacaoComprador" role="status" aria-live="polite"></p>
+        </form>
+    </dialog>
 
     <!-- Confirmação de saída -->
     <dialog class="modalSair" id="modalSair" aria-labelledby="modalSairTitulo">
@@ -242,6 +311,256 @@
     </footer>
 
     <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+
+    <script>
+    (() => {
+        const modal = document.getElementById("modal-identificacao");
+        const formulario = document.getElementById("formIdentificacaoComprador");
+        if (!modal || !formulario) return;
+
+        const chave = "cafezinPerfilCompradorIdentificacao";
+        const campos = {
+            nome: document.getElementById("campoNomeComprador"),
+            email: document.getElementById("campoEmailComprador"),
+            telefone: document.getElementById("campoTelefoneComprador"),
+            nascimento: document.getElementById("campoNascimentoComprador")
+        };
+
+        const carregar = () => {
+            try {
+                return JSON.parse(localStorage.getItem(chave)) || {};
+            } catch {
+                return {};
+            }
+        };
+
+        const exibir = dados => {
+            Object.entries(dados).forEach(([campo, valor]) => {
+                const destino = document.querySelector(`[data-comprador-valor="${campo}"]`);
+                if (destino) {
+                    if (campo === "nascimento" && valor) {
+                        const [ano, mes, dia] = valor.split("-");
+                        destino.textContent = `${dia}/${mes}/${ano}`;
+                    } else {
+                        destino.textContent = valor || (campo === "nascimento" ? "Não informada" : "Não informado");
+                    }
+                }
+            });
+
+            const nome = document.getElementById("perfilNome");
+            const email = document.getElementById("perfilEmail");
+            if (nome && dados.nome) nome.textContent = dados.nome;
+            if (email && dados.email) email.textContent = dados.email;
+        };
+
+        const dadosAtuais = carregar();
+        Object.entries(campos).forEach(([campo, input]) => {
+            if (input && dadosAtuais[campo]) input.value = dadosAtuais[campo];
+        });
+        exibir(dadosAtuais);
+
+        document.querySelectorAll('[data-abrir-modal="modal-identificacao"]').forEach(botao => {
+            botao.addEventListener("click", () => {
+                const dados = carregar();
+                Object.entries(campos).forEach(([campo, input]) => {
+                    if (input) input.value = dados[campo] || "";
+                });
+                modal.showModal();
+            });
+        });
+
+        modal.querySelectorAll("[data-fechar-modal]").forEach(botao => {
+            botao.addEventListener("click", () => modal.close());
+        });
+
+        modal.addEventListener("click", evento => {
+            if (evento.target === modal) modal.close();
+        });
+
+        formulario.addEventListener("submit", evento => {
+            evento.preventDefault();
+            if (!formulario.reportValidity()) return;
+
+            const dados = Object.fromEntries(
+                Object.entries(campos).map(([campo, input]) => [campo, input.value.trim()])
+            );
+
+            try {
+                localStorage.setItem(chave, JSON.stringify(dados));
+            } catch {
+                const mensagem = document.getElementById("mensagemIdentificacaoComprador");
+                if (mensagem) mensagem.textContent = "Não foi possível salvar os dados neste navegador.";
+                return;
+            }
+
+            exibir(dados);
+            modal.close();
+        });
+    })();
+    </script>
+
+
+    <script>
+    (() => {
+        const formulario = document.getElementById("formEndereco");
+        const lista = document.getElementById("listaEnderecos");
+        const botaoNovo = document.getElementById("alternarNovoEndereco");
+        const botaoCancelar = document.getElementById("cancelarEndereco");
+        const modalEndereco = document.getElementById("modal-endereco");
+        const botaoFecharModal = document.getElementById("fecharModalEndereco");
+        const chave = "cafezinEnderecosComprador";
+
+        if (!formulario || !lista || !botaoNovo) return;
+
+        const campos = {
+            apelido: document.getElementById("endApelido"),
+            tipo: document.getElementById("endTipo"),
+            rua: document.getElementById("endRua"),
+            numero: document.getElementById("endNumero"),
+            bairro: document.getElementById("endBairro"),
+            cidade: document.getElementById("endCidade"),
+            estado: document.getElementById("endEstado"),
+            cep: document.getElementById("endCep")
+        };
+
+        // Máscara do CEP (00000-000) e estado em maiúsculas
+        campos.cep.addEventListener("input", () => {
+            const n = campos.cep.value.replace(/\D/g, "").slice(0, 8);
+            campos.cep.value = n.length > 5 ? `${n.slice(0, 5)}-${n.slice(5)}` : n;
+        });
+        campos.estado.addEventListener("input", () => {
+            campos.estado.value = campos.estado.value.replace(/[^A-Za-z]/g, "").toUpperCase();
+        });
+
+        const formatarCep = valor => {
+            const n = (valor || "").replace(/\D/g, "");
+            return n.length === 8 ? `${n.slice(0, 5)}-${n.slice(5)}` : (valor || "Não informado");
+        };
+
+        let enderecos = [];
+        try {
+            enderecos = JSON.parse(localStorage.getItem(chave)) || [];
+        } catch {
+            enderecos = [];
+        }
+
+        const salvar = () => {
+            localStorage.setItem(chave, JSON.stringify(enderecos));
+        };
+
+        const criarCard = (endereco, indice) => {
+            const item = document.createElement("li");
+            item.className = "itemEndereco";
+
+            const icone = document.createElement("div");
+            icone.className = "itemEnderecoIcone";
+            const simbolo = document.createElement("i");
+            simbolo.className = "bi bi-geo-alt-fill";
+            simbolo.setAttribute("aria-hidden", "true");
+            icone.appendChild(simbolo);
+
+            const conteudo = document.createElement("div");
+            const titulo = document.createElement("h3");
+            titulo.textContent = endereco.apelido || endereco.tipo || "Endereço";
+
+            const tipo = document.createElement("p");
+            tipo.textContent = `Tipo: ${endereco.tipo || "Não informado"}`;
+
+            const linha1 = document.createElement("p");
+            linha1.textContent = `${endereco.rua}, ${endereco.numero}`;
+            const linha2 = document.createElement("p");
+            linha2.textContent = `${endereco.bairro} — ${endereco.cidade}${endereco.estado ? "/" + endereco.estado : ""}`;
+            const linha3 = document.createElement("p");
+            linha3.textContent = `CEP: ${formatarCep(endereco.cep)}`;
+            conteudo.append(titulo, tipo, linha1, linha2, linha3);
+
+            const acoes = document.createElement("div");
+            acoes.className = "itemAcoes";
+
+            const excluir = document.createElement("button");
+            excluir.type = "button";
+            excluir.className = "botaoIcone";
+            excluir.title = "Excluir endereço";
+            excluir.setAttribute("aria-label", "Excluir endereço");
+            excluir.innerHTML = '<i class="bi bi-trash" aria-hidden="true"></i>';
+            excluir.addEventListener("click", () => {
+                enderecos.splice(indice, 1);
+                if (enderecos.length && !enderecos.some(item => item.principal)) {
+                    enderecos[0].principal = true;
+                }
+                salvar();
+                renderizar();
+            });
+
+            acoes.append(excluir);
+            item.append(icone, conteudo, acoes);
+            return item;
+        };
+
+        const renderizar = () => {
+            lista.replaceChildren();
+            enderecos.forEach((endereco, indice) => {
+                lista.appendChild(criarCard(endereco, indice));
+            });
+        };
+
+        const abrirFormulario = () => {
+            formulario.reset();
+            const erro = document.getElementById("erroEndereco");
+            if (erro) erro.textContent = "";
+            modalEndereco.showModal();
+            botaoNovo.setAttribute("aria-expanded", "true");
+            campos.apelido.focus();
+        };
+
+        const fecharFormulario = () => {
+            formulario.reset();
+            if (modalEndereco.open) modalEndereco.close();
+            botaoNovo.setAttribute("aria-expanded", "false");
+            const erro = document.getElementById("erroEndereco");
+            if (erro) erro.textContent = "";
+        };
+
+        botaoNovo.addEventListener("click", abrirFormulario);
+        if (botaoCancelar) botaoCancelar.addEventListener("click", fecharFormulario);
+        if (botaoFecharModal) botaoFecharModal.addEventListener("click", fecharFormulario);
+        modalEndereco.addEventListener("click", evento => {
+            if (evento.target === modalEndereco) fecharFormulario();
+        });
+        modalEndereco.addEventListener("close", () => {
+            botaoNovo.setAttribute("aria-expanded", "false");
+        });
+
+        formulario.addEventListener("submit", evento => {
+            evento.preventDefault();
+
+            if (!formulario.reportValidity()) return;
+
+            const endereco = Object.fromEntries(
+                Object.entries(campos).map(([chaveCampo, input]) => [
+                    chaveCampo,
+                    input.value.trim()
+                ])
+            );
+
+            enderecos.push(endereco);
+
+            try {
+                salvar();
+            } catch {
+                const erro = document.getElementById("erroEndereco");
+                if (erro) erro.textContent = "Não foi possível salvar o endereço neste navegador.";
+                enderecos.pop();
+                return;
+            }
+
+            renderizar();
+            fecharFormulario();
+        });
+
+        renderizar();
+    })();
+    </script>
 
     <script src="JavaScript/Comprador/perfilComprador.js"></script>
 </body>
