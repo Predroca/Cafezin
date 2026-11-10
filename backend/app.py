@@ -20,6 +20,9 @@ CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = Config.SQLALCHEMY_DATABASE_URI
 app.config["SECRET_KEY"] = Config.SECRET_KEY
+app.config["UPLOAD_FOLDER"] = Config.UPLOAD_FOLDER
+app.config["MAX_CONTENT_LENGTH"] = Config.MAX_CONTENT_LENGTH
+app.config["EXTENSOES_PERMITIDAS"] = Config.EXTENSOES_PERMITIDAS
 
 db.init_app(app)
 jwt.init_app(app)
