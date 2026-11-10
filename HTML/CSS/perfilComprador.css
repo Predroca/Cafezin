@@ -289,6 +289,19 @@ Usa as variáveis e fontes de main.css e a navegação/rodapé de indexComp.css.
     font-size: var(--fonte-normal);
     transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
 }
+
+.formPerfilLoja .campo select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(75, 54, 42, .28);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-texto);
+    font-family: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+}
+
 .campo input:hover {
     border-color: var(--cor-laranja);
 }
