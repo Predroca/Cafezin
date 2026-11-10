@@ -29,6 +29,8 @@ def salvar_foto(arquivo, subpasta):
 def remover_foto(foto_url):
     if not foto_url:
         return
+    if (Produto.query.filter_by(foto_url=foto_url).first() or Usuario.query.filter_by(foto_url=foto_url).first()):
+        return
     partes = foto_url.split("/")
     if len(partes) != 4 or partes[1] != "uploads" or partes[2] not in SUBPASTAS:
         return
@@ -78,11 +80,12 @@ def foto_perfil():
     if arquivo is None:
         return {"error": "envie o arquivo no campo 'foto'"}, 400
     
-    caminho = salvar_foto(arquivo, "produtos")
+    caminho = salvar_foto(arquivo, "usuarios")
     if caminho is None:
         return {"error": "formato inválido (use png, jpg, jpeg ou webp)"}, 400
-    
+
     foto_antiga = usuario.foto_url
+    usuario.foto_url = caminho
     db.session.commit()
     remover_foto(foto_antiga)
     
