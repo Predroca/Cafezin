@@ -125,20 +125,11 @@
     position: sticky;
     top: 100px;
     animation-delay: .08s;
+    max-width: 400px;
+    margin: auto;
 }
 
 /* Cartões de grupo de campos */
-
-.cartaoGrupo {
-    margin: 0;
-    padding: 24px;
-    border: 1px solid rgba(75, 54, 42, .12);
-    border-radius: var(--borda-arredondada-media);
-    background: var(--cor-background);
-    box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
-    min-width: 0;
-}
-
 .cartaoGrupoCabecalho {
     display: flex;
     align-items: center;
@@ -146,7 +137,6 @@
     width: 100%;
     margin-bottom: 20px;
     padding-bottom: 16px;
-    border-bottom: 1px dashed rgba(75, 54, 42, .22);
 }
 
 .cartaoGrupoIcone {
@@ -167,6 +157,10 @@
     font-size: var(--fonte-grande);
     line-height: 1.1;
 }
+.cartaoGrupo{
+    border: none;
+    margin-bottom: 40px;
+}
 
 .cartaoGrupoCabecalho p,
 .cartaoGrupoCabecalho .subtituloGrupo {
@@ -174,6 +168,9 @@
     margin-top: 3px;
     color: var(--cor-texto-secundario);
     font-size: .78rem;
+}
+.secaopadrao{
+    background-color: white;
 }
 
 legend.cartaoGrupoCabecalho {
@@ -326,26 +323,23 @@ legend.cartaoGrupoCabecalho + * {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    width: 320px;
+    height: 320px;
+    min-width: 220px;
     min-height: 220px;
     padding: 20px;
-    border: 2px dashed rgba(75, 54, 42, .3);
-    border-radius: var(--borda-arredondada-media);
-    background: var(--cor-background-alternativo);
+    border: 2px solid rgba(75, 54, 42, 0.11);
     color: var(--cor-marrom-claro);
     text-align: center;
+    margin: auto;
+    border-radius: 5px;
     cursor: pointer;
     transition: border-color var(--transicao-normal), background var(--transicao-normal), transform var(--transicao-normal);
 }
 
 .areaFoto:hover {
-    border-color: var(--cor-laranja);
-    background: var(--cor-background-bege);
-}
-
-.areaFoto:focus-within {
-    border-color: var(--cor-laranja-escuro);
-    outline: 3px solid var(--cor-laranja-claro);
-    outline-offset: 2px;
+    border-color:#b8744f42;
+    background: #fff3e7a9;
 }
 
 .areaFoto i {
