@@ -307,3 +307,58 @@ def lojas_da_categoria(cod_categoria):
         })
 
     return {"categoria" : categoria.nome_categoria, "lojas" : list(lojas.values())}
+
+def _loja_aberta(loja):
+    if not loja.horario_abertura or not loja.horario_fecha:
+        return None
+    agora = datetime.now().time()
+    if loja.horario_abertura <= loja.horario_fecha:
+        return loja.horario_abertura <= agora <= loja.horario_fecha
+    return agora >= loja.horario_abertura or agora <= loja.horario_fecha
+
+
+@catalogo_bp.route("/lojas/<int:cod_loja>/cardapio", methods=["GET"])
+def cardapio_da_loja(cod_loja):
+    loja = db.session.get(Loja, cod_loja)
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+
+    nota_media, total_avaliacoes = (
+        db.session.query(
+            func.avg(AvaliacaoLoja.nota),
+            func.count(AvaliacaoLoja.cod_avaliacao_loja),
+        )
+        .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+        .filter(Pedido.cod_loja == cod_loja)
+        .one()
+    )
+
+    linhas = (
+        db.session.query(Produto, Categoria.nome_categoria)
+        .outerjoin(Categoria, Categoria.cod_categoria == Produto.cod_categoria)
+        .filter(Produto.cod_loja == cod_loja, Produto.disponibilidade.is_(True))
+        .order_by(Categoria.nome_categoria, Produto.nome)
+        .all()
+    )
+
+    return {
+        "cod_loja": loja.cod_loja,
+        "nome": loja.usuario.nome,
+        "foto_url": loja.usuario.foto_url,
+        "horario_abertura": loja.horario_abertura.strftime("%H:%M") if loja.horario_abertura else None,
+        "horario_fecha": loja.horario_fecha.strftime("%H:%M") if loja.horario_fecha else None,
+        "aberta": _loja_aberta(loja),
+        "nota_media": round(float(nota_media), 1) if nota_media is not None else None,
+        "total_avaliacoes": total_avaliacoes,
+        "produtos": [
+            {
+                "cod_produto": p.cod_produto,
+                "nome": p.nome,
+                "descricao": p.descricao,
+                "preco": float(p.preco),
+                "foto_url": p.foto_url,
+                "categoria": nome_categoria,
+            }
+            for p, nome_categoria in linhas
+        ],
+    }
