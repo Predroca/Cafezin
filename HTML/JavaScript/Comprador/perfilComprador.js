@@ -1,33 +1,17 @@
-/*
-Perfil do comprador
-Os dados ficam no localStorage enquanto não há back-end.
-Quando a API existir, troque ler() e salvar() por chamadas fetch.
-*/
+
 (function () {
     "use strict";
 
     const CHAVES = {
-        perfil: "cafezinPerfil",
-        enderecos: "cafezinEnderecos",
+        perfil: "cafezinPerfil",                                  // só a foto
+        identificacao: "cafezinPerfilCompradorIdentificacao",     // gravada pelo script inline
+        enderecos: "cafezinEnderecosComprador",                   // gravada pelo script inline
         favoritas: "cafezinFavoritas",
         sessao: "cafezinSessao"
     };
 
     const PAGINA_INICIAL_DESLOGADO = "index.html";
     const PAGINA_INICIAL_COMPRADOR = "indexComprador.html";
-
-    /* ---------- Dados de exemplo (substitua pelos dados reais do back-end) ---------- */
-    const PERFIL_PADRAO = {
-        nome: "Ana",
-        email: "ana@email.com",
-        telefone: "(34) 9 9999-9999",
-        nascimento: "",
-        foto: ""
-    };
-
-    const ENDERECOS_PADRAO = [
-        { id: 1, apelido: "Casa", rua: "Rua das Flores", numero: "120", bairro: "Centro", cidade: "Barbacena", principal: true }
-    ];
 
     const FAVORITAS_PADRAO = [
         { id: 1, nome: "Boutique dos Pães", tipo: "Padaria · Cafeteria", sigla: "BP", nota: "4,9", cor: "" },
@@ -62,7 +46,6 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         }
     }
 
-    // Cria elementos sem innerHTML, para nunca interpretar texto digitado como HTML.
     function el(tag, classe, texto) {
         const no = document.createElement(tag);
         if (classe) no.className = classe;
@@ -80,9 +63,15 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         return document.getElementById(id);
     }
 
+    function definirTexto(id, valor) {
+        const no = $(id);
+        if (no) no.textContent = valor;
+    }
+
     let temporizadorAviso;
     function avisar(mensagem) {
         const aviso = $("aviso");
+        if (!aviso) return;
         aviso.textContent = mensagem;
         aviso.classList.add("visivel");
         clearTimeout(temporizadorAviso);
@@ -90,17 +79,18 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
     }
 
     /* ---------- Estado ---------- */
-    let perfil = Object.assign({}, PERFIL_PADRAO, ler(CHAVES.perfil, {}));
-    let enderecos = ler(CHAVES.enderecos, ENDERECOS_PADRAO);
+    let perfil = Object.assign({ foto: "" }, ler(CHAVES.perfil, {}));
     let favoritas = ler(CHAVES.favoritas, FAVORITAS_PADRAO);
 
-    /* ---------- Cabeçalho ---------- */
-    function primeiroNome(nome) {
-        return nome.trim().split(/\s+/)[0] || "Cliente";
+    /* ---------- Cabeçalho (avatar e contagens) ---------- */
+    function nomeAtual() {
+        const ident = ler(CHAVES.identificacao, {});
+        return (ident.nome || "").trim();
     }
 
     function renderAvatar() {
         const avatar = $("avatar");
+        if (!avatar) return;
         avatar.textContent = "";
         if (perfil.foto) {
             const img = el("img");
@@ -108,52 +98,68 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
             img.alt = "";
             avatar.appendChild(img);
         } else {
-            avatar.textContent = primeiroNome(perfil.nome).charAt(0).toUpperCase();
+            avatar.textContent = (nomeAtual().charAt(0) || "A").toUpperCase();
         }
     }
 
-    function renderCabecalho() {
-        $("perfilNome").textContent = perfil.nome;
-        $("perfilEmail").textContent = perfil.email;
-        $("resumoPedidos").textContent = PEDIDOS.length;
-        $("resumoFavoritas").textContent = favoritas.length;
-        $("resumoEnderecos").textContent = enderecos.length;
-        renderAvatar();
+    function renderContagens() {
+        definirTexto("resumoPedidos", PEDIDOS.length);
+        definirTexto("resumoFavoritas", favoritas.length);
+        definirTexto("resumoEnderecos", ler(CHAVES.enderecos, []).length);
     }
 
-    $("avatarArquivo").addEventListener("change", function () {
-        const arquivo = this.files[0];
-        if (!arquivo) return;
+    const inputFoto = $("avatarArquivo");
+    if (inputFoto) {
+        inputFoto.addEventListener("change", function () {
+            const arquivo = this.files[0];
+            if (!arquivo) return;
 
-        if (arquivo.size > 1024 * 1024) {
-            avisar("Escolha uma foto de até 1 MB.");
-            this.value = "";
-            return;
-        }
-
-        const leitor = new FileReader();
-        leitor.onload = function () {
-            perfil.foto = leitor.result;
-            if (salvar(CHAVES.perfil, perfil)) {
-                avisar("Foto atualizada.");
-            } else {
-                avisar("Não foi possível guardar a foto. Tente uma imagem menor.");
-                perfil.foto = "";
+            if (arquivo.size > 1024 * 1024) {
+                avisar("Escolha uma foto de até 1 MB.");
+                this.value = "";
+                return;
             }
-            renderAvatar();
-        };
-        leitor.readAsDataURL(arquivo);
-    });
 
-    /* ---------- Abas ----------
-       Todos os painéis ficam na área .perfilPaineis. Clicar numa aba só rola essa
-       área (nunca a página inteira) e, ao rolar à mão, a aba ativa acompanha. */
+            const leitor = new FileReader();
+            leitor.onload = function () {
+                perfil.foto = leitor.result;
+                if (salvar(CHAVES.perfil, perfil)) {
+                    avisar("Foto atualizada.");
+                } else {
+                    avisar("Não foi possível guardar a foto. Tente uma imagem menor.");
+                    perfil.foto = "";
+                }
+                renderAvatar();
+            };
+            leitor.readAsDataURL(arquivo);
+        });
+    }
+
+    // Quando a identificação é salva (script inline), atualiza a inicial do avatar
+    const formIdentificacao = $("formIdentificacaoComprador");
+    if (formIdentificacao) {
+        formIdentificacao.addEventListener("submit", function () {
+            setTimeout(renderAvatar, 0);
+        });
+    }
+
+    // Quando um endereço é salvo/excluído (script inline), atualiza a contagem
+    const formEnderecoNovo = $("formEndereco");
+    if (formEnderecoNovo) {
+        formEnderecoNovo.addEventListener("submit", function () { setTimeout(renderContagens, 0); });
+    }
+    const listaEnd = $("listaEnderecos");
+    if (listaEnd) {
+        new MutationObserver(renderContagens).observe(listaEnd, { childList: true });
+    }
+
+    /* ---------- Abas ---------- */
     const abas = Array.from(document.querySelectorAll(".aba"));
     const areaPaineis = $("perfilPaineis");
     const reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     let abaAtual = null;
-    let travaRolagem = false;      // true enquanto a rolagem foi pedida por um clique
+    let travaRolagem = false;
     let temporizadorTrava;
     let quadroPendente = false;
 
@@ -167,7 +173,6 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
                 aba.removeAttribute("aria-current");
             }
             aba.tabIndex = ativa ? 0 : -1;
-            // preventScroll: dar foco não pode rolar a página
             if (ativa && moverFoco) aba.focus({ preventScroll: true });
         });
 
@@ -182,14 +187,12 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         if (!painel) return;
 
         const folga = parseFloat(getComputedStyle(areaPaineis).paddingTop) || 0;
-        const topo = Math.max(0, painel.offsetTop - folga);   // .perfilPaineis é position: relative
+        const topo = Math.max(0, painel.offsetTop - folga);
 
         travaRolagem = true;
         clearTimeout(temporizadorTrava);
-        // se já estiver na posição não haverá evento de scroll; garante que a trava solte
         temporizadorTrava = setTimeout(function () { travaRolagem = false; }, 250);
 
-        // scrollTo age só nesta área; scrollIntoView/âncora (#id) rolariam a página toda
         areaPaineis.scrollTo({
             top: topo,
             behavior: instantaneo || reduzMovimento.matches ? "auto" : "smooth"
@@ -202,12 +205,10 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         rolarParaPainel(nome, config.instantaneo);
     }
 
-    // Descobre qual painel está no topo da área e marca a aba correspondente
     function sincronizarAbaComRolagem() {
         quadroPendente = false;
 
         if (travaRolagem) {
-            // durante a rolagem do clique, só espera ela terminar (sem piscar abas no caminho)
             clearTimeout(temporizadorTrava);
             temporizadorTrava = setTimeout(function () { travaRolagem = false; }, 120);
             return;
@@ -219,7 +220,7 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
 
         abas.forEach(function (aba) {
             const painel = $("painel-" + aba.dataset.aba);
-            if (painel.offsetTop - folga <= referencia) nome = aba.dataset.aba;
+            if (painel && painel.offsetTop - folga <= referencia) nome = aba.dataset.aba;
         });
 
         const noFim = areaPaineis.scrollTop + areaPaineis.clientHeight >= areaPaineis.scrollHeight - 2;
@@ -236,7 +237,7 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
 
     abas.forEach(function (aba, indice) {
         aba.addEventListener("click", function (e) {
-            e.preventDefault();   // impede o salto nativo da âncora (#painel-...) que rolava a página
+            e.preventDefault();
             abrirAba(aba.dataset.aba);
         });
         aba.addEventListener("keydown", function (e) {
@@ -249,7 +250,6 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         });
     });
 
-    // Links de fora do menu lateral (ex.: "Pedidos" no topo da página)
     document.querySelectorAll("[data-ir-aba]").forEach(function (link) {
         link.addEventListener("click", function (e) {
             e.preventDefault();
@@ -257,189 +257,24 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         });
     });
 
-    /* ---------- Meus dados ---------- */
-    const formDados = $("formDados");
-    const camposDados = { nome: $("campoNome"), email: $("campoEmail"), telefone: $("campoTelefone"), nascimento: $("campoNascimento") };
-
-    function preencherForm() {
-        Object.keys(camposDados).forEach(function (k) {
-            camposDados[k].value = perfil[k] || "";
-        });
-        limparErros();
-    }
-
-    function mostrarErro(campo, mensagem) {
-        const alvo = document.querySelector('[data-erro-para="' + campo.id + '"]');
-        if (alvo) alvo.textContent = mensagem;
-        campo.setAttribute("aria-invalid", mensagem ? "true" : "false");
-        if (alvo) {
-            campo.setAttribute("aria-describedby", alvo.id || (alvo.id = campo.id + "Erro"));
+    /* ---------- Estado vazio ---------- */
+    function estadoVazio(nomeIcone, titulo, texto, rotuloLink, href) {
+        const li = el("li", "estadoVazio");
+        li.appendChild(icone(nomeIcone));
+        li.appendChild(el("strong", "", titulo));
+        li.appendChild(el("span", "", texto));
+        if (rotuloLink) {
+            const a = el("a", "", rotuloLink);
+            a.href = href;
+            li.appendChild(a);
         }
-    }
-
-    function limparErros() {
-        Object.values(camposDados).forEach((c) => mostrarErro(c, ""));
-    }
-
-    function formatarTelefone(valor) {
-        const n = valor.replace(/\D/g, "").slice(0, 11);
-        if (n.length <= 2) return n ? "(" + n : "";
-        if (n.length <= 3) return "(" + n.slice(0, 2) + ") " + n.slice(2);
-        if (n.length <= 7) return "(" + n.slice(0, 2) + ") " + n.slice(2, 3) + " " + n.slice(3);
-        return "(" + n.slice(0, 2) + ") " + n.slice(2, 3) + " " + n.slice(3, 7) + "-" + n.slice(7);
-    }
-
-    camposDados.telefone.addEventListener("input", function () {
-        this.value = formatarTelefone(this.value);
-    });
-
-    function validarDados() {
-        limparErros();
-        let primeiroInvalido = null;
-
-        function falhar(campo, msg) {
-            mostrarErro(campo, msg);
-            if (!primeiroInvalido) primeiroInvalido = campo;
-        }
-
-        if (camposDados.nome.value.trim().length < 3) {
-            falhar(camposDados.nome, "Digite seu nome completo.");
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(camposDados.email.value.trim())) {
-            falhar(camposDados.email, "Digite um e-mail válido, como nome@email.com.");
-        }
-        if (camposDados.telefone.value.replace(/\D/g, "").length !== 11) {
-            falhar(camposDados.telefone, "Digite o telefone com DDD e 9 dígitos.");
-        }
-
-        if (primeiroInvalido) primeiroInvalido.focus();
-        return !primeiroInvalido;
-    }
-
-    formDados.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (!validarDados()) return;
-
-        perfil.nome = camposDados.nome.value.trim();
-        perfil.email = camposDados.email.value.trim();
-        perfil.telefone = camposDados.telefone.value;
-        perfil.nascimento = camposDados.nascimento.value;
-
-        if (salvar(CHAVES.perfil, perfil)) {
-            renderCabecalho();
-            avisar("Dados salvos.");
-        } else {
-            avisar("Não foi possível salvar. Verifique o espaço do navegador.");
-        }
-    });
-
-    $("descartarDados").addEventListener("click", function () {
-        preencherForm();
-        avisar("Alterações descartadas.");
-    });
-
-    /* ---------- Endereços ---------- */
-    const formEndereco = $("formEndereco");
-    const botaoNovoEndereco = $("alternarNovoEndereco");
-
-    function alternarFormEndereco(abrir) {
-        formEndereco.hidden = !abrir;
-        botaoNovoEndereco.setAttribute("aria-expanded", abrir);
-        if (abrir) {
-            $("endApelido").focus();
-        } else {
-            formEndereco.reset();
-            $("erroEndereco").textContent = "";
-        }
-    }
-
-    botaoNovoEndereco.addEventListener("click", () => alternarFormEndereco(formEndereco.hidden));
-    $("cancelarEndereco").addEventListener("click", () => alternarFormEndereco(false));
-
-    formEndereco.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const dados = {
-            apelido: $("endApelido").value.trim(),
-            rua: $("endRua").value.trim(),
-            numero: $("endNumero").value.trim(),
-            bairro: $("endBairro").value.trim(),
-            cidade: $("endCidade").value.trim()
-        };
-
-        if (Object.values(dados).some((v) => !v)) {
-            $("erroEndereco").textContent = "Preencha todos os campos do endereço.";
-            return;
-        }
-
-        enderecos.push(Object.assign({ id: Date.now(), principal: enderecos.length === 0 }, dados));
-        salvar(CHAVES.enderecos, enderecos);
-        alternarFormEndereco(false);
-        renderEnderecos();
-        renderCabecalho();
-        avisar("Endereço adicionado.");
-    });
-
-    function renderEnderecos() {
-        const lista = $("listaEnderecos");
-        lista.textContent = "";
-
-        if (!enderecos.length) {
-            lista.appendChild(estadoVazio("geo-alt", "Nenhum endereço salvo", "Adicione um endereço para receber seus pedidos."));
-            return;
-        }
-
-        enderecos.forEach(function (end) {
-            const item = el("li", "itemEndereco");
-
-            const iconeBox = el("div", "itemEnderecoIcone");
-            iconeBox.appendChild(icone(end.apelido.toLowerCase() === "trabalho" ? "briefcase" : "house-door"));
-
-            const texto = el("div");
-            const titulo = el("h3", "", end.apelido);
-            if (end.principal) titulo.appendChild(el("span", "selo", "Principal"));
-            texto.appendChild(titulo);
-            texto.appendChild(el("p", "", end.rua + ", " + end.numero + " - " + end.bairro + ", " + end.cidade));
-
-            const acoes = el("div", "itemAcoes");
-
-            if (!end.principal) {
-                const principal = el("button", "botaoIcone");
-                principal.type = "button";
-                principal.title = "Definir como principal";
-                principal.setAttribute("aria-label", "Definir " + end.apelido + " como endereço principal");
-                principal.appendChild(icone("check2"));
-                principal.addEventListener("click", function () {
-                    enderecos.forEach((x) => (x.principal = x.id === end.id));
-                    salvar(CHAVES.enderecos, enderecos);
-                    renderEnderecos();
-                    avisar(end.apelido + " agora é o endereço principal.");
-                });
-                acoes.appendChild(principal);
-            }
-
-            const excluir = el("button", "botaoIcone excluir");
-            excluir.type = "button";
-            excluir.title = "Excluir endereço";
-            excluir.setAttribute("aria-label", "Excluir endereço " + end.apelido);
-            excluir.appendChild(icone("trash"));
-            excluir.addEventListener("click", function () {
-                enderecos = enderecos.filter((x) => x.id !== end.id);
-                if (enderecos.length && !enderecos.some((x) => x.principal)) enderecos[0].principal = true;
-                salvar(CHAVES.enderecos, enderecos);
-                renderEnderecos();
-                renderCabecalho();
-                avisar("Endereço excluído.");
-            });
-            acoes.appendChild(excluir);
-
-            item.append(iconeBox, texto, acoes);
-            lista.appendChild(item);
-        });
+        return li;
     }
 
     /* ---------- Pedidos ---------- */
     function renderPedidos() {
         const lista = $("listaPedidos");
+        if (!lista) return;
         lista.textContent = "";
 
         if (!PEDIDOS.length) {
@@ -472,6 +307,7 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
     /* ---------- Favoritas ---------- */
     function renderFavoritas() {
         const lista = $("listaFavoritas");
+        if (!lista) return;
         lista.textContent = "";
 
         if (!favoritas.length) {
@@ -501,7 +337,7 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
                 favoritas = favoritas.filter((x) => x.id !== loja.id);
                 salvar(CHAVES.favoritas, favoritas);
                 renderFavoritas();
-                renderCabecalho();
+                renderContagens();
                 avisar(loja.nome + " saiu das favoritas.");
             });
             item.appendChild(remover);
@@ -510,56 +346,42 @@ Quando a API existir, troque ler() e salvar() por chamadas fetch.
         });
     }
 
-    function estadoVazio(nomeIcone, titulo, texto, rotuloLink, href) {
-        const li = el("li", "estadoVazio");
-        li.appendChild(icone(nomeIcone));
-        li.appendChild(el("strong", "", titulo));
-        li.appendChild(el("span", "", texto));
-        if (rotuloLink) {
-            const a = el("a", "", rotuloLink);
-            a.href = href;
-            li.appendChild(a);
-        }
-        return li;
-    }
-
     /* ---------- Sair da conta ---------- */
     const modalSair = $("modalSair");
 
-    $("abrirSair").addEventListener("click", function () {
-        if (typeof modalSair.showModal === "function") {
-            modalSair.showModal();
-            $("cancelarSair").focus();
-        } else if (window.confirm("Sair da sua conta?")) {
-            sair();
-        }
-    });
-
-    $("cancelarSair").addEventListener("click", () => modalSair.close());
-
-    // Fecha ao clicar fora da caixa
-    modalSair.addEventListener("click", function (e) {
-        const caixa = modalSair.getBoundingClientRect();
-        const fora = e.clientX < caixa.left || e.clientX > caixa.right || e.clientY < caixa.top || e.clientY > caixa.bottom;
-        if (fora) modalSair.close();
-    });
-
-    $("confirmarSair").addEventListener("click", sair);
-
     function sair() {
-        // Encerra só a sessão. Quando houver token/cookie de login, remova-o aqui também.
         try {
             localStorage.removeItem(CHAVES.sessao);
             sessionStorage.clear();
-        } catch (e) { /* navegador sem storage: segue para o início mesmo assim */ }
-
+        } catch (e) { /* segue mesmo sem storage */ }
         window.location.replace(PAGINA_INICIAL_DESLOGADO);
     }
 
+    const botaoAbrirSair = $("abrirSair");
+    if (botaoAbrirSair && modalSair) {
+        botaoAbrirSair.addEventListener("click", function () {
+            if (typeof modalSair.showModal === "function") {
+                modalSair.showModal();
+                $("cancelarSair").focus();
+            } else if (window.confirm("Sair da sua conta?")) {
+                sair();
+            }
+        });
+
+        $("cancelarSair").addEventListener("click", () => modalSair.close());
+
+        modalSair.addEventListener("click", function (e) {
+            const caixa = modalSair.getBoundingClientRect();
+            const fora = e.clientX < caixa.left || e.clientX > caixa.right || e.clientY < caixa.top || e.clientY > caixa.bottom;
+            if (fora) modalSair.close();
+        });
+
+        $("confirmarSair").addEventListener("click", sair);
+    }
+
     /* ---------- Início ---------- */
-    renderCabecalho();
-    preencherForm();
-    renderEnderecos();
+    renderAvatar();
+    renderContagens();
     renderPedidos();
     renderFavoritas();
 
