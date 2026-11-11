@@ -19,9 +19,9 @@
             <a class="logoLoja" href="#topo" aria-label="Cafézin - painel da loja">Cafézin <span>Loja</span></a>
 
             <nav class="navLinks" aria-label="Navegação do painel">
-                <a class="ativo" href="#painel">Painel</a>
+                <a class="ativo" href="#painel">Cardápio</a>
                 <a href="#pedidos">Pedidos</a>
-                <a href="#produtos">Produtos</a>
+
                 <a href="#minhaLoja">Minha loja</a>
             </nav>
 
@@ -97,146 +97,7 @@
             </div>
         </section>
 
-        <section class="secaoPadrao" id="pedidos" aria-labelledby="titulo-pedidos">
-            <div class="container">
-
-                <div class="cabecalhoSecao linha">
-                    <div>
-                        <h2 id="titulo-pedidos">Pedidos em andamento</h2>
-                        <p>Confirme, prepare e despache sem perder o ritmo.</p>
-                    </div>
-
-                </div>
-
-                <div class="listaPedidos">
-
-                    <article class="pedido  novo">
-                        <div class="pedidoCabecalho">
-                            <span class="statusBadge aguardando">Pendente</span>
-                            <time>Há 2 min</time>
-                        </div>
-
-                        <h3>Pedido #4821 · Ana Clara</h3>
-                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 44,00</strong>
-
-                            <div class="pedidoAcoes">
-                                <button type="button" class="botaoPrimario">
-                                    Confirmar preparo
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="pedido  preparo">
-                        <div class="pedidoCabecalho">
-                            <span class="statusBadge aguardando">Em preparo</span>
-                            <time>Há 9 min</time>
-                        </div>
-
-                        <h3>Pedido #4819 · Rafael Souza</h3>
-                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 22,80</strong>
-
-                            <div class="pedidoAcoes">
-                                <button type="button" class="botaoPrimario">
-                                    Marcar como pronto
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="pedido  pronto">
-                        <div class="pedidoCabecalho">
-                            <span class="statusBadge entregue">A caminho</span>
-                            <time>Há 14 min</time>
-                        </div>
-
-                        <h3>Pedido #4816 · Marcos Vinícius</h3>
-                        <p>3x Pão de queijo artesanal</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 43,50</strong>
-
-                            <div class="pedidoAcoes">
-                                <button type="button" class="botaoSecundario">
-                                    Marcar como entregue
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-        </section>
-
-
-        <section class="secaoPadrao" id="pedidos" aria-labelledby="titulo-pedidos">
-            <div class="container">
-
-                <div class="cabecalhoSecao linha">
-                    <div>
-                        <h2 id="titulo-pedidos">Pedidos finalizados</h2>
-                        <p>Vizualize todo o histórico de pedidos.</p>
-                    </div>
-
-                    <a class="linkSecao" href="historicoPedidos.html">
-                        Ver todos
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-
-                <div class="listaPedidos">
-
-                    <article class="pedido  novo">
-                        <div class="pedidoCabecalho">
-                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
-                        </div>
-
-                        <h3>Pedido #4821 · Ana Clara</h3>
-                        <p>2x Pão de queijo artesanal · 1x Chocolate quente cremoso</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 44,00</strong>
-
-                        </div>
-                    </article>
-
-                    <article class="pedido  preparo">
-                        <div class="pedidoCabecalho">
-                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
-                        </div>
-
-                        <h3>Pedido #4819 · Rafael Souza</h3>
-                        <p>1x Bolo de cenoura caseiro· 1x Cappuccino cremoso</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 22,80</strong>
-
-                            
-                        </div>
-                    </article>
-
-                    <article class="pedido  pronto">
-                        <div class="pedidoCabecalho">
-                            <time class="diaHoraEntrega" >Quarta-feira, 14:30</time>
-                        </div>
-
-                        <h3>Pedido #4816 · Marcos Vinícius</h3>
-                        <p>3x Pão de queijo artesanal</p>
-
-                        <div class="pedidoRodape">
-                            <strong>R$ 43,50</strong>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-        </section>
+        
 
         <section
             class="secaoPadrao secaoAlternada"
@@ -382,6 +243,76 @@
                     </article>
 
                     <!-- Produto 4 -->
+                    <article class="produto Loja">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja azul"
+                            role="img"
+                            aria-label="Espaço para foto do cappuccino"
+                        >
+
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Sanduíche natural de frango</h3>
+
+
+                            </div>
+
+                            <p>Pão integral, frango desfiado, requeijão, tomate, alface...</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 11,99</strong>
+
+                                <div class="produtoAcoes">
+                                    <a
+                                        href='editarProduto.html'
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
+                    <article class="produto Loja">
+
+                        <div
+                            class="placeholderFoto fotoProdutoLoja azul"
+                            role="img"
+                            aria-label="Espaço para foto do cappuccino"
+                        >
+
+                        </div>
+
+                        <div class="produtoInfoLoja">
+
+                            <div class="produtoInfoLinha">
+                                <h3>Sanduíche natural de frango</h3>
+
+
+                            </div>
+
+                            <p>Pão integral, frango desfiado, requeijão, tomate, alface...</p>
+
+                            <div class="produtoInfoRodape">
+                                <strong>R$ 11,99</strong>
+
+                                <div class="produtoAcoes">
+                                    <a
+                                        href='editarProduto.html'
+                                        aria-label="Editar produto"
+                                    >
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </article>
                     <article class="produto Loja">
 
                         <div
