@@ -4,7 +4,8 @@ Padrão visual compartilhado pelas três telas (header de etapas, títulos de se
 seção de produtos, resumo, botões e estado vazio). O pagamento.css só tem o que é
 exclusivo do pagamento. Carregue este arquivo ANTES do pagamento.css.
 Depende de: main.css (variáveis), indexComp.css (header do comprador e carrossel).
-Botão, botão voltar e estado vazio usam as mesmas regras do perfilComprador.css.
+Botão, botão voltar e estado vazio vêm do componentes.css (compartilhado com o perfil).
+Carregue o componentes.css ANTES deste arquivo.
 
 Layout: área com scroll (.areaRolagem) de um lado e o resumo alongado do outro.
 Só a área com scroll desce; o resumo ocupa toda a altura da direita e fica parado.
@@ -22,17 +23,17 @@ html{
 .navComprador{
     view-transition-name: cabecalho;
 }
+/* o header não faz fade: só aparece o novo, sem fantasma da linha antiga */
+::view-transition-old(cabecalho){
+    display: none;
+}
+::view-transition-new(cabecalho){
+    animation: none;
+}
 ::view-transition-old(root),
 ::view-transition-new(root){
     animation-duration: 0.18s;
     animation-timing-function: ease;
-}
-
-[hidden]{ display: none !important; }
-
-:focus-visible{
-    outline: 3px solid var(--cor-laranja-claro);
-    outline-offset: 2px;
 }
 
 /* ===== Estrutura da página ===== */
@@ -103,101 +104,20 @@ Logo à esquerda, etapas no centro (com a linha amarela que desliza), ações à
     border-radius: 999px;
     background: var(--cor-laranja-claro);
     pointer-events: none;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform var(--transicao-normal) ease, width var(--transicao-normal) ease;
 }
 .sacola.sacolaAtiva{
     color: var(--cor-laranja-claro);
 }
 
-/* ===== Botões e estado vazio (iguais aos do perfilComprador) ===== */
-.botaoVoltar{
-    align-self: flex-start;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    border: 1px solid rgba(255, 243, 231, .3);
-    border-radius: var(--borda-arredondada-completa);
-    color: var(--cor-marrom-claro);
-    font-size: var(--fonte-pequena);
-    font-weight: 600;
-    transition: background var(--transicao-rapida), color var(--transicao-rapida);
-}
-.botaoVoltar:hover{
-    background: var(--cor-bege-destaque);
-}
-.botaoVoltar i{
-    transition: transform var(--transicao-rapida);
-}
-.botaoVoltar:hover i{
-    transform: translateX(-3px);
-}
+/* ===== Botões e estado vazio =====
+Botão primário/secundário, botão voltar e estado vazio vêm do componentes.css
+(os mesmos do perfilComprador). Aqui só o que é desta tela. */
 .barraVoltar{
     margin-bottom: var(--espacamento-medio);
 }
-
-.botaoPrimario,
-.botaoSecundario{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    height: var(--altura-botao);
-    padding: 0 22px;
-    border: 1px solid transparent;
-    border-radius: var(--borda-arredondada-pequena);
-    font-family: inherit;
-    font-size: var(--fonte-pequena);
-    font-weight: 700;
-    cursor: pointer;
-    transition: background var(--transicao-rapida), color var(--transicao-rapida), transform var(--transicao-rapida);
-}
-.botaoPrimario:active,
-.botaoSecundario:active{
-    transform: scale(.97);
-}
-.botaoPrimario{
-    background: var(--cor-laranja-escuro);
-    color: var(--cor-texto-claro);
-}
-.botaoPrimario:hover{
-    background: var(--cor-marrom-medio);
-}
-.botaoSecundario{
-    border-color: rgba(115, 70, 48, .35);
-    background: transparent;
-    color: var(--cor-marrom-claro);
-}
-.botaoSecundario:hover{
-    background: var(--cor-background-alternativo);
-    color: var(--cor-laranja-escuro);
-}
 .botaoBloco{
     width: 100%;
-}
-
-.estadoVazio{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 36px 16px;
-    border: 2px dashed rgba(115, 70, 48, .3);
-    border-radius: var(--borda-arredondada-grande);
-    color: var(--cor-texto-secundario);
-    text-align: center;
-}
-.estadoVazio i{
-    color: var(--cor-laranja);
-    font-size: 2.2rem;
-}
-.estadoVazio strong{
-    color: var(--cor-marrom-escuro-2);
-}
-.estadoVazio a{
-    margin-top: 6px;
-    color: var(--cor-laranja-escuro);
-    font-weight: 700;
 }
 
 /* ===== Layout: área com scroll / resumo alongado ===== */
