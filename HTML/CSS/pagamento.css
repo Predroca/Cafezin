@@ -1,0 +1,161 @@
+/*
+Pagamento (só o que é exclusivo desta tela)
+O padrão visual compartilhado com a sacola (header, painéis, títulos, seção de produtos,
+resumo, botões, estado vazio e tracejado) está em sacola.css.
+Carregue o sacola.css ANTES deste arquivo.
+*/
+
+/* ===== Produtos do pedido (somente leitura) ===== */
+.itemSomenteLeitura{
+    grid-template-columns: 100px 1fr auto;
+}
+
+/* ===== Forma de pagamento (painel, no mesmo padrão dos outros tópicos) ===== */
+.blocoPagamento{
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== Cards das formas de pagamento: 3 na primeira linha, 2 embaixo ===== */
+.opcoesPagamento{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--espacamento-medio);
+}
+.opcaoPagamento{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--espacamento-pequeno);
+    min-height: 110px;
+    padding: var(--espacamento-medio);
+    border: var(--borda-media) solid var(--cor-azul-claro);
+    border-radius: var(--borda-arredondada-media);
+    text-align: center;
+    font-size: var(--fonte-normal);
+    color: var(--cor-azul-marinho);
+    cursor: pointer;
+    transition: border-color var(--transicao-rapida), background-color var(--transicao-rapida);
+}
+/* o círculo do radio fica escondido: o card inteiro é o botão */
+.opcaoPagamento input{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.opcaoPagamento i{
+    font-size: var(--fonte-titulo);
+    color: var(--cor-azul-marinho);
+}
+.opcaoPagamento:hover{
+    border-color: var(--cor-azul-medio);
+}
+.opcaoPagamento:has(input:checked){
+    border-color: var(--cor-azul-marinho);
+    background-color: var(--cor-azul-claro);
+}
+.opcaoPagamento:has(input:focus-visible){
+    outline: var(--borda-media) solid var(--cor-azul-marinho);
+    outline-offset: 2px;
+}
+
+/* ===== Detalhes da forma escolhida (separados dos cards pelo tracejado padrão) ===== */
+.areaDetalhesPagamento{
+    margin-top: var(--espacamento-grande);
+    padding-top: var(--espacamento-grande);
+    border-top: var(--borda-fina) dashed var(--cor-marrom-claro);
+}
+.detalhesPagamento{
+    display: none;
+    font-size: var(--fonte-normal);
+}
+.detalhesPagamento p{
+    color: var(--cor-texto-secundario);
+}
+.formaPagamento:has(#pagamentoPix:checked) .detalhesPix{
+    display: block;
+}
+.formaPagamento:has(#pagamentoBoleto:checked) .detalhesBoleto{
+    display: block;
+}
+.formaPagamento:has(#pagamentoCartao:checked) .detalhesCartao{
+    display: grid;
+}
+.formaPagamento:has(#pagamentoDinheiro:checked) .detalhesDinheiro{
+    display: block;
+}
+.formaPagamento:has(#pagamentoTransferencia:checked) .detalhesTransferencia{
+    display: block;
+}
+
+/* ===== Campos de informação (azuis) ===== */
+.camposPagamento{
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--espacamento-medio);
+}
+.campoPagamento{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-extra-pequeno);
+    font-size: var(--fonte-normal);
+    color: var(--cor-azul-marinho);
+}
+.campoPagamento input{
+    height: var(--altura-input);
+    padding: 0 var(--espacamento-medio);
+    border: var(--borda-media) solid var(--cor-azul);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-azul-marinho);
+    font-family: inherit;
+    font-size: var(--fonte-normal);
+    transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+.campoPagamento input::placeholder{
+    color: var(--cor-azul);
+}
+.campoPagamento input:focus{
+    outline: none;
+    border-color: var(--cor-azul-marinho);
+    box-shadow: 0 0 0 3px var(--cor-azul-claro);
+}
+.campoNumeroCartao{ grid-column: span 6; }
+.campoNomeCartao{ grid-column: span 6; }
+.campoValidadeCartao{ grid-column: span 3; }
+.campoCodigoCartao{ grid-column: span 3; }
+.campoTroco{ grid-column: span 6; }
+
+/* ===== Resumo do pedido: lista de produtos (no meio do resumo alongado) ===== */
+.listaItensPedido{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+    padding-bottom: var(--espacamento-medio);
+    border-bottom: var(--borda-fina) dashed var(--cor-marrom-claro);
+    list-style: none;
+}
+.itemPedido{
+    display: flex;
+    justify-content: space-between;
+    gap: var(--espacamento-medio);
+    font-size: var(--fonte-normal);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 700px){
+    .opcoesPagamento{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .itemSomenteLeitura{
+        grid-template-columns: 80px 1fr;
+    }
+    .itemSomenteLeitura .precoItemSacola{
+        grid-column: 2;
+    }
+    .campoValidadeCartao,
+    .campoCodigoCartao{
+        grid-column: span 6;
+    }
+}
