@@ -109,7 +109,7 @@
                 <div class="cabecalhoSecao linha">
                     <div>
                         <h2 id="titulo-produtos">Seu cardápio</h2>
-                        <p>Ative, edite ou pause produtos a qualquer momento.</p>
+                        <p>Adicione ou modifique os produtos do seu cardápio.</p>
                     </div>
 
                     <a class="linkSecao" href=" apio.html">
@@ -119,20 +119,20 @@
                 </div>
 
                 <div class="filtrosProdutos">
-                    <button type="button" class="ativo">Todos</button>
-                    <button type="button">Cafés</button>
-                    <button type="button">Doces</button>
-                    <button type="button">Bolos</button>
-                    <button type="button">Salgados</button>
-                    <button type="button">Bebidas</button>
-                    <button type="button">Pães</button>
-                    <button type="button">Indisponíveis</button>
+                    <button type="button" class="ativo" data-filtro="todos" aria-pressed="true">Todos</button>
+                    <button type="button" data-filtro="cafes" aria-pressed="false">Cafés</button>
+                    <button type="button" data-filtro="doces" aria-pressed="false">Doces</button>
+                    <button type="button" data-filtro="bolos" aria-pressed="false">Bolos</button>
+                    <button type="button" data-filtro="salgados" aria-pressed="false">Salgados</button>
+                    <button type="button" data-filtro="bebidas" aria-pressed="false">Bebidas</button>
+                    <button type="button" data-filtro="paes" aria-pressed="false">Pães</button>
+                    <button type="button" data-filtro="indisponiveis" aria-pressed="false">Indisponíveis</button>
                 </div>
 
                 <div class="listaProdutosLoja">
 
                     <!-- Produto 1 -->
-                    <article class="produto Loja">
+                    <article class="produto Loja" data-categoria="bebidas">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja dourada"
@@ -169,7 +169,7 @@
                     </article>
 
                     <!-- Produto 2 -->
-                    <article class="produto Loja">
+                    <article class="produto Loja" data-categoria="bolos">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja"
@@ -206,7 +206,7 @@
                     </article>
 
                     <!-- Produto 3 -->
-                    <article class="produto Loja pausado">
+                    <article class="produto Loja pausado" data-categoria="paes">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja rosa"
@@ -243,7 +243,7 @@
                     </article>
 
                     <!-- Produto 4 -->
-                    <article class="produto Loja">
+                    <article class="produto Loja" data-categoria="salgados">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja azul"
@@ -278,7 +278,7 @@
 
                         </div>
                     </article>
-                    <article class="produto Loja">
+                    <article class="produto Loja" data-categoria="salgados">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja azul"
@@ -313,7 +313,7 @@
 
                         </div>
                     </article>
-                    <article class="produto Loja">
+                    <article class="produto Loja" data-categoria="salgados">
 
                         <div
                             class="placeholderFoto fotoProdutoLoja azul"
@@ -459,6 +459,9 @@
         </div>
 
     </footer>
+
+
+    <script src="JavaScript/Loja/categoriasCardapio.js"></script>
 
 </body>
 </html>
