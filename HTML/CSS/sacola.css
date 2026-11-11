@@ -1,0 +1,674 @@
+/*
+Etapas da compra: Sacola, Pagamento e Produtos da loja
+Padrão visual compartilhado pelas três telas (header de etapas, títulos de seção,
+seção de produtos, resumo, botões e estado vazio). O pagamento.css só tem o que é
+exclusivo do pagamento. Carregue este arquivo ANTES do pagamento.css.
+Depende de: main.css (variáveis), indexComp.css (header do comprador e carrossel).
+Botão, botão voltar e estado vazio usam as mesmas regras do perfilComprador.css.
+
+Layout: área com scroll (.areaRolagem) de um lado e o resumo alongado do outro.
+Só a área com scroll desce; o resumo ocupa toda a altura da direita e fica parado.
+*/
+
+/* ===== Transição entre páginas (sem "pisque") =====
+O navegador segura a página antiga até a nova estar pronta e faz só um fade curto.
+O header tem nome próprio, então ele não pisca junto com o resto. */
+@view-transition{
+    navigation: auto;
+}
+html{
+    background-color: var(--cor-background);
+}
+.navComprador{
+    view-transition-name: cabecalho;
+}
+::view-transition-old(root),
+::view-transition-new(root){
+    animation-duration: 0.18s;
+    animation-timing-function: ease;
+}
+
+[hidden]{ display: none !important; }
+
+:focus-visible{
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+}
+
+/* ===== Estrutura da página ===== */
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex: 1;
+    background-color: var(--cor-background);
+}
+.sessaoSacola{
+    padding: 26px 0;
+}
+.navCompradorConteudo,
+.sessaoSacola .container{
+    max-width: 1600px;
+}
+@media (min-width: 701px){
+    .navCompradorConteudo,
+    .sessaoSacola .container{
+        width: 98%;
+    }
+}
+
+/* ===== Utilitários (usados pelo JavaScript) ===== */
+.escondido{
+    display: none !important;
+}
+.desativado{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ===== Header das etapas =====
+Logo à esquerda, etapas no centro (com a linha amarela que desliza), ações à direita. */
+.navCompradorConteudo{
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: var(--espacamento-extra-grande);
+}
+.navEtapas{
+    position: relative; /* referência da linha deslizante */
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-extra-grande);
+}
+.navEtapas a{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 2px;
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena);
+    transition: color var(--transicao-rapida);
+}
+.navEtapas a:hover,
+.navEtapas a.ativo{
+    color: var(--cor-texto-claro);
+}
+.indicadorEtapa{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--cor-laranja-claro);
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sacola.sacolaAtiva{
+    color: var(--cor-laranja-claro);
+}
+
+/* ===== Botões e estado vazio (iguais aos do perfilComprador) ===== */
+.botaoVoltar{
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 243, 231, .3);
+    border-radius: var(--borda-arredondada-completa);
+    color: var(--cor-marrom-claro);
+    font-size: var(--fonte-pequena);
+    font-weight: 600;
+    transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+.botaoVoltar:hover{
+    background: var(--cor-bege-destaque);
+}
+.botaoVoltar i{
+    transition: transform var(--transicao-rapida);
+}
+.botaoVoltar:hover i{
+    transform: translateX(-3px);
+}
+.barraVoltar{
+    margin-bottom: var(--espacamento-medio);
+}
+
+.botaoPrimario,
+.botaoSecundario{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: var(--altura-botao);
+    padding: 0 22px;
+    border: 1px solid transparent;
+    border-radius: var(--borda-arredondada-pequena);
+    font-family: inherit;
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transicao-rapida), color var(--transicao-rapida), transform var(--transicao-rapida);
+}
+.botaoPrimario:active,
+.botaoSecundario:active{
+    transform: scale(.97);
+}
+.botaoPrimario{
+    background: var(--cor-laranja-escuro);
+    color: var(--cor-texto-claro);
+}
+.botaoPrimario:hover{
+    background: var(--cor-marrom-medio);
+}
+.botaoSecundario{
+    border-color: rgba(115, 70, 48, .35);
+    background: transparent;
+    color: var(--cor-marrom-claro);
+}
+.botaoSecundario:hover{
+    background: var(--cor-background-alternativo);
+    color: var(--cor-laranja-escuro);
+}
+.botaoBloco{
+    width: 100%;
+}
+
+.estadoVazio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 36px 16px;
+    border: 2px dashed rgba(115, 70, 48, .3);
+    border-radius: var(--borda-arredondada-grande);
+    color: var(--cor-texto-secundario);
+    text-align: center;
+}
+.estadoVazio i{
+    color: var(--cor-laranja);
+    font-size: 2.2rem;
+}
+.estadoVazio strong{
+    color: var(--cor-marrom-escuro-2);
+}
+.estadoVazio a{
+    margin-top: 6px;
+    color: var(--cor-laranja-escuro);
+    font-weight: 700;
+}
+
+/* ===== Layout: área com scroll / resumo alongado ===== */
+.conteudoSacola,
+.conteudoPagamento{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: var(--espacamento-extra-grande);
+    height: max(520px, calc(100vh - 76px - 52px - 52px));
+}
+/* sem produtos: só o estado vazio, ocupando a largura toda */
+.conteudoSacola.semProdutos,
+.conteudoPagamento.semProdutos{
+    grid-template-columns: minmax(0, 1fr);
+}
+
+/* Sacola vazia: nada para rolar na área, então a página inteira rola normalmente */
+.semProdutos{
+    height: auto !important;
+    min-height: 0;
+}
+.semProdutos .areaRolagem{
+    overflow: visible;
+    overscroll-behavior: auto;
+}
+
+/* Área com scroll: só ela desce. Sem tracejado ao lado dela. */
+.areaRolagem{
+    position: relative; /* referência para offsetTop dos painéis */
+    min-width: 0;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0 var(--espacamento-medio) 0 0;
+    background-color: var(--cor-background);
+    scrollbar-width: thin;
+    scrollbar-color: var(--cor-laranja) var(--cor-bege-claro);
+}
+/* main.css zera as barras de rolagem; aqui elas voltam a aparecer */
+.areaRolagem::-webkit-scrollbar{
+    width: 10px;
+}
+.areaRolagem::-webkit-scrollbar-track{
+    background: var(--cor-bege-claro);
+}
+.areaRolagem::-webkit-scrollbar-thumb{
+    border-radius: 999px;
+    background: var(--cor-laranja);
+}
+.areaRolagem:focus-visible{
+    outline-offset: -4px;
+}
+
+/* Cada tópico (Sacola, Adicione mais..., Pagamento, Forma de pagamento) é um painel.
+Sem padding lateral: o tracejado entre painéis tem a mesma largura do conteúdo. */
+.painelSacola{
+    padding: 12px 0 var(--espacamento-extra-grande);
+    background-color: var(--cor-background);
+}
+.painelSacola + .painelSacola{
+    margin-top: 12px;
+    padding-top: var(--espacamento-extra-grande);
+    border-top: var(--borda-fina) dashed var(--cor-marrom-claro);
+}
+
+/* Título e subtítulo de cada tópico: mesmo estilo e mesma posição em todos */
+.cabecalhoPainel{
+    margin-bottom: var(--espacamento-grande);
+}
+.tituloSecao{
+    font-family: "Brasika", sans-serif;
+    font-weight: 400;
+    font-size: var(--fonte-grande);
+    color: var(--cor-laranja-escuro);
+}
+.subtituloSecao{
+    margin-top: 4px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+}
+
+/* ===== Seção de produtos: tudo numa peça só (sacola e pagamento) =====
+Linha "todos os produtos", nome da loja, produtos e frete formam uma sequência
+alinhada, separada por linhas finas. Sem sombra. */
+.secaoProdutos{
+    overflow: hidden;
+    border: var(--borda-fina) solid rgba(75, 54, 42, 0.18);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-marrom-vermelhado);
+}
+.secaoProdutos .linhaSecao,
+.secaoProdutos .itemSacola,
+.secaoProdutos .freteCafeteria{
+    border-top: var(--borda-fina) solid var(--cor-bege-claro);
+}
+.secaoProdutos > :first-child{
+    border-top: none;
+}
+.linhaSecao{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacamento-medio);
+    padding: var(--espacamento-medio) var(--espacamento-grande);
+}
+.linhaTopoSecao{
+    background-color: var(--cor-background-alternativo);
+}
+.rotuloLinha,
+.campoSelecionar{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    font-size: var(--fonte-normal);
+    font-weight: 600;
+}
+.campoSelecionar{
+    cursor: pointer;
+}
+.cabecalhoCafeteria{
+    justify-content: flex-start;
+}
+.nomeCafeteria{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    font-size: var(--fonte-media);
+    font-weight: 700;
+    color: var(--cor-marrom-escuro-2);
+}
+.nomeCafeteria i{
+    color: var(--cor-laranja-escuro);
+}
+input[type="checkbox"]{
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--cor-laranja);
+    cursor: pointer;
+}
+.acaoLinha,
+.botaoRemoverItem,
+.quantidadeItem button{
+    border: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+.acaoLinha{
+    font-size: var(--fonte-normal);
+    font-weight: 600;
+    color: var(--cor-laranja-escuro);
+    transition: color var(--transicao-rapida);
+}
+.acaoLinha:hover{
+    color: var(--cor-marrom-medio);
+}
+
+/* ===== Produto (.itemSacola) ===== */
+.itemSacola{
+    display: grid;
+    grid-template-columns: auto 100px 1fr auto;
+    align-items: start;
+    gap: var(--espacamento-medio);
+    padding: var(--espacamento-medio) var(--espacamento-grande);
+}
+.imagemItemSacola{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--borda-arredondada-pequena);
+    background-color: var(--cor-bege-claro);
+}
+.imagemItemSacola.semImagem{
+    display: grid;
+    place-items: center;
+    color: var(--cor-laranja);
+    font-size: 1.6rem;
+}
+.infoItemSacola{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+}
+.linhaNomeItem{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+}
+.nomeItemSacola{
+    font-size: var(--fonte-normal);
+    font-weight: 600;
+    color: var(--cor-marrom-escuro-2);
+}
+.botaoRemoverItem{
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-normal);
+    transition: color var(--transicao-rapida);
+}
+.botaoRemoverItem:hover{
+    color: var(--cor-laranja-escuro);
+}
+.detalheItemSacola,
+.disponibilidadeItem{
+    font-size: var(--fonte-pequena);
+    color: var(--cor-texto-secundario);
+}
+
+/* Preço do produto e, logo abaixo, o controle de quantidade */
+.precoItemSacola{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--espacamento-pequeno);
+}
+.precoTotalItem{
+    font-size: var(--fonte-media);
+    font-weight: 600;
+    color: var(--cor-marrom-escuro-2);
+}
+.quantidadeItem{
+    display: inline-flex;
+    align-items: center;
+    border: var(--borda-fina) solid var(--cor-bege-destaque);
+    border-radius: var(--borda-arredondada-pequena);
+}
+.quantidadeItem button{
+    width: 36px;
+    height: 34px;
+    color: var(--cor-laranja-escuro);
+    font-size: var(--fonte-media);
+    transition: background-color var(--transicao-rapida);
+}
+.quantidadeItem button:hover{
+    background-color: var(--cor-bege-claro);
+}
+.quantidadeItem button:disabled{
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: none;
+}
+.quantidadeValor{
+    min-width: 40px;
+    text-align: center;
+    font-size: var(--fonte-normal);
+}
+
+/* ===== Frete da cafeteria ===== */
+.freteCafeteria{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+    padding: var(--espacamento-medio) var(--espacamento-grande);
+    font-size: var(--fonte-normal);
+}
+.linhaFrete,
+.linhaResumo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacamento-medio);
+}
+.avisoFreteGratis{
+    font-size: var(--fonte-pequena);
+}
+.valorGratis{
+    color: #3c6b32;
+    font-weight: 600;
+}
+.linkVerProdutos{
+    color: var(--cor-laranja-escuro);
+    font-weight: 600;
+}
+.linkVerProdutos:hover{
+    text-decoration: underline;
+}
+
+/* ===== Resumo alongado (sacola: .resumoCompra / pagamento: .resumoPedido) =====
+Ocupa toda a altura da coluna da direita: título em cima, informações no meio,
+botão embaixo. Sem sombra. */
+.resumoCompra,
+.resumoPedido{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-grande);
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--espacamento-extra-grande);
+    border: var(--borda-fina) solid rgba(115, 70, 48, 0.18);
+    border-radius: var(--borda-arredondada-grande);
+    background-color: #ffffff;
+    color: var(--cor-marrom-vermelhado);
+    scrollbar-width: none;
+}
+.tituloResumo{
+    padding-bottom: var(--espacamento-medio);
+    border-bottom: var(--borda-fina) dashed var(--cor-marrom-claro);
+}
+.corpoResumo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--espacamento-grande);
+}
+.linhasResumo{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-medio);
+    font-size: var(--fonte-normal);
+}
+.totalResumo{
+    padding-top: var(--espacamento-medio);
+    border-top: var(--borda-fina) dashed var(--cor-marrom-claro);
+}
+/* o título do resumo (1.5rem) continua maior que o preço total (1.4rem) */
+.linhaTotalResumo{
+    font-size: var(--fonte-normal);
+    font-weight: 700;
+    color: var(--cor-marrom-escuro-2);
+}
+.valorTotal{
+    font-size: 1.4rem;
+}
+
+/* ===== Adicionar mais produtos da mesma loja ===== */
+.painelMaisProdutos .lojaTopo{
+    margin-bottom: var(--espacamento-grande);
+}
+.painelMaisProdutos .OutrasLojasCard,
+.gradeProdutosLoja .OutrasLojasCard{
+    border: var(--borda-fina) solid rgba(75, 54, 42, 0.12);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+}
+.imagemProdutoSugerido{
+    display: block;
+    width: 100%;
+    height: 165px;
+    object-fit: cover;
+}
+.painelMaisProdutos .setaLojas{
+    box-shadow: none;
+}
+/* Degradê das pontas do carrossel na cor do fundo desta página */
+.painelMaisProdutos .listaLojasWraper::before{
+    background: linear-gradient(to left, rgba(254, 252, 250, 0), var(--cor-background));
+}
+.painelMaisProdutos .listaLojasWraper::after{
+    background: linear-gradient(to right, rgba(254, 252, 250, 0), var(--cor-background));
+}
+.adicionar.adicionado{
+    background: var(--cor-laranja-escuro);
+    color: var(--cor-texto-claro);
+}
+
+/* ===== Página "Ver mais" (produtos da loja) ===== */
+.gradeProdutosLoja{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--espacamento-grande);
+}
+
+/* Tira de resumo da sacola: fica colada no rodapé da tela e para acima do footer */
+.tiraSacola{
+    position: sticky;
+    bottom: 0;
+    z-index: 9;
+    border-top: var(--borda-fina) solid rgba(115, 70, 48, 0.25);
+    background-color: var(--cor-background-bege);
+}
+.tiraSacolaConteudo{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-grande);
+    min-height: 76px;
+    padding: 12px 0;
+}
+.tiraSacolaInfo{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    min-width: 0;
+}
+.tiraSacolaIcone{
+    flex: 0 0 44px;
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-bege-destaque);
+    font-size: 1.2rem;
+}
+.tiraSacolaTexto{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.tiraSacolaTexto strong{
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-normal);
+}
+.tiraSacolaTexto small{
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+}
+.tiraSacolaAcoes{
+    display: flex;
+    gap: 12px;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 900px){
+    .conteudoSacola,
+    .conteudoPagamento{
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .areaRolagem{
+        overflow: visible;
+        padding: 0;
+    }
+    .resumoCompra,
+    .resumoPedido{
+        height: auto;
+        overflow: visible;
+    }
+    .corpoResumo{
+        justify-content: flex-start;
+    }
+}
+@media (max-width: 700px){
+    .navCompradorConteudo{
+        gap: 12px;
+    }
+    .navEtapas{
+        gap: var(--espacamento-medio);
+    }
+    .linhaSecao,
+    .itemSacola,
+    .freteCafeteria{
+        padding-left: var(--espacamento-medio);
+        padding-right: var(--espacamento-medio);
+    }
+    .itemSacola{
+        grid-template-columns: auto 80px 1fr;
+    }
+    .imagemItemSacola{
+        width: 80px;
+        height: 80px;
+    }
+    .precoItemSacola{
+        grid-column: 3;
+        align-items: flex-start;
+    }
+    .resumoCompra,
+    .resumoPedido{
+        padding: var(--espacamento-grande);
+    }
+    .tiraSacolaConteudo{
+        flex-wrap: wrap;
+    }
+    .tiraSacolaAcoes{
+        width: 100%;
+    }
+    .tiraSacolaAcoes > *{
+        flex: 1;
+    }
+}
