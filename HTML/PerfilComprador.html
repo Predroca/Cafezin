@@ -583,6 +583,25 @@
         renderizar();
     })();
     </script>
+    <script>
+    (() => {
+        const modal = document.getElementById("modal-avaliar");
+        if (!modal) return;
+    
+        document.querySelectorAll('[data-abrir-modal="modal-avaliar"]').forEach(botao => {
+            botao.addEventListener("click", () => modal.showModal());
+        });
+    
+        modal.querySelectorAll("[data-fechar-modal]").forEach(botao => {
+            botao.addEventListener("click", () => modal.close());
+        });
+    
+        // Fecha ao clicar fora (no backdrop)
+        modal.addEventListener("click", evento => {
+            if (evento.target === modal) modal.close();
+        });
+    })();
+    </script>
 
     <script src="JavaScript/Comprador/perfilComprador.js"></script>
 </body>
