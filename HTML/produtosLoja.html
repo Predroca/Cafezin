@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafézin | Produtos da loja</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexComp.css">
+    <link rel="stylesheet" href="CSS/sacola.css">
+</head>
+<body id="topo">
+    <!--
+        GUIA PARA O BACK (rotas)
+        A loja vem pelo parâmetro ?loja=ID da URL (ex.: produtosLoja.html?loja=1).
+        .cartaoProdutoSugerido ....... um produto da loja, com data-produto-id e data-preco (unitário)
+        #contadorSacola .............. quantidade total de itens da sacola (ícone do header)
+        Tira de resumo (#tiraTitulo, #tiraDetalhe, #botaoQuantidadeProdutos) vem da sacola salva.
+    -->
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="indexComprador.html" aria-label="Cafézin - página inicial">Cafézin</a>
+
+            <nav class="navEtapas" aria-label="Etapas da compra">
+                <a href="sacola.html" class="ativo" aria-current="page"><i class="bi bi-bag" aria-hidden="true"></i> Sacola</a>
+                <a href="pagamento.html" id="etapaPagamento"><i class="bi bi-credit-card" aria-hidden="true"></i> Pagamento</a>
+                <span class="indicadorEtapa" aria-hidden="true"></span>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola sacolaAtiva" href="sacola.html" aria-label="Abrir sacola">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span id="contadorSacola">0</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sessaoSacola">
+            <div class="container">
+                <div class="barraVoltar">
+                    <a class="botaoVoltar" href="sacola.html">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar para a sacola
+                    </a>
+                </div>
+
+                <section class="painelSacola" aria-labelledby="tituloProdutosLoja">
+                    <div class="cabecalhoPainel">
+                        <h2 class="tituloSecao" id="tituloProdutosLoja">Produtos da loja</h2>
+                        <p class="subtituloSecao">Toque no + para adicionar à sua sacola. Quem escolhe aqui continua o pedido na tira de baixo.</p>
+                    </div>
+
+                    <div class="lojaTopo">
+                        <article class="lojaCard" data-loja-id="1">
+                            <div class="logoLoja">EC</div>
+                            <button type="button" class="favoritar" aria-label="Favoritar Empório do Café"><i class="bi bi-heart"></i></button>
+                            <div class="lojaInfo">
+                                <h3>Empório do Café</h3>
+                                <p>Cafeteria · Padaria</p>
+                                <small><strong><i class="bi bi-star-fill"></i> 4,9</strong> · 20–35 min · R$ 3,99</small>
+                                <b>Entrega grátis acima de R$ 25</b>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="gradeProdutosLoja">
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="1" data-preco="15.00">
+                        <img src="img/indexComprador/ProdutoExemplar1.jpg" alt="Chocolate quente cremoso" class="imagemProdutoSugerido">
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Chocolate quente cremoso</h3>
+                            <span>Com chocolate meio amargo</span>
+                            <strong class="preco">R$ 15,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar chocolate quente cremoso à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="4" data-preco="25.00">
+                        <img src="img/indexComprador/ProdutoExemplar4.jpg" alt="Bolo de cenoura caseiro" class="imagemProdutoSugerido">
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Bolo de cenoura caseiro</h3>
+                            <span>Fatia generosa com brigadeiro belga</span>
+                            <strong class="preco">R$ 25,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar bolo de cenoura caseiro à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="3" data-preco="5.90">
+                        <img src="img/indexComprador/ProdutoExemplar3.jpg" alt="Baguete caseira" class="imagemProdutoSugerido">
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Baguete caseira</h3>
+                            <span>Sem glúten, contém noz moscada.</span>
+                            <strong class="preco">R$ 5,90</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar baguete caseira à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="2" data-preco="11.99">
+                        <img src="img/indexComprador/ProdutoExemplar2.jpg" alt="Sanduíche natural de frango" class="imagemProdutoSugerido">
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Sanduíche natural de frango</h3>
+                            <span>Pão integral, frango desfiado, requeijão, tomate, alface...</span>
+                            <strong class="preco">R$ 11,99</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar sanduíche natural de frango à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <!-- Cards modelo (sem conteúdo): troque pelos produtos reais da loja -->
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="5" data-preco="0.00">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <span>Descrição do produto</span>
+                            <strong class="preco">R$ 0,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar produto à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="6" data-preco="0.00">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <span>Descrição do produto</span>
+                            <strong class="preco">R$ 0,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar produto à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="7" data-preco="0.00">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <span>Descrição do produto</span>
+                            <strong class="preco">R$ 0,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar produto à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+
+                    <article class="OutrasLojasCard cartaoProdutoSugerido" data-produto-id="8" data-preco="0.00">
+                        <div class="placeholderFoto fotoProduto" role="img" aria-label="Espaço para foto do produto">
+                            <i class="bi bi-image"></i>
+                            <span>Foto do produto</span>
+                        </div>
+                        <div class="produtoInfo">
+                            <h3 class="produtoNome">Nome do produto</h3>
+                            <span>Descrição do produto</span>
+                            <strong class="preco">R$ 0,00</strong>
+                        </div>
+                        <button type="button" class="adicionar botaoAdicionarSugerido" aria-label="Adicionar produto à sacola"><i class="bi bi-plus-lg"></i></button>
+                    </article>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- Tira de resumo da sacola: fica no rodapé da tela -->
+        <div class="tiraSacola" role="region" aria-label="Resumo da sacola">
+            <div class="container tiraSacolaConteudo">
+                <div class="tiraSacolaInfo">
+                    <div class="tiraSacolaIcone" aria-hidden="true"><i class="bi bi-bag"></i></div>
+                    <div class="tiraSacolaTexto" aria-live="polite">
+                        <strong id="tiraTitulo">Sua sacola</strong>
+                        <small id="tiraDetalhe"></small>
+                    </div>
+                </div>
+                <div class="tiraSacolaAcoes">
+                    <a href="sacola.html" class="botaoSecundario">Ver sacola</a>
+                    <a href="pagamento.html" id="botaoContinuar" class="botaoPrimario"><span>Continuar (<span id="botaoQuantidadeProdutos">0</span>)</span></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footerConteudo">
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+        </div>
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="JavaScript/Comprador/sacolaDados.js"></script>
+    <script src="JavaScript/Comprador/cabecalhoEtapas.js"></script>
+    <script src="JavaScript/Comprador/produtosLoja.js"></script>
+</body>
+</html>
