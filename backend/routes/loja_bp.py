@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from extensions import db
 from permissoes import tipo_requerido
 from sqlalchemy.exc import SQLAlchemyError
-from datetime import date
+from datetime import date, time
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload
 
@@ -33,6 +33,59 @@ def loja_do_usuario_logado():
     cod_usuario = get_jwt_identity()
     loja = Loja.query.filter_by(cod_usuario=cod_usuario).first()
     return loja
+
+def _hora_json(valor):
+    return valor.strftime("%H:%M") if valor else None
+ 
+def _perfil_loja_json(loja):
+    usuario = loja.usuario
+    end = loja.endereco
+    return {
+        "nome": usuario.nome,
+        "cnpj": loja.cnpj,
+        "email": usuario.email,
+        "telefone": usuario.telefone,
+        "foto_url": usuario.foto_url,
+        "endereco": {
+            "nome_logradouro": end.nome_logradouro,
+            "numero": end.numero,
+            "bairro": end.bairro,
+            "cidade": end.cidade,
+            "estado": end.estado,
+            "cep": end.cep,
+        },
+        "horario_abertura": _hora_json(loja.horario_abertura),
+        "horario_fecha": _hora_json(loja.horario_fecha),
+    }
+
+
+def _ler_hora(bruto):
+    #'HH:MM' -> time. Vazio/None -> (None, None). Inválido -> (None, erro)."""
+    if bruto in (None, ""):
+        return None, None
+    try:
+        h, m = str(bruto).split(":")[:2]
+        return time(int(h), int(m)), None
+    except (ValueError, TypeError):
+        return None, "horário deve estar no formato HH:MM"
+ 
+ 
+def _texto_opcional(dados, chave, limite):
+    #"""Devolve (valor, erro) para campos de texto opcionais; vazio vira None."""
+    valor = (dados.get(chave) or "").strip()
+    if len(valor) > limite:
+        return None, f"{chave} deve ter no máximo {limite} caracteres"
+    return (valor or None), None
+ 
+ 
+@loja_bp.route("/loja/perfil", methods=["GET"])
+@tipo_requerido("Loja")
+def ver_perfil_loja():
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+    return _perfil_loja_json(loja), 200
+
 
 @loja_bp.route("/loja/produtos", methods=["GET"])
 @tipo_requerido("Loja")
