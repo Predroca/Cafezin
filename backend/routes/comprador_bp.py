@@ -4,13 +4,37 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 from extensions import db
 from permissoes import tipo_requerido
-from models import Comprador, Loja, LojaFavorita, Usuario
+from models import Comprador, Loja, LojaFavorita, Usuario, Comprador_Endereco, Pedido
 
 comprador_bp = Blueprint("comprador", __name__)
 
 def comprador_do_usuario_logado():
     return Comprador.query.filter_by(cod_usuario=get_jwt_identity()).first()
 
+
+def _perfil_json(comprador):
+    usuario = comprador.usuario
+    return {
+        "nome": usuario.nome,
+        "email": usuario.email,
+        "telefone": usuario.telefone,
+        "data_nasc": comprador.data_nasc.isoformat() if comprador.data_nasc else None,
+        "foto_url": usuario.foto_url,
+        "resumo": {
+            "pedidos": Pedido.query.filter_by(cod_comprador=comprador.cod_comprador).count(),
+            "favoritas": LojaFavorita.query.filter_by(cod_comprador=comprador.cod_comprador).count(),
+            "enderecos": Comprador_Endereco.query.filter_by(cod_comprador=comprador.cod_comprador).count(),
+        },
+    }
+
+
+@comprador_bp.route("/comprador/perfil", methods=["GET"])
+@tipo_requerido("Comprador")
+def ver_perfil():
+    comprador = comprador_do_usuario_logado()
+    if comprador is None:
+        return {"error": "comprador não encontrado"}, 404
+    return _perfil_json(comprador), 200
 
 
 @comprador_bp.route("/favoritas", methods=["GET"])
