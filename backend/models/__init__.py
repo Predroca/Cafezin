@@ -26,7 +26,7 @@ __all__ = [
     "Entregador",
     "Categoria",
     "Loja",
-    "LojaFavorita"
+    "LojaFavorita",
     "Produto",
     "Pedido",
     "ItemPedido",
