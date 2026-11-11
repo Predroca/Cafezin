@@ -503,10 +503,9 @@ button, input, select, textarea { font: inherit; }
 }
 
 
-.filtrosProdutos button:focus{
-    background: var(--cor-laranja-escuro);
-    border-color: transparent;
-    color: white;
+.filtrosProdutos button:focus-visible {
+    outline: 2px solid var(--cor-laranja-escuro);
+    outline-offset: 2px;
 }
 /* Produtos do lojista */
 
