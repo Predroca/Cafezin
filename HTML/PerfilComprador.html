@@ -144,13 +144,15 @@
 
                     <!-- Pedidos -->
                     <section class="painel" id="painel-pedidos" aria-labelledby="titulo-pedidos">
-                        <div class="cabecalhoSecao">
-                            <h2 id="titulo-pedidos">Meus pedidos</h2>
-                            <p>Acompanhe o que está a caminho e peça de novo o que você gostou.</p>
-                        </div>
-                         <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-identificacao">
+                        <div class="cabecalhoSecao linha">
+                            <div>
+                                <h2 id="titulo-pedidos">Meus pedidos</h2>
+                                <p>Acompanhe o que está a caminho e peça de novo o que você gostou.</p>
+                            </div>
+                            <button class="botaoSecundario pequeno" type="button" data-abrir-modal="modal-avaliar">
                                 <i class="bi bi-star" aria-hidden="true"></i> Avaliar pedido
                             </button>
+                        </div>
                         <ul class="listaPedidos" id="listaPedidos"></ul>
                     </section>
 
@@ -266,7 +268,24 @@
             <p class="mensagemFormulario" id="mensagemIdentificacaoComprador" role="status" aria-live="polite"></p>
         </form>
     </dialog>
+    <!-- Avaliar pedido -->
+    <dialog class="modalEditar" id="modal-avaliar" aria-labelledby="titulo-modal-avaliar">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-star"></i></span>
+                <div>
+                    <h2 id="titulo-modal-avaliar">Avaliar pedido</h2>
+                    <p>Conte como foi a sua experiência.</p>
+                </div>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
 
+    <!-- Conteúdo do pop-up (vazio por enquanto) -->
+    <div class="modalAvaliarCorpo" id="modalAvaliarCorpo"></div>
+</dialog>
     <!-- Confirmação de saída -->
     <dialog class="modalSair" id="modalSair" aria-labelledby="modalSairTitulo">
         <div class="modalSairIcone" aria-hidden="true"><i class="bi bi-box-arrow-right"></i></div>
