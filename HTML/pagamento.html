@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafézin | Pagamento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/indexComp.css">
+    <link rel="stylesheet" href="CSS/sacola.css">
+    <link rel="stylesheet" href="CSS/pagamento.css">
+</head>
+<body id="topo">
+    <!--
+        GUIA PARA O BACK (rotas)
+        Os ids do resumo são os mesmos da sacola.html:
+        #contadorSacola, #resumoQuantidadeProdutos, #resumoSubtotal, #resumoFrete, #resumoTotal
+        Os produtos (.itemSacola e .itemPedido) são criados pelo pagamento.js a partir dos produtos
+        marcados na sacola (sacolaDados.js).
+        input[name="formaPagamento"] ... valor escolhido: PIX, Boleto, Cartão, Dinheiro ou Transferência
+        Campos do cartão: numeroCartao, nomeCartao, validadeCartao, codigoCartao
+        Campo do dinheiro: troco
+    -->
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="indexComprador.html" aria-label="Cafézin - página inicial">Cafézin</a>
+
+            <nav class="navEtapas" aria-label="Etapas da compra">
+                <a href="sacola.html"><i class="bi bi-bag" aria-hidden="true"></i> Sacola</a>
+                <a href="pagamento.html" id="etapaPagamento" class="ativo" aria-current="page"><i class="bi bi-credit-card" aria-hidden="true"></i> Pagamento</a>
+                <span class="indicadorEtapa" aria-hidden="true"></span>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola sacolaAtiva" href="sacola.html" aria-label="Abrir sacola">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span id="contadorSacola">0</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sessaoSacola">
+            <div class="container">
+                <div class="barraVoltar">
+                    <a class="botaoVoltar" href="sacola.html">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i> Voltar para a sacola
+                    </a>
+                </div>
+
+                <div class="conteudoPagamento" id="conteudoPagamento">
+
+                    <!-- Área com scroll: só ela desce -->
+                    <div class="areaRolagem" id="areaRolagem" tabindex="0" role="region" aria-label="Dados do pagamento. Role para ver tudo.">
+                        <form class="formularioPagamento" id="formularioPagamento">
+
+                            <!-- Produtos do pedido (mesma seção da sacola, só leitura) -->
+                            <section class="painelSacola" aria-labelledby="tituloPagamento">
+                                <div class="cabecalhoPainel">
+                                    <h2 class="tituloSecao" id="tituloPagamento">Pagamento</h2>
+                                    <p class="subtituloSecao">Confira os produtos do seu pedido antes de pagar.</p>
+                                </div>
+
+                                <div class="secaoProdutos" id="secaoProdutos">
+                                    <div class="linhaSecao linhaTopoSecao">
+                                        <span class="rotuloLinha">Produtos do pedido</span>
+                                        <a href="sacola.html" class="acaoLinha">Editar sacola</a>
+                                    </div>
+
+                                    <div class="linhaSecao cabecalhoCafeteria">
+                                        <span class="nomeCafeteria">
+                                            <i class="bi bi-shop" aria-hidden="true"></i>
+                                            <span id="nomeLoja">Empório do Café</span>
+                                        </span>
+                                    </div>
+
+                                    <div id="listaItens"></div>
+
+                                    <div class="freteCafeteria">
+                                        <div class="linhaFrete">
+                                            <span>Frete</span>
+                                            <span id="freteCafeteria" class="valorFrete valorGratis">Grátis</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="estadoVazio escondido" id="estadoVazio">
+                                <i class="bi bi-bag" aria-hidden="true"></i>
+                                <strong>Nenhum produto para pagar</strong>
+                                <span>Marque os produtos que quer levar na sua sacola.</span>
+                                <a href="sacola.html">Voltar à sacola</a>
+                            </div>
+                            </section>
+
+                            <!-- Forma de pagamento (painel no mesmo padrão do anterior) -->
+                            <section class="painelSacola blocoPagamento formaPagamento" id="painelFormaPagamento" aria-labelledby="tituloFormaPagamento">
+                                <div class="cabecalhoPainel">
+                                    <h2 class="tituloSecao" id="tituloFormaPagamento">Forma de pagamento</h2>
+                                    <p class="subtituloSecao">Escolha como quer pagar.</p>
+                                </div>
+
+                                <div class="opcoesPagamento">
+                                    <label class="opcaoPagamento">
+                                        <input type="radio" name="formaPagamento" id="pagamentoPix" value="PIX" checked>
+                                        <i class="bi bi-qr-code" aria-hidden="true"></i>
+                                        Pix
+                                    </label>
+                                    <label class="opcaoPagamento">
+                                        <input type="radio" name="formaPagamento" id="pagamentoBoleto" value="Boleto">
+                                        <i class="bi bi-upc-scan" aria-hidden="true"></i>
+                                        Boleto
+                                    </label>
+                                    <label class="opcaoPagamento">
+                                        <input type="radio" name="formaPagamento" id="pagamentoCartao" value="Cartão">
+                                        <i class="bi bi-wallet-fill" aria-hidden="true"></i>
+                                        Cartão
+                                    </label>
+                                    <label class="opcaoPagamento">
+                                        <input type="radio" name="formaPagamento" id="pagamentoDinheiro" value="Dinheiro">
+                                        <i class="bi bi-cash-coin" aria-hidden="true"></i>
+                                        Dinheiro na entrega
+                                    </label>
+                                    <label class="opcaoPagamento">
+                                        <input type="radio" name="formaPagamento" id="pagamentoTransferencia" value="Transferência">
+                                        <i class="bi bi-bank" aria-hidden="true"></i>
+                                        Transferência
+                                    </label>
+                                </div>
+
+                                <div class="areaDetalhesPagamento">
+                                    <div class="detalhesPagamento detalhesPix">
+                                        <p>O código Pix será gerado depois que você finalizar o pedido.</p>
+                                    </div>
+                                    <div class="detalhesPagamento detalhesBoleto">
+                                        <p>O boleto será gerado depois que você finalizar o pedido.</p>
+                                    </div>
+                                    <div class="detalhesPagamento detalhesCartao camposPagamento">
+                                        <label class="campoPagamento campoNumeroCartao">
+                                            Número do cartão
+                                            <input type="text" name="numeroCartao" placeholder="0000 0000 0000 0000">
+                                        </label>
+                                        <label class="campoPagamento campoNomeCartao">
+                                            Nome no cartão
+                                            <input type="text" name="nomeCartao">
+                                        </label>
+                                        <label class="campoPagamento campoValidadeCartao">
+                                            Validade
+                                            <input type="text" name="validadeCartao" placeholder="MM/AA">
+                                        </label>
+                                        <label class="campoPagamento campoCodigoCartao">
+                                            Código de segurança
+                                            <input type="text" name="codigoCartao" placeholder="000">
+                                        </label>
+                                    </div>
+                                    <div class="detalhesPagamento detalhesDinheiro">
+                                        <label class="campoPagamento campoTroco">
+                                            Troco para quanto?
+                                            <input type="text" name="troco" placeholder="R$ 0,00">
+                                        </label>
+                                    </div>
+                                    <div class="detalhesPagamento detalhesTransferencia">
+                                        <p>Os dados para a transferência serão exibidos depois que você finalizar o pedido.</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+
+                    <!-- Resumo alongado: título em cima, informações no meio, botão embaixo -->
+                    <aside class="resumoPedido" id="resumoPedido">
+                        <h2 class="tituloSecao tituloResumo">Resumo do pedido</h2>
+                        <div class="corpoResumo">
+                            <ul class="listaItensPedido" id="listaItensPedido"></ul>
+                            <div class="linhasResumo">
+                                <div class="linhaResumo">
+                                    <span>Produtos (<span id="resumoQuantidadeProdutos">0</span>)</span>
+                                    <span id="resumoSubtotal">R$ 0,00</span>
+                                </div>
+                                <div class="linhaResumo">
+                                    <span>Frete</span>
+                                    <span id="resumoFrete" class="valorFrete valorGratis">Grátis</span>
+                                </div>
+                            </div>
+                            <div class="totalResumo">
+                                <div class="linhaResumo linhaTotalResumo">
+                                    <span>Total</span>
+                                    <span id="resumoTotal" class="valorTotal">R$ 0,00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" form="formularioPagamento" class="botaoPrimario botaoBloco">Finalizar pedido</button>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footerConteudo">
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+        </div>
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="JavaScript/Comprador/sacolaDados.js"></script>
+    <script src="JavaScript/Comprador/cabecalhoEtapas.js"></script>
+    <script src="JavaScript/Comprador/pagamento.js"></script>
+</body>
+</html>
