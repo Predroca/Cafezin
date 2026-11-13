@@ -139,20 +139,20 @@ button, input, select, textarea { font: inherit; }
    ========================================================= */
 
 .painelLoja {
-    background: var(--cor-marrom-escuro-2);
+    background-image: url(../img/indexLoja/BannerIndexLoja.svg);
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
     padding-top: 40px;
+    background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
 .painelConteudo {
     min-height: 300px;
-    display: grid;
 
-    /*
-     * O texto ocupa a parte esquerda.
-     * Os cards ocupam somente o espaço restante à direita.
-     */
+
+
     grid-template-columns: 42% 58%;
 
     align-items: center;
