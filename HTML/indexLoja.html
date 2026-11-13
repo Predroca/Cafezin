@@ -43,7 +43,7 @@
     <main>
 
         <!-- =========================================
-             PAINEL PRINCIPAL
+             PAINEL PRINCIPAL (BANNER)
              ========================================= -->
 
         <section class="painelLoja" id="painel">
@@ -59,43 +59,54 @@
                     </p>
                 </div>
 
-
-                <!-- =================================
-                     DASHBOARD
-                     ================================= -->
-
-               <!---<div class="listaEstatisticas">
-
-                    <div class="estat">
-                        <i class="bi bi-receipt" aria-hidden="true"></i>
-                        <strong>18</strong>
-                        <span>Pedidos hoje</span>
-                    </div>
-
-                    <div class="estat">
-                        <i class="bi bi-box-seam" aria-hidden="true"></i>
-                        <strong>24</strong>
-                        <span>Produtos ativos</span>
-                    </div>
-
-                    <div class="estat">
-                        <i class="bi bi-star-fill" aria-hidden="true"></i>
-                        <strong>4,9</strong>
-                        <span>Avaliação média</span>
-                    </div>
-
-                    <div class="estat destaque">
-                        <i class="bi bi-cash-coin" aria-hidden="true"></i>
-                        <strong>R$ 612,40</strong>
-                        <span>Faturado hoje</span>
-                    </div> --> 
-
-                </div>
-
             </div>
         </section>
 
-        
+
+        <!-- =========================================
+             DASHBOARD
+             ========================================= -->
+
+        <section class="secaoDashboard" aria-label="Resumo da loja">
+            <div class="container">
+                <div class="dashGrid">
+
+                    <article class="dashCard">
+                        <div class="dashIcone"><i class="bi bi-receipt" aria-hidden="true"></i></div>
+                        <div class="dashTexto">
+                            <span class="dashRotulo">Pedidos hoje</span>
+                            <strong class="dashValor">18</strong>                        </div>
+                    </article>
+
+                    <article class="dashCard">
+                        <div class="dashIcone"><i class="bi bi-box-seam" aria-hidden="true"></i></div>
+                        <div class="dashTexto">
+                            <span class="dashRotulo">Produtos ativos</span>
+                            <strong class="dashValor">24</strong>                        </div>
+                    </article>
+
+                    <article class="dashCard">
+                        <div class="dashIcone"><i class="bi bi-star-fill" aria-hidden="true"></i></div>
+                        <div class="dashTexto">
+                            <span class="dashRotulo">Avaliação média</span>
+                            <strong class="dashValor">4,9</strong>                        </div>
+                    </article>
+
+                    <article class="dashCard destaque">
+                        <div class="dashIcone"><i class="bi bi-cash-stack"></i></div>
+                        <div class="dashTexto">
+                            <span class="dashRotulo">Faturado hoje</span>
+                            <strong class="dashValor">R$ 612,40</strong>                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =========================================
+             CARDÁPIO
+             ========================================= -->
 
         <section
             class="secaoPadrao secaoAlternada"
