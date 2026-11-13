@@ -51,36 +51,62 @@
           </div>
 
         </div>
-        <div class="listaPedidos">
-          <article class="pedido novo" data-pedido-id="4821" data-status="Pendente">
-            <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 2 min</time></div>
-            <h3>Pedido de Ana Clara</h3><span class="dadoTitulo">Produtos:</span>
-            <p>2x Pão de queijo artesanal, 1x Chocolate quente cremoso</p>
-            <div class="pedidoRodape"><strong>R$ 44,00</strong>
-              <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="confirmar">Confirmar
-                  preparo</button></div>
+        <div class="colunasPedidos">
+          <section class="colunaPedidos" data-coluna-status="Pendente" aria-labelledby="tituloPendentes">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloPendentes">Pendentes</h3>
+              <span class="contadorColunaPedidos">2</span>
             </div>
-          </article>
-          <article class="pedido preparo" data-pedido-id="4819" data-status="Em preparo">
-            <div class="pedidoCabecalho"><span class="statusBadge aguardando">Em preparo</span><time>Há 9 min</time>
+            <div class="listaPedidosColuna" data-lista-status="Pendente">
+              <article class="pedido novo" data-pedido-id="4821" data-status="Pendente">
+                <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 2 min</time></div>
+                <h3>Pedido de Ana Clara</h3><span class="dadoTitulo">Produtos:</span>
+                <p>2x Pão de queijo artesanal, 1x Chocolate quente cremoso</p>
+                <div class="pedidoRodape"><strong>R$ 44,00</strong>
+                  <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="iniciar-preparo">Iniciar preparo</button></div>
+                </div>
+              </article>
+              <article class="pedido novo" data-pedido-id="4823" data-status="Pendente">
+                <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 5 min</time></div>
+                <h3>Pedido de Beatriz Lima</h3><span class="dadoTitulo">Produtos:</span>
+                <p>1x Pão na chapa, 2x Café coado</p>
+                <div class="pedidoRodape"><strong>R$ 19,50</strong>
+                  <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="iniciar-preparo">Iniciar preparo</button></div>
+                </div>
+              </article>
             </div>
-            <h3>Pedido de Rafael Souza</h3><span class="dadoTitulo">Produtos:</span>
-            <p>1x Bolo de cenoura caseiro, 1x Cappuccino cremoso</p>
-            <div class="pedidoRodape"><strong>R$ 22,80</strong>
-              <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="pronto">Marcar como
-                  pronto</button></div>
-            </div>
-          </article>
-          <article class="pedido novo" data-pedido-id="4823" data-status="Pendente">
-            <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 5 min</time></div>
-            <h3>Pedido de Beatriz Lima</h3><span class="dadoTitulo">Produtos:</span>
-            <p>1x Pão na chapa, 2x Café coado</p>
-            <div class="pedidoRodape"><strong>R$ 19,50</strong>
-              <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="confirmar">Confirmar
-                  preparo</button></div>
-            </div>
-          </article>
+          </section>
 
+          <section class="colunaPedidos" data-coluna-status="Em preparo" aria-labelledby="tituloEmPreparo">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloEmPreparo">Em preparo</h3>
+              <span class="contadorColunaPedidos">1</span>
+            </div>
+            <div class="listaPedidosColuna" data-lista-status="Em preparo">
+              <article class="pedido preparo" data-pedido-id="4819" data-status="Em preparo">
+                <div class="pedidoCabecalho"><span class="statusBadge aguardando">Em preparo</span><time>Há 9 min</time></div>
+                <h3>Pedido de Rafael Souza</h3><span class="dadoTitulo">Produtos:</span>
+                <p>1x Bolo de cenoura caseiro, 1x Cappuccino cremoso</p>
+                <div class="pedidoRodape"><strong>R$ 22,80</strong>
+                  <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="marcar-pronto">Marcar como pronto</button></div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="colunaPedidos" data-coluna-status="Pronto" aria-labelledby="tituloProntos">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloProntos">Prontos</h3>
+              <span class="contadorColunaPedidos">0</span>
+            </div>
+            <div class="listaPedidosColuna" data-lista-status="Pronto"></div>
+          </section>
+        </div>
+        <div class="acoesSalvarPedidos">
+          <button type="button" id="salvarAlteracoesPedidos" class="botaoPrimario">
+            <i class="bi bi-save"></i> Salvar alterações
+          </button>
+          <span id="mensagemSalvamentoPedidos" class="mensagemSalvamento" role="status" aria-live="polite"></span>
         </div>
       </div>
     </section>
@@ -233,5 +259,7 @@
     </div>
 
   </footer>
+
+<script src="JavaScript/Loja/gerirPedidos.js"></script>
 
 </html>
