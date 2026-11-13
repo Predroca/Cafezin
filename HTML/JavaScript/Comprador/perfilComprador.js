@@ -383,6 +383,7 @@
     /* ---------- Início ---------- */
     renderAvatar();
     renderContagens();
+    renderAvaliacao();
     renderPedidos();
     renderFavoritas();
 
