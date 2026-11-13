@@ -622,3 +622,102 @@ Usa as variáveis e fontes de main.css e a navegação/rodapé de indexComp.css.
     opacity: 1;
     transform: translate(-50%, 0);
 }
+
+@media (max-width: 640px) {
+    .itemPedido {
+        grid-template-columns: 1fr auto;
+    }
+    .itemPedido .botaoAvaliar {
+        grid-column: 1 / -1;
+        justify-self: start;
+        order: 3;
+    }
+}
+
+/* ---------- Avaliar pedido ---------- */
+.avaliarResumo {
+    display: grid;
+    gap: 4px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(75, 54, 42, .14);
+    grid-column: span 2;
+}
+.avaliarResumo h3 {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-normal);
+}
+.avaliarResumo p {
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+}
+.avaliarResumo strong {
+    color: var(--cor-marrom-claro);
+}
+
+.avaliarNota {
+    grid-column: span 2;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.avaliarNota legend {
+    margin-bottom: 8px;
+    padding: 0;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+}
+.estrelas {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 4px;
+    position: relative;
+}
+.estrelas input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.estrelas label {
+    color: rgba(75, 54, 42, .22);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transicao-rapida), transform var(--transicao-rapida);
+}
+.estrelas label:hover,
+.estrelas label:hover ~ label,
+.estrelas input:checked ~ label {
+    color: var(--cor-laranja);
+}
+.estrelas label:hover {
+    transform: scale(1.12);
+}
+.estrelas input:focus-visible + label {
+    outline: 3px solid var(--cor-laranja-claro);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.formPerfilLoja .campo textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(75, 54, 42, .28);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background);
+    color: var(--cor-texto);
+    font-family: inherit;
+    font-size: var(--fonte-normal);
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+.formPerfilLoja .campo textarea:hover {
+    border-color: var(--cor-laranja);
+}
+.formPerfilLoja .campo textarea:focus {
+    outline: 0;
+    border-color: var(--cor-laranja-escuro);
+    box-shadow: 0 0 0 3px rgba(225, 167, 104, .4);
+}
