@@ -1,9 +1,3 @@
-/*
-   Painel do lojista (IndexLoja)
-   Identidade: usa as variáveis de CSS e a tipografia definidas em main.css,
-   seguindo o mesmo padrão visual de indexComp.css.
-*/
-
 body {
     font-family: "Google Sans", sans-serif;
     color: var(--cor-texto);
@@ -139,22 +133,17 @@ button, input, select, textarea { font: inherit; }
    ========================================================= */
 
 .painelLoja {
-    background-image: url(../img/indexLoja/BannerIndexLoja.png);
+    background-image: url(../img/indexLoja/BannerIndexLoja.svg);
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
     padding-top: 40px;
     background-repeat: no-repeat;
-  background-size: cover;
-
+    background-size: cover;
 }
 
 .painelConteudo {
     min-height: 300px;
-
-
-
     grid-template-columns: 42% 58%;
-
     align-items: center;
     gap: 0;
 }
@@ -175,11 +164,9 @@ button, input, select, textarea { font: inherit; }
 .painelTexto h1 {
     max-width: 600px;
     margin: 0 auto 22px;
-
     font-family: "Brasika", sans-serif;
     font-size: clamp(2.2rem, 4vw, 3.2rem);
     line-height: 1.25;
-
     text-align: center;
 }
 
@@ -212,7 +199,7 @@ button, input, select, textarea { font: inherit; }
     margin: 0 auto;
     position: relative;
     left: 0;
-    border: 2px solid white ;
+    border: 2px solid white;
     border-radius: var(--borda-arredondada-grande);
     color: var(--cor-bege-destaque);
 }
@@ -229,79 +216,100 @@ button, input, select, textarea { font: inherit; }
     color: var(--cor-bege-claro);
 }
 
-
 /* =========================================================
-   CARDS DO PAINEL (resumo / estatísticas)
+   DASHBOARD
    ========================================================= */
 
-.listaEstatisticas {
-    width: 50%;
-    margin-right: auto;
-    display: grid;
-    margin-left: 60px;
-    grid-template-columns: repeat(2, 2fr);
-    
-    gap: 18px;
-    padding: 0 20px;
+.secaoDashboard {
+    padding: 31px 0 0px;
+    background: var(--cor-background);
 }
 
-.estat {
+.dashGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
 
-    
+.dashCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    min-height: 120px;
+
+    padding: 22px 20px;
+
+    border: 1px solid rgba(255, 243, 231, .14);
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-marrom-escuro-2);
+
+}
+
+.dashIcone {
+    flex: 0 0 54px;
+    width: 54px;
+    height: 54px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: rgba(255, 243, 231, .1);
+    color: var(--cor-laranja-claro);
+    font-size: 1.5rem;
+}
+
+.dashTexto {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 145px;
-    padding: 18px 10px;
-    width: 300px;
-    border: 1px solid rgba(255, 243, 231, .14);
-
-    text-align: center;
+    gap: 3px;
 }
 
-/* Destaque do faturamento */
-.estat.destaque {
-    
+.dashRotulo {
+    color: var(--cor-bege-claro);
+    font-size: .74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.dashValor {
+    color: var(--cor-texto-claro);
+    font-size: var(--fonte-titulo);
+    line-height: 1.1;
+}
+
+/* Cartão de destaque (faturamento) */
+.dashCard.destaque {
     background: var(--cor-laranja-escuro);
     border-color: transparent;
 }
 
-.estat i {
-    color: var(--cor-laranja-claro);
-    font-size: 2rem;
-}
-
-.estat.destaque i {
+.dashCard.destaque .dashIcone {
+    background: rgba(255, 243, 231, .2);
     color: var(--cor-bege-destaque);
-}
-
-.estat strong {
-    display: block;
-
-    color: var(--cor-texto-claro);
-    font-size: var(--fonte-titulo);
-    line-height: 1;
-
-    text-align: center;
-}
-
-.estat span {
-    display: block;
     
-    color: var(--cor-bege-claro);
-    font-size: var(--fonte-media);
-    line-height: 1.3;
+    display: grid;
+    place-items: center;
+    
+}
 
-    text-align: center;
+.dashCard.destaque .dashRotulo {
+    color: var(--cor-bege-claro);
+}
+
+.dashCard.destaque .dashValor {
+    color: var(--cor-texto-claro);
 }
 
 /* Estrutura de seções */
 
 .secaoPadrao {
-    padding: 62px 0;
+    padding: 31px 0;
 }
+
 .cabecalhoSecao {
     margin-bottom: 25px;
 }
@@ -389,7 +397,6 @@ button, input, select, textarea { font: inherit; }
     border: 1px solid rgba(75, 54, 42, .30);
 }
 
-
 .pedidoCabecalho {
     display: flex;
     align-items: center;
@@ -417,10 +424,7 @@ button, input, select, textarea { font: inherit; }
 .statusBadge.entregue {
     background: rgba(131, 184, 255, .18);
     color: var(--cor-azul-marinho);
-
 }
-
-
 
 .pedido h3 {
     font-size: var(--fonte-pequena);
@@ -457,15 +461,10 @@ button, input, select, textarea { font: inherit; }
 .produtoLoja,
 .produto.Loja {
     overflow: hidden;
-
     border: 1px solid rgba(75, 54, 42, .12);
-
     border-radius: var(--borda-arredondada-pequena);
-
     background: var(--cor-background);
-
     box-shadow: 0 8px 22px rgba(45, 28, 22, .07);
-
     transition: opacity var(--transicao-rapida);
 }
 
@@ -477,23 +476,14 @@ button, input, select, textarea { font: inherit; }
 }
 
 .filtrosProdutos button {
-
     padding: 8px 14px;
-
     border: 1px solid rgba(75,54,42,.2);
-
     border-radius: var(--borda-arredondada-pequena);
-
     background: transparent;
-
     color: var(--cor-marrom-claro);
-
     font-size: .75rem;
-
     font-weight: 600;
-
     cursor: pointer;
-
 }
 
 .filtrosProdutos button.ativo {
@@ -502,11 +492,11 @@ button, input, select, textarea { font: inherit; }
     color: white;
 }
 
-
 .filtrosProdutos button:focus-visible {
     outline: 2px solid var(--cor-laranja-escuro);
     outline-offset: 2px;
 }
+
 /* Produtos do lojista */
 
 .listaProdutosLoja {
@@ -524,8 +514,6 @@ button, input, select, textarea { font: inherit; }
     box-shadow: 0 8px 22px rgba(45,28,22,.07);
     transition: opacity var(--transicao-rapida);
 }
-
-
 
 .fotoProdutoLoja {
     height: 200px;
@@ -761,17 +749,14 @@ button, input, select, textarea { font: inherit; }
 }
 
 /* Disponibilidade */
-#botaoDisponibilidade{
-       font-size: .90rem;
 
+#botaoDisponibilidade {
+    font-size: .90rem;
 }
-
-
 
 footer {
     margin-top: 0;
 }
-
 
 /* =========================================================
    RESPONSIVIDADE
@@ -787,13 +772,9 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .listaEstatisticas {
-        gap: 10px;
-    }
-
-    .estat {
-        min-height: 135px;
-        padding: 14px 8px;
+    .dashGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
     }
 
     .formNovoProduto,
@@ -831,16 +812,6 @@ footer {
         display: none;
     }
 
-    .listaEstatisticas {
-        max-width: 550px;
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    .estat {
-        min-height: 125px;
-    }
-
     .secaoPadrao {
         padding: 46px 0;
     }
@@ -854,21 +825,12 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .listaEstatisticas {
-        gap: 8px;
+    .dashGrid {
+        grid-template-columns: 1fr;
     }
 
-    .estat {
-        min-height: 110px;
-        padding: 10px 5px;
-    }
-
-    .estat strong {
-        font-size: var(--fonte-media);
-    }
-
-    .estat span {
-        font-size: .65rem;
+    .dashCard {
+        padding: 16px;
     }
 
     .cabecalhoSecao.linha {
