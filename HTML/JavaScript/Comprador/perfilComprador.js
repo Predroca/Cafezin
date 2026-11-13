@@ -7,7 +7,8 @@
         identificacao: "cafezinPerfilCompradorIdentificacao",     // gravada pelo script inline
         enderecos: "cafezinEnderecosComprador",                   // gravada pelo script inline
         favoritas: "cafezinFavoritas",
-        sessao: "cafezinSessao"
+        sessao: "cafezinSessao",
+        avaliacoes: "cafezinAvaliacoesComprador"
     };
 
     const PAGINA_INICIAL_DESLOGADO = "index.html";
