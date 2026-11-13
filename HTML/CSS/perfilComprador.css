@@ -464,7 +464,7 @@ Usa as variáveis e fontes de main.css e a navegação/rodapé de indexComp.css.
 }
 
 .itemPedido {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
 }
 .itemPedidoTopo {
     display: flex;
