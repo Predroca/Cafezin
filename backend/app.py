@@ -35,6 +35,7 @@ app.register_blueprint(avaliacao_bp)
 app.register_blueprint(loja_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(upload_bp)
+app.register_blueprint(comprador_bp)
 
 
 @app.route("/health")
