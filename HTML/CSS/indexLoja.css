@@ -139,7 +139,7 @@ button, input, select, textarea { font: inherit; }
    ========================================================= */
 
 .painelLoja {
-    background-image: url(../img/indexLoja/BannerIndexLoja.svg);
+    background-image: url(../img/indexLoja/BannerIndexLoja.png);
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
     padding-top: 40px;
