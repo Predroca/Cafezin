@@ -12,7 +12,7 @@ import { iniciarAbas, abrirAbaInicial } from "./abasPerfilComprador.js";
 import { obterEnderecos, renderEnderecos, iniciarEnderecos } from "./enderecosPerfilComprador.js";
 import { obterFavoritas, renderFavoritas } from "./favoritasPerfilComprador.js";
 import { iniciarSessao } from "./sessaoPerfilComprador.js";
-
+import { PEDIDOS, renderPedidos, iniciarAvaliacao } from "./pedidosPerfilComprador.js";
 // Reúne as contagens dos módulos e redesenha o cabeçalho.
 // Passado como callback para os módulos, evitando importações circulares.
 function atualizarCabecalho() {
@@ -29,6 +29,7 @@ function inicializarPagina() {
     iniciarAbas();
     iniciarEnderecos(atualizarCabecalho);
     iniciarSessao();
+    iniciarAvaliacao();
 
     // Carregamento inicial
     atualizarCabecalho();
