@@ -180,20 +180,15 @@
                 <i class="bi bi-x-lg" aria-hidden="true"></i>
             </button>
         </div>
-
+        
         <form class="formPerfilLoja" id="formEndereco" novalidate>
             <div class="campo">
                 <label for="endApelido">Nome do endereço</label>
                 <input id="endApelido" type="text" placeholder="Ex.: Minha casa" required>
             </div>
             <div class="campo">
-                <label for="endTipo">Tipo de endereço</label>
-                <select id="endTipo" required>
-                    <option value="" selected disabled>Selecione uma opção</option>
-                    <option value="Casa">Casa</option>
-                    <option value="Trabalho">Trabalho</option>
-                    <option value="Outro">Outro</option>
-                </select>
+                <label for="endCep">Cep</label>
+                <input id="endCep" type="text" inputmode="numeric" maxlength="9" pattern="[0-9]{5}-?[0-9]{3}" autocomplete="postal-code" placeholder="00000-000" title="Informe os 8 dígitos do CEP" required>
             </div>
             <div class="campo">
                 <label for="endRua">Rua</label>
@@ -216,8 +211,13 @@
                 <input id="endEstado" type="text" inputmode="text" maxlength="2" pattern="[A-Za-z]{2}" autocomplete="address-level1" title="Informe a sigla com duas letras, como MG" required>
             </div>
             <div class="campo">
-                <label for="endCep">Cep</label>
-                <input id="endCep" type="text" inputmode="numeric" maxlength="9" pattern="[0-9]{5}-?[0-9]{3}" autocomplete="postal-code" placeholder="00000-000" title="Informe os 8 dígitos do CEP" required>
+                <label for="endTipo">Tipo de endereço</label>
+                <select id="endTipo" required>
+                    <option value="" selected disabled>Selecione uma opção</option>
+                    <option value="Casa">Casa</option>
+                    <option value="Trabalho">Trabalho</option>
+                    <option value="Outro">Outro</option>
+                </select>
             </div>
             <small class="erroCampo erroForm" id="erroEndereco"></small>
             <div class="formAcoes modalEditarAcoes">
