@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acompanhe em tempo real o preparo e a entrega do seu pedido no Cafézin.">
+    <title>Cafézin | Acompanhar pedido</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/acompanharPedido.css">
+</head>
+
+<body id="topo">
+
+    <header class="navComprador">
+        <div class="container navCompradorConteudo">
+            <a class="logoComprador" href="indexComprador.html#topo" aria-label="Cafézin - página inicial">Cafézin</a>
+
+            <form id="formBusca" class="buscaCabecalho" role="search" action="pesquisa.html" method="get">
+                <label class="visualmenteOculto" for="busca">Buscar lojas ou produtos</label>
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input id="busca" name="q" type="search" placeholder="Busque por um café, um bolo ou uma cafeteria!">
+                <button type="submit" aria-label="Pesquisar"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
+            </form>
+
+            <nav class="navLinks" aria-label="Navegação principal">
+                <a href="indexComprador.html#inicio">Início</a>
+                <a href="indexComprador.html#cafeterias">Cafeterias</a>
+                <a href="indexComprador.html#produtos">Produtos</a>
+                <a class="ativo" aria-current="page" href="acompanharPedido.html">Pedidos</a>
+            </nav>
+
+            <div class="navAcoes">
+                <a class="sacola" href="Sacola.html" aria-label="Sacola com três itens">
+                    <i class="bi bi-bag" aria-hidden="true"></i>
+                    <span>3</span>
+                </a>
+                <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil">
+                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- =========================================
+             CABEÇALHO DA PÁGINA
+             ========================================= -->
+
+        <section class="cabecalhoAcompanhar">
+            <div class="container">
+
+                <a class="linkVoltar" href="indexComprador.html">
+                    <i class="bi bi-arrow-left"></i> Voltar para o início
+                </a>
+
+                <div class="cabecalhoAcompanharLinha">
+
+                    <div>
+                        <p class="saudacaoAcompanhar">Pedido #4821 · Café da Praça</p>
+
+                        <h1>Acompanhe seu <span>pedido</span></h1>
+
+                        <p class="descricaoPagina">
+                            Estamos preparando tudo com carinho. Você vê cada etapa por aqui,
+                            do balcão até a sua porta.
+                        </p>
+                    </div>
+
+                    <div class="previsaoCard">
+                        <i class="bi bi-clock-history" aria-hidden="true"></i>
+                        <div>
+                            <span>Previsão de entrega</span>
+                            <strong id="previsaoTexto">20:55 - 21:10</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="secaoPadrao" id="statusPedido" aria-labelledby="tituloStatus">
+            <div class="container">
+
+                <div class="gradeAcompanhar">
+
+
+                    <!-- =================================
+                         COLUNA ESQUERDA: ANDAMENTO
+                         ================================= -->
+
+                    <article class="pedido cardAndamento" id="cardPedido" data-status="Em preparo">
+
+                        <div class="pedidoCabecalho">
+                            <span class="statusBadge" id="badgeStatus">Em preparo</span>
+                            <time>Pedido feito às 20:34</time>
+                        </div>
+
+                        <h2 id="tituloStatus">Seu pedido está em preparo</h2>
+                        <p class="mensagemStatus" id="mensagemStatus">
+                            A loja já confirmou e está preparando seus itens.
+                        </p>
+
+                        <div class="barraProgresso" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                            aria-valuenow="40" aria-label="Progresso do pedido">
+                            <div class="barraProgressoPreenchida" id="barraPreenchida"></div>
+                        </div>
+
+                        <ol class="linhaTempo" id="linhaTempo">
+
+                            <li class="etapa" data-etapa="Pendente">
+                                <span class="etapaIcone"><i class="bi bi-receipt"></i></span>
+                                <div class="etapaTexto">
+                                    <strong>Pedido recebido</strong>
+                                    <small>A loja recebeu seu pedido</small>
+                                </div>
+                                <time>20:34</time>
+                            </li>
+
+                            <li class="etapa" data-etapa="Em preparo">
+                                <span class="etapaIcone"><i class="bi bi-cup-hot"></i></span>
+                                <div class="etapaTexto">
+                                    <strong>Em preparo</strong>
+                                    <small>Seus itens estão sendo feitos agora</small>
+                                </div>
+                                <time>20:36</time>
+                            </li>
+
+                            <li class="etapa" data-etapa="Aguardando retirada">
+                                <span class="etapaIcone"><i class="bi bi-bag-check"></i></span>
+                                <div class="etapaTexto">
+                                    <strong>Pronto para retirada</strong>
+                                    <small>Aguardando o entregador buscar na loja</small>
+                                </div>
+                                <time>--:--</time>
+                            </li>
+
+                            <li class="etapa" data-etapa="Em rota">
+                                <span class="etapaIcone"><i class="bi bi-bicycle"></i></span>
+                                <div class="etapaTexto">
+                                    <strong>A caminho</strong>
+                                    <small>O entregador saiu com seu pedido</small>
+                                </div>
+                                <time>--:--</time>
+                            </li>
+
+                            <li class="etapa" data-etapa="Entregue">
+                                <span class="etapaIcone"><i class="bi bi-house-heart"></i></span>
+                                <div class="etapaTexto">
+                                    <strong>Entregue</strong>
+                                    <small>Bom apetite!</small>
+                                </div>
+                                <time>--:--</time>
+                            </li>
+
+                        </ol>
+
+                    </article>
+
+
+                    <!-- =================================
+                         COLUNA DIREITA: RESUMO
+                         ================================= -->
+
+                    <aside class="colunaResumo" aria-label="Detalhes do pedido">
+
+
+                        <!-- DETALHES DO PEDIDO -->
+
+                        <article class="entrega cardResumo">
+
+                            <div class="entregaCabecalho">
+                                <span class="statusBadge aguardando">Resumo do pedido</span>
+                                <time>#4821</time>
+                            </div>
+
+                            <div class="entregaInfo">
+
+                                <div class="entregaDado lojaEntrega">
+                                    <i class="bi bi-shop"></i>
+                                    <div>
+                                        <span class="dadoTitulo">Loja:</span>
+                                        <strong>Café da Praça</strong>
+                                        <small>(Rua Coronel Antônio Alves, 315)</small>
+                                    </div>
+                                </div>
+
+                                <div class="entregaDado produtosEntrega">
+                                    <i class="bi bi-bag"></i>
+                                    <div>
+                                        <span class="dadoTitulo">Produtos:</span>
+                                        <p><strong>2x Pão de queijo artesanal, 1x Chocolate quente cremoso</strong></p>
+                                    </div>
+                                </div>
+
+                                <div class="entregaDado enderecoEntrega">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <div>
+                                        <span class="dadoTitulo">Entrega:</span>
+                                        <strong>Av. Floriano Peixoto, 1250</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <ul class="valoresPedido">
+                                <li><span>Subtotal</span><span>R$ 36,00</span></li>
+                                <li><span>Taxa de entrega</span><span>R$ 8,00</span></li>
+                            </ul>
+
+                            <div class="entregaRodape">
+                                <span class="rotuloTotal">Total</span>
+                                <strong>R$ 44,00</strong>
+                            </div>
+
+                        </article>
+
+
+                        <!-- ENTREGADOR -->
+
+                        <article class="entrega cardEntregador" id="cardEntregador">
+
+                            <div class="entregaCabecalho">
+                                <span class="statusBadge entregue">Seu entregador</span>
+                            </div>
+
+                            <div class="entregadorLinha" id="entregadorAtribuido" hidden>
+                                <span class="entregadorAvatar"><i class="bi bi-person-fill"></i></span>
+                                <div>
+                                    <strong>Lucas Oliveira</strong>
+                                    <small><i class="bi bi-star-fill"></i> 4,8 · Cafézin Entregador</small>
+                                </div>
+                            </div>
+
+                            <p class="entregadorAguardo" id="entregadorAguardo">
+                                <i class="bi bi-hourglass-split"></i>
+                                Assim que o pedido ficar pronto, um entregador será chamado.
+                            </p>
+
+                        </article>
+
+                    </aside>
+
+                </div>
+                <div class="areaCancelar" id="areaCancelar">
+                    <button type="button" class="botaoCancelar" id="botaoCancelar">
+                        Cancelar pedido ou contatar o suporte sla/????? smt
+                    </button>
+                </div>
+
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="footerConteudo">
+
+            <section class="footerSection footerMarca">
+                <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+                <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Sobre nós</div>
+                <ul class="footerSectionLists">
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="cadastrarEntregador.html">Seja entregador</a></li>
+                    <li><a href="canalAtendimento.html">Fale Conosco</a></li>
+                    <li><a href="cafeDev.html">CaféDev</a></li>
+                </ul>
+            </section>
+
+            <section class="footerSection">
+                <div class="titulo">Contato</div>
+                <ul class="footerSectionLists">
+                    <li class="footerSubtitulo">Redes sociais</li>
+                    <li><img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram"><span>@CafezinDSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter"><span>@Cafezin_DSA</span></li>
+                    <li><img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp"><span>(34) 9 9999-9999</span></li>
+                </ul>
+            </section>
+
+        </div>
+
+        <div class="footerCopyright">
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
+        </div>
+
+    </footer>
+
+
+    <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
+
+    <script>
+        /*
+         * O status vem de data-status no #cardPedido.
+         * Ao integrar com o backend, basta chamar atualizarStatus("Em rota"), por exemplo.
+         */
+        const ETAPAS = ["Pendente", "Em preparo", "Aguardando retirada", "Em rota", "Entregue"];
+
+        const TEXTOS = {
+            "Pendente": {
+                titulo: "Aguardando a loja confirmar",
+                mensagem: "Enviamos seu pedido. Assim que a loja aceitar, o preparo começa.",
+                badge: "aguardando"
+            },
+            "Em preparo": {
+                titulo: "Seu pedido está em preparo",
+                mensagem: "A loja já confirmou e está preparando seus itens.",
+                badge: "preparo"
+            },
+            "Aguardando retirada": {
+                titulo: "Pedido pronto!",
+                mensagem: "Seu pedido está pronto e esperando o entregador na loja.",
+                badge: "aguardando"
+            },
+            "Em rota": {
+                titulo: "Seu pedido está a caminho",
+                mensagem: "O entregador já saiu. Fique atento, logo ele chega.",
+                badge: "rota"
+            },
+            "Entregue": {
+                titulo: "Pedido entregue",
+                mensagem: "Esperamos que você aproveite. Obrigado por pedir no Cafézin!",
+                badge: "entregue"
+            }
+        };
+
+        function atualizarStatus(status) {
+            const indice = ETAPAS.indexOf(status);
+            if (indice === -1) return;
+
+            const card = document.getElementById("cardPedido");
+            card.dataset.status = status;
+
+            document.querySelectorAll("#linhaTempo .etapa").forEach((etapa, i) => {
+                etapa.classList.toggle("concluida", i < indice);
+                etapa.classList.toggle("atual", i === indice);
+                etapa.classList.toggle("futura", i > indice);
+            });
+
+            const texto = TEXTOS[status];
+            const badge = document.getElementById("badgeStatus");
+            badge.textContent = status === "Aguardando retirada" ? "Pronto para retirada" : status;
+            badge.className = "statusBadge " + texto.badge;
+
+            document.getElementById("tituloStatus").textContent = texto.titulo;
+            document.getElementById("mensagemStatus").textContent = texto.mensagem;
+
+            const porcentagem = Math.round(((indice + 1) / ETAPAS.length) * 100);
+            document.getElementById("barraPreenchida").style.width = porcentagem + "%";
+            card.querySelector(".barraProgresso").setAttribute("aria-valuenow", porcentagem);
+
+            /* Entregador só aparece depois que o pedido está pronto */
+            const comEntregador = indice >= 2;
+            document.getElementById("entregadorAtribuido").hidden = !comEntregador;
+            document.getElementById("entregadorAguardo").hidden = comEntregador;
+
+            /* Cancelamento só enquanto a loja ainda não terminou o preparo */
+            document.getElementById("areaCancelar").hidden = indice >= 2;
+        }
+
+        atualizarStatus(document.getElementById("cardPedido").dataset.status);
+    </script>
+
+</body>
+
+</html>
