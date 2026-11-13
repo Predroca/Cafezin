@@ -130,3 +130,147 @@ body {
     }
 }
 
+
+/* Organização dos pedidos por etapa */
+.colunasPedidos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: start;
+}
+
+.colunaPedidos {
+    min-width: 0;
+    padding: 18px;
+    border: 1px solid rgba(75, 54, 42, .14);
+    border-radius: var(--borda-arredondada-grande);
+    background: rgba(255, 243, 231, .55);
+}
+
+.cabecalhoColunaPedidos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(75, 54, 42, .14);
+}
+
+.cabecalhoColunaPedidos h3 {
+    margin: 0;
+    color: var(--cor-marrom-escuro-2);
+    font-size: 1rem;
+}
+
+.contadorColunaPedidos {
+    display: inline-flex;
+    min-width: 27px;
+    height: 27px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 7px;
+    border-radius: 999px;
+    background: rgba(148, 70, 27, .09);
+    color: var(--cor-laranja-escuro);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.listaPedidosColuna {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 90px;
+}
+
+.listaPedidosColuna .pedido {
+    width: 100%;
+    margin: 0;
+}
+
+.pedido[data-status="Pronto"] {
+    border-color: rgba(111, 174, 122, .55);
+}
+
+.pedido[data-status="Pronto"] .statusBadge {
+    background: rgba(111, 174, 122, .16);
+    color: #3d7048;
+}
+
+@media (max-width: 900px) {
+    .colunasPedidos {
+        grid-template-columns: repeat(3, minmax(270px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+}
+
+
+/* Ações de reversão e salvamento dos pedidos */
+.pedidoAcoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.botaoReverterPedido {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-pequena);
+    background: transparent;
+    color: var(--cor-marrom-escuro-2);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.botaoReverterPedido:hover {
+    border-color: var(--cor-laranja-escuro);
+    background: rgba(148, 70, 27, .09);
+    color: var(--cor-laranja-escuro);
+}
+
+.botaoReverterPedido:focus-visible,
+.acoesSalvarPedidos button:focus-visible {
+    outline: 2px solid var(--cor-laranja-escuro);
+    outline-offset: 3px;
+}
+
+.acoesSalvarPedidos {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+}
+
+.acoesSalvarPedidos .botaoPrimario {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.mensagemSalvamento {
+    color: var(--cor-texto-secundario);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.mensagemSalvamento.salvamentoSucesso {
+    color: #3d7048;
+}
+
+@media (max-width: 500px) {
+    .acoesSalvarPedidos {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
