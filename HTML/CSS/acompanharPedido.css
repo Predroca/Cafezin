@@ -1,0 +1,729 @@
+/*
+   Tela do comprador: Acompanhar pedido
+   Usa as variáveis de main.css e o mesmo padrão visual de
+   indexLoja.css / indexEntregador.css / gestorPedidos.css.
+*/
+
+body {
+    font-family: "Google Sans", sans-serif;
+    color: var(--cor-texto);
+    background: var(--cor-background);
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+.container { width: 95%; margin: 0 auto; }
+
+
+/* =========================================================
+   NAVBAR (idêntica à de indexComp.css)
+   ========================================================= */
+
+.visualmenteOculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.navComprador {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--cor-marrom-escuro-2);
+    border-bottom: 1px solid rgba(255, 243, 231, .18);
+}
+
+.navCompradorConteudo {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-grande);
+}
+
+.logoComprador {
+    flex: 0 0 auto;
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    color: var(--cor-background-bege);
+}
+
+.buscaCabecalho {
+    height: 42px;
+    width: min(330px, 30vw);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 5px 4px 14px;
+    border: 1px solid rgba(255, 243, 231, .18);
+    border-radius: var(--borda-arredondada-media);
+    background: var(--cor-background);
+}
+
+.buscaCabecalho > i {
+    color: var(--cor-laranja-escuro);
+}
+
+.buscaCabecalho input {
+    min-width: 0;
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: .78rem;
+}
+
+.buscaCabecalho input::placeholder {
+    color: var(--cor-texto-secundario);
+}
+
+.buscaCabecalho button {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 7px;
+    background: var(--cor-laranja);
+    color: var(--cor-texto-claro);
+    cursor: pointer;
+}
+
+.buscaCabecalho button:hover {
+    background: var(--cor-laranja-escuro);
+}
+
+.navLinks {
+    display: flex;
+    gap: var(--espacamento-grande);
+    margin-left: auto;
+}
+
+.navLinks a {
+    position: relative;
+    padding: 7px 0;
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena);
+}
+
+.navLinks a:hover,
+.navLinks .ativo {
+    color: var(--cor-texto-claro);
+}
+
+.navLinks .ativo::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--cor-laranja-claro);
+}
+
+.navAcoes {
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+}
+
+.sacola,
+.perfil {
+    position: relative;
+    color: var(--cor-background-bege);
+    font-size: 1.3rem;
+}
+
+.sacola span {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    display: grid;
+    width: 17px;
+    height: 17px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cor-laranja);
+    color: white;
+    font-size: .62rem;
+    font-weight: 700;
+}
+
+.sacola:hover,
+.perfil:hover {
+    color: var(--cor-laranja-claro);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.cabecalhoAcompanhar {
+    padding: 34px 0 40px;
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-texto-claro);
+}
+
+.linkVoltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    color: var(--cor-bege-claro);
+    font-size: var(--fonte-pequena);
+}
+
+.linkVoltar:hover {
+    color: var(--cor-laranja-claro);
+}
+
+.cabecalhoAcompanharLinha {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.saudacaoAcompanhar {
+    margin-bottom: 10px;
+    color: var(--cor-bege-destaque);
+    font-size: var(--fonte-pequena);
+}
+
+.cabecalhoAcompanhar h1 {
+    margin-bottom: 10px;
+    font-family: "Brasika", sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+}
+
+.cabecalhoAcompanhar h1 span {
+    color: var(--cor-laranja-claro);
+}
+
+.descricaoPagina {
+    max-width: 650px;
+    color: var(--cor-bege-claro);
+    line-height: 1.55;
+}
+
+.previsaoCard {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-laranja-escuro);
+}
+
+.previsaoCard i {
+    font-size: 1.7rem;
+    color: var(--cor-bege-destaque);
+}
+
+.previsaoCard span {
+    display: block;
+    color: var(--cor-bege-claro);
+    font-size: .74rem;
+}
+
+.previsaoCard strong {
+    display: block;
+    margin-top: 2px;
+    color: var(--cor-texto-claro);
+    font-size: var(--fonte-grande);
+    line-height: 1.1;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.secaoPadrao {
+    padding: 48px 0 44px;
+}
+
+.gradeAcompanhar {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 18px;
+    align-items: stretch;
+}
+
+.colunaResumo {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.cardEntregador {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   CARD DE ANDAMENTO (mesmo padrão do card de pedido)
+   ========================================================= */
+
+.pedido,
+.entrega {
+    padding: 22px;
+    border-radius: var(--borda-arredondada-pequena);
+    background: var(--cor-background);
+    border: 1px solid rgba(75, 54, 42, .30);
+}
+
+.pedidoCabecalho,
+.entregaCabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.pedidoCabecalho time,
+.entregaCabecalho time {
+    color: var(--cor-texto-secundario);
+    font-size: .68rem;
+}
+
+.statusBadge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: .64rem;
+    font-weight: 700;
+}
+
+.statusBadge.aguardando {
+    background: rgba(184, 116, 79, .15);
+    color: var(--cor-laranja-escuro);
+}
+
+.statusBadge.preparo,
+.statusBadge.entregue {
+    background: rgba(131, 184, 255, .18);
+    color: var(--cor-azul-marinho);
+}
+
+.statusBadge.rota {
+    background: rgba(111, 174, 122, .18);
+    color: #3d7048;
+}
+
+.cardAndamento h2 {
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-grande);
+    line-height: 1.25;
+}
+
+.mensagemStatus {
+    margin: 6px 0 20px;
+    color: var(--cor-texto-secundario);
+    font-size: var(--fonte-pequena);
+    line-height: 1.5;
+}
+
+
+/* Barra de progresso */
+
+.barraProgresso {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--cor-background-alternativo);
+    border: 1px solid rgba(75, 54, 42, .12);
+}
+
+.barraProgressoPreenchida {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: var(--cor-laranja-escuro);
+    transition: width .6s ease;
+}
+
+
+/* Linha do tempo */
+
+.linhaTempo {
+    list-style: none;
+    margin: 26px 0 0;
+    padding: 0;
+}
+
+.etapa {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 24px;
+}
+
+.etapa:last-child {
+    padding-bottom: 0;
+}
+
+/* linha que liga um ícone ao próximo */
+.etapa:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    top: 38px;
+    bottom: 0;
+    left: 18px;
+    width: 2px;
+    background: rgba(75, 54, 42, .15);
+}
+
+.etapa.concluida:not(:last-child)::before {
+    background: var(--cor-laranja-escuro);
+}
+
+.etapaIcone {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cor-background-alternativo);
+    border: 1px solid rgba(75, 54, 42, .22);
+    color: var(--cor-marrom-claro);
+    font-size: 1rem;
+}
+
+.etapaTexto {
+    flex: 1;
+    min-width: 0;
+}
+
+.etapaTexto strong {
+    display: block;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+}
+
+.etapaTexto small {
+    display: block;
+    margin-top: 2px;
+    color: var(--cor-texto-secundario);
+    font-size: .72rem;
+    line-height: 1.35;
+}
+
+.etapa time {
+    color: var(--cor-texto-secundario);
+    font-size: .7rem;
+    font-weight: 600;
+}
+
+/* estados */
+
+.etapa.concluida .etapaIcone {
+    background: var(--cor-laranja-escuro);
+    border-color: transparent;
+    color: white;
+}
+
+.etapa.atual .etapaIcone {
+    background: var(--cor-laranja-escuro);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 0 5px rgba(225, 167, 104, .35);
+    animation: pulsar 1.8s ease-in-out infinite;
+}
+
+.etapa.futura .etapaTexto strong,
+.etapa.futura time {
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+}
+
+.etapa.futura {
+    opacity: .75;
+}
+
+@keyframes pulsar {
+    0%, 100% { box-shadow: 0 0 0 5px rgba(225, 167, 104, .35); }
+    50%      { box-shadow: 0 0 0 9px rgba(225, 167, 104, .12); }
+}
+
+
+/* =========================================================
+   RESUMO DO PEDIDO (mesmo padrão do card de entrega)
+   ========================================================= */
+
+.entregaDado {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 13px;
+}
+
+.entregaDado > i {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    color: var(--cor-laranja-escuro);
+    font-size: .95rem;
+    line-height: 1;
+}
+
+.dadoTitulo {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--cor-marrom-claro);
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.lojaEntrega strong,
+.enderecoEntrega strong {
+    color: var(--cor-marrom-escuro-2);
+    font-size: .76rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.lojaEntrega small {
+    display: block;
+    margin-top: 2px;
+    color: var(--cor-marrom-principal);
+    font-size: .69rem;
+    line-height: 1.35;
+}
+
+.produtosEntrega p {
+    margin: 0;
+    color: var(--cor-marrom-claro);
+    font-size: .74rem;
+    line-height: 1.45;
+}
+
+.produtosEntrega p strong {
+    color: var(--cor-marrom-escuro-2);
+    font-weight: 700;
+}
+
+.enderecoEntrega {
+    margin-bottom: 0;
+}
+
+.valoresPedido {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px solid rgba(75, 54, 42, .10);
+}
+
+.valoresPedido li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    color: var(--cor-texto-secundario);
+    font-size: .74rem;
+}
+
+.entregaRodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(75, 54, 42, .10);
+}
+
+.rotuloTotal {
+    color: var(--cor-marrom-claro);
+    font-size: .74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+}
+
+.entregaRodape strong {
+    color: var(--cor-marrom-claro);
+    font-size: var(--fonte-grande);
+}
+
+
+/* =========================================================
+   ENTREGADOR
+   ========================================================= */
+
+.entregadorLinha {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.entregadorLinha[hidden],
+.entregadorAguardo[hidden] {
+    display: none;
+}
+
+.entregadorAvatar {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--cor-marrom-escuro-2);
+    color: var(--cor-laranja-claro);
+    font-size: 1.3rem;
+}
+
+.entregadorLinha strong {
+    display: block;
+    color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
+}
+
+.entregadorLinha small {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+    color: var(--cor-texto-secundario);
+    font-size: .7rem;
+}
+
+.entregadorLinha small i {
+    color: var(--cor-laranja);
+}
+
+.entregadorAguardo {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    color: var(--cor-texto-secundario);
+    font-size: .74rem;
+    line-height: 1.45;
+}
+
+.entregadorAguardo i {
+    color: var(--cor-laranja-escuro);
+    font-size: .95rem;
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR (centralizado abaixo dos cards)
+   ========================================================= */
+
+.areaCancelar {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+}
+
+.areaCancelar[hidden] {
+    display: none;
+}
+
+.botaoCancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 28px;
+    border-radius: var(--borda-arredondada-pequena);
+    background: transparent;
+    border: 1px solid rgba(75, 54, 42, .25);
+    color: var(--cor-marrom-claro);
+    font-size: .78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--transicao-rapida), color var(--transicao-rapida);
+}
+
+.botaoCancelar:hover {
+    background: var(--cor-background-alternativo);
+    color: var(--cor-laranja-escuro);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+    .navLinks { display: none; }
+
+    .buscaCabecalho {
+        width: min(450px, 48vw);
+        margin-left: auto;
+    }
+
+    .gradeAcompanhar {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .container { width: min(100% - 32px, 1180px); }
+
+    .navCompradorConteudo {
+        min-height: 66px;
+        gap: 12px;
+    }
+
+    .logoComprador { font-size: var(--fonte-media); }
+
+    .buscaCabecalho {
+        flex: 1;
+        width: auto;
+        margin-left: 0;
+    }
+
+    .cabecalhoAcompanhar { padding: 28px 0 32px; }
+
+    .cabecalhoAcompanharLinha {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .secaoPadrao { padding: 36px 0 46px; }
+}
+
+@media (max-width: 500px) {
+    .perfil { display: none; }
+
+    .buscaCabecalho input { font-size: .68rem; }
+}
+
+@media (max-width: 560px) {
+    .pedido,
+    .entrega { padding: 16px; }
+
+    .etapa time { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+        animation: none !important;
+    }
+}
