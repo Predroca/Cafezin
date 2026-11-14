@@ -190,6 +190,9 @@ async function carregarMaisPedidos() {
 function criarCardMaisPedido(produto) {
     const card = document.createElement("article");
     card.className = "OutrasLojasCard";
+    card.dataset.codProduto = produto.cod_produto;
+    card.setAttribute("role", "link" );
+    card.tabIndex = 0;
 
     const nome = produto.nome || "Produto";
 
@@ -266,4 +269,7 @@ function escaparHTML(valor) {
         "'": "&#039;"
     })[caractere]);
 }
+
+
+
 
