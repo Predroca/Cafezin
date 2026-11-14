@@ -106,6 +106,10 @@ def produto_detalhe(cod_produto):
         "loja": produto.loja.usuario.nome,
         "media_avaliacao": media_avaliacao,
         "total_avaliacoes": len(notas),
+        "foto_url" : produto.foto_url,
+        "disponibilidade" : produto.disponibilidade,
+        "cod_loja" : produto.loja.cod_loja,
+        "cod_categoria" : produto.cod_categoria
     }
 
 
@@ -361,4 +365,18 @@ def cardapio_da_loja(cod_loja):
             }
             for p, nome_categoria in linhas
         ],
+    }
+
+@catalogo_bp.route("/categorias", methods=["GET"])
+def listar_categorias():
+    categorias = Categoria.query.order_by(Categoria.nome_categoria).all()
+
+    return {
+        "categorias": [
+            {
+                "cod_categoria": c.cod_categoria,
+                "nome": c.nome_categoria,
+            }
+            for c in categorias
+        ]
     }
