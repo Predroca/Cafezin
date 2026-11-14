@@ -1,9 +1,3 @@
-/*
-   Tela do comprador: Acompanhar pedido
-   Usa as variáveis de main.css e o mesmo padrão visual de
-   indexLoja.css / indexEntregador.css / gestorPedidos.css.
-*/
-
 body {
     font-family: "Google Sans", sans-serif;
     color: var(--cor-texto);
@@ -16,7 +10,7 @@ button, input, select, textarea { font: inherit; }
 
 
 /* =========================================================
-   NAVBAR (idêntica à de indexComp.css)
+   NAVBAR 
    ========================================================= */
 
 .visualmenteOculto {
@@ -210,36 +204,6 @@ button, input, select, textarea { font: inherit; }
     color: var(--cor-bege-claro);
     line-height: 1.55;
 }
-
-.previsaoCard {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 22px;
-    border-radius: var(--borda-arredondada-pequena);
-    background: var(--cor-laranja-escuro);
-}
-
-.previsaoCard i {
-    font-size: 1.7rem;
-    color: var(--cor-bege-destaque);
-}
-
-.previsaoCard span {
-    display: block;
-    color: var(--cor-bege-claro);
-    font-size: .74rem;
-}
-
-.previsaoCard strong {
-    display: block;
-    margin-top: 2px;
-    color: var(--cor-texto-claro);
-    font-size: var(--fonte-grande);
-    line-height: 1.1;
-}
-
 
 /* =========================================================
    LAYOUT
@@ -626,46 +590,6 @@ button, input, select, textarea { font: inherit; }
     font-size: .95rem;
 }
 
-
-/* =========================================================
-   BOTÃO CANCELAR (centralizado abaixo dos cards)
-   ========================================================= */
-
-.areaCancelar {
-    display: flex;
-    justify-content: center;
-    margin-top: 44px;
-}
-
-.areaCancelar[hidden] {
-    display: none;
-}
-
-.botaoCancelar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 28px;
-    border-radius: var(--borda-arredondada-pequena);
-    background: transparent;
-    border: 1px solid rgba(75, 54, 42, .25);
-    color: var(--cor-marrom-claro);
-    font-size: .78rem;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background var(--transicao-rapida), color var(--transicao-rapida);
-}
-
-.botaoCancelar:hover {
-    background: var(--cor-background-alternativo);
-    color: var(--cor-laranja-escuro);
-}
-
-
-/* =========================================================
-   RESPONSIVIDADE
-   ========================================================= */
 
 @media (max-width: 1050px) {
     .navLinks { display: none; }
