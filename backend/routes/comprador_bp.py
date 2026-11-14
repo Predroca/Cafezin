@@ -2,7 +2,7 @@ import re
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from sqlalchemy import joinedload
+from sqlalchemy.orm import joinedload
 from datetime import date, time
 
 from extensions import db
