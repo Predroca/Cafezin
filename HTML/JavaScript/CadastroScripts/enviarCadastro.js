@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     let transitando = false;
     let timerErro = null;
+    let enviandoCadastro = false;
+    const botaoEnviar = document.getElementById('submit');
 
     // guarda o texto original de cada alerta para restaurar depois
     [preencherCampos, diferentPsswd].forEach((alerta) => {
@@ -249,18 +251,19 @@ document.addEventListener('DOMContentLoaded', () => {
     nextStep.addEventListener('click', avancar);
 
 
-    /* ---------------- Envio (sem backend) ---------------- */
+    /* ---------------- Envio para a API ---------------- */
 
     // Monta o objeto só com os campos do tipo escolhido (Usuario + subclasse)
     function montarDados() {
         const tipo = tipoSelecionado();
 
-        // atributos de Usuario (comuns). A senha fica de fora de propósito para não ir ao console.
+        // Monta os dados exigidos pela API; a senha é enviada no corpo da requisição.
         const dados = {
             tipo: tipo,
             nome: nomeUser.value.trim(),
             email: email.value.trim(),
-            telefone: telefone.value.trim() || null
+            telefone: telefone.value.trim() || null,
+            senha: password.value
         };
 
         if (tipo === 'comprador' || tipo === 'entregador') {
@@ -278,7 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
             dados.estado = estadoLoja.value;
             dados.cep = cepLoja.value;
             dados.cnpj = cnpjLoja.value;
-            dados.horarioFuncionamento = abreLoja.value + ' às ' + fechaLoja.value;
+            dados.horarioAbertura = abreLoja.value;
+            dados.horarioFechamento = fechaLoja.value;
         }
         if (tipo === 'entregador') {
             dados.cnh = cnhEntregador.value;
@@ -287,21 +291,35 @@ document.addEventListener('DOMContentLoaded', () => {
         return dados;
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // Enter na etapa 1 apenas avança (com a mesma validação do botão)
+        // Enter na etapa 1 apenas avança (com a mesma validação do botão).
         if (getComputedStyle(segundaSessao).display === 'none') {
             avancar();
             return;
         }
 
-        if (!validarEtapa2()) return;
+        if (enviandoCadastro || !validarEtapa2()) return;
 
-        const dados = montarDados();
-        console.log('Cadastro validado (sem backend):', dados);
-        alert('Cadastro de ' + dados.tipo + ' validado! Veja os dados no console (F12).');
+        enviandoCadastro = true;
+        const valorOriginal = botaoEnviar.value;
+        botaoEnviar.disabled = true;
+        botaoEnviar.value = 'Cadastrando...';
 
-        // TODO backend: aqui entra o fetch/POST quando você for integrar.
+        try {
+            await cadastrarUsuario(montarDados());
+            window.location.href = 'login.html';
+        } catch (erro) {
+            if (erro.status === 409) {
+                usuarioExistente.classList.add('aberto');
+            } else {
+                mostrarErro(preencherCampos, erro.message || 'Não foi possível concluir o cadastro. Tente novamente.');
+            }
+        } finally {
+            enviandoCadastro = false;
+            botaoEnviar.disabled = false;
+            botaoEnviar.value = valorOriginal;
+        }
     });
 });
