@@ -7,11 +7,13 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from datetime import date, time
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload
+from decimal import Decimal, InvalidOperation
 
 from models.produto import Produto
 from models.loja import Loja
 from models.usuario import Usuario
 from models.pedido import Pedido
+from models.categoria import Categoria
 from models.avaliacao_loja import AvaliacaoLoja
 from models.comprador import Comprador
 from models.item_pedido import ItemPedido
@@ -249,45 +251,46 @@ def dashboard():
     }
 
      
-#/<string:nome>/<int:cod_loja>
-@loja_bp.route("/registrar_produto/<int:cod_loja>/<string:nome>", methods=["POST"])
+@loja_bp.route("/loja/produto", methods=["POST"])
 @tipo_requerido("Loja")
-def registrar_endereco(nome , cod_loja):
-        
-        dados = request.get_json()
+def criar_produto():
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
 
-        erro = _erro_nomeExist(nome)
-        if erro:
-            return erro
+    dados = request.get_json(silent=True) or {}
 
-        erro2 = _erro_lojaInexistente(cod_loja)
-        if erro2:
-            return erro2
+    nome = (dados.get("nome") or "").strip()
+    if not nome or len(nome) > 100:
+        return {"error": "nome é obrigatório (máximo 100 caracteres)"}, 400
 
-        cod_loja = dados.get("cod_loja")
-        nome = dados.get("nome")
-        descricao = dados.get("descricao")
-        preco = dados.get("preco")
-        disponibilidade = dados.get("disponibilidade")
-        cod_categoria = dados.get("cod_categoria")
-        foto_url = dados.get("foto_url")
-        
+    ja_existe = Produto.query.filter_by(cod_loja=loja.cod_loja, nome=nome).first()
+    if ja_existe:
+        return {"error": "sua loja já tem um produto com esse nome"}, 409
 
+    preco, erro = _ler_preco(dados.get("preco"))
+    if erro:
+        return {"error": erro}, 400
 
-        end = Produto(
-            cod_loja = cod_loja,
-            nome = nome,
-            descricao = descricao,
-            preco = preco,
-            disponibilidade = disponibilidade,
-            cod_categoria = cod_categoria,
-            foto_url = foto_url
-        )
+    disponibilidade = dados.get("disponibilidade", True)
+    if not isinstance(disponibilidade, bool):
+        return {"error": "disponibilidade deve ser true ou false"}, 400
 
-        db.session.add(end)
-        db.session.commit()
+    cod_categoria = dados.get("cod_categoria")
 
-        return {"message": "produto criado", "cod_produto": end.cod_produto}, 201
+    produto = Produto(
+        cod_loja=loja.cod_loja,
+        nome=nome,
+        descricao=(dados.get("descricao") or "").strip() or None,
+        preco=preco,
+        disponibilidade=disponibilidade,
+        cod_categoria=cod_categoria,
+    )
+
+    db.session.add(produto)
+    db.session.commit()
+
+    return {"message": "produto criado", "cod_produto": produto.cod_produto}, 201
     
 @loja_bp.route("/deletar_produto/<int:cod_produto>", methods=["DELETE"]) #não usem essa rota a não ser em ultimo caso , pode deletar metade do banco de dados
 def deletar_produto(cod_produto):
@@ -400,3 +403,97 @@ def listar_todos_pedidos_loja():
         }
         for p in pedidos
     ]
+
+
+
+def _ler_preco(bruto):
+    try:
+        preco = Decimal(str(bruto).replace(",", "."))
+    except InvalidOperation:
+        return None, "preço inválido"
+    if preco <= 0:
+        return None, "preço deve ser maior que zero"
+    return preco, None
+
+def _produto_json(p):
+    return {
+        "cod_produto": p.cod_produto,
+        "nome": p.nome,
+        "descricao": p.descricao,
+        "preco": float(p.preco),
+        "disponibilidade": p.disponibilidade,
+        "cod_categoria": p.cod_categoria,
+        "foto_url": p.foto_url,
+    }
+
+def _produto_da_loja(cod_produto, loja):
+    produto = db.session.get(Produto, cod_produto)
+    if produto is None or produto.cod_loja != loja.cod_loja:
+        return None
+    return produto
+
+@loja_bp.route("/loja/produtos/<int:cod_produto>", methods=["GET"])
+@tipo_requerido("Loja")
+def ver_produto(cod_produto):
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+
+    produto = _produto_da_loja(cod_produto, loja)
+    if produto is None:
+        return {"error": "produto não encontrado"}, 404
+
+    return _produto_json(produto), 200
+
+@loja_bp.route("/loja/produtos/<int:cod_produto>", methods=["PATCH"])
+@tipo_requerido("Loja")
+def editar_produto(cod_produto):
+    loja = loja_do_usuario_logado()
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+
+    produto = _produto_da_loja(cod_produto, loja)
+    if produto is None:
+        return {"error": "produto não encontrado"}, 404
+     
+    dados = request.get_json(silent=True) or {}
+    
+     
+    if "nome" in dados:
+        nome = (dados["nome"] or "").strip()
+        if not nome or len(nome) > 100:
+            return {"error": "nome é obrigatório (máximo 100 caracteres)"}, 400
+        repetido = Produto.query.filter(
+            Produto.cod_loja == loja.cod_loja,
+            Produto.nome == nome,
+            Produto.cod_produto != produto.cod_produto,
+        ).first()
+        if repetido:
+            return {"error": "sua loja já tem um produto com esse nome"}, 409
+        produto.nome = nome
+
+    if "descricao" in dados:
+        descricao = (dados["descricao"] or "").strip()
+        produto.descricao = descricao or None
+
+    if "preco" in dados:
+        preco, erro = _ler_preco(dados["preco"])
+        if erro:
+            return {"error": erro}, 400
+        produto.preco = preco
+    
+    if "disponibilidade" in dados:
+        disponibilidade = dados["disponibilidade"]
+        if not isinstance(disponibilidade, bool):
+            return {"error": "disponibilidade deve ser true ou false"}, 400
+        produto.disponibilidade = disponibilidade
+
+    if "cod_categoria" in dados:
+        cod_categoria = dados["cod_categoria"]
+        if cod_categoria is not None:
+            if db.session.get(Categoria, cod_categoria) is None:
+                return {"error": "categoria não encontrada"}, 400
+        produto.cod_categoria = cod_categoria
+
+    db.session.commit()
+    return _produto_json(produto), 200
