@@ -67,39 +67,66 @@
              DASHBOARD
              ========================================= -->
 
-        <section class="secaoDashboard" aria-label="Resumo da loja">
+        <section
+            class="secaoDashboard"
+            id="dashboard"
+            aria-labelledby="titulo-dashboard"
+        >
             <div class="container">
-                <div class="dashGrid">
 
-                    <article class="dashCard">
-                        <div class="dashIcone"><i class="bi bi-receipt" aria-hidden="true"></i></div>
-                        <div class="dashTexto">
-                            <span class="dashRotulo">Pedidos hoje</span>
-                            <strong class="dashValor">18</strong>                        </div>
-                    </article>
+                <!-- Painel único: cabeçalho + 4 indicadores num só bloco -->
+                <div class="dashPainel">
 
-                    <article class="dashCard">
-                        <div class="dashIcone"><i class="bi bi-box-seam" aria-hidden="true"></i></div>
-                        <div class="dashTexto">
-                            <span class="dashRotulo">Produtos ativos</span>
-                            <strong class="dashValor">24</strong>                        </div>
-                    </article>
+                    <div class="cabecalhoSecao">
+                        <h2 id="titulo-dashboard">Resumo da loja</h2>
+                        <p>Veja como sua loja está indo hoje.</p>
+                    </div>
 
-                    <article class="dashCard">
-                        <div class="dashIcone"><i class="bi bi-star-fill" aria-hidden="true"></i></div>
-                        <div class="dashTexto">
-                            <span class="dashRotulo">Avaliação média</span>
-                            <strong class="dashValor">4,9</strong>                        </div>
-                    </article>
+                    <div class="dashGrid">
 
-                    <article class="dashCard destaque">
-                        <div class="dashIcone"><i class="bi bi-cash-stack"></i></div>
-                        <div class="dashTexto">
-                            <span class="dashRotulo">Faturado hoje</span>
-                            <strong class="dashValor">R$ 612,40</strong>                        </div>
-                    </article>
+                        <article class="dashCard">
+                            <div class="dashIcone">
+                                <i class="bi bi-receipt" aria-hidden="true"></i>
+                            </div>
+                            <div class="dashTexto">
+                                <span class="dashRotulo">Pedidos hoje</span>
+                                <strong class="dashValor">18</strong>
+                            </div>
+                        </article>
 
+                        <article class="dashCard destaque">
+                            <div class="dashIcone">
+                                <i class="bi bi-box-seam" aria-hidden="true"></i>
+                            </div>
+                            <div class="dashTexto">
+                                <span class="dashRotulo">Produtos ativos</span>
+                                <strong class="dashValor">24</strong>
+                            </div>
+                        </article>
+
+                        <article class="dashCard">
+                            <div class="dashIcone">
+                                <i class="bi bi-star-fill" aria-hidden="true"></i>
+                            </div>
+                            <div class="dashTexto">
+                                <span class="dashRotulo">Avaliação média</span>
+                                <strong class="dashValor">4,9</strong>
+                            </div>
+                        </article>
+
+                        <article class="dashCard destaque">
+                            <div class="dashIcone">
+                                <i class="bi bi-cash-stack" aria-hidden="true"></i>
+                            </div>
+                            <div class="dashTexto">
+                                <span class="dashRotulo">Faturado hoje</span>
+                                <strong class="dashValor">R$ 612,40</strong>
+                            </div>
+                        </article>
+
+                    </div>
                 </div>
+
             </div>
         </section>
 
