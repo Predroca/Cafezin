@@ -91,29 +91,34 @@ def ver_perfil_loja():
         return {"error": "loja não encontrada"}, 404
     return _perfil_loja_json(loja), 200
 
-@loja_bp.route("/loja/perfil", methods=["PATCH"]) #atualizar dados
+UFS = {
+    "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
+    "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
+}
+
+@loja_bp.route("/loja/perfil", methods=["PATCH"])  # atualizar dados
 @tipo_requerido("Loja")
 def editar_perfil_loja():
     loja = loja_do_usuario_logado()
     if loja is None:
         return {"error": "loja não encontrada"}, 404
- 
+
     dados = request.get_json(silent=True) or {}
     usuario = loja.usuario
- 
+
     # identificação
     if "nome" in dados:
         nome = (dados["nome"] or "").strip()
         if len(nome) < 2 or len(nome) > 100:
             return {"error": "nome deve ter entre 2 e 100 caracteres"}, 400
         usuario.nome = nome
- 
+
     if "cnpj" in dados:
         cnpj = re.sub(r"\D", "", dados["cnpj"] or "")
         if len(cnpj) != 14:
             return {"error": "cnpj deve ter 14 dígitos"}, 400
         loja.cnpj = cnpj
- 
+
     # contato
     if "email" in dados:
         email = (dados["email"] or "").strip()
@@ -125,33 +130,45 @@ def editar_perfil_loja():
         if em_uso:
             return {"error": "e-mail já cadastrado"}, 409
         usuario.email = email
- 
+
     if "telefone" in dados:
         telefone = (dados["telefone"] or "").strip()
         if telefone and len(re.sub(r"\D", "", telefone)) not in (10, 11):
             return {"error": "telefone deve ter DDD e 8 ou 9 dígitos"}, 400
         usuario.telefone = telefone or None
- 
+
     # endereço: atualiza o Endereco já ligado à loja, não cria outro
     end_dados = dados.get("endereco")
     if end_dados is not None:
         if not isinstance(end_dados, dict):
             return {"error": "endereco deve ser um objeto"}, 400
         end = loja.endereco
- 
+
         if "nome_logradouro" in end_dados:
             logradouro = (end_dados["nome_logradouro"] or "").strip()
             if not logradouro or len(logradouro) > 100:
                 return {"error": "logradouro é obrigatório (máximo 100 caracteres)"}, 400
             end.nome_logradouro = logradouro
- 
+
         for campo, limite in (("numero", 10), ("bairro", 50), ("cidade", 50)):
             if campo in end_dados:
                 valor, erro = _texto_opcional(end_dados, campo, limite)
                 if erro:
                     return {"error": erro}, 400
                 setattr(end, campo, valor)
- 
+
+        if "estado" in end_dados:
+            estado = (end_dados["estado"] or "").strip().upper()
+            if estado and estado not in UFS:
+                return {"error": "estado inválido (use a sigla, ex.: MG)"}, 400
+            end.estado = estado or None
+
+        if "cep" in end_dados:
+            cep = re.sub(r"\D", "", end_dados["cep"] or "")
+            if cep and len(cep) != 8:
+                return {"error": "cep deve ter 8 dígitos"}, 400
+            end.cep = cep or None
+
     # funcionamento (horário único)
     abertura, fecha = loja.horario_abertura, loja.horario_fecha
     if "horario_abertura" in dados:
@@ -166,7 +183,7 @@ def editar_perfil_loja():
         return {"error": "o fechamento deve ser depois da abertura"}, 400
     loja.horario_abertura = abertura
     loja.horario_fecha = fecha
- 
+
     try:
         db.session.commit()
     except IntegrityError:
@@ -175,7 +192,7 @@ def editar_perfil_loja():
     except SQLAlchemyError as erro:
         db.session.rollback()
         return {"error": f"erro ao acessar o banco de dados: {erro}"}, 500
- 
+
     return _perfil_loja_json(loja), 200
 
 
