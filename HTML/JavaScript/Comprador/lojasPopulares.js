@@ -145,7 +145,7 @@ function criarCardProduto(produto) {
         `;
 
     return `
-        <article class="produtoCard">
+        <article class="produtoCard" role="link" tabindex="0" data-cod-produto="${escaparHTML(produto.cod_produto)}">
 
             ${imagem}
 
@@ -189,3 +189,4 @@ function escaparHTML(valor) {
         "'": "&#39;"
     })[caractere]);
 }
+
