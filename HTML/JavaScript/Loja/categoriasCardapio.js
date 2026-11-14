@@ -1,59 +1,73 @@
- document.addEventListener("DOMContentLoaded", () => {
-            const botoes = document.querySelectorAll(".filtrosProdutos button");
-            const produtos = document.querySelectorAll(".listaProdutosLoja .produto");
 
-            const categoriasSelecionadas = new Set();
-            let mostrarIndisponiveis = false;
+document.addEventListener("DOMContentLoaded", () => {
+    const botoes = document.querySelectorAll(".filtrosProdutos button");
 
-            function atualizarProdutos() {
-                const todosAtivo =
-                    categoriasSelecionadas.size === 0 && !mostrarIndisponiveis;
+    const categoriasSelecionadas = new Set();
+    let mostrarIndisponiveis = false;
 
-                botoes.forEach((botao) => {
-                    const filtro = botao.dataset.filtro;
-                    const ativo = filtro === "todos"
-                        ? todosAtivo
-                        : filtro === "indisponiveis"
-                            ? mostrarIndisponiveis
-                            : categoriasSelecionadas.has(filtro);
+    function atualizarProdutos() {
+        // Busca os cards novamente, incluindo os criados dinamicamente
+        const produtos = document.querySelectorAll(
+            ".listaProdutosLoja .produto"
+        );
 
-                    botao.classList.toggle("ativo", ativo);
-                    botao.setAttribute("aria-pressed", String(ativo));
-                });
+        const todosAtivo =
+            categoriasSelecionadas.size === 0 && !mostrarIndisponiveis;
 
-                produtos.forEach((produto) => {
-                    const categoria = produto.dataset.categoria;
-                    const indisponivel = produto.classList.contains("pausado");
+        botoes.forEach((botao) => {
+            const filtro = botao.dataset.filtro;
 
-                    const correspondeCategoria =
-                        categoriasSelecionadas.size === 0 ||
-                        categoriasSelecionadas.has(categoria);
+            const ativo = filtro === "todos"
+                ? todosAtivo
+                : filtro === "indisponiveis"
+                    ? mostrarIndisponiveis
+                    : categoriasSelecionadas.has(filtro);
 
-                    const correspondeDisponibilidade =
-                        !mostrarIndisponiveis || indisponivel;
+            botao.classList.toggle("ativo", ativo);
+            botao.setAttribute("aria-pressed", String(ativo));
+        });
 
-                    produto.hidden = !(correspondeCategoria && correspondeDisponibilidade);
-                });
+        produtos.forEach((produto) => {
+            const categoria = produto.dataset.categoria;
+            const indisponivel = produto.classList.contains("pausado");
+
+            const correspondeCategoria =
+                categoriasSelecionadas.size === 0 ||
+                categoriasSelecionadas.has(categoria);
+
+            const correspondeDisponibilidade =
+                !mostrarIndisponiveis || indisponivel;
+
+            produto.hidden = !(
+                correspondeCategoria && correspondeDisponibilidade
+            );
+        });
+    }
+
+    botoes.forEach((botao) => {
+        botao.addEventListener("click", () => {
+            const filtro = botao.dataset.filtro;
+
+            if (filtro === "todos") {
+                categoriasSelecionadas.clear();
+                mostrarIndisponiveis = false;
+
+            } else if (filtro === "indisponiveis") {
+                mostrarIndisponiveis = !mostrarIndisponiveis;
+
+            } else if (categoriasSelecionadas.has(filtro)) {
+                categoriasSelecionadas.delete(filtro);
+
+            } else {
+                categoriasSelecionadas.add(filtro);
             }
-
-            botoes.forEach((botao) => {
-                botao.addEventListener("click", () => {
-                    const filtro = botao.dataset.filtro;
-
-                    if (filtro === "todos") {
-                        categoriasSelecionadas.clear();
-                        mostrarIndisponiveis = false;
-                    } else if (filtro === "indisponiveis") {
-                        mostrarIndisponiveis = !mostrarIndisponiveis;
-                    } else if (categoriasSelecionadas.has(filtro)) {
-                        categoriasSelecionadas.delete(filtro);
-                    } else {
-                        categoriasSelecionadas.add(filtro);
-                    }
-
-                    atualizarProdutos();
-                });
-            });
 
             atualizarProdutos();
         });
+    });
+
+    // Permite atualizar os filtros depois que os cards forem criados
+    window.atualizarFiltrosProdutos = atualizarProdutos;
+
+    atualizarProdutos();
+});
