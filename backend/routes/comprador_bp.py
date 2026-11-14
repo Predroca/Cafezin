@@ -42,7 +42,7 @@ def ver_perfil():
         return {"error": "comprador não encontrado"}, 404
     return _perfil_json(comprador), 200
 
-comprador_bp.route("/comprador/perfil", methods=["PATCH"])
+@comprador_bp.route("/comprador/perfil", methods=["PATCH"])
 @tipo_requerido("Comprador")
 def editar_perfil():
     comprador = comprador_do_usuario_logado()
@@ -193,7 +193,7 @@ STATUS_TELA = {
 }
 
 
-comprador_bp.route("/comprador/pedidos", methods=["GET"])
+@comprador_bp.route("/comprador/pedidos", methods=["GET"])
 @tipo_requerido("Comprador")
 def listar_meus_pedidos():
     comprador = comprador_do_usuario_logado()
