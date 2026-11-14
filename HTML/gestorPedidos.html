@@ -58,7 +58,7 @@
               <span class="contadorColunaPedidos">2</span>
             </div>
             <div class="listaPedidosColuna" data-lista-status="Pendente">
-              <article class="pedido novo" data-pedido-id="4821" data-status="Pendente">
+              <article class="pedido novo" data-pedido-id="4821" data-status="Pendente" data-endereco="Rua das Flores, 120">
                 <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 2 min</time></div>
                 <h3>Pedido de Ana Clara</h3><span class="dadoTitulo">Produtos:</span>
                 <p>2x Pão de queijo artesanal, 1x Chocolate quente cremoso</p>
@@ -66,7 +66,7 @@
                   <div class="pedidoAcoes"><button type="button" class="botaoPrimario" data-acao="iniciar-preparo">Iniciar preparo</button></div>
                 </div>
               </article>
-              <article class="pedido novo" data-pedido-id="4823" data-status="Pendente">
+              <article class="pedido novo" data-pedido-id="4823" data-status="Pendente" data-endereco="Rua Bahia, 65">
                 <div class="pedidoCabecalho"><span class="statusBadge aguardando">Pendente</span><time>Há 5 min</time></div>
                 <h3>Pedido de Beatriz Lima</h3><span class="dadoTitulo">Produtos:</span>
                 <p>1x Pão na chapa, 2x Café coado</p>
@@ -83,7 +83,7 @@
               <span class="contadorColunaPedidos">1</span>
             </div>
             <div class="listaPedidosColuna" data-lista-status="Em preparo">
-              <article class="pedido preparo" data-pedido-id="4819" data-status="Em preparo">
+              <article class="pedido preparo" data-pedido-id="4819" data-status="Em preparo" data-endereco="Rua Santo Antônio, 15">
                 <div class="pedidoCabecalho"><span class="statusBadge aguardando">Em preparo</span><time>Há 9 min</time></div>
                 <h3>Pedido de Rafael Souza</h3><span class="dadoTitulo">Produtos:</span>
                 <p>1x Bolo de cenoura caseiro, 1x Cappuccino cremoso</p>
@@ -260,6 +260,21 @@
 
   </footer>
 
-<script src="JavaScript/Loja/gerirPedidos.js"></script>
+<dialog id="modalEntregadores" class="modalEntregadores" aria-labelledby="tituloModalEntregadores">
+    <div class="modalCabecalho">
+      <div>
+        <h2 id="tituloModalEntregadores">Escolha um de seus entregadores</h2>
+        <p id="modalEntregadoresPedido"></p>
+
+      </div>
+      <button type="button" class="botaoFecharModal" data-fechar-modal aria-label="Fechar">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <ul class="listaEntregadoresModal" id="listaEntregadoresModal"></ul>
+  </dialog>
+
+  <script src="JavaScript/Loja/gerirPedidos.js"></script>
+</body>
 
 </html>
