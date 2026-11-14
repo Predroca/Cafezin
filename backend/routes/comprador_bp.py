@@ -2,11 +2,14 @@ import re
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+
 from sqlalchemy.orm import joinedload
-from datetime import date, time
+from sqlalchemy import func
+from datetime import date
 
 from extensions import db
 from permissoes import tipo_requerido
+from models.avaliacao_loja import AvaliacaoLoja
 from models import Comprador, Loja, LojaFavorita, Usuario, Comprador_Endereco, Pedido
 from models import ItemPedido 
 
@@ -117,16 +120,24 @@ def listar_lojas_favoritas():
         .all()
     )
 
-    return jsonify([
-        {
+    resposta = []
+    for loja, usuario in linhas:
+        nota = (
+            db.session.query(func.avg(AvaliacaoLoja.nota))
+            .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+            .filter(Pedido.cod_loja == loja.cod_loja)
+            .scalar()
+        )
+        resposta.append({
             "cod_loja": loja.cod_loja,
             "nome": usuario.nome,
             "foto_url": usuario.foto_url,
             "horario_abertura": loja.horario_abertura.strftime("%H:%M") if loja.horario_abertura else None,
             "horario_fecha": loja.horario_fecha.strftime("%H:%M") if loja.horario_fecha else None,
-        }
-        for loja, usuario in linhas
-    ]), 200
+            "nota_media": round(float(nota), 1) if nota is not None else None,
+        })
+
+    return jsonify(resposta), 200
 
 @comprador_bp.route("/favoritas/<int:cod_loja>", methods=["POST"])
 @tipo_requerido("Comprador")
