@@ -22,16 +22,9 @@ from models.item_pedido import ItemPedido
 loja_bp = Blueprint("loja", __name__)
 
 @loja_bp.errorhandler(SQLAlchemyError)
-def _erro_nomeExist(nome):
-    produto = Produto.query.filter_by(nome=nome).first()
-    if produto != None:
-            return ({"error" : "já existe um produto com o nome informado (tenha mais criatividade)"})
-    
-def _erro_lojaInexistente(cod_loja):
-     loja = Loja.query.filter_by(cod_loja=cod_loja).first()
-    
-     if loja is None:
-          return ({"error" : "não exite nenhuma loja com o codigo informado (melhore)"})
+def erro_banco(erro):
+    db.session.rollback()
+    return {"error": f"erro ao acessar o banco de dados: {erro}"}, 500
 
 def loja_do_usuario_logado():
     cod_usuario = get_jwt_identity()
@@ -274,27 +267,30 @@ def criar_produto():
     loja = loja_do_usuario_logado()
     if loja is None:
         return {"error": "loja não encontrada"}, 404
-
+ 
     dados = request.get_json(silent=True) or {}
-
+ 
     nome = (dados.get("nome") or "").strip()
     if not nome or len(nome) > 100:
         return {"error": "nome é obrigatório (máximo 100 caracteres)"}, 400
-
+ 
     ja_existe = Produto.query.filter_by(cod_loja=loja.cod_loja, nome=nome).first()
     if ja_existe:
         return {"error": "sua loja já tem um produto com esse nome"}, 409
-
+ 
     preco, erro = _ler_preco(dados.get("preco"))
     if erro:
         return {"error": erro}, 400
-
+ 
     disponibilidade = dados.get("disponibilidade", True)
     if not isinstance(disponibilidade, bool):
         return {"error": "disponibilidade deve ser true ou false"}, 400
-
+ 
     cod_categoria = dados.get("cod_categoria")
-
+    if cod_categoria is not None:
+        if db.session.get(Categoria, cod_categoria) is None:
+            return {"error": "categoria não encontrada"}, 400
+ 
     produto = Produto(
         cod_loja=loja.cod_loja,
         nome=nome,
@@ -303,10 +299,10 @@ def criar_produto():
         disponibilidade=disponibilidade,
         cod_categoria=cod_categoria,
     )
-
+ 
     db.session.add(produto)
     db.session.commit()
-
+ 
     return {"message": "produto criado", "cod_produto": produto.cod_produto}, 201
     
 @loja_bp.route("/deletar_produto/<int:cod_produto>", methods=["DELETE"]) #não usem essa rota a não ser em ultimo caso , pode deletar metade do banco de dados
