@@ -607,7 +607,50 @@
         renderizar();
     })();
     </script>
+    <!-- Avaliar pedido -->
+    <dialog class="modalEditar" id="modal-avaliar" aria-labelledby="titulo-modal-avaliar">
+        <div class="modalEditarCabecalho">
+            <div>
+                <span class="modalEditarIcone" aria-hidden="true"><i class="bi bi-star"></i></span>
+                <h2 id="titulo-modal-avaliar">Avaliar pedido</h2>
+            </div>
+            <button class="botaoFecharModal" type="button" data-fechar-modal aria-label="Fechar janela">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
     
+        <form class="formPerfilLoja" id="formAvaliar" novalidate>
+            <div class="avaliarResumo">
+                <h3 id="avaliarLoja"></h3>
+                <p id="avaliarItens"></p>
+                <p id="avaliarMeta"></p>
+                <p><strong id="avaliarTotal"></strong></p>
+            </div>
+    
+            <fieldset class="avaliarNota">
+                <legend>Sua nota</legend>
+                <div class="estrelas">
+                    <input type="radio" id="nota5" name="nota" value="5"><label for="nota5" title="5 estrelas">★</label>
+                    <input type="radio" id="nota4" name="nota" value="4"><label for="nota4" title="4 estrelas">★</label>
+                    <input type="radio" id="nota3" name="nota" value="3"><label for="nota3" title="3 estrelas">★</label>
+                    <input type="radio" id="nota2" name="nota" value="2"><label for="nota2" title="2 estrelas">★</label>
+                    <input type="radio" id="nota1" name="nota" value="1"><label for="nota1" title="1 estrela">★</label>
+                </div>
+            </fieldset>
+    
+            <div class="campo" style="grid-column: span 2;">
+                <label for="avaliarComentario">Comentário (opcional)</label>
+                <textarea id="avaliarComentario" rows="4" maxlength="500" placeholder="Conte como foi seu pedido"></textarea>
+            </div>
+    
+            <small class="erroCampo erroForm" id="erroAvaliar"></small>
+    
+            <div class="formAcoes modalEditarAcoes">
+                <button class="botaoPrimario" type="submit"><i class="bi bi-check2" aria-hidden="true"></i> Enviar avaliação</button>
+                <button class="botaoSecundario" type="button" data-fechar-modal>Cancelar</button>
+            </div>
+        </form>
+    </dialog>
     <script src="JavaScript/Comprador/perfilComprador.js"></script>
 </body>
 </html>
