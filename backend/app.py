@@ -10,6 +10,7 @@ from routes.avaliacao_bp import avaliacao_bp
 from routes.loja_bp import loja_bp
 from routes.admin_bp import admin_bp
 from routes.upload_bp import upload_bp
+from routes.comprador_bp import comprador_bp
 
 from config import Config
 
