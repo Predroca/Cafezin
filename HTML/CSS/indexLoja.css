@@ -133,7 +133,7 @@ button, input, select, textarea { font: inherit; }
    ========================================================= */
 
 .painelLoja {
-    background-image: url(../img/indexLoja/BannerIndexLoja.svg);
+    background-image: url(../img/indexLoja/BannerIndexLoja.png);
     color: var(--cor-texto-claro);
     padding-bottom: 40px;
     padding-top: 40px;
@@ -221,38 +221,62 @@ button, input, select, textarea { font: inherit; }
    ========================================================= */
 
 .secaoDashboard {
-    padding: 31px 0 0px;
-    background: var(--cor-background);
+    /* Cor creme do fundo da seção (troque aqui se quiser outro tom) */
+    --dash-creme: #fdf2ec;
+
+    padding: 40px 0 31px;
+    background: #fff;
 }
 
+
+.dashPainel {
+    --dash-pad: 28px;
+    --dash-linha: rgba(75, 54, 42, .10);
+
+    position: relative;
+    padding: var(--dash-pad) var(--dash-pad) 0;
+
+    overflow: hidden;
+    border: 1px solid rgba(75, 54, 42, .12);
+    border-radius: var(--borda-arredondada-grande, 20px);
+    background: var(--dash-creme);
+
+}
+
+.dashPainel .cabecalhoSecao {
+    margin-bottom: 22px;
+}
+
+/* Os cards viram colunas coladas do painel, sem espaço entre elas */
 .dashGrid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
+    gap: 0;
+
+    margin: 0 calc(var(--dash-pad) * -1);
+    border-top: 1px solid var(--dash-linha);
 }
 
 .dashCard {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 18px;
 
-    min-height: 120px;
+    min-height: 110px;
+    padding: 24px var(--dash-pad);
 
-    padding: 22px 20px;
-
-    border: 1px solid rgba(255, 243, 231, .14);
-    border-radius: var(--borda-arredondada-pequena);
     background: var(--cor-marrom-escuro-2);
-
 }
 
+/* Círculo do ícone */
 .dashIcone {
     flex: 0 0 54px;
     width: 54px;
     height: 54px;
 
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border-radius: 50%;
     background: rgba(255, 243, 231, .1);
@@ -260,11 +284,28 @@ button, input, select, textarea { font: inherit; }
     font-size: 1.5rem;
 }
 
+/* O Bootstrap Icons aplica vertical-align e altura de linha no glifo,
+   o que o desloca do centro; aqui eles são zerados. */
+.dashIcone i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+}
+
+.dashIcone i::before {
+    display: block;
+    line-height: 1;
+    vertical-align: 0;
+}
+
 .dashTexto {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 4px;
 }
 
 .dashRotulo {
@@ -284,24 +325,11 @@ button, input, select, textarea { font: inherit; }
 /* Cartão de destaque (faturamento) */
 .dashCard.destaque {
     background: var(--cor-laranja-escuro);
-    border-color: transparent;
 }
 
 .dashCard.destaque .dashIcone {
     background: rgba(255, 243, 231, .2);
     color: var(--cor-bege-destaque);
-    
-    display: grid;
-    place-items: center;
-    
-}
-
-.dashCard.destaque .dashRotulo {
-    color: var(--cor-bege-claro);
-}
-
-.dashCard.destaque .dashValor {
-    color: var(--cor-texto-claro);
 }
 
 /* Estrutura de seções */
@@ -774,7 +802,6 @@ footer {
 
     .dashGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
     }
 
     .formNovoProduto,
@@ -815,6 +842,10 @@ footer {
     .secaoPadrao {
         padding: 46px 0;
     }
+
+    .secaoDashboard {
+        padding: 32px 0 46px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -829,8 +860,13 @@ footer {
         grid-template-columns: 1fr;
     }
 
+    .dashPainel {
+        --dash-pad: 18px;
+    }
+
     .dashCard {
-        padding: 16px;
+        min-height: 90px;
+        padding: 16px var(--dash-pad);
     }
 
     .cabecalhoSecao.linha {
