@@ -21,12 +21,13 @@ form.addEventListener("submit", async (event) => {
         const resposta = await fetch("http://localhost:5000/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, senha })
+            body: JSON.stringify({ "email": email, "senha": senha })
         });
         const dados = await resposta.json().catch(() => ({}));
 
         if (!resposta.ok) {
             mostrarErroLogin(dados.erro || dados.error || "E-mail ou senha inválidos. Tente novamente.");
+
             return;
         }
         if (!dados.token) {
@@ -65,4 +66,5 @@ form.addEventListener("submit", async (event) => {
 function mostrarErroLogin(texto) {
     mensagem.textContent = texto;
     aviso.style.display = "flex";
+    setTimeout(()=>{aviso.style.display='none';}, 4000)
 }
