@@ -126,6 +126,7 @@
         camposLoja[elemento.dataset.valorPara] = elemento.dataset.valorInicial || "";
     });
     camposLoja.foto_url = "";
+    try { camposLoja.descricao = localStorage.getItem("cafezin.descricaoLoja") || ""; } catch (erro) { camposLoja.descricao = ""; }
 
     const aviso = document.getElementById("aviso");
     let temporizadorAviso;
@@ -293,20 +294,20 @@
         const miniatura = document.getElementById("miniaturaFotoLoja");
         const status = document.getElementById("statusFotoLoja");
 
-        [avatar, miniatura].forEach(function (imagem) {
+        [avatar, miniatura].filter(Boolean).forEach(function (imagem) {
             imagem.hidden = !url;
             imagem.onload = function () {
-                status.textContent = "Foto cadastrada";
+                if (status) status.textContent = "Foto cadastrada";
             };
             imagem.onerror = function () {
                 imagem.hidden = true;
-                status.textContent = "Endereço informado; imagem indisponível";
+                if (status) status.textContent = "Endereço informado; imagem indisponível";
             };
             if (url) imagem.src = url;
             else imagem.removeAttribute("src");
         });
 
-        if (!url) status.textContent = "Não informada";
+        if (!url && status) status.textContent = "Não informada";
     }
 
     function atualizarResumo() {
@@ -336,7 +337,7 @@
             const formulario = modal.querySelector("form[data-formulario]");
 
             formulario.querySelectorAll("[name]").forEach(function (campo) {
-                campo.value = camposLoja[campo.name] || "";
+                if (campo.type !== "file") { campo.value = camposLoja[campo.name] || ""; }
             });
 
             if (formulario.dataset.formulario === "funcionamento") {
@@ -411,7 +412,7 @@
     document.getElementById("descartarHorario").addEventListener("click", function () {
         const formulario = document.querySelector('form[data-formulario="funcionamento"]');
         formulario.querySelectorAll("[name]").forEach(function (campo) {
-            campo.value = camposLoja[campo.name] || "";
+            if (campo.type !== "file") { campo.value = camposLoja[campo.name] || ""; }
         });
         preencherHorarios(horariosSalvos);
     });
@@ -453,3 +454,6 @@
 
     atualizarResumo();
 })();
+
+
+
