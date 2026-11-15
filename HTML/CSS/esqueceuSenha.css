@@ -105,3 +105,6 @@ input::placeholder {
     color: var(--cor-azul-marinho);
 }
 
+#errorEsqueciSenha{
+    display: none;
+}
