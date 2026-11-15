@@ -235,47 +235,38 @@ CREATE TABLE LojaPopularidade (
 -- Usuários 1-12 mantidos igual como antes. Senhas dos novos usuários (13-31) seguem
 -- o mesmo formato ( bruno.carvalho123, padaria.estreladourada123, gabriel.martins123 etc.).
 -- =========================================================
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
-('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384'),
-('maria.souza@email.com', 'scrypt:32768:8:1$A9O17HTDRSsNm2Qg$2f047ab698200bf2d632a034769e5aef6169570a7bca77f5e2d47600cfe686a5d88d0c9b3a5bd40064204f5843b3b1280860c653a561296d59e24dcdbd2ee4ad', 'Maria Souza', 'Comprador', '32992348821'),
-('carlos.lima@email.com', 'scrypt:32768:8:1$zVaPz5qYU1y1RlmZ$64eb2297c8207eec638060290e231d0c5f6f5dc0a411d3853cd1b063de8681456879f1e405cdf2369e3118e274b5229c3e924545714a34254bc2bf624e3f47f8', 'Carlos Lima', 'Comprador', '32993451167'),
-('ana.pereira@email.com', 'scrypt:32768:8:1$spJ5UpbWyFo8r3FO$7ac8c4c4a4c64b7f482c4efaad4e60e9b6c162e345b691942da9858916c6ba65267a815ccd1e4d06a7666d56b0b232118ca4db5f2f3cb7dee5839e369533992a', 'Ana Pereira', 'Comprador', '32994567290'),
-('pedro.santos@email.com', 'scrypt:32768:8:1$dn6tfq8bWl0BxhKB$e9161d1ba38a3fd13223650736df3cf30e19eebd469c2976122784749eaa9481652b51ff097082355a610b01f03d726b210663b5f5ce8a38bddeb263d6adc5b7', 'Pedro Santos', 'Comprador', '32995673345'),
-('lucas.oliveira@email.com', 'scrypt:32768:8:1$5JmkvptqbJK16zz6$334828d83cdcc313f51972635887ae1b3012331054c5b02d1e6e2a55e5203eccb8b573cb84cc7ae9c28b7cebe9238ffc859e6f19f6a0da1fdd20953192630b9c', 'Lucas Oliveira', 'Entregador', '32988112234'),
-('fernanda.costa@email.com', 'scrypt:32768:8:1$TYbVYkkFbmCeKm2T$a7986bcc642c793bd0282a41fb7753b31a5e7380e8918a837c232b69c9f1884d8ceecde348931b6f4d82f3faab1be1eed94669dbdaa2d2476362fa4c279dd20d', 'Fernanda Costa', 'Entregador', '32987229981'),
-('rafael.almeida@email.com', 'scrypt:32768:8:1$TwCMjLoNHaTAmOFe$8ff618bf2f7be522c7d3a2bd00f3dd57625364ff5c40a76d28a3776652269cbde68e9224828d19fba9c41b33610c8dc9736ee220dc6a727183b2a411a4eac3f2', 'Rafael Almeida', 'Entregador', '32986334456'),
-('contato@cafeteriadorenata.com', 'scrypt:32768:8:1$DWIQqJKGrD1vkfLN$b92d0b447449cfd1733b9e3f0cc9f7cbe72463d5e4784560e7b97a6d3ae2114b5f68022a93ca51a74fabb873567a47c5b378958578126017aee733938c358889', 'Cafeteria da Renata', 'Loja', '32337122885'),
-('contato@padariabomgosto.com', 'scrypt:32768:8:1$mAGz7e4S0nVhlCAc$b1d352c8fbb0033db55f16f8fdee8e79fb656476ffc30331e898d975222e4a62131f5c449b840b161e101e778ec8e2805ae8f04e4ba524722d1c9dba09bbd08b', 'Padaria Bom Gosto', 'Loja', '32337255410'),
-('contato@docedecasa.com', 'scrypt:32768:8:1$RcFXefnKT8BcEOtd$8f29cb30f44de1001e606177ce3c4f5133b675302844bed76d49789ebe2a20440f86dfbb7885fb83e10596c8e1e183aca248436aae602ba94bf60a272b019ee2', 'Doce de Casa', 'Loja', '32337390877'),
-('admin@cafezin.com', 'scrypt:32768:8:1$BDRpp1j6SsyiiFWG$f34ba0d55bd15c6188b7f8948218980540c49ce1500ad907b24165c14d3c3a1ca6c57c3e0d18c2f5072ef42847b0f1a5cfb72609607fc24f255b8707df7ea39c', 'Administrador Cafezin', 'Admin', NULL);
-
--- Novos entregadores (13-17)
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
-('bruno.carvalho@email.com', 'scrypt:32768:8:1$hrEi2lRQzpjnhDXm$997c7c863e29a2d008c1a24dea588e8b15c663fa325b354e5224d38250cb96875932341a76a44be61e0dba95d6800fe6cbf774881d4013bf3d28dfab9ec95130', 'Bruno Carvalho', 'Entregador', '32988445566'),
-('diego.martins@email.com', 'scrypt:32768:8:1$fl5kY5RMO58Ze4tl$13eef9a9ba689ea8031ece6ccf31028200eb63fc6bcc265bb343abdc83c48922bfdfce558ca5ded7362d632184905b6dd097a41596444ac763e7d59ad06f0ed6', 'Diego Martins', 'Entregador', '32987556677'),
-('juliana.ferreira@email.com', 'scrypt:32768:8:1$4FS0UiwZHDkv5FcO$2e6bfe60738f82975ebb239fc2e4ca261c86711272c1e20a4cfac6d504ec676f7df133e717545c3b4a05dc9dcf589d56f02fb9c4abb16cb228d4342c8725f01d', 'Juliana Ferreira', 'Entregador', '32986667788'),
-('thiago.rocha@email.com', 'scrypt:32768:8:1$3y2jJbNc3k9fjXR5$ea319ed312121c729baceaecefd892befa878d582848a2f7b3d0cdb37e33938a3cfed6971db45bdb1c6d5781843cbc41715216ebaab3320ed3d457164a528c17', 'Thiago Rocha', 'Entregador', '32985778899'),
-('camila.nunes@email.com', 'scrypt:32768:8:1$sIqsGmtmSr64KDp0$d45f71c9c291f62f861603446ddb30184975608de0618aa4a17c430aae2d7c070ecb9da993c089a1d0c7f41f8ba3b32559e9d4558123f7fb848e9566aeb0e922', 'Camila Nunes', 'Entregador', '32984889900');
-
--- Novos donos de loja (18-26)
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
-('contato@padariaestreladourada.com', 'scrypt:32768:8:1$kATYZMWCJr4PNAAi$c1eb497c4c2b905938b5e0e9c7c514c0c588fcbb4e2e84d8be489b82c22139ac101dabcccc882b81fa2a40f533e44a016a78a51ae7e2bba7919fb89a061d67a5', 'Padaria Estrela Dourada', 'Loja', '32337411223'),
-('contato@cafeteriatrilhoreal.com', 'scrypt:32768:8:1$PTQCqnF9peePLmZ7$82abbcbe951bf0f618fd8173f9d1160255645ca6ec7d87156d5184c8c1a53836a02570f36da615e68cc3bb6cb7a36916af1329d361fd8025f818cf6ff67a9e54', 'Cafeteria Trilho Real', 'Loja', '32337522334'),
-('contato@docesabormineiro.com', 'scrypt:32768:8:1$7KAucySgT1PmXF1R$d7c6cbb068ab55c3159d3c4651544910608dc89712fdf5175fc7674a43227d092f6e1a09c02435dcd2319b8514bfd93919fe33da63498680ca2a844aee39272c', 'Doceria Sabor Mineiro', 'Loja', '32337633445'),
-('contato@point33burguer.com', 'scrypt:32768:8:1$yXOxOw2Xtg06SL0K$a2158adb1c59fac23bef5645c3bfc8bbae010cdcbb7b49615d45c035b9b7a25f26e5151385325582123b0ab3be15cb5e91a231031f04e4b2b1df4704d58b3080', 'Hamburgueria Point 33', 'Loja', '32337744556'),
-('contato@gelatoreal.com', 'scrypt:32768:8:1$VWSjGlzusrq9yAK4$5adadcc170926489df42c222cf839ffb6876f9a7cb121edc62376dd0618240d6a0495af7736426e651570b7f22c9ec7b0adf57c27357c45064cf5242e7e25ac6', 'Sorveteria Gelato Real', 'Loja', '32337855667'),
-('contato@theatrocafe.com', 'scrypt:32768:8:1$zwPIsABtO6adKWf9$84149db0467d1f1207b9558162cf6f12b5b59c6b08601cfd1bcc588c0749dc65468017d4c5cb96e61bc4bb432a3b0c442657135140665e223f56bace261a6a23', 'Theatro Café', 'Loja', '32337966778'),
-('contato@paonosso.com', 'scrypt:32768:8:1$eG5SJlws5qw0YsY6$33134266039948ba8a809f48732aee893c9439be3f4cdadcbb19b0303310bd0470f45886aa03dbef20fb57c0b9da59c205eff0272bff168add99a29adc98f0d0', 'Pão Nosso', 'Loja', '32338077889'),
-('contato@doceencanto.com', 'scrypt:32768:8:1$aG6xrLhzlp7PZvrV$a1a529322db80c4ff8b95dbeba78277877e1e9bd619a4ce00ff1a980c8d3fd4db97bb9d60e87d17e19bc4cf884b1c65990b103b8e8ab9aea5d22bf99c57a4a71', 'Confeitaria Doce Encanto', 'Loja', '32338188990'),
-('contato@emporiodasbebidas.com', 'scrypt:32768:8:1$hc59cvPqOlgxnOoB$2c0493a2c85c44096f1988ea526d6ae05127698b04fca1ad97c3aa1233093657e7ad7e95adb00077688353421d4ab431767e27f5ed4c8d928f69b3245966295c', 'Empório das Bebidas', 'Loja', '32338299001');
-
--- Novos compradores (27-31)
-INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone) VALUES
-('gabriel.martins@email.com', 'scrypt:32768:8:1$CjYUwQfrxYMsARmV$79c3b87067e3ad2f0b7d3c911411e9472d875e382246f8c0e14c3b4a3fa62b53063305b4ed624fe3a21dd5bcea869822455f24abf1bcb3eb85240e3c536ebd00', 'Gabriel Martins', 'Comprador', '32996784511'),
-('isabela.rocha@email.com', 'scrypt:32768:8:1$f3ZnA53To4ebWbp6$f9fdf756967d4a578e7f2967788e0a4f223794a5f68c2becd9c14387efc28792e8546c3e88552ccbf021bc0e2a5ca1dc50f15b0520b23d45c736e73c0fb105b7', 'Isabela Rocha', 'Comprador', '32997895622'),
-('matheus.correia@email.com', 'scrypt:32768:8:1$awDo4sSwNQjgy0Km$5f86c2034fbeae5e3ec879b0097954c0b41f1485b5f193fe80d3ee577d3edc0f70a58a8dab93d3c582f37f9c39fd10b41f6dfbc85c5eb7630c577cad2840c2e8', 'Matheus Correia', 'Comprador', '32998906733'),
-('larissa.andrade@email.com', 'scrypt:32768:8:1$mqpf5u7iLZ2qVkaa$a2985d7e207f2d5dae3ede6f41cb978994814937b8a85aaddad03929f4f6c36ec8215f87b481576e19511b44cf60b8f811a1976486d5e5bc1bd3f45fc26b1221', 'Larissa Andrade', 'Comprador', '32999017844'),
-('vinicius.teixeira@email.com', 'scrypt:32768:8:1$OH5VejrRypwD5Z3D$e4d84a5bc0d13e78ae8bd81aa5db43387deefcf0e66ac483a97a47c1dfd4dbdbbff510f52c3a44b6272cba5fc71b752bff65dd129151b98fefc7df222c984f34', 'Vinicius Teixeira', 'Comprador', '32990128955');
+INSERT INTO Usuario (email, senha, nome, tipo_usuario, telefone, foto_url) VALUES
+('joao.silva@email.com', 'scrypt:32768:8:1$9eN0zol7OblD6rrx$9b5b73790de84492ad61e48163c50c1c9e3af2159273cd5fdecad9ec1ef45d85a6295c73fa3d12f99d429343aeb7d5afd4f93f0fc66cf5a0e633014f3022fdeb', 'João Silva', 'Comprador', '32991027384', '/uploads/usuarios/82a6b341e7394b7c830fe298f1d985c8.jpg'),
+('maria.souza@email.com', 'scrypt:32768:8:1$A9O17HTDRSsNm2Qg$2f047ab698200bf2d632a034769e5aef6169570a7bca77f5e2d47600cfe686a5d88d0c9b3a5bd40064204f5843b3b1280860c653a561296d59e24dcdbd2ee4ad', 'Maria Souza', 'Comprador', '32992348821', NULL),
+('carlos.lima@email.com', 'scrypt:32768:8:1$zVaPz5qYU1y1RlmZ$64eb2297c8207eec638060290e231d0c5f6f5dc0a411d3853cd1b063de8681456879f1e405cdf2369e3118e274b5229c3e924545714a34254bc2bf624e3f47f8', 'Carlos Lima', 'Comprador', '32993451167', NULL),
+('ana.pereira@email.com', 'scrypt:32768:8:1$spJ5UpbWyFo8r3FO$7ac8c4c4a4c64b7f482c4efaad4e60e9b6c162e345b691942da9858916c6ba65267a815ccd1e4d06a7666d56b0b232118ca4db5f2f3cb7dee5839e369533992a', 'Ana Pereira', 'Comprador', '32994567290', NULL),
+('pedro.santos@email.com', 'scrypt:32768:8:1$dn6tfq8bWl0BxhKB$e9161d1ba38a3fd13223650736df3cf30e19eebd469c2976122784749eaa9481652b51ff097082355a610b01f03d726b210663b5f5ce8a38bddeb263d6adc5b7', 'Pedro Santos', 'Comprador', '32995673345', NULL),
+('lucas.oliveira@email.com', 'scrypt:32768:8:1$5JmkvptqbJK16zz6$334828d83cdcc313f51972635887ae1b3012331054c5b02d1e6e2a55e5203eccb8b573cb84cc7ae9c28b7cebe9238ffc859e6f19f6a0da1fdd20953192630b9c', 'Lucas Oliveira', 'Entregador', '32988112234', NULL),
+('fernanda.costa@email.com', 'scrypt:32768:8:1$TYbVYkkFbmCeKm2T$a7986bcc642c793bd0282a41fb7753b31a5e7380e8918a837c232b69c9f1884d8ceecde348931b6f4d82f3faab1be1eed94669dbdaa2d2476362fa4c279dd20d', 'Fernanda Costa', 'Entregador', '32987229981', NULL),
+('rafael.almeida@email.com', 'scrypt:32768:8:1$TwCMjLoNHaTAmOFe$8ff618bf2f7be522c7d3a2bd00f3dd57625364ff5c40a76d28a3776652269cbde68e9224828d19fba9c41b33610c8dc9736ee220dc6a727183b2a411a4eac3f2', 'Rafael Almeida', 'Entregador', '32986334456', NULL),
+('contato@cafeteriadorenata.com', 'scrypt:32768:8:1$DWIQqJKGrD1vkfLN$b92d0b447449cfd1733b9e3f0cc9f7cbe72463d5e4784560e7b97a6d3ae2114b5f68022a93ca51a74fabb873567a47c5b378958578126017aee733938c358889', 'Cafeteria da Renata', 'Loja', '32337122885', NULL),
+('contato@padariabomgosto.com', 'scrypt:32768:8:1$mAGz7e4S0nVhlCAc$b1d352c8fbb0033db55f16f8fdee8e79fb656476ffc30331e898d975222e4a62131f5c449b840b161e101e778ec8e2805ae8f04e4ba524722d1c9dba09bbd08b', 'Padaria Bom Gosto', 'Loja', '32337255410', NULL),
+('contato@docedecasa.com', 'scrypt:32768:8:1$RcFXefnKT8BcEOtd$8f29cb30f44de1001e606177ce3c4f5133b675302844bed76d49789ebe2a20440f86dfbb7885fb83e10596c8e1e183aca248436aae602ba94bf60a272b019ee2', 'Doce de Casa', 'Loja', '32337390877', NULL),
+('admin@cafezin.com', 'scrypt:32768:8:1$BDRpp1j6SsyiiFWG$f34ba0d55bd15c6188b7f8948218980540c49ce1500ad907b24165c14d3c3a1ca6c57c3e0d18c2f5072ef42847b0f1a5cfb72609607fc24f255b8707df7ea39c', 'Administrador Cafezin', 'Admin', NULL, NULL),
+('bruno.carvalho@email.com', 'scrypt:32768:8:1$hrEi2lRQzpjnhDXm$997c7c863e29a2d008c1a24dea588e8b15c663fa325b354e5224d38250cb96875932341a76a44be61e0dba95d6800fe6cbf774881d4013bf3d28dfab9ec95130', 'Bruno Carvalho', 'Entregador', '32988445566', NULL),
+('diego.martins@email.com', 'scrypt:32768:8:1$fl5kY5RMO58Ze4tl$13eef9a9ba689ea8031ece6ccf31028200eb63fc6bcc265bb343abdc83c48922bfdfce558ca5ded7362d632184905b6dd097a41596444ac763e7d59ad06f0ed6', 'Diego Martins', 'Entregador', '32987556677', NULL),
+('juliana.ferreira@email.com', 'scrypt:32768:8:1$4FS0UiwZHDkv5FcO$2e6bfe60738f82975ebb239fc2e4ca261c86711272c1e20a4cfac6d504ec676f7df133e717545c3b4a05dc9dcf589d56f02fb9c4abb16cb228d4342c8725f01d', 'Juliana Ferreira', 'Entregador', '32986667788', NULL),
+('thiago.rocha@email.com', 'scrypt:32768:8:1$3y2jJbNc3k9fjXR5$ea319ed312121c729baceaecefd892befa878d582848a2f7b3d0cdb37e33938a3cfed6971db45bdb1c6d5781843cbc41715216ebaab3320ed3d457164a528c17', 'Thiago Rocha', 'Entregador', '32985778899', NULL),
+('camila.nunes@email.com', 'scrypt:32768:8:1$sIqsGmtmSr64KDp0$d45f71c9c291f62f861603446ddb30184975608de0618aa4a17c430aae2d7c070ecb9da993c089a1d0c7f41f8ba3b32559e9d4558123f7fb848e9566aeb0e922', 'Camila Nunes', 'Entregador', '32984889900', NULL),
+('contato@padariaestreladourada.com', 'scrypt:32768:8:1$kATYZMWCJr4PNAAi$c1eb497c4c2b905938b5e0e9c7c514c0c588fcbb4e2e84d8be489b82c22139ac101dabcccc882b81fa2a40f533e44a016a78a51ae7e2bba7919fb89a061d67a5', 'Padaria Estrela Dourada', 'Loja', '32337411223', NULL),
+('contato@cafeteriatrilhoreal.com', 'scrypt:32768:8:1$PTQCqnF9peePLmZ7$82abbcbe951bf0f618fd8173f9d1160255645ca6ec7d87156d5184c8c1a53836a02570f36da615e68cc3bb6cb7a36916af1329d361fd8025f818cf6ff67a9e54', 'Cafeteria Trilho Real', 'Loja', '32337522334', NULL),
+('contato@docesabormineiro.com', 'scrypt:32768:8:1$7KAucySgT1PmXF1R$d7c6cbb068ab55c3159d3c4651544910608dc89712fdf5175fc7674a43227d092f6e1a09c02435dcd2319b8514bfd93919fe33da63498680ca2a844aee39272c', 'Doceria Sabor Mineiro', 'Loja', '32337633445', NULL),
+('contato@point33burguer.com', 'scrypt:32768:8:1$yXOxOw2Xtg06SL0K$a2158adb1c59fac23bef5645c3bfc8bbae010cdcbb7b49615d45c035b9b7a25f26e5151385325582123b0ab3be15cb5e91a231031f04e4b2b1df4704d58b3080', 'Hamburgueria Point 33', 'Loja', '32337744556', NULL),
+('contato@gelatoreal.com', 'scrypt:32768:8:1$VWSjGlzusrq9yAK4$5adadcc170926489df42c222cf839ffb6876f9a7cb121edc62376dd0618240d6a0495af7736426e651570b7f22c9ec7b0adf57c27357c45064cf5242e7e25ac6', 'Sorveteria Gelato Real', 'Loja', '32337855667', NULL),
+('contato@theatrocafe.com', 'scrypt:32768:8:1$zwPIsABtO6adKWf9$84149db0467d1f1207b9558162cf6f12b5b59c6b08601cfd1bcc588c0749dc65468017d4c5cb96e61bc4bb432a3b0c442657135140665e223f56bace261a6a23', 'Theatro Café', 'Loja', '32337966778', NULL),
+('contato@paonosso.com', 'scrypt:32768:8:1$eG5SJlws5qw0YsY6$33134266039948ba8a809f48732aee893c9439be3f4cdadcbb19b0303310bd0470f45886aa03dbef20fb57c0b9da59c205eff0272bff168add99a29adc98f0d0', 'Pão Nosso', 'Loja', '32338077889', NULL),
+('contato@doceencanto.com', 'scrypt:32768:8:1$aG6xrLhzlp7PZvrV$a1a529322db80c4ff8b95dbeba78277877e1e9bd619a4ce00ff1a980c8d3fd4db97bb9d60e87d17e19bc4cf884b1c65990b103b8e8ab9aea5d22bf99c57a4a71', 'Confeitaria Doce Encanto', 'Loja', '32338188990', NULL),
+('contato@emporiodasbebidas.com', 'scrypt:32768:8:1$hc59cvPqOlgxnOoB$2c0493a2c85c44096f1988ea526d6ae05127698b04fca1ad97c3aa1233093657e7ad7e95adb00077688353421d4ab431767e27f5ed4c8d928f69b3245966295c', 'Empório das Bebidas', 'Loja', '32338299001', NULL),
+('gabriel.martins@email.com', 'scrypt:32768:8:1$CjYUwQfrxYMsARmV$79c3b87067e3ad2f0b7d3c911411e9472d875e382246f8c0e14c3b4a3fa62b53063305b4ed624fe3a21dd5bcea869822455f24abf1bcb3eb85240e3c536ebd00', 'Gabriel Martins', 'Comprador', '32996784511', NULL),
+('isabela.rocha@email.com', 'scrypt:32768:8:1$f3ZnA53To4ebWbp6$f9fdf756967d4a578e7f2967788e0a4f223794a5f68c2becd9c14387efc28792e8546c3e88552ccbf021bc0e2a5ca1dc50f15b0520b23d45c736e73c0fb105b7', 'Isabela Rocha', 'Comprador', '32997895622', NULL),
+('matheus.correia@email.com', 'scrypt:32768:8:1$awDo4sSwNQjgy0Km$5f86c2034fbeae5e3ec879b0097954c0b41f1485b5f193fe80d3ee577d3edc0f70a58a8dab93d3c582f37f9c39fd10b41f6dfbc85c5eb7630c577cad2840c2e8', 'Matheus Correia', 'Comprador', '32998906733', NULL),
+('larissa.andrade@email.com', 'scrypt:32768:8:1$mqpf5u7iLZ2qVkaa$a2985d7e207f2d5dae3ede6f41cb978994814937b8a85aaddad03929f4f6c36ec8215f87b481576e19511b44cf60b8f811a1976486d5e5bc1bd3f45fc26b1221', 'Larissa Andrade', 'Comprador', '32999017844', NULL),
+('vinicius.teixeira@email.com', 'scrypt:32768:8:1$OH5VejrRypwD5Z3D$e4d84a5bc0d13e78ae8bd81aa5db43387deefcf0e66ac483a97a47c1dfd4dbdbbff510f52c3a44b6272cba5fc71b752bff65dd129151b98fefc7df222c984f34', 'Vinicius Teixeira', 'Comprador', '32990128955', NULL);
 
 -- =========================================================
 -- ENDERECO
@@ -657,4 +648,5 @@ INSERT INTO AvaliacaoProduto (data, descricao, nota, horario, cod_produto, cod_c
 ('2026-09-23', 'Excelente para começar o dia', 5, '07:50:00', 1, 6),
 ('2026-09-23', 'Cappuccino cremoso, adorei', 5, '08:05:00', 2, 7),
 ('2026-09-23', 'Muito bom, mas achei meio doce', 4, '08:55:00', 18, 6);
+
 
