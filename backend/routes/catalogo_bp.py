@@ -16,6 +16,7 @@ from models.produto_popularidade import ProdutoPopularidade
 from models.avaliacao_produto import AvaliacaoProduto
 from models.avaliacao_loja import AvaliacaoLoja
 from models.loja_popularidade import LojaPopularidade
+from models.comprador import Comprador
 
 
 catalogo_bp = Blueprint("catalogo", __name__)
@@ -211,6 +212,10 @@ def produtos_populares():
                 "nome": p.nome,
                 "preco": float(p.preco),
                 "total_vendido": total_vendido,
+                "foto_url": p.foto_url,
+                "cod_loja": p.cod_loja,
+                "loja": p.loja.usuario.nome,
+
             }
             for p, total_vendido in resultados
         ]
@@ -251,6 +256,7 @@ def lojas_populares():
         loja_dict = {
             "cod_loja": loja.cod_loja,
             "nome": nome,
+            "foto_url": loja.usuario.foto_url,
             "total_vendido": total_vendido,
             "nota_media": round(float(nota_media), 1),
             "total_avaliacoes": total_avaliacoes,
@@ -379,4 +385,129 @@ def listar_categorias():
             }
             for c in categorias
         ]
+    }
+
+def _nome_publico(nome):
+    """'Mariana Souza Lima' -> 'Mariana L.' (não expõe o nome completo)."""
+    partes = (nome or "").split()
+    if not partes:
+        return "Cliente"
+    if len(partes) == 1:
+        return partes[0]
+    return f"{partes[0]} {partes[-1][0]}."
+
+
+def _paginacao(padrao, maximo):
+    limite = request.args.get("limite", default=padrao, type=int)
+    offset = request.args.get("offset", default=0, type=int)
+    return max(1, min(limite, maximo)), max(0, offset)
+
+
+def _avaliacao_json(nome, a):
+    return {
+        "comprador": _nome_publico(nome),
+        "data": a.data.isoformat() if a.data else None,
+        "nota": a.nota,
+        "descricao": a.descricao,
+    }
+
+@catalogo_bp.route("/produtos/<int:cod_produto>/avaliacoes", methods=["GET"])
+def avaliacoes_do_produto(cod_produto):
+    if db.session.get(Produto, cod_produto) is None:
+        return {"error": "produto não encontrado"}, 404
+
+    limite, offset = _paginacao(padrao=10, maximo=50)
+
+    media, total = (
+        db.session.query(
+            func.avg(AvaliacaoProduto.nota),
+            func.count(AvaliacaoProduto.nota),
+        )
+        .filter(AvaliacaoProduto.cod_produto == cod_produto)
+        .one()
+    )
+
+    linhas = (
+        db.session.query(Usuario.nome, AvaliacaoProduto)
+        .select_from(AvaliacaoProduto)
+        .join(Comprador, Comprador.cod_comprador == AvaliacaoProduto.cod_comprador)
+        .join(Usuario, Usuario.cod_usuario == Comprador.cod_usuario)
+        .filter(AvaliacaoProduto.cod_produto == cod_produto)
+        .order_by(AvaliacaoProduto.data.desc(), AvaliacaoProduto.horario.desc())
+        .limit(limite)
+        .offset(offset)
+        .all()
+    )
+
+    return {
+        "media_avaliacao": round(float(media), 1) if media is not None else None,
+        "total_avaliacoes": total,
+        "avaliacoes": [_avaliacao_json(nome, a) for nome, a in linhas],
+    }
+
+@catalogo_bp.route("/produtos/<int:cod_produto>/avaliacoes", methods=["GET"])
+def avaliacoes_do_produto(cod_produto):
+    if db.session.get(Produto, cod_produto) is None:
+        return {"error": "produto não encontrado"}, 404
+
+    limite, offset = _paginacao(padrao=10, maximo=50)
+
+    media, total = (
+        db.session.query(
+            func.avg(AvaliacaoProduto.nota),
+            func.count(AvaliacaoProduto.nota),
+        )
+        .filter(AvaliacaoProduto.cod_produto == cod_produto)
+        .one()
+    )
+
+    linhas = (
+        db.session.query(Usuario.nome, AvaliacaoProduto)
+        .select_from(AvaliacaoProduto)
+        .join(Comprador, Comprador.cod_comprador == AvaliacaoProduto.cod_comprador)
+        .join(Usuario, Usuario.cod_usuario == Comprador.cod_usuario)
+        .filter(AvaliacaoProduto.cod_produto == cod_produto)
+        .order_by(AvaliacaoProduto.data.desc(), AvaliacaoProduto.horario.desc())
+        .limit(limite)
+        .offset(offset)
+        .all()
+    )
+
+    return {
+        "media_avaliacao": round(float(media), 1) if media is not None else None,
+        "total_avaliacoes": total,
+        "avaliacoes": [_avaliacao_json(nome, a) for nome, a in linhas],
+    }
+
+@catalogo_bp.route("/lojas/<int:cod_loja>/produtos", methods=["GET"])
+def produtos_da_loja(cod_loja):
+    loja = db.session.get(Loja, cod_loja)
+    if loja is None:
+        return {"error": "loja não encontrada"}, 404
+
+    limite = request.args.get("limite", default=4, type=int)
+    limite = max(1, min(limite, 20))
+    excluir = request.args.get("excluir", type=int)
+
+    query = Produto.query.filter(
+        Produto.cod_loja == cod_loja,
+        Produto.disponibilidade.is_(True),
+    )
+    if excluir:
+        query = query.filter(Produto.cod_produto != excluir)
+
+    produtos = query.order_by(Produto.nome).limit(limite).all()
+
+    return {
+        "cod_loja": loja.cod_loja,
+        "loja": loja.usuario.nome,
+        "produtos": [
+            {
+                "cod_produto": p.cod_produto,
+                "nome": p.nome,
+                "preco": float(p.preco),
+                "foto_url": p.foto_url,
+            }
+            for p in produtos
+        ],
     }
