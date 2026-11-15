@@ -1,10 +1,11 @@
 from datetime import datetime
+from sqlalchemy import func, exists, or_, and_
 
 from sqlalchemy import func
 from flask import Blueprint, request
 from sqlalchemy.exc import SQLAlchemyError
-
 from extensions import db
+
 from models.produto import Produto
 from models.loja import Loja
 from models.usuario import Usuario
@@ -509,5 +510,165 @@ def produtos_da_loja(cod_loja):
                 "foto_url": p.foto_url,
             }
             for p in produtos
+        ],
+    }
+
+ORDENACAO_LOJAS = {"nome", "nota", "populares"}
+ORDENACAO_ITENS = {"nome", "preco_asc", "preco_desc", "populares"}
+
+
+def _ler_busca():
+    q = (request.args.get("q") or "").strip()[:100]
+    categorias = request.args.getlist("categoria", type=int)
+    limite, offset = _paginacao(padrao=20, maximo=50)
+    return q, categorias, limite, offset
+
+
+def _aberta_agora_sql():
+    """Mesma regra do _loja_aberta, mas como condição SQL (horário atual do servidor)."""
+    agora = datetime.now().time()
+    return or_(
+        and_(
+            Loja.horario_abertura <= Loja.horario_fecha,
+            Loja.horario_abertura <= agora,
+            agora <= Loja.horario_fecha,
+        ),
+        and_(
+            Loja.horario_abertura > Loja.horario_fecha,
+            or_(agora >= Loja.horario_abertura, agora <= Loja.horario_fecha),
+        ),
+    )
+
+
+@catalogo_bp.route("/pesquisa/lojas", methods=["GET"])
+def pesquisar_lojas():
+    q, categorias, limite, offset = _ler_busca()
+
+    ordenar = request.args.get("ordenar", "nome")
+    if ordenar not in ORDENACAO_LOJAS:
+        return {"error": "ordenar deve ser: nome, nota ou populares"}, 400
+
+    somente_abertas = request.args.get("abertas", "").lower() in ("1", "true")
+
+    nota_media = func.avg(AvaliacaoLoja.nota)
+    total_vendido = func.coalesce(func.max(LojaPopularidade.total_vendido), 0)
+
+    query = (
+        db.session.query(
+            Loja,
+            Usuario,
+            nota_media.label("nota_media"),
+            func.count(AvaliacaoLoja.nota).label("total_avaliacoes"),
+        )
+        .join(Usuario, Usuario.cod_usuario == Loja.cod_usuario)
+        .outerjoin(Pedido, Pedido.cod_loja == Loja.cod_loja)
+        .outerjoin(AvaliacaoLoja, AvaliacaoLoja.cod_pedido == Pedido.cod_pedido)
+        .outerjoin(LojaPopularidade, LojaPopularidade.cod_loja == Loja.cod_loja)
+        .group_by(Loja.cod_loja, Usuario.cod_usuario)
+    )
+
+    if q:
+        vende_o_item = exists().where(
+            Produto.cod_loja == Loja.cod_loja,
+            Produto.disponibilidade.is_(True),
+            Produto.nome.contains(q, autoescape=True),
+        )
+        query = query.filter(
+            or_(Usuario.nome.contains(q, autoescape=True), vende_o_item)
+        )
+
+    if categorias:
+        query = query.filter(
+            exists().where(
+                Produto.cod_loja == Loja.cod_loja,
+                Produto.disponibilidade.is_(True),
+                Produto.cod_categoria.in_(categorias),
+            )
+        )
+
+    if somente_abertas:
+        query = query.filter(_aberta_agora_sql())
+
+    if ordenar == "nota":
+        query = query.order_by(nota_media.desc(), Usuario.nome)
+    elif ordenar == "populares":
+        query = query.order_by(total_vendido.desc(), Usuario.nome)
+    else:
+        query = query.order_by(Usuario.nome)
+
+    total = query.count()
+    linhas = query.limit(limite).offset(offset).all()
+
+    return {
+        "total": total,
+        "lojas": [
+            {
+                "cod_loja": loja.cod_loja,
+                "nome": usuario.nome,
+                "foto_url": usuario.foto_url,
+                "nota_media": round(float(nota), 1) if nota is not None else None,
+                "total_avaliacoes": n_avaliacoes,
+                "aberta": _loja_aberta(loja),
+                "horario_abertura": loja.horario_abertura.strftime("%H:%M") if loja.horario_abertura else None,
+                "horario_fecha": loja.horario_fecha.strftime("%H:%M") if loja.horario_fecha else None,
+            }
+            for loja, usuario, nota, n_avaliacoes in linhas
+        ],
+    }
+
+
+@catalogo_bp.route("/pesquisa/itens", methods=["GET"])
+def pesquisar_itens():
+    q, categorias, limite, offset = _ler_busca()
+
+    ordenar = request.args.get("ordenar", "nome")
+    if ordenar not in ORDENACAO_ITENS:
+        return {"error": "ordenar deve ser: nome, preco_asc, preco_desc ou populares"}, 400
+
+    query = (
+        db.session.query(Produto, Usuario.nome)
+        .join(Loja, Loja.cod_loja == Produto.cod_loja)
+        .join(Usuario, Usuario.cod_usuario == Loja.cod_usuario)
+        .outerjoin(ProdutoPopularidade, ProdutoPopularidade.cod_produto == Produto.cod_produto)
+        .filter(Produto.disponibilidade.is_(True))
+    )
+
+    if q:
+        query = query.filter(
+            or_(
+                Produto.nome.contains(q, autoescape=True),
+                Produto.descricao.contains(q, autoescape=True),
+            )
+        )
+
+    if categorias:
+        query = query.filter(Produto.cod_categoria.in_(categorias))
+
+    if ordenar == "preco_asc":
+        query = query.order_by(Produto.preco.asc(), Produto.nome)
+    elif ordenar == "preco_desc":
+        query = query.order_by(Produto.preco.desc(), Produto.nome)
+    elif ordenar == "populares":
+        query = query.order_by(ProdutoPopularidade.total_vendido.desc(), Produto.nome)
+    else:
+        query = query.order_by(Produto.nome)
+
+    total = query.count()
+    linhas = query.limit(limite).offset(offset).all()
+
+    return {
+        "total": total,
+        "itens": [
+            {
+                "cod_produto": p.cod_produto,
+                "nome": p.nome,
+                "descricao": p.descricao,
+                "preco": float(p.preco),
+                "foto_url": p.foto_url,
+                "cod_categoria": p.cod_categoria,
+                "cod_loja": p.cod_loja,
+                "loja": nome_loja,
+            }
+            for p, nome_loja in linhas
         ],
     }
