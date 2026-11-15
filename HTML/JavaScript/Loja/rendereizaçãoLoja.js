@@ -319,8 +319,20 @@
             );
 
             if (saudacao && perfil.nome) {
-                saudacao.textContent =
-                    `Bem-vindo(a), ${perfil.nome}`;
+                saudacao.textContent = `Bem-vindo(a), ${perfil.nome}`;
+            }
+
+            const linkPerfil = document.querySelector(".navAcoes .perfilLoja");
+            const imagemPerfil = document.getElementById("fotoPerfilLoja");
+            const iconePerfil = linkPerfil?.querySelector("i");
+            if (linkPerfil) linkPerfil.href = "perfilLoja.html";
+            if (imagemPerfil && perfil.foto_url) {
+                imagemPerfil.src = perfil.foto_url.startsWith("http")
+                    ? perfil.foto_url
+                    : `${API_URL}${perfil.foto_url}`;
+                imagemPerfil.hidden = false;
+                imagemPerfil.onerror = () => { imagemPerfil.hidden = true; if (iconePerfil) iconePerfil.hidden = false; };
+                if (iconePerfil) iconePerfil.hidden = true;
             }
 
         } catch (erro) {
