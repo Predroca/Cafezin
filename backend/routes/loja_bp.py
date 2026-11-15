@@ -4,9 +4,9 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from extensions import db
 from permissoes import tipo_requerido
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
-from datetime import date, time
+from datetime import date, time, datetime, timedelta
 from sqlalchemy import func
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, selectinload
 from decimal import Decimal, InvalidOperation
 
 from models.produto import Produto
@@ -89,7 +89,7 @@ UFS = {
     "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
 }
 
-@loja_bp.route("/loja/perfil", methods=["PATCH"])  # atualizar dados
+@loja_bp.route("/loja/perfil", methods=["PATCH"])  # editar dados
 @tipo_requerido("Loja")
 def editar_perfil_loja():
     loja = loja_do_usuario_logado()
@@ -99,7 +99,7 @@ def editar_perfil_loja():
     dados = request.get_json(silent=True) or {}
     usuario = loja.usuario
 
-    # identificação
+    # atualizacao da identificação
     if "nome" in dados:
         nome = (dados["nome"] or "").strip()
         if len(nome) < 2 or len(nome) > 100:
@@ -112,7 +112,7 @@ def editar_perfil_loja():
             return {"error": "cnpj deve ter 14 dígitos"}, 400
         loja.cnpj = cnpj
 
-    # contato
+    # atualizacao do contato
     if "email" in dados:
         email = (dados["email"] or "").strip()
         if len(email) > 100 or not EMAIL_RE.match(email):
@@ -130,7 +130,7 @@ def editar_perfil_loja():
             return {"error": "telefone deve ter DDD e 8 ou 9 dígitos"}, 400
         usuario.telefone = telefone or None
 
-    # endereço: atualiza o Endereco já ligado à loja, não cria outro
+    # atualizacao do endereço
     end_dados = dados.get("endereco")
     if end_dados is not None:
         if not isinstance(end_dados, dict):
@@ -162,7 +162,7 @@ def editar_perfil_loja():
                 return {"error": "cep deve ter 8 dígitos"}, 400
             end.cep = cep or None
 
-    # funcionamento (horário único)
+    # atualizacao do horario de funcionamento 
     abertura, fecha = loja.horario_abertura, loja.horario_fecha
     if "horario_abertura" in dados:
         abertura, erro = _ler_hora(dados["horario_abertura"])
@@ -198,7 +198,7 @@ def meus_produtos():
         return {"error": "loja não encontrada"}, 404
 
     cod_categoria = request.args.get("categoria", type=int)
-    apenas_indisponiveis = request.args.get("indisponiveis", type=bool)
+    apenas_indisponiveis = request.args.get("indisponiveis", "").lower() in ("1", "true")
 
     query = Produto.query.filter_by(cod_loja=loja.cod_loja)
 
@@ -261,36 +261,36 @@ def dashboard():
     }
 
      
-@loja_bp.route("/loja/produto", methods=["POST"])
+@loja_bp.route("/loja/produtos", methods=["POST"])
 @tipo_requerido("Loja")
 def criar_produto():
     loja = loja_do_usuario_logado()
     if loja is None:
         return {"error": "loja não encontrada"}, 404
- 
+
     dados = request.get_json(silent=True) or {}
- 
+
     nome = (dados.get("nome") or "").strip()
     if not nome or len(nome) > 100:
         return {"error": "nome é obrigatório (máximo 100 caracteres)"}, 400
- 
+
     ja_existe = Produto.query.filter_by(cod_loja=loja.cod_loja, nome=nome).first()
     if ja_existe:
         return {"error": "sua loja já tem um produto com esse nome"}, 409
- 
+
     preco, erro = _ler_preco(dados.get("preco"))
     if erro:
         return {"error": erro}, 400
- 
+
     disponibilidade = dados.get("disponibilidade", True)
     if not isinstance(disponibilidade, bool):
         return {"error": "disponibilidade deve ser true ou false"}, 400
- 
+
     cod_categoria = dados.get("cod_categoria")
     if cod_categoria is not None:
         if db.session.get(Categoria, cod_categoria) is None:
             return {"error": "categoria não encontrada"}, 400
- 
+
     produto = Produto(
         cod_loja=loja.cod_loja,
         nome=nome,
@@ -299,26 +299,12 @@ def criar_produto():
         disponibilidade=disponibilidade,
         cod_categoria=cod_categoria,
     )
- 
+
     db.session.add(produto)
     db.session.commit()
- 
+
     return {"message": "produto criado", "cod_produto": produto.cod_produto}, 201
     
-@loja_bp.route("/deletar_produto/<int:cod_produto>", methods=["DELETE"]) #não usem essa rota a não ser em ultimo caso , pode deletar metade do banco de dados
-def deletar_produto(cod_produto):
-
-    product = Produto.query.filter_by(cod_produto = cod_produto).first()
-
-    if product != None:
-        # Marcar o produto para exclusão
-        db.session.delete(product)
-        # Salvar as alterações no banco de dados
-        db.session.commit()
-        return{"message" : "Ja era KK , cabo com o banco de dados."}
-    else:
-        return{"message" : "Produto não encontrado."}
-
 @loja_bp.route("/loja/pedidos", methods=["GET"])
 @tipo_requerido("Loja")
 def listar_pedidos_loja():
@@ -334,7 +320,15 @@ def listar_pedidos_loja():
     else:
         query = query.filter(Pedido.status.in_(["Pendente", "Em preparo", "Em andamento"]))
 
-    pedidos = query.order_by(Pedido.data_pedido.asc()).all()
+    pedidos = (
+        query.options(
+            joinedload(Pedido.comprador).joinedload(Comprador.usuario),
+            joinedload(Pedido.endereco_entrega),
+            selectinload(Pedido.itens).joinedload(ItemPedido.produto),
+        )
+        .order_by(Pedido.data_pedido.asc())
+        .all()
+    )
 
     return {
         "pedidos": [
@@ -344,6 +338,7 @@ def listar_pedidos_loja():
                 "data_pedido": p.data_pedido.isoformat(),
                 "valor_total": float(p.valor_total),
                 "comprador": p.comprador.usuario.nome,
+                "endereco_entrega": _endereco_json(p.endereco_entrega),
                 "itens": [
                     {"produto": i.produto.nome, "quantidade": i.quantidade}
                     for i in p.itens
@@ -386,6 +381,47 @@ def atualizar_status_pedido(cod_pedido):
     return {"cod_pedido": pedido.cod_pedido, "status": pedido.status}
 
 
+STATUS_PEDIDO = ["Pendente", "Em preparo", "Em andamento", "Entregue", "Cancelado"]
+DIAS_SEMANA = [
+    "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira",
+    "Sexta-feira", "Sábado", "Domingo",
+]
+
+
+def _ler_data(bruto):
+    """'AAAA-MM-DD' -> (date, None). Vazio -> (None, None). Inválido -> (None, erro)."""
+    if not bruto:
+        return None, None
+    try:
+        return date.fromisoformat(bruto), None
+    except ValueError:
+        return None, "datas devem estar no formato AAAA-MM-DD"
+
+
+def _endereco_json(e):
+    return {
+        "nome_logradouro": e.nome_logradouro,
+        "numero": e.numero,
+        "bairro": e.bairro,
+        "cidade": e.cidade,
+        "estado": e.estado,
+        "cep": e.cep,
+    }
+
+
+def _pedido_historico_json(p):
+    return {
+        "numero": p.cod_pedido,
+        "nome": p.comprador.usuario.nome,
+        "data": p.data_pedido.date().isoformat(),
+        "dia_semana": DIAS_SEMANA[p.data_pedido.weekday()],
+        "hora": p.data_pedido.strftime("%H:%M"),
+        "produtos": [f"{i.quantidade}x {i.produto.nome}" for i in p.itens],
+        "valor": float(p.valor_total or 0),
+        "status": p.status,
+    }
+
+
 @loja_bp.route("/loja/pedidos/todos", methods=["GET"])
 @tipo_requerido("Loja")
 def listar_todos_pedidos_loja():
@@ -393,30 +429,46 @@ def listar_todos_pedidos_loja():
     if loja is None:
         return {"error": "loja não encontrada"}, 404
 
+    de, erro = _ler_data(request.args.get("de"))
+    if erro:
+        return {"error": erro}, 400
+    ate, erro = _ler_data(request.args.get("ate"))
+    if erro:
+        return {"error": erro}, 400
+    if de and ate and ate < de:
+        return {"error": "'ate' deve ser igual ou posterior a 'de'"}, 400
+
+    status_filtro = request.args.getlist("status")
+    if any(s not in STATUS_PEDIDO for s in status_filtro):
+        return {"error": "status inválido"}, 400
+
+    limite = max(1, min(request.args.get("limite", default=50, type=int), 200))
+    offset = max(0, request.args.get("offset", default=0, type=int))
+
+    query = Pedido.query.filter(Pedido.cod_loja == loja.cod_loja)
+    if de:
+        query = query.filter(Pedido.data_pedido >= datetime.combine(de, time.min))
+    if ate:
+        query = query.filter(
+            Pedido.data_pedido < datetime.combine(ate + timedelta(days=1), time.min)
+        )
+    if status_filtro:
+        query = query.filter(Pedido.status.in_(status_filtro))
+
+    total = query.count()
+
     pedidos = (
-        Pedido.query.filter_by(cod_loja=loja.cod_loja)
-        .options(
+        query.options(
             joinedload(Pedido.comprador).joinedload(Comprador.usuario),
-            joinedload(Pedido.itens).joinedload(ItemPedido.produto),
+            selectinload(Pedido.itens).joinedload(ItemPedido.produto),
         )
         .order_by(Pedido.data_pedido.desc())
+        .limit(limite)
+        .offset(offset)
         .all()
     )
 
-    return [
-        {
-            "nomeCliente": p.comprador.usuario.nome,
-            "codigoPedido": p.cod_pedido,
-            "horario": p.data_pedido.strftime("%H:%M"),
-            "produtosPedido": [i.produto.nome for i in p.itens],
-            "dia": p.data_pedido.day,
-            "mes": p.data_pedido.month,
-            "ano": p.data_pedido.year,
-            "valorDoPedido": float(p.valor_total),
-        }
-        for p in pedidos
-    ]
-
+    return {"total": total, "pedidos": [_pedido_historico_json(p) for p in pedidos]}, 200
 
 
 def _ler_preco(bruto):
@@ -424,9 +476,11 @@ def _ler_preco(bruto):
         preco = Decimal(str(bruto).replace(",", "."))
     except InvalidOperation:
         return None, "preço inválido"
-    if preco <= 0:
+    if not preco.is_finite() or preco <= 0:
         return None, "preço deve ser maior que zero"
-    return preco, None
+    if preco > Decimal("99999999.99"):
+        return None, "preço acima do limite permitido"
+    return preco.quantize(Decimal("0.01")), None
 
 def _produto_json(p):
     return {
