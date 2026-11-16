@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     carregarLojasPopulares();
 });
@@ -118,7 +117,7 @@ function criarCardLoja(loja) {
 
         <div class="listaProdutos listaProdutosLoja">
 
-            ${produtos.map(produto => criarCardProduto(produto)).join("")}
+            ${produtos.map(produto => criarCardProduto(produto, loja)).join("")}
 
         </div>
     `;
@@ -127,7 +126,7 @@ function criarCardLoja(loja) {
 }
 
 // Cria cada card de produto
-function criarCardProduto(produto) {
+function criarCardProduto(produto, loja) {
 
     const imagem = produto.foto_url
         ? `
@@ -145,7 +144,13 @@ function criarCardProduto(produto) {
         `;
 
     return `
-        <article class="produtoCard" role="link" tabindex="0" data-cod-produto="${escaparHTML(produto.cod_produto)}">
+        <article class="produtoCard"
+            data-cod-produto="${escaparHTML(produto.cod_produto)}"
+            data-nome="${escaparHTML(produto.nome)}"
+            data-preco="${escaparHTML(produto.preco)}"
+            data-foto="${escaparHTML(produto.foto_url)}"
+            data-cod-loja="${escaparHTML(loja.cod_loja)}"
+            data-nome-loja="${escaparHTML(loja.nome)}">
 
             ${imagem}
 
@@ -169,6 +174,7 @@ function criarCardProduto(produto) {
 
             <button
                 class="adicionar"
+                type="button"
                 data-produto="${produto.cod_produto}"
                 aria-label="Adicionar ${escaparHTML(produto.nome)}"
             >
@@ -189,4 +195,3 @@ function escaparHTML(valor) {
         "'": "&#39;"
     })[caractere]);
 }
-
