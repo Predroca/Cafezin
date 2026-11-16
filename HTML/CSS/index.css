@@ -395,7 +395,7 @@ a{
     justify-content: center;
     align-items: center;
     gap: 56px;
-    animation: spin 16s linear infinite;
+    animation: spin 24s linear infinite;
     padding-left: 56px;
 }
 .carouselContainer:has(.categoriaIcons:hover) .categoriasContainerIcons{
@@ -410,7 +410,7 @@ a{
     width: 118px;
     height: 118px;
     border-radius: 30px;
-    background: var(--cor-bege-claro);
+
     transition: transform var(--transicao-normal), border-radius var(--transicao-normal);
 }
 .iconeCategoria img{
@@ -418,12 +418,18 @@ a{
     height: 56%;
     object-fit: contain;
 }
+
+
+
 .corDoce{ background: #f7ded9; }
 .corCafe{ background: #f8e4cf; }
 .corBebida{ background: #dce8ee; }
-.corTarde{ background: #f7e8bf; }
 .corManha{ background: #f1dfcf; }
 .corMais{ background: #dfead9; }
+.corSalgado{ background: #f8f2cf ; }
+.corSanduiche{ background: rgba(221, 188, 175, 0.618); }
+.corSorvete{ background: #f9d9e6; }
+.corChocolate{ background: #e4d1c6; }
 .categoriaIcons{
     width: 250px;
     flex: 0 0 250px;
