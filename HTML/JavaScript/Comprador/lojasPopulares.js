@@ -73,7 +73,8 @@ function criarCardLoja(loja) {
     bloco.innerHTML = `
         <div class="lojaTopo">
 
-            <article class="lojaCard">
+            <article class="lojaCard"
+                data-cod-loja="${escaparHTML(loja.cod_loja)}">
 
                 <div class="logoLoja">
                     ${escaparHTML(iniciais)}
