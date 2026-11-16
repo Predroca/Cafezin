@@ -1,3 +1,4 @@
+
 // ==========================================
 // adicionarSacola.js
 // Botão "+" dos cards de produto -> salva na sacola (localStorage).
@@ -12,29 +13,29 @@
 //   ]
 // }
 // ==========================================
-
+ 
 const CHAVE_SACOLA = "cafezinSacola";
 const LIMITE_QUANTIDADE_ITEM = 20; // mesmo limite do backend (criar_pedido)
-
+ 
 // ------------------------------------------
 // 1. Leitura / escrita no localStorage
 // ------------------------------------------
-
+ 
 function obterSacola() {
     try {
         const bruto = localStorage.getItem(CHAVE_SACOLA);
         const sacola = bruto ? JSON.parse(bruto) : null;
-
+ 
         if (sacola && Array.isArray(sacola.itens)) {
             return sacola;
         }
     } catch (erro) {
         console.error("Erro ao ler a sacola:", erro);
     }
-
+ 
     return { cod_loja: null, nome_loja: "", itens: [] };
 }
-
+ 
 function salvarSacola(sacola) {
     try {
         localStorage.setItem(CHAVE_SACOLA, JSON.stringify(sacola));
@@ -44,7 +45,7 @@ function salvarSacola(sacola) {
         return false;
     }
 }
-
+ 
 function limparSacola() {
     try {
         localStorage.removeItem(CHAVE_SACOLA);
@@ -53,31 +54,31 @@ function limparSacola() {
     }
     atualizarContadorSacola();
 }
-
+ 
 function totalItensSacola() {
     return obterSacola().itens.reduce((soma, item) => soma + item.quantidade, 0);
 }
-
+ 
 // ------------------------------------------
 // 2. Lê os dados do produto a partir do card clicado
 // ------------------------------------------
 // Os cards precisam ter data-cod-produto, data-nome, data-preco,
 // data-cod-loja e data-nome-loja (data-foto é opcional).
-
+ 
 function lerProdutoDoCard(botao) {
     const card = botao.closest(".OutrasLojasCard, .produtoCard");
     if (!card) return null;
-
+ 
     const dados = card.dataset;
-
+ 
     const codProduto = Number(dados.codProduto || botao.dataset.codProduto || botao.dataset.produto);
     const codLoja = Number(dados.codLoja);
     const preco = Number(dados.preco);
-
+ 
     if (!Number.isFinite(codProduto) || !Number.isFinite(codLoja) || !Number.isFinite(preco)) {
         return null;
     }
-
+ 
     return {
         cod_produto: codProduto,
         nome: dados.nome || "Produto",
@@ -87,14 +88,14 @@ function lerProdutoDoCard(botao) {
         nome_loja: dados.nomeLoja || "esta loja",
     };
 }
-
+ 
 // ------------------------------------------
 // 3. Adicionar à sacola
 // ------------------------------------------
-
+ 
 function adicionarNaSacola(produto) {
     const sacola = obterSacola();
-
+ 
     // sacola com itens de outra loja -> bloqueia
     if (sacola.itens.length > 0 && Number(sacola.cod_loja) !== produto.cod_loja) {
         mostrarAviso(
@@ -104,9 +105,9 @@ function adicionarNaSacola(produto) {
         );
         return false;
     }
-
+ 
     const existente = sacola.itens.find(i => i.cod_produto === produto.cod_produto);
-
+ 
     if (existente) {
         if (existente.quantidade >= LIMITE_QUANTIDADE_ITEM) {
             mostrarAviso(
@@ -125,69 +126,69 @@ function adicionarNaSacola(produto) {
             quantidade: 1,
         });
     }
-
+ 
     sacola.cod_loja = produto.cod_loja;
     sacola.nome_loja = produto.nome_loja;
-
+ 
     if (!salvarSacola(sacola)) {
         mostrarAviso("Não foi possível salvar a sacola neste navegador.", "erro");
         return false;
     }
-
+ 
     atualizarContadorSacola();
     mostrarAviso(`${produto.nome} adicionado à sacola.`, "sucesso");
     return true;
 }
-
+ 
 // Um único listener para TODOS os botões "+", inclusive os criados
 // depois pelo secoesInicio.js e pelo lojasPopulares.js.
 document.addEventListener("click", evento => {
     const botao = evento.target.closest("button.adicionar");
     if (!botao) return;
-
+ 
     const produto = lerProdutoDoCard(botao);
-
+ 
     if (!produto) {
         console.warn("Card sem dados completos do produto; nada foi adicionado.", botao);
         return;
     }
-
+ 
     adicionarNaSacola(produto);
 });
-
+ 
 // ------------------------------------------
 // 4. Contador da sacola no cabeçalho
 // ------------------------------------------
-
+ 
 function atualizarContadorSacola() {
     const link = document.querySelector(".navAcoes .sacola");
     if (!link) return;
-
+ 
     const total = totalItensSacola();
     const contador = link.querySelector("span");
-
+ 
     if (contador) {
         contador.textContent = total;
         contador.hidden = total === 0;
     }
-
+ 
     link.setAttribute(
         "aria-label",
         `Sacola com ${total} ${total === 1 ? "item" : "itens"}`
     );
 }
-
+ 
 document.addEventListener("DOMContentLoaded", atualizarContadorSacola);
-
+ 
 // ------------------------------------------
 // 5. Aviso (toast) - não depende de CSS externo
 // ------------------------------------------
-
+ 
 let temporizadorAviso = null;
-
+ 
 function mostrarAviso(mensagem, tipo) {
     let aviso = document.getElementById("avisoSacola");
-
+ 
     if (!aviso) {
         aviso = document.createElement("div");
         aviso.id = "avisoSacola";
@@ -208,17 +209,17 @@ function mostrarAviso(mensagem, tipo) {
         ].join(";");
         document.body.appendChild(aviso);
     }
-
+ 
     aviso.textContent = mensagem;
     aviso.style.background = tipo === "erro" ? "#b3261e" : "#4e342e";
     aviso.style.display = "block";
-
+ 
     clearTimeout(temporizadorAviso);
     temporizadorAviso = setTimeout(() => {
         aviso.style.display = "none";
     }, 3500);
 }
-
+ 
 // Para a tela de sacola usar depois:
 // window.Sacola.obter(), window.Sacola.limpar(), window.Sacola.total()
 window.Sacola = {
@@ -227,3 +228,4 @@ window.Sacola = {
     limpar: limparSacola,
     total: totalItensSacola,
 };
+ 
