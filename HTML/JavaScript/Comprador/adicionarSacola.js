@@ -1,197 +1,229 @@
-document.addEventListener("DOMContentLoaded", () => {
-    carregarLojasPopulares();
-});
+// ==========================================
+// adicionarSacola.js
+// Botão "+" dos cards de produto -> salva na sacola (localStorage).
+// A sacola só aceita produtos de UMA loja por vez.
+//
+// Formato salvo em localStorage["cafezinSacola"]:
+// {
+//   cod_loja: 3,
+//   nome_loja: "Empório do Café",
+//   itens: [
+//     { cod_produto: 1, nome: "...", preco: 15, foto_url: "...", quantidade: 2 }
+//   ]
+// }
+// ==========================================
 
-const API_URL = "http://localhost:5000";
+const CHAVE_SACOLA = "cafezinSacola";
+const LIMITE_QUANTIDADE_ITEM = 20; // mesmo limite do backend (criar_pedido)
 
-// Busca as lojas populares na API
-async function carregarLojasPopulares() {
-    const container = document.querySelector(
-        "#cafeterias .container"
-    );
+// ------------------------------------------
+// 1. Leitura / escrita no localStorage
+// ------------------------------------------
 
-    if (!container) return;
-
+function obterSacola() {
     try {
-        const resposta = await fetch(
-            `${API_URL}/lojas/populares?limite=3&incluir_produtos=true`
-        );
+        const bruto = localStorage.getItem(CHAVE_SACOLA);
+        const sacola = bruto ? JSON.parse(bruto) : null;
 
-        if (!resposta.ok) {
-            throw new Error("Erro ao buscar lojas populares.");
+        if (sacola && Array.isArray(sacola.itens)) {
+            return sacola;
         }
-
-        const dados = await resposta.json();
-
-        if (!dados.lojas || dados.lojas.length === 0) {
-            container.innerHTML = `
-                <p>Nenhuma cafeteria em destaque no momento.</p>
-            `;
-            return;
-        }
-
-        // Mantém o cabeçalho e remove os cards estáticos
-        const cabecalho = container.querySelector(".cabecalhoSecao");
-
-        container.innerHTML = "";
-
-        if (cabecalho) {
-            container.appendChild(cabecalho);
-        }
-
-        // Cria um bloco para cada loja
-        dados.lojas.forEach(loja => {
-            container.appendChild(criarCardLoja(loja));
-        });
-
     } catch (erro) {
-        console.error("Erro ao carregar cafeterias:", erro);
-        container.innerHTML += `
-            <p>Não foi possível carregar as cafeterias.</p>
-        `;
+        console.error("Erro ao ler a sacola:", erro);
+    }
+
+    return { cod_loja: null, nome_loja: "", itens: [] };
+}
+
+function salvarSacola(sacola) {
+    try {
+        localStorage.setItem(CHAVE_SACOLA, JSON.stringify(sacola));
+        return true;
+    } catch (erro) {
+        console.error("Erro ao salvar a sacola:", erro);
+        return false;
     }
 }
 
-// Cria o card da loja e sua lista de produtos
-function criarCardLoja(loja) {
-
-    const bloco = document.createElement("div");
-    bloco.className = "lojaBloco";
-
-    const iniciais = loja.nome
-        .split(" ")
-        .filter(Boolean)
-        .slice(0, 2)
-        .map(palavra => palavra[0])
-        .join("")
-        .toUpperCase();
-
-    // Seleciona os cinco produtos mais vendidos
-    const produtos = (loja.produtos || [])
-        .slice(0, 5);
-
-    bloco.innerHTML = `
-        <div class="lojaTopo">
-
-            <article class="lojaCard">
-
-                <div class="logoLoja">
-                    ${escaparHTML(iniciais)}
-                </div>
-
-                <button class="favoritar"
-                    aria-label="Favoritar ${escaparHTML(loja.nome)}">
-                    <i class="bi bi-heart"></i>
-                </button>
-
-                <div class="lojaInfo">
-
-                    <h3>
-                        ${escaparHTML(loja.nome)}
-                    </h3>
-
-                    <p>Cafeteria parceira</p>
-
-                    <small>
-                        <strong>
-                            <i class="bi bi-star-fill"></i>
-                            ${loja.nota_media ?? "Sem avaliações"}
-                        </strong>
-                        · ${loja.total_avaliacoes} avaliações
-                    </small>
-
-                    <b>
-                        ${loja.total_vendido} produtos vendidos
-                    </b>
-
-                </div>
-
-            </article>
-
-            <a class="linkSecao" href="#">
-                Ver tudo
-                <i class="bi bi-chevron-right"></i>
-            </a>
-
-        </div>
-
-        <div class="listaProdutos listaProdutosLoja">
-
-            ${produtos.map(produto => criarCardProduto(produto, loja)).join("")}
-
-        </div>
-    `;
-
-    return bloco;
+function limparSacola() {
+    try {
+        localStorage.removeItem(CHAVE_SACOLA);
+    } catch (erro) {
+        console.error("Erro ao limpar a sacola:", erro);
+    }
+    atualizarContadorSacola();
 }
 
-// Cria cada card de produto
-function criarCardProduto(produto, loja) {
-
-    const imagem = produto.foto_url
-        ? `
-            <img
-                src="${escaparHTML(produto.foto_url)}"
-                alt="${escaparHTML(produto.nome)}"
-                class="imagemProduto"
-            >
-        `
-        : `
-            <div class="placeholderFoto fotoProduto">
-                <i class="bi bi-image"></i>
-                <span>Foto do produto</span>
-            </div>
-        `;
-
-    return `
-        <article class="produtoCard"
-            data-cod-produto="${escaparHTML(produto.cod_produto)}"
-            data-nome="${escaparHTML(produto.nome)}"
-            data-preco="${escaparHTML(produto.preco)}"
-            data-foto="${escaparHTML(produto.foto_url)}"
-            data-cod-loja="${escaparHTML(loja.cod_loja)}"
-            data-nome-loja="${escaparHTML(loja.nome)}">
-
-            ${imagem}
-
-            <div class="produtoInfo">
-
-                <h3 class="produtoNome">
-                    ${escaparHTML(produto.nome)}
-                </h3>
-
-                <strong class="preco">
-                    ${Number(produto.preco).toLocaleString(
-                        "pt-BR",
-                        {
-                            style: "currency",
-                            currency: "BRL"
-                        }
-                    )}
-                </strong>
-
-            </div>
-
-            <button
-                class="adicionar"
-                type="button"
-                data-produto="${produto.cod_produto}"
-                aria-label="Adicionar ${escaparHTML(produto.nome)}"
-            >
-                <i class="bi bi-plus-lg"></i>
-            </button>
-
-        </article>
-    `;
+function totalItensSacola() {
+    return obterSacola().itens.reduce((soma, item) => soma + item.quantidade, 0);
 }
 
-// Evita inserir conteúdo textual da API diretamente como HTML
-function escaparHTML(valor) {
-    return String(valor ?? "").replace(/[&<>"']/g, caractere => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    })[caractere]);
+// ------------------------------------------
+// 2. Lê os dados do produto a partir do card clicado
+// ------------------------------------------
+// Os cards precisam ter data-cod-produto, data-nome, data-preco,
+// data-cod-loja e data-nome-loja (data-foto é opcional).
+
+function lerProdutoDoCard(botao) {
+    const card = botao.closest(".OutrasLojasCard, .produtoCard");
+    if (!card) return null;
+
+    const dados = card.dataset;
+
+    const codProduto = Number(dados.codProduto || botao.dataset.codProduto || botao.dataset.produto);
+    const codLoja = Number(dados.codLoja);
+    const preco = Number(dados.preco);
+
+    if (!Number.isFinite(codProduto) || !Number.isFinite(codLoja) || !Number.isFinite(preco)) {
+        return null;
+    }
+
+    return {
+        cod_produto: codProduto,
+        nome: dados.nome || "Produto",
+        preco: preco,
+        foto_url: dados.foto || null,
+        cod_loja: codLoja,
+        nome_loja: dados.nomeLoja || "esta loja",
+    };
 }
+
+// ------------------------------------------
+// 3. Adicionar à sacola
+// ------------------------------------------
+
+function adicionarNaSacola(produto) {
+    const sacola = obterSacola();
+
+    // sacola com itens de outra loja -> bloqueia
+    if (sacola.itens.length > 0 && Number(sacola.cod_loja) !== produto.cod_loja) {
+        mostrarAviso(
+            `Você só pode adicionar produtos de uma loja por vez. ` +
+            `Sua sacola já tem itens de ${sacola.nome_loja || "outra loja"}.`,
+            "erro"
+        );
+        return false;
+    }
+
+    const existente = sacola.itens.find(i => i.cod_produto === produto.cod_produto);
+
+    if (existente) {
+        if (existente.quantidade >= LIMITE_QUANTIDADE_ITEM) {
+            mostrarAviso(
+                `O limite é de ${LIMITE_QUANTIDADE_ITEM} unidades por produto.`,
+                "erro"
+            );
+            return false;
+        }
+        existente.quantidade += 1;
+    } else {
+        sacola.itens.push({
+            cod_produto: produto.cod_produto,
+            nome: produto.nome,
+            preco: produto.preco,
+            foto_url: produto.foto_url,
+            quantidade: 1,
+        });
+    }
+
+    sacola.cod_loja = produto.cod_loja;
+    sacola.nome_loja = produto.nome_loja;
+
+    if (!salvarSacola(sacola)) {
+        mostrarAviso("Não foi possível salvar a sacola neste navegador.", "erro");
+        return false;
+    }
+
+    atualizarContadorSacola();
+    mostrarAviso(`${produto.nome} adicionado à sacola.`, "sucesso");
+    return true;
+}
+
+// Um único listener para TODOS os botões "+", inclusive os criados
+// depois pelo secoesInicio.js e pelo lojasPopulares.js.
+document.addEventListener("click", evento => {
+    const botao = evento.target.closest("button.adicionar");
+    if (!botao) return;
+
+    const produto = lerProdutoDoCard(botao);
+
+    if (!produto) {
+        console.warn("Card sem dados completos do produto; nada foi adicionado.", botao);
+        return;
+    }
+
+    adicionarNaSacola(produto);
+});
+
+// ------------------------------------------
+// 4. Contador da sacola no cabeçalho
+// ------------------------------------------
+
+function atualizarContadorSacola() {
+    const link = document.querySelector(".navAcoes .sacola");
+    if (!link) return;
+
+    const total = totalItensSacola();
+    const contador = link.querySelector("span");
+
+    if (contador) {
+        contador.textContent = total;
+        contador.hidden = total === 0;
+    }
+
+    link.setAttribute(
+        "aria-label",
+        `Sacola com ${total} ${total === 1 ? "item" : "itens"}`
+    );
+}
+
+document.addEventListener("DOMContentLoaded", atualizarContadorSacola);
+
+// ------------------------------------------
+// 5. Aviso (toast) - não depende de CSS externo
+// ------------------------------------------
+
+let temporizadorAviso = null;
+
+function mostrarAviso(mensagem, tipo) {
+    let aviso = document.getElementById("avisoSacola");
+
+    if (!aviso) {
+        aviso = document.createElement("div");
+        aviso.id = "avisoSacola";
+        aviso.setAttribute("role", "alert");
+        aviso.style.cssText = [
+            "position:fixed",
+            "left:50%",
+            "bottom:24px",
+            "transform:translateX(-50%)",
+            "max-width:90%",
+            "padding:12px 20px",
+            "border-radius:10px",
+            "color:#fff",
+            "font-size:15px",
+            "box-shadow:0 4px 14px rgba(0,0,0,.25)",
+            "z-index:9999",
+            "text-align:center",
+        ].join(";");
+        document.body.appendChild(aviso);
+    }
+
+    aviso.textContent = mensagem;
+    aviso.style.background = tipo === "erro" ? "#b3261e" : "#4e342e";
+    aviso.style.display = "block";
+
+    clearTimeout(temporizadorAviso);
+    temporizadorAviso = setTimeout(() => {
+        aviso.style.display = "none";
+    }, 3500);
+}
+
+// Para a tela de sacola usar depois:
+// window.Sacola.obter(), window.Sacola.limpar(), window.Sacola.total()
+window.Sacola = {
+    obter: obterSacola,
+    salvar: salvarSacola,
+    limpar: limparSacola,
+    total: totalItensSacola,
+};
