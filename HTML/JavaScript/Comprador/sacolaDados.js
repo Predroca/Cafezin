@@ -42,7 +42,9 @@ const SacolaDados = (function () {
                 }
             }
         } catch (e) { /* sem storage: usa o exemplo */ }
-        return criarPadrao();
+        const padrao = criarPadrao();
+        salvar(padrao);
+        return padrao;
     }
 
     function salvar(estado) {
