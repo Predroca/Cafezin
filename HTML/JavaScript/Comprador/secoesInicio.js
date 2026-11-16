@@ -1,4 +1,3 @@
-
 const API_URL_SECOES = "http://localhost:5000";
 const LIMITE_LOJAS = 20;
 
@@ -81,6 +80,9 @@ function criarCardLojaParceira(loja) {
     card.className = "lojaCard lojaParceiraCard";
 
     const nome = loja.nome || "Cafeteria";
+
+    // cod_loja lido pelo botão de favoritar (favoritarLoja.js)
+    card.dataset.codLoja = loja.cod_loja;
 
     // Gera as iniciais caso a loja não tenha imagem.
     const iniciais = nome
@@ -190,11 +192,17 @@ async function carregarMaisPedidos() {
 function criarCardMaisPedido(produto) {
     const card = document.createElement("article");
     card.className = "OutrasLojasCard";
-    card.dataset.codProduto = produto.cod_produto;
-    card.setAttribute("role", "link" );
-    card.tabIndex = 0;
 
     const nome = produto.nome || "Produto";
+
+    // dados lidos pelo botão "+" (adicionarSacola.js)
+    card.dataset.codProduto = produto.cod_produto;
+    card.dataset.nome = nome;
+
+    if (produto.cod_loja != null) card.dataset.codLoja = produto.cod_loja;
+    if (produto.nome_loja) card.dataset.nomeLoja = produto.nome_loja;
+    if (Number.isFinite(Number(produto.preco))) card.dataset.preco = produto.preco;
+    if (produto.foto_url) card.dataset.foto = produto.foto_url;
 
     const foto = produto.foto_url
         ? `
@@ -269,7 +277,3 @@ function escaparHTML(valor) {
         "'": "&#039;"
     })[caractere]);
 }
-
-
-
-
