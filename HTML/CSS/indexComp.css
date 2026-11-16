@@ -1012,12 +1012,6 @@ footer {
     transition: background 0.2s, transform 0.2s;
 }
 
-
-
-/* ==========================================
-   CAFETERIAS PARCEIRAS
-   ========================================== */
-
 .listaLojasParceiras {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1092,4 +1086,69 @@ footer {
     .listaLojasParceiras {
         grid-template-columns: 1fr;
     }
+}
+
+/* ==========================================
+   CORREÇÃO DAS SETAS DO CARROSSEL
+   ========================================== */
+
+.listaLojasWraper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Estilo compartilhado das duas setas */
+.listaLojasWraper .setaLojas {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: 1px solid #eadbd2;
+    border-radius: 50%;
+
+    background: #fffdfb;
+    color: #9f4c22;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Seta da esquerda */
+.listaLojasWraper .setaLojasEsquerda {
+    left: 0;
+    right: auto;
+}
+
+/* Seta da direita */
+.listaLojasWraper .setaLojasDireita {
+    right: 0;
+    left: auto;
+}
+
+/* Ícones */
+.listaLojasWraper .setaLojas i {
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+/* Efeito ao passar o mouse */
+.listaLojasWraper .setaLojas:hover {
+    background: #f8e4cf;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
 }
