@@ -887,22 +887,3 @@ footer {
         transition-duration: .01ms !important;
     }
 }
-
-
-/* Atalho para o perfil da loja no cabeçalho */
-.navAcoes .perfilLoja {
-    display: grid;
-    width: 40px;
-    height: 40px;
-    place-items: center;
-    overflow: hidden;
-    border: 2px solid var(--cor-bege-claro);
-    border-radius: 50%;
-    text-decoration: none;
-}
-.navAcoes .perfilLoja img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.navAcoes .perfilLoja i { font-size: 1.2rem; }
