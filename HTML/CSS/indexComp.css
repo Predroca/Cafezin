@@ -136,49 +136,48 @@ button, input {
 .sacola:hover, .perfil:hover {
     color: var(--cor-laranja-claro);
 }
-
-.Comprador {
-    background-image: url(../img/indexComprador/CompradorBanner.svg);
+/* Hero */
+.heroComprador {
     color: var(--cor-texto-claro);
-    padding-bottom: 40px;
-    padding-top: 40px;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
-.Conteudo {
+.heroConteudo {
     min-height: 370px;
     display: flex;
     grid-template-columns: 1.2fr .8fr;
     align-items: center;
     gap: 50px;
-
+    justify-content: center;
+    align-items: center;
 }
-.Texto {
-
-
-    padding: 55px 25px;
+.heroTexto {
+    align-items: center;
+    justify-content: center;
+    padding: 55px 0;
+    padding-right: 50%;
+    width: 100%;
+    
 }
-.Saudacao {
+.heroSaudacao {
     margin-bottom: 6px;
     color: var(--cor-bege-destaque);
     font-size: var(--fonte-media);
 }
-.Texto h1 {
+.heroTexto h1 {
     margin: 0 0 14px;
     font-family: "Brasika", sans-serif;
     font-size: clamp(2.4rem, 4vw, 3.5rem);
     line-height: 1.1;
 }
-.Texto h1 span {
+.heroTexto h1 span {
     color: var(--cor-laranja-claro);
 }
-.Texto > p:not(.Saudacao) {
+.heroTexto > p:not(.heroSaudacao) {
     max-width: 480px;
     color: var(--cor-bege-claro);
     font-size: var(--fonte-normal);
     line-height: 1.55;
 }
-.Vantagens {
+.heroVantagens {
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
@@ -186,7 +185,7 @@ button, input {
     color: var(--cor-bege-destaque);
     font-size: var(--fonte-pequena);
 }
-.Vantagens i {
+.heroVantagens i {
     color: var(--cor-laranja-claro);
 }
 /* Placeholders: troque o conteúdo por <img> quando receber as fotos finais. */
@@ -198,20 +197,20 @@ button, input {
     gap: 6px;
     text-align: center;
 }
-.Foto {
+.heroFoto {
     min-height: 245px;
     border: 2px dashed rgba(255, 243, 231, .48);
     border-radius: var(--borda-arredondada-grande);
     background: linear-gradient(135deg, rgba(225,167,104,.35), rgba(255,243,231,.12));
     color: var(--cor-bege-destaque);
 }
-.Foto i {
+.heroFoto i {
     font-size: 3.2rem;
 }
-.Foto strong {
+.heroFoto strong {
     font-size: var(--fonte-media);
 }
-.Foto small {
+.heroFoto small {
     color: var(--cor-bege-claro);
 }
 /* Estrutura de seções */
@@ -258,73 +257,42 @@ button, input {
 .linkSecao i {
     margin-left: 4px;
 }
-/* Categorias (carrossel) */
-.carrosselCategorias {
-    position: relative;
-    padding: 30px 26px;
-    border-radius: 24px;
-    background: #fdf3ee;
-}
+/* Categorias */
 .listaCategorias {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 100%;
+    margin: auto;
+    
 }
 .categoria {
-    flex: 0 0 auto;
-    width: 102px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
-    padding: 12px 4px 10px;
-    border: 2px solid #c8864f;
-    border-radius: 20px;
-    background: #fff;
+    gap: 8px;
+    height: auto;
+    padding: 14px 8px;
+    border-radius: var(--borda-arredondada-media);
     color: var(--cor-marrom-escuro-2);
+    font-size: var(--fonte-pequena);
     text-align: center;
-    transition: transform .2s, box-shadow .2s;
-}
-.categoria:hover {box-shadow: 0 4px 10px rgba(154, 74, 31, .15); }
-.categoria b { font-family: "Google Sans", sans-serif; font-size: .835rem; font-weight: 500; white-space: nowrap; }
-.categoria > span {
-    position: relative;
-    display: block;
-    width: 54px;
-    height: 54px;
-    border-radius: 25%;
 }
 .categoria img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
     cursor: pointer;
 }
-
-.categoria .corDoce{ background: #f7ded9; }
-.categoria .corCafe{ background: #f8e4cf; }
-.categoria .corBebida{ background: #dce8ee; }
-.categoria .corManha{ background: #f1dfcf; }
-.categoria .corSalgado{ background: #f8f2cf; }
-.categoria .corSanduiche{ background: rgba(221, 188, 175, 0.618); }
-.categoria .corSorvete{ background: #f9d9e6; }
-.categoria .corChocolate{ background: #e4d1c6; }
-/* Ícones que precisam de um pouco mais de área */
-.categoria .corSalgado img{ width: 70%; height: 70%; }
-.categoria .corSanduiche img{ width: 76%; height: 76%; }
-.categoria .corSorvete img{ width: 74%; height: 74%; }
-@media (max-width: 500px) {
-    .carrosselCategorias { padding: 17px 10px; }
-    .listaCategorias { gap: 10px; }
-    .categoria { width: calc((100% - 20px) / 3); max-width: 102px; padding: 11px 2px 9px; }
-    .categoria > span { width: 51px; height: 51px; }
-    .categoria b { font-size: .8rem; }
+.categoria > span {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    border-radius: 18px 18px 10px 10px;
+    background: #f8e4cf;
+}
+.categoria img {
+    width: 45%;
+    height: 40%;
+    object-fit: contain;
+    background: var(--cor-bege-claro);
 }
 
 /* Filtros */
@@ -403,7 +371,6 @@ button, input {
     
     background: var(--cor-background);
     transition: transform var(--transicao-rapida), box-shadow var(--transicao-rapida);
-        border: 1px solid rgba(75,54,42,.12);
 }
 .placeholderOutLoja{
      display: flex;
@@ -780,34 +747,37 @@ footer {
         width: auto;
         margin-left: 0;
     }
-    .Conteudo {
+    .heroConteudo {
         min-height: auto;
         display: block;
     }
-    .Texto {
+    .heroTexto {
         padding: 45px 0;
     }
-    .Foto {
+    .heroFoto {
         display: none;
+    }
+    .listaCategorias {
+        grid-template-columns: repeat(3, 1fr);
     }
 
 }
 
-.Texto {
+.heroTexto {
     text-align: center;
 }
 
-.Texto h1 {
+.heroTexto h1 {
     margin: 0 auto 14px;
 }
 
-.Texto > p:not(.Saudacao) {
+.heroTexto > p:not(.heroSaudacao) {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-.Vantagens {
+.heroVantagens {
     justify-content: center;
 }
 
@@ -818,10 +788,10 @@ footer {
     .buscaCabecalho input {
         font-size: .68rem;
     }
-    .Texto h1 {
+    .heroTexto h1 {
         font-size: 2.35rem;
     }
-    .Vantagens {
+    .heroVantagens {
         gap: 10px;
         font-size: .7rem;
     }
@@ -874,16 +844,13 @@ footer {
     color: var(--cor-marrom-escuro-2);
 }
 
+
+/* Loja em destaque + fileira de 5 produtos */
 .lojaBloco {
-    margin-bottom: 55px;
+    margin-bottom: 68px;
     border-bottom: 1px solid rgba(75,54,42,.12);
-    padding-bottom: 55px;
+    padding-bottom: 58px;
 }
-
-#produtos.secaoPadrao{
-    padding-top: 0px;
-}
-
 
 .lojaOutBloco {
     position: relative;
@@ -923,7 +890,7 @@ footer {
     margin-left: auto;
     margin-right: auto;
     width: 95%;
-    margin-bottom: 55px;
+    margin-bottom: 100px;
 
 }
 /* Gradiente no final da área visível */
@@ -934,7 +901,8 @@ footer {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    margin-bottom: 55px;
+    margin-top: 20px;
+    margin-bottom: 18px;
 }
 .lojaTopo .lojaCard {
     flex: 0 1 460px;
@@ -1040,10 +1008,34 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     cursor: pointer;
 
-    transition: background 0.2s, transform 0.2s;
+    transition: background 0.2s, opacity 0.2s;
+}
+
+/* Posição de cada seta: uma em cada ponta da lista */
+.setaLojasEsquerda {
+    left: 8px;
+}
+
+.setaLojasDireita {
+    right: 8px;
+}
+
+.setaLojas:hover {
+    background: #f6ece5;
+}
+
+/* Some quando não há mais para onde rolar naquele lado */
+.listaLojasWraper:not(.temEsquerda) .setaLojasEsquerda,
+.listaLojasWraper:not(.temDireita) .setaLojasDireita {
+    opacity: 0;
+    pointer-events: none;
 }
 
 
+
+/* ==========================================
+   CAFETERIAS PARCEIRAS
+   ========================================== */
 
 .listaLojasParceiras {
     display: grid;
@@ -1054,6 +1046,7 @@ footer {
 }
 
 .lojaParceiraCard {
+    margin-top: 10px;
     position: relative;
     display: grid;
     grid-template-columns: 85px minmax(0, 1fr);
@@ -1121,67 +1114,45 @@ footer {
     }
 }
 
+
 /* ==========================================
-   CORREÇÃO DAS SETAS DO CARROSSEL
+   IMAGENS GERADAS PELOS SCRIPTS
+   A imagem nunca aumenta o card: ela é cortada
+   (object-fit: cover) para caber na moldura.
    ========================================== */
 
-.listaLojasWraper {
-    position: relative;
+/* Logo redonda das cafeterias (lojasPopulares.js e secoesInicio.js) */
+.logoLoja {
+    overflow: hidden;      /* corta o que passar do círculo */
+    flex-shrink: 0;
+}
+
+.logoLoja img {
+    display: block;
     width: 100%;
-    min-width: 0;
+    height: 100%;
+    object-fit: cover;     /* preenche o círculo cortando as sobras */
+    object-position: center;
 }
 
-/* Estilo compartilhado das duas setas */
-.listaLojasWraper .setaLojas {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-
-    width: 52px;
-    height: 52px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0;
-    border: 1px solid #eadbd2;
-    border-radius: 50%;
-
-    background: #fffdfb;
-    color: #9f4c22;
-
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-
-    cursor: pointer;
-    pointer-events: auto;
-
-    transition:
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+/* Foto dos produtos em "Mais pedidos" (moldura .fotoProduto, 165px) */
+.fotoProduto {
+    overflow: hidden;
 }
 
-/* Seta da esquerda */
-.listaLojasWraper .setaLojasEsquerda {
-    left: 0;
-    right: auto;
+.imagemProdutoMaisPedido {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-/* Seta da direita */
-.listaLojasWraper .setaLojasDireita {
-    right: 0;
-    left: auto;
-}
-
-/* Ícones */
-.listaLojasWraper .setaLojas i {
-    font-size: 1.1rem;
-    pointer-events: none;
-}
-
-/* Efeito ao passar o mouse */
-.listaLojasWraper .setaLojas:hover {
-    background: #f8e4cf;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+/* Foto dos produtos das cafeterias populares (img direto no .produtoCard) */
+.imagemProduto {
+    display: block;
+    width: 100%;
+    height: 165px;         /* mesma altura da moldura .fotoProduto */
+    object-fit: cover;
+    object-position: center;
 }

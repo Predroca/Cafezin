@@ -105,6 +105,13 @@ Usa as variáveis e fontes de main.css e a navegação/rodapé de indexComp.css.
     cursor: pointer;
     transition: background var(--transicao-rapida), transform var(--transicao-rapida);
 }
+.itemPedido .pedidoNota {
+    color: var(--cor-laranja);
+    letter-spacing: 2px;
+}
+.itemPedido .pedidoComentario {
+    font-style: italic;
+}
 .avatarEditar:hover {
     background: var(--cor-laranja-claro);
     transform: scale(1.08);

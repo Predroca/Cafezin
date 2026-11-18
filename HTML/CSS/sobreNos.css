@@ -1,0 +1,530 @@
+:root{
+    --altura-secao: calc(100vh - 76px);
+    --tracejado: 1px dashed rgba(115, 70, 48, .35);
+}
+
+footer{ margin-top: 0; }
+
+a, button, label, select, summary, [role="button"],
+.sobreTimeCard, .conviteCard, .conviteImagem{
+    cursor: pointer;
+}
+
+.paraTopoSeta{ transition: filter var(--transicao-rapida); }
+.paraTopoSeta:hover{ filter: brightness(.9); }
+
+@keyframes revelarSuave{
+    from{ opacity: 0; scale: .95; }
+    to{ opacity: 1; scale: 1; }
+}
+
+@keyframes revelarEsquerda{
+    from{ opacity: 0; translate: -48px 0; }
+    to{ opacity: 1; translate: 0 0; }
+}
+
+@keyframes revelarLadoDireito{
+    from{ opacity: 0; translate: 48px 0; }
+    to{ opacity: 1; translate: 0 0; }
+}
+
+.revelarAoRolar{
+    animation: revelarSuave linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+}
+
+main .container{
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.subtituloSobre{
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cor-laranja);
+}
+
+.sobreHistoriaSection{
+    position: relative;
+    display: flex;
+    background-color: var(--cor-background-bege);
+}
+
+.sobreHistoriaImagem{
+    position: sticky;
+    top: 76px;
+    width: 45%;
+    height: var(--altura-secao);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.sobreHistoriaImagem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sobreHistoriaConteudo{
+    position: relative;
+    z-index: 1;
+    width: 55%;
+    margin-left: -12%;
+    padding: 20vh 5% 20vh 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40vh;
+}
+
+.sobreHistoriaBloco{
+    padding: var(--espacamento-muito-grande);
+    border: 1px solid rgba(75, 54, 42, .12);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-marrom-vermelhado);
+    box-shadow: 0 18px 40px -14px rgba(45, 28, 22, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-medio);
+    animation: aparecerDireita linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 35%;
+}
+
+.sobreHistoriaBloco:nth-child(even){
+    margin-left: 12%;
+    color: var(--cor-marrom-medio);
+}
+
+.sobreHistoriaBloco .subtituloSobre{
+    padding-bottom: var(--espacamento-pequeno);
+    border-bottom: var(--tracejado);
+}
+
+.sobreHistoriaBloco .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.sobreHistoriaBloco p{
+    font-size: var(--fonte-media);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.sobreTimeSection{
+    padding: calc(var(--espacamento-padrao) * .9) 0;
+    background-color: var(--cor-background);
+}
+
+.sobreTimeCabecalho{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacamento-pequeno);
+    margin-bottom: calc(var(--espacamento-muito-grande) * 1.3);
+    padding-bottom: var(--espacamento-grande);
+    border-bottom: var(--tracejado);
+    text-align: center;
+    color: var(--cor-marrom-vermelhado);
+}
+
+.sobreTimeCabecalho .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.sobreTimeCabecalho p{
+    width: min(560px, 100%);
+    font-size: var(--fonte-normal);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.sobreTimeGrid{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-extra-grande);
+}
+
+.sobreTimeCard{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-extra-grande);
+    width: min(780px, 80%);
+    padding: 22px;
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-marrom-vermelhado);
+    transition: border-color var(--transicao-rapida);
+}
+
+.sobreTimeCard:nth-child(even){
+    flex-direction: row-reverse;
+    margin-left: auto;
+    text-align: right;
+}
+
+.sobreTimeCard:hover{
+    border-color: var(--cor-laranja);
+}
+
+.sobreTimeFoto{
+    display: grid;
+    place-items: center;
+    flex: 0 0 200px;
+    aspect-ratio: 1;
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background-bege);
+    overflow: hidden;
+    color: var(--cor-laranja-escuro);
+    font-size: 3.4rem;
+}
+
+.sobreTimeFoto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sobreTimeInfo{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+}
+
+.sobreTimeNome{
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-titulo);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.sobreTimeCargo{
+    padding-bottom: var(--espacamento-medio);
+    border-bottom: var(--tracejado);
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cor-laranja);
+}
+
+.sobreTimeTexto{
+    padding-top: var(--espacamento-pequeno);
+    font-size: var(--fonte-normal);
+    line-height: 1.6;
+    color: var(--cor-texto-secundario);
+}
+
+.sobreValoresSection{
+    padding: calc(var(--espacamento-padrao) * .55) 0;
+    background-color: var(--cor-marrom-escuro-2);
+    view-timeline: --valores block;
+}
+
+.sobreValoresCabecalho{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacamento-pequeno);
+    margin-bottom: calc(var(--espacamento-muito-grande) * 1.2);
+    text-align: center;
+}
+
+.sobreValoresCabecalho .subtituloSobre{
+    color: var(--cor-laranja-claro);
+}
+
+.sobreValoresCabecalho .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-bege-destaque);
+}
+
+.sobreValoresContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(var(--espacamento-muito-grande) * 1.3);
+}
+
+.sobreValorItem{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: var(--espacamento-pequeno);
+    padding-left: var(--espacamento-grande);
+    border-left: 2px dashed var(--cor-laranja-claro);
+}
+
+.sobreValorItem i{
+    font-size: 2.4rem;
+    color: var(--cor-laranja-claro);
+}
+
+.sobreValorTitulo{
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    color: var(--cor-texto-claro-alternativo);
+}
+
+.sobreValorTexto{
+    font-size: var(--fonte-pequena);
+    line-height: 1.5;
+    color: var(--cor-bege-claro);
+}
+
+.sobreConviteSection{
+    padding: calc(var(--espacamento-padrao) * 1.2) 0;
+    background-color: var(--cor-bege-claro);
+}
+
+.sobreConviteCabecalho{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    margin-bottom: calc(var(--espacamento-muito-grande) * 1.3);
+    padding-bottom: var(--espacamento-grande);
+    border-bottom: var(--tracejado);
+    text-align: center;
+    color: var(--cor-marrom-vermelhado);
+}
+
+.sobreConviteCabecalho .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro-2);
+}
+
+.sobreConviteCabecalho p{
+    width: min(560px, 100%);
+    font-size: var(--fonte-media);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.conviteGrid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--espacamento-extra-grande);
+    align-items: stretch;
+    width: min(940px, 100%);
+    margin-inline: auto;
+}
+
+.conviteCard{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(75, 54, 42, .12);
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-marrom-vermelhado);
+}
+
+.conviteImagem{
+    position: relative;
+    display: block;
+    height: 220px;
+    overflow: hidden;
+}
+
+.conviteImagem img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transicao-lenta);
+}
+
+.conviteImagem:hover img{
+    transform: scale(1.06);
+}
+
+.conviteIcone{
+    position: absolute;
+    left: var(--espacamento-medio);
+    bottom: var(--espacamento-medio);
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--borda-arredondada-media);
+    background-color: var(--cor-background);
+    color: var(--cor-laranja-escuro);
+    font-size: 1.4rem;
+    box-shadow: 0 6px 16px -6px rgba(45, 28, 22, .5);
+    pointer-events: none;
+}
+
+.conviteCorpo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-medio);
+    padding: var(--espacamento-grande);
+}
+
+.conviteCorpo .titulo{
+    font-size: var(--fonte-titulo);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.conviteCorpo p{
+    flex: 1;
+    font-size: var(--fonte-normal);
+    line-height: 1.6;
+    color: var(--cor-texto-secundario);
+}
+
+.conviteLinkSaiba{
+    margin-left: 4px;
+    color: var(--cor-laranja-escuro);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transicao-rapida);
+}
+
+.conviteLinkSaiba:hover{
+    color: var(--cor-marrom-medio);
+}
+
+.conviteAcoes{
+    padding-top: var(--espacamento-medio);
+    border-top: var(--tracejado);
+}
+
+.conviteBotao{
+    display: block;
+    padding: 12px var(--espacamento-grande);
+    border-radius: var(--borda-arredondada-pequena);
+    font-size: var(--fonte-pequena);
+    font-weight: 600;
+    text-align: center;
+    transition: background-color var(--transicao-rapida), color var(--transicao-rapida), filter var(--transicao-rapida);
+}
+
+.conviteBotaoPedir{ background-color: var(--cor-laranja-claro); color: var(--cor-marrom-vermelhado); }
+.conviteBotaoPedir:hover{ background-color: color-mix(in srgb, var(--cor-laranja-claro) 72%, var(--cor-marrom-escuro-2)); }
+
+.conviteBotaoLoja{ background-color: var(--cor-laranja-escuro-2); color: var(--cor-texto-claro-alternativo); }
+.conviteBotaoLoja:hover{ background-color: var(--cor-marrom-medio); }
+
+@media (max-width: 992px){
+    .sobreTimeCard{
+        width: 92%;
+    }
+
+    .sobreValoresContainer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px){
+    .conviteGrid{
+        grid-template-columns: 1fr;
+        width: min(520px, 100%);
+    }
+
+    .sobreHistoriaSection{
+        flex-direction: column;
+    }
+
+    .sobreHistoriaImagem{
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 50vh;
+    }
+
+    .sobreHistoriaConteudo{
+        width: 100%;
+        margin-left: 0;
+        margin-top: -60px;
+        padding: 0 var(--espacamento-grande) var(--espacamento-padrao);
+        gap: var(--espacamento-extra-grande);
+    }
+
+    .sobreHistoriaBloco:nth-child(even){
+        margin-left: 0;
+    }
+
+    .sobreHistoriaBloco .titulo{
+        font-size: var(--fonte-titulo);
+    }
+
+    .sobreValoresContainer{
+        grid-template-columns: 1fr;
+    }
+
+    .sobreValoresCabecalho .titulo,
+    .sobreTimeCabecalho .titulo,
+    .sobreConviteCabecalho .titulo{
+        font-size: var(--fonte-titulo);
+    }
+}
+
+.sobreValoresCabecalho{ animation-timeline: --valores; animation-range: cover 6% cover 16%; }
+
+.sobreValorItem{ animation-timeline: --valores; animation-range: cover 14% cover 24%; }
+.sobreValorItem:nth-child(2){ animation-range: cover 22% cover 32%; }
+.sobreValorItem:nth-child(3){ animation-range: cover 30% cover 40%; }
+.sobreValorItem:nth-child(4){ animation-range: cover 38% cover 48%; }
+
+.sobreTimeCard:nth-child(odd){ animation-name: revelarEsquerda; }
+.sobreTimeCard:nth-child(even){ animation-name: revelarLadoDireito; }
+
+.conviteCard:nth-child(odd){ animation-name: revelarEsquerda; }
+.conviteCard:nth-child(even){ animation-name: revelarLadoDireito; }
+
+@media (max-width: 768px){
+    .conviteCard:nth-child(odd),
+    .conviteCard:nth-child(even),
+    .sobreTimeCard:nth-child(odd),
+    .sobreTimeCard:nth-child(even){ animation-name: revelarSuave; }
+}
+
+@media (max-width: 640px){
+    .sobreTimeCard,
+    .sobreTimeCard:nth-child(even){
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        margin-left: 0;
+        text-align: left;
+    }
+
+    .sobreTimeFoto{
+        flex: none;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+    }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .revelarAoRolar{
+        animation: none;
+    }
+}
+
+.sobreTimeSection,
+.sobreConviteSection{
+    min-height: var(--altura-secao);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}

@@ -259,15 +259,19 @@ button, input, select, textarea { font: inherit; }
 
 .dashCard {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 18px;
-
+    
     min-height: 110px;
     padding: 24px var(--dash-pad);
 
     background: var(--cor-marrom-escuro-2);
 }
 
+.dashCard .dashIcone{
+    margin-left: -10%;
+}
 /* Círculo do ícone */
 .dashIcone {
     flex: 0 0 54px;

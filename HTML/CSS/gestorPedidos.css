@@ -1,15 +1,16 @@
+
 body {
     font-family: "Google Sans", sans-serif;
     color: var(--cor-texto);
     background: var(--cor-background)
 }
-
+ 
 .cabecalhoGestor {
     padding: 34px 0 38px;
     background: var(--cor-marrom-escuro-2);
     color: var(--cor-texto-claro)
 }
-
+ 
 .cabecalhoGestor .linkVoltar {
     display: inline-flex;
     align-items: center;
@@ -18,13 +19,13 @@ body {
     color: var(--cor-bege-claro);
     font-size: var(--fonte-pequena)
 }
-
+ 
 .cabecalhoGestor .painelSaudacao {
     margin-bottom: 10px;
     color: var(--cor-bege-destaque);
     font-size: var(--fonte-pequena)
 }
-
+ 
 .cabecalhoGestor .selo {
     display: inline-flex;
     align-items: center;
@@ -34,32 +35,32 @@ body {
     border-radius: 999px;
     background: rgba(255, 243, 231, .08)
 }
-
+ 
 .cabecalhoGestor h1 {
     margin-bottom: 10px;
     font-family: "Brasika", sans-serif;
     font-size: clamp(2rem, 4vw, 3rem);
     line-height: 1.2
 }
-
+ 
 .cabecalhoGestor h1 span {
     color: var(--cor-laranja-claro)
 }
-
+ 
 .descricaoPagina {
     max-width: 650px;
     color: var(--cor-bege-claro);
     line-height: 1.55
 }
-
+ 
 .secaoPedidosLoja {
     padding-bottom: 48px
 }
-
+ 
 .secaoEntregas {
     padding-top: 48px
 }
-
+ 
 .contadorSecao {
     flex: 0 0 auto;
     padding: 7px 12px;
@@ -69,25 +70,25 @@ body {
     font-size: .76rem;
     font-weight: 700
 }
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
 .trilhoEntregas .entrega {
     display: flex;
     flex-direction: column
 }
-
+ 
 .trilhoEntregas .entregaInfo {
     flex: 1
 }
-
+ 
 .trilhoEntregas .entregaRodape {
     margin-top: 18px
 }
-
+ 
 .avisoSomenteLeitura {
     display: inline-flex;
     align-items: center;
@@ -97,39 +98,39 @@ body {
     font-weight: 600;
     text-align: right
 }
-
+ 
 .pedido[data-status="Em andamento"] {
     border-color: rgba(111, 174, 122, .55)
 }
-
+ 
 .pedido[data-status="Em andamento"] .statusBadge {
     background: rgba(111, 174, 122, .16);
     color: #3d7048
 }
-
+ 
 .pedido p {
     color: var(--cor-marrom-escuro-2);
     font-size: .76rem;
     margin-bottom: 14px;
     font-weight: 700;
 }
-
+ 
 @media(max-width:700px) {
     .cabecalhoGestor {
         padding: 28px 0 32px
     }
-
+ 
     .cabecalhoSecao.linha {
         align-items: flex-start
     }
-
+ 
     .trilhoPedidos,
     .trilhoEntregas {
         grid-auto-columns: minmax(270px, 86vw)
     }
 }
-
-
+ 
+ 
 /* Organização dos pedidos por etapa */
 .colunasPedidos {
     display: grid;
@@ -137,7 +138,7 @@ body {
     gap: 22px;
     align-items: start;
 }
-
+ 
 .colunaPedidos {
     min-width: 0;
     padding: 18px;
@@ -145,7 +146,7 @@ body {
     border-radius: var(--borda-arredondada-pequena);
     background: rgba(255, 243, 231, .55);
 }
-
+ 
 .cabecalhoColunaPedidos {
     display: flex;
     align-items: center;
@@ -155,13 +156,13 @@ body {
     padding-bottom: 12px;
     border-bottom: 1px solid rgba(75, 54, 42, .14);
 }
-
+ 
 .cabecalhoColunaPedidos h3 {
     margin: 0;
     color: var(--cor-marrom-escuro-2);
     font-size: 1rem;
 }
-
+ 
 .contadorColunaPedidos {
     display: inline-flex;
     min-width: 27px;
@@ -175,28 +176,28 @@ body {
     font-size: .75rem;
     font-weight: 700;
 }
-
+ 
 .listaPedidosColuna {
     display: flex;
     flex-direction: column;
     gap: 16px;
     min-height: 90px;
 }
-
+ 
 .listaPedidosColuna .pedido {
     width: 100%;
     margin: 0;
 }
-
+ 
 .pedido[data-status="Pronto"] {
     border-color: rgba(111, 174, 122, .55);
 }
-
+ 
 .pedido[data-status="Pronto"] .statusBadge {
     background: rgba(111, 174, 122, .16);
     color: #3d7048;
 }
-
+ 
 @media (max-width: 900px) {
     .colunasPedidos {
         grid-template-columns: repeat(3, minmax(270px, 1fr));
@@ -204,8 +205,8 @@ body {
         padding-bottom: 10px;
     }
 }
-
-
+ 
+ 
 /* Ações de reversão e salvamento dos pedidos */
 .pedidoAcoes {
     display: flex;
@@ -213,7 +214,7 @@ body {
     gap: 8px;
     flex-wrap: wrap;
 }
-
+ 
 .botaoReverterPedido {
     display: inline-flex;
     width: 38px;
@@ -229,19 +230,19 @@ body {
     cursor: pointer;
     transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
-
+ 
 .botaoReverterPedido:hover {
     border-color: var(--cor-laranja-escuro);
     background: rgba(148, 70, 27, .09);
     color: var(--cor-laranja-escuro);
 }
-
+ 
 .botaoReverterPedido:focus-visible,
 .acoesSalvarPedidos button:focus-visible {
     outline: 2px solid var(--cor-laranja-escuro);
     outline-offset: 3px;
 }
-
+ 
 .acoesSalvarPedidos {
     display: flex;
     align-items: center;
@@ -249,25 +250,25 @@ body {
     flex-wrap: wrap;
     margin-top: 24px;
 }
-
+ 
 .acoesSalvarPedidos .botaoPrimario {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
 }
-
+ 
 .mensagemSalvamento {
     color: var(--cor-texto-secundario);
     font-size: .8rem;
     font-weight: 600;
 }
-
+ 
 .mensagemSalvamento.salvamentoSucesso {
     color: #3d7048;
 }
-
-
+ 
+ 
 /* Modal: escolher entregador */
 .modalEntregadores {
     width: min(480px, calc(100% - 32px));
@@ -280,17 +281,17 @@ body {
     box-shadow: 0 20px 50px rgba(45, 28, 22, .3);
     overflow: hidden;
 }
-
+ 
 .modalEntregadores[open] {
     display: flex;
     flex-direction: column;
     margin: auto;
 }
-
+ 
 .modalEntregadores::backdrop {
     background: rgba(45, 28, 22, .55);
 }
-
+ 
 .modalCabecalho {
     display: flex;
     align-items: flex-start;
@@ -299,20 +300,20 @@ body {
     padding: 18px 20px;
     border-bottom: 1px solid rgba(75, 54, 42, .14);
 }
-
+ 
 .modalCabecalho h2 {
     margin: 0;
     color: var(--cor-laranja-escuro);
     font-family: "Brasika", sans-serif;
     font-size: 1.3rem;
 }
-
+ 
 .modalCabecalho p {
     margin: 4px 0 0;
     color: var(--cor-texto-secundario);
     font-size: .78rem;
 }
-
+ 
 .botaoFecharModal {
     display: inline-flex;
     width: 34px;
@@ -326,21 +327,21 @@ body {
     color: var(--cor-marrom-escuro-2);
     cursor: pointer;
 }
-
+ 
 .botaoFecharModal:hover {
     border-color: var(--cor-laranja-escuro);
     color: var(--cor-laranja-escuro);
 }
-
+ 
 /* Trava a rolagem da página enquanto o modal está aberto */
 body.modalAberto {
     overflow: hidden;
 }
-
+ 
 .modalEntregadores {
     overscroll-behavior: contain;
 }
-
+ 
 .listaEntregadoresModal {
     min-height: 0;
     overscroll-behavior: contain;
@@ -352,7 +353,7 @@ body.modalAberto {
     list-style: none;
     overflow-y: auto;
 }
-
+ 
 /* Barra de rolagem sempre visível na lista de entregadores */
 .listaEntregadoresModal {
     overflow-y: scroll;
@@ -360,25 +361,25 @@ body.modalAberto {
     scrollbar-width: thin;
     scrollbar-color: var(--cor-laranja-escuro) rgba(75, 54, 42, .12);
 }
-
+ 
 .listaEntregadoresModal::-webkit-scrollbar {
     width: 10px;
 }
-
+ 
 .listaEntregadoresModal::-webkit-scrollbar-track {
     background: rgba(75, 54, 42, .12);
     border-radius: 999px;
 }
-
+ 
 .listaEntregadoresModal::-webkit-scrollbar-thumb {
     background: var(--cor-laranja-escuro);
     border-radius: 999px;
 }
-
+ 
 .listaEntregadoresModal::-webkit-scrollbar-thumb:hover {
     background: var(--cor-laranja);
 }
-
+ 
 .entregadorOpcao {
     display: flex;
     align-items: center;
@@ -387,13 +388,13 @@ body.modalAberto {
     border: 1px solid rgba(75, 54, 42, .2);
     border-radius: var(--borda-arredondada-pequena);
 }
-
+ 
 .entregadorAvatar {
     color: var(--cor-laranja-escuro);
     font-size: 1.8rem;
     line-height: 1;
 }
-
+ 
 .entregadorDados {
     display: flex;
     min-width: 0;
@@ -401,20 +402,59 @@ body.modalAberto {
     flex-direction: column;
     gap: 2px;
 }
-
+ 
 .entregadorDados strong {
     color: var(--cor-marrom-escuro-2);
     font-size: .85rem;
 }
-
+ 
 .entregadorDados span {
     color: var(--cor-texto-secundario);
     font-size: .72rem;
 }
-
+ 
 @media (max-width: 500px) {
     .acoesSalvarPedidos {
         align-items: flex-start;
         flex-direction: column;
     }
 }
+ 
+ 
+/* Estado vazio das colunas e seta para o histórico */
+.colunaVazia {
+    margin: 0;
+    padding: 18px 10px;
+    color: var(--cor-texto-secundario);
+    font-size: .8rem;
+    font-weight: 600;
+    text-align: center;
+}
+ 
+.setaHistorico {
+    display: inline-flex;
+    align-self: center;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--cor-marrom-escuro-2);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+ 
+.setaHistorico:hover {
+    border-color: var(--cor-laranja-escuro);
+    background: rgba(148, 70, 27, .09);
+    color: var(--cor-laranja-escuro);
+}
+ 
+.setaHistorico:focus-visible {
+    outline: 2px solid var(--cor-laranja-escuro);
+    outline-offset: 3px;
+}
+ 

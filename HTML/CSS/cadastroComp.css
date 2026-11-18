@@ -184,6 +184,7 @@ body{
 }
 
 .inptLoginEmail{
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -532,7 +533,7 @@ body{
     .paginaCadastro .formLoginContainer { padding: 22px 16px; }
     .paginaCadastro .inputsContainer { grid-template-columns: 1fr; }
     .paginaCadastro .seletorTipo { width: 100%; }
-    .paginaCadastro .opcaoTipo { width: 33.333%; }
+    .paginaCadastro .opcaoTipo { width: 50%; }
     .paginaCadastro .loginTelefone { grid-column: auto; }
     .cabecalhoCadastro { height: 60px; }
 }
@@ -648,7 +649,7 @@ body{
 }
 @media (max-width: 620px) {
     .paginaCadastro .seletorTipo { width: 100%; }
-    .paginaCadastro .opcaoTipo { width: 33.333%; }
+    .paginaCadastro .opcaoTipo { width: 50%; }
     .gridEnderecoLoja, .dadosLoja { grid-template-columns: 1fr; }
     .campoLoja.ruaLoja { grid-column: auto; }
     .dadosLoja { gap: 11px; }

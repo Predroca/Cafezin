@@ -1,0 +1,503 @@
+:root{
+    --altura-secao: calc(100vh - 76px);
+    --tracejado-info: 1px dashed rgba(115, 70, 48, .35);
+}
+
+footer{ margin-top: 0; }
+
+a, button, label, select, summary, [role="button"],
+.infoBeneficio, .infoRequisitosLista li{
+    cursor: pointer;
+}
+
+.paraTopoSeta{ transition: filter var(--transicao-rapida); }
+.paraTopoSeta:hover{ filter: brightness(.9); }
+
+@keyframes revelarSuave{
+    from{ opacity: 0; scale: .95; }
+    to{ opacity: 1; scale: 1; }
+}
+
+@keyframes revelarEsquerda{
+    from{ opacity: 0; translate: -48px 0; }
+    to{ opacity: 1; translate: 0 0; }
+}
+
+@keyframes revelarLadoDireito{
+    from{ opacity: 0; translate: 48px 0; }
+    to{ opacity: 1; translate: 0 0; }
+}
+
+.revelarAoRolar{
+    animation: revelarSuave linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+}
+
+main .container{
+    width: min(1120px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.subtituloInfo{
+    font-size: var(--fonte-pequena);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.infoCabecalhoSecao{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacamento-pequeno);
+    margin-bottom: calc(var(--espacamento-muito-grande) * 1.3);
+    text-align: center;
+}
+
+.infoCabecalhoSecao .subtituloInfo{ color: var(--cor-laranja); }
+
+.infoCabecalhoSecao .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.infoHero{
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    min-height: var(--altura-secao);
+}
+
+.infoHeroConteudo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--espacamento-medio);
+    padding: var(--espacamento-muito-grande) 8%;
+}
+
+.infoHeroConteudo .titulo{
+    font-size: 3rem;
+    line-height: 1.05;
+}
+
+.infoHeroConteudo p{
+    width: min(540px, 100%);
+    font-size: var(--fonte-media);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.infoHeroImagem{
+    position: relative;
+    overflow: hidden;
+}
+
+.infoHeroImagem img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.infoHeroAcoes{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    margin-top: var(--espacamento-pequeno);
+}
+
+.infoBotao{
+    padding: 14px var(--espacamento-extra-grande);
+    border-radius: var(--borda-arredondada-pequena);
+    font-size: var(--fonte-normal);
+    font-weight: 600;
+    transition: background-color var(--transicao-rapida), color var(--transicao-rapida), box-shadow var(--transicao-rapida);
+}
+
+.infoHeroLoja,
+.infoCtaSection{
+    background-color: var(--cor-laranja-escuro-2);
+    color: var(--cor-bege-destaque);
+}
+.infoHeroLoja .subtituloInfo{ color: var(--cor-laranja-claro); }
+.infoHeroLoja .infoBotaoPrincipal,
+.infoCtaSection .infoBotaoPrincipal{
+    background-color: var(--cor-bege-destaque);
+    color: var(--cor-laranja-escuro-2);
+}
+.infoHeroLoja .infoBotaoPrincipal:hover,
+.infoCtaSection .infoBotaoPrincipal:hover{
+    background-color: var(--cor-laranja-claro);
+}
+.infoHeroLoja .infoBotaoSecundario,
+.infoCtaSection .infoBotaoSecundario{
+    color: var(--cor-bege-destaque);
+    box-shadow: inset 0 0 0 2px var(--cor-bege-destaque);
+}
+.infoHeroLoja .infoBotaoSecundario:hover,
+.infoCtaSection .infoBotaoSecundario:hover{
+    background-color: color-mix(in srgb, var(--cor-bege-destaque) 20%, transparent);
+}
+
+.infoBeneficiosSection{
+    padding: var(--espacamento-padrao) 0;
+    background-color: var(--cor-background);
+}
+
+.infoBeneficiosGrid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--espacamento-extra-grande);
+}
+
+.infoBeneficio{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+    padding: var(--espacamento-grande);
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-pequena);
+    background-color: var(--cor-background-bege);
+    color: var(--cor-marrom-vermelhado);
+    transition: border-color var(--transicao-rapida);
+}
+
+.infoBeneficio:hover{
+    border-color: var(--cor-laranja);
+}
+
+.infoBeneficioIcone{
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--espacamento-pequeno);
+    border-radius: var(--borda-arredondada-pequena);
+    background-color: var(--cor-laranja-escuro);
+    color: var(--cor-texto-claro);
+    font-size: 1.4rem;
+}
+
+.infoBeneficioTitulo{
+    padding-bottom: var(--espacamento-pequeno);
+    border-bottom: var(--tracejado-info);
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    color: var(--cor-laranja-escuro);
+}
+
+.infoBeneficio p{
+    font-size: var(--fonte-pequena);
+    line-height: 1.6;
+    color: var(--cor-texto-secundario);
+}
+
+.infoPassosSection{
+    padding: calc(var(--espacamento-padrao) * 1.8) 0;
+    background-color: var(--cor-marrom-escuro-2);
+}
+
+.infoPassosSection .infoCabecalhoSecao .titulo{ color: var(--cor-bege-destaque); }
+.infoPassosSection .infoCabecalhoSecao .subtituloInfo{ color: var(--cor-laranja-claro); }
+
+.infoPassosLista{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--espacamento-grande);
+    list-style: none;
+}
+
+.infoPasso{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-pequeno);
+}
+
+.infoPassoIcone{
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--cor-laranja-claro);
+}
+
+.infoPasso:not(:last-child)::after{
+    content: "";
+    position: absolute;
+    top: 1.5rem;
+    left: 4.5rem;
+    width: calc(100% - 4.5rem + var(--espacamento-grande) - 12px);
+    border-top: 2px dashed var(--cor-laranja-claro);
+    opacity: .7;
+}
+
+.infoPassoTitulo{
+    font-family: "Brasika", sans-serif;
+    font-size: var(--fonte-grande);
+    color: var(--cor-texto-claro-alternativo);
+}
+
+.infoPasso p{
+    font-size: var(--fonte-pequena);
+    line-height: 1.6;
+    color: var(--cor-bege-claro);
+}
+
+.infoRequisitosSection{
+    padding: var(--espacamento-padrao) 0;
+    background-color: var(--cor-background);
+}
+
+.infoRequisitosContainer{
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: var(--espacamento-muito-grande);
+    align-items: center;
+    color: var(--cor-marrom-vermelhado);
+}
+
+.infoRequisitosTexto{
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacamento-medio);
+    padding-right: var(--espacamento-grande);
+    border-right: 2px dashed var(--cor-marrom-claro);
+}
+
+.infoRequisitosTexto .subtituloInfo{ color: var(--cor-laranja); }
+
+.infoRequisitosTexto .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+    color: var(--cor-laranja-escuro);
+}
+
+.infoRequisitosTexto p{
+    font-size: var(--fonte-media);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.infoRequisitosLista{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espacamento-grande);
+    list-style: none;
+}
+
+.infoRequisitosLista li{
+    display: flex;
+    align-items: center;
+    gap: var(--espacamento-medio);
+    padding: var(--espacamento-medio);
+    border: 1px solid rgba(75, 54, 42, .22);
+    border-radius: var(--borda-arredondada-pequena);
+    background-color: var(--cor-background-bege);
+    font-size: var(--fonte-normal);
+    line-height: 1.4;
+    transition: border-color var(--transicao-rapida);
+}
+
+.infoRequisitosLista li:hover{
+    border-color: var(--cor-laranja);
+}
+
+.infoRequisitosLista i{
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--borda-arredondada-pequena);
+    background-color: var(--cor-laranja-escuro);
+    color: var(--cor-texto-claro);
+    font-size: 1.3rem;
+}
+
+.infoCtaSection{
+    padding: var(--espacamento-padrao) var(--espacamento-grande);
+}
+
+.infoCtaContainer{
+    width: min(760px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacamento-grande);
+    text-align: center;
+}
+
+.infoCtaContainer .titulo{
+    font-size: var(--fonte-titulo-grande);
+    line-height: 1.1;
+}
+
+.infoCtaContainer p{
+    font-size: var(--fonte-media);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.infoCtaContainer .infoHeroAcoes{
+    justify-content: center;
+}
+
+@media (max-width: 992px){
+    .infoBeneficiosGrid,
+    .infoPassosLista{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .infoPasso:not(:last-child)::after{ display: none; }
+    .infoPasso{
+        padding-top: var(--espacamento-medio);
+        border-top: 2px dashed var(--cor-laranja-claro);
+    }
+
+    .infoRequisitosContainer{
+        grid-template-columns: 1fr;
+    }
+
+    .infoRequisitosTexto{
+        padding-right: 0;
+        padding-bottom: var(--espacamento-grande);
+        border-right: 0;
+        border-bottom: 2px dashed var(--cor-marrom-claro);
+    }
+}
+
+@media (max-width: 768px){
+    .infoHero{
+        grid-template-columns: 1fr;
+    }
+
+    .infoHeroImagem{
+        height: 280px;
+        order: -1;
+    }
+
+    .infoHeroConteudo{
+        padding: var(--espacamento-muito-grande) var(--espacamento-grande);
+    }
+
+    .infoHeroConteudo .titulo{ font-size: var(--fonte-titulo-grande); }
+
+    .infoBeneficiosGrid,
+    .infoPassosLista,
+    .infoRequisitosLista{
+        grid-template-columns: 1fr;
+    }
+
+    .infoCabecalhoSecao .titulo,
+    .infoRequisitosTexto .titulo,
+    .infoCtaContainer .titulo{
+        font-size: var(--fonte-titulo);
+    }
+}
+
+.infoBeneficio:nth-child(2){ animation-range: entry 6% cover 34%; }
+.infoBeneficio:nth-child(3){ animation-range: entry 12% cover 38%; }
+.infoBeneficio:nth-child(4){ animation-range: entry 18% cover 42%; }
+
+@keyframes caminharTracejado{
+    from{ clip-path: inset(0 100% 0 0); }
+    to{ clip-path: inset(0 0 0 0); }
+}
+
+.infoPasso:nth-child(2){ animation-range: entry 6% cover 34%; }
+.infoPasso:nth-child(3){ animation-range: entry 12% cover 38%; }
+.infoPasso:nth-child(4){ animation-range: entry 18% cover 42%; }
+
+@media (min-width: 993px){
+    .infoPassosSection{
+        height: 260vh;
+        padding: 0;
+        view-timeline: --passos block;
+    }
+
+    .infoPassosSection > .container{
+        position: sticky;
+        top: 76px;
+        min-height: calc(100vh - 76px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-block: var(--espacamento-padrao);
+    }
+
+    .infoPassosSection .infoPasso{
+        animation: revelarSuave linear both;
+        animation-timeline: --passos;
+        animation-range: cover 30% cover 34%;
+    }
+    .infoPassosSection .infoPasso:nth-child(2){ animation-range: cover 42% cover 46%; }
+    .infoPassosSection .infoPasso:nth-child(3){ animation-range: cover 54% cover 58%; }
+    .infoPassosSection .infoPasso:nth-child(4){ animation-range: cover 66% cover 70%; }
+
+    .infoPassosSection .infoPasso:not(:last-child)::after{
+        animation: caminharTracejado linear both;
+        animation-timeline: --passos;
+        animation-range: cover 34% cover 42%;
+    }
+    .infoPassosSection .infoPasso:nth-child(2)::after{ animation-range: cover 46% cover 54%; }
+    .infoPassosSection .infoPasso:nth-child(3)::after{ animation-range: cover 58% cover 66%; }
+}
+
+.infoRequisitosTexto{ animation-name: revelarEsquerda; }
+.infoRequisitosLista li:nth-child(odd){ animation-name: revelarEsquerda; }
+.infoRequisitosLista li:nth-child(even){ animation-name: revelarLadoDireito; }
+
+.infoHeroConteudo > *{
+    animation: revelarSuave .8s ease both;
+}
+.infoHeroConteudo > :nth-child(2){ animation-delay: .12s; }
+.infoHeroConteudo > :nth-child(3){ animation-delay: .24s; }
+.infoHeroConteudo > :nth-child(4){ animation-delay: .36s; }
+
+.infoHeroImagem{
+    animation: revelarLadoDireito 1s ease both;
+}
+
+@media (max-width: 768px){
+    .infoRequisitosTexto,
+    .infoRequisitosLista li:nth-child(odd),
+    .infoRequisitosLista li:nth-child(even){ animation-name: revelarSuave; }
+}
+
+@media (prefers-reduced-motion: reduce){
+    .infoPassosSection .infoPasso,
+    .infoPassosSection .infoPasso::after{
+        animation: none;
+    }
+
+    .revelarAoRolar,
+    .infoHeroConteudo > *,
+    .infoHeroImagem{
+        animation: none;
+    }
+}
+
+.infoBeneficiosSection,
+.infoRequisitosSection,
+.infoCtaSection{
+    min-height: var(--altura-secao);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+@media (max-width: 992px){
+    .infoPassosSection{
+        min-height: var(--altura-secao);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+}
