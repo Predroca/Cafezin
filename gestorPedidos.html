@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acompanhe e gerencie os pedidos da sua loja no Cafézin.">
+  <title>Cafézin | Gestor de pedidos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="CSS/main.css">
+  <link rel="stylesheet" href="CSS/indexLoja.css">
+  <link rel="stylesheet" href="CSS/indexEntregador.css">
+  <link rel="stylesheet" href="CSS/gestorPedidos.css">
+
+</head>
+
+<body id="topo">
+  <header class="navLoja">
+    <div class="container navLojaConteudo">
+      <a class="logoLoja" href="indexLoja.html#topo">Cafézin <span>Loja</span></a>
+      <nav class="navLinks" aria-label="Navegação do painel">
+        <a href="indexLoja.html#painel">Inicio</a>
+        <a class="ativo" aria-current="page" href="gestorPedidos.html">Pedidos</a>
+        <a href="perfilLoja.html">Minha Loja</a>
+
+      </nav>
+      <div class="navAcoes">
+        <a class="notificacao" href="#pedidosLoja" aria-label="Ver pedidos"><i class="bi bi-bell"></i><span
+            id="contadorNotificacao">0</span></a>
+        <a class="perfilLoja" href="perfilLoja.html" aria-label="Abrir dados da loja"><i class="bi bi-shop"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="gestorPedidos">
+    <section class="cabecalhoGestor">
+      <div class="container">
+        <a class="linkVoltar" href="indexLoja.html#painel"><i class="bi bi-arrow-left"></i> Voltar para o painel</a>
+
+        <h1>Gestor de <span>pedidos</span></h1>
+        <p class="descricaoPagina">Organize seus pedidos e acompanhe aqueles que já estão com seus entregadores.</p>
+      </div>
+    </section>
+
+    <section class="secaoPadrao secaoPedidosLoja" id="pedidosLoja" aria-labelledby="tituloPedidosLoja">
+      <div class="container">
+        <div class="cabecalhoSecao linha">
+          <div>
+            <h2 id="tituloPedidosLoja">Pedidos em preparo</h2>
+            <p>Confirme e prepare os pedidos até liberá-los para retirada.</p>
+          </div>
+
+        </div>
+        <div class="colunasPedidos">
+          <section class="colunaPedidos" data-coluna-status="Pendente" aria-labelledby="tituloPendentes">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloPendentes">Pendentes</h3>
+              <span class="contadorColunaPedidos">0</span>
+            </div>
+            <div class="listaPedidosColuna" data-lista-status="Pendente"></div>
+          </section>
+
+          <section class="colunaPedidos" data-coluna-status="Em preparo" aria-labelledby="tituloEmPreparo">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloEmPreparo">Em preparo</h3>
+              <span class="contadorColunaPedidos">0</span>
+            </div>
+            <div class="listaPedidosColuna" data-lista-status="Em preparo"></div>
+          </section>
+
+          <section class="colunaPedidos" data-coluna-status="Pronto" aria-labelledby="tituloProntos">
+            <div class="cabecalhoColunaPedidos">
+              <h3 id="tituloProntos">Prontos</h3>
+              <span class="contadorColunaPedidos">0</span>
+            </div>
+            <div class="listaPedidosColuna" data-lista-status="Pronto"></div>
+          </section>
+        </div>
+        <div class="acoesSalvarPedidos">
+          <span id="mensagemSalvamentoPedidos" class="mensagemSalvamento" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="secaoPadrao secaoAlternada secaoEntregas" id="pedidosEntrega"
+      aria-labelledby="tituloPedidosEntrega">
+      <div class="container">
+        <div class="cabecalhoSecao linha">
+          <div>
+            <h2 id="tituloPedidosEntrega">Pedidos em entrega</h2>
+            <p>Pedidos liberados por você. O andamento é atualizado pelo seu entregador.</p>
+          </div>
+
+        </div>
+        <div class="listaEntregas">
+          <article class="entrega aguardando" data-pedido-id="4816" data-entrega-status="Aguardando">
+            <div class="entregaCabecalho"><span class="statusBadge aguardando">Aguardando retirada</span><time>Há 4
+                min</time></div>
+            <div class="entregaInfo">
+              <h3>Pedido de Ana Caroline</h3>
+              <div class="entregaDado lojaEntrega"><i class="bi bi-truck"></i>
+                <div><span class="dadoTitulo">Entregador(a): </span><strong>José Silva</strong></div>
+              </div>
+              <div class="entregaDado produtosEntrega"><i class="bi bi-bag"></i>
+                <div><span class="dadoTitulo">Produtos:</span>
+                  <p><strong>3x Pão de queijo artesanal</strong></p>
+                </div>
+              </div>
+              <div class="entregaDado enderecoEntrega"><i class="bi bi-geo-alt"></i>
+                <div><span class="dadoTitulo">Entrega: </span><strong>Av. Afonso Pena, 1250</strong></div>
+              </div>
+            </div>
+            <div class="entregaRodape"><strong>R$ 43,50</strong><span class="avisoSomenteLeitura">Aguardando
+                entregador</span></div>
+          </article>
+          <article class="entrega entregue" data-pedido-id="4808" data-entrega-status="Em rota">
+            <div class="entregaCabecalho"><span class="statusBadge entregue">Em rota</span><time>Há 12 min</time></div>
+            <div class="entregaInfo">
+              <h3>Pedido de Júlia Martins</h3>
+              <div class="entregaDado lojaEntrega"><i class="bi bi-truck"></i>
+                <div><span class="dadoTitulo">Entregador(a): </span><strong>Maria Castro</strong></div>
+              </div>
+              <div class="entregaDado produtosEntrega"><i class="bi bi-bag"></i>
+                <div><span class="dadoTitulo">Produtos:</span>
+                  <p><strong>1x Bolo de cenoura, 1x Cappuccino</strong></p>
+                </div>
+              </div>
+              <div class="entregaDado enderecoEntrega"><i class="bi bi-geo-alt"></i>
+                <div><span class="dadoTitulo">Entrega: </span><strong>Rua Goiás, 438</strong></div>
+              </div>
+            </div>
+            <div class="entregaRodape"><strong>R$ 32,20</strong><span class="avisoSomenteLeitura"> Em entrega</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+
+    <div class="footerConteudo">
+
+      <section class="footerSection footerMarca">
+
+        <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
+
+        <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
+
+      </section>
+
+
+      <section class="footerSection">
+
+        <div class="titulo">
+          Sobre nós
+        </div>
+
+        <ul class="footerSectionLists">
+
+          <li>
+            <a href="cadastrarLoja.html">
+              Cadastre sua loja
+            </a>
+          </li>
+
+          <li>
+            <a href="cadastrarEntregador.html">
+              Seja entregador
+            </a>
+          </li>
+
+          <li>
+            <a href="canalAtendimento.html">
+              Fale Conosco
+            </a>
+          </li>
+
+          <li>
+            <a href="cafeDev.html">
+              CaféDev
+            </a>
+          </li>
+
+        </ul>
+
+      </section>
+
+
+      <section class="footerSection">
+
+        <div class="titulo">
+          Contato
+        </div>
+
+        <ul class="footerSectionLists">
+
+          <li class="footerSubtitulo">
+            Redes sociais
+          </li>
+
+          <li>
+            <img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">
+            <span>@CafezinDSA</span>
+          </li>
+
+          <li>
+            <img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter">
+            <span>@Cafezin_DSA</span>
+          </li>
+
+          <li>
+            <img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">
+            <span>(34) 9 9999-9999</span>
+          </li>
+
+        </ul>
+
+      </section>
+
+    </div>
+
+
+    <div class="footerCopyright">
+
+      <p>
+        © 2026 Cafézin. Todos os direitos reservados.
+      </p>
+
+    </div>
+
+  </footer>
+
+<dialog id="modalEntregadores" class="modalEntregadores" aria-labelledby="tituloModalEntregadores">
+    <div class="modalCabecalho">
+      <div>
+        <h2 id="tituloModalEntregadores">Escolha um de seus entregadores</h2>
+        <p id="modalEntregadoresPedido"></p>
+
+      </div>
+      <button type="button" class="botaoFecharModal" data-fechar-modal aria-label="Fechar">
+        <i class="bi bi-x-lg" aria-hidden="true"></i>
+      </button>
+    </div>
+    <ul class="listaEntregadoresModal" id="listaEntregadoresModal"></ul>
+  </dialog>
+
+  <script src="JavaScript/Loja/gerirPedidos.js"></script>
+</body>
+
+</html>
