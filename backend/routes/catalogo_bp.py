@@ -447,6 +447,42 @@ def avaliacoes_do_produto(cod_produto):
         "avaliacoes": [_avaliacao_json(nome, a) for nome, a in linhas],
     }
 
+@catalogo_bp.route("/lojas/<int:cod_loja>/avaliacoes", methods=["GET"])
+def avaliacoes_da_loja(cod_loja):
+    if db.session.get(Loja, cod_loja) is None:
+        return {"error": "loja não encontrada"}, 404
+
+    limite, offset = _paginacao(padrao=10, maximo=50)
+
+    media, total = (
+        db.session.query(
+            func.avg(AvaliacaoLoja.nota),
+            func.count(AvaliacaoLoja.nota),
+        )
+        .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+        .filter(Pedido.cod_loja == cod_loja)
+        .one()
+    )
+
+    linhas = (
+        db.session.query(Usuario.nome, AvaliacaoLoja)
+        .select_from(AvaliacaoLoja)
+        .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
+        .join(Comprador, Comprador.cod_comprador == Pedido.cod_comprador)
+        .join(Usuario, Usuario.cod_usuario == Comprador.cod_usuario)
+        .filter(Pedido.cod_loja == cod_loja)
+        .order_by(AvaliacaoLoja.data.desc(), AvaliacaoLoja.horario.desc())
+        .limit(limite)
+        .offset(offset)
+        .all()
+    )
+
+    return {
+        "media_avaliacao": round(float(media), 1) if media is not None else None,
+        "total_avaliacoes": total,
+        "avaliacoes": [_avaliacao_json(nome, a) for nome, a in linhas],
+    }
+
 @catalogo_bp.route("/lojas/<int:cod_loja>/produtos", methods=["GET"])
 def produtos_da_loja(cod_loja):
     loja = db.session.get(Loja, cod_loja)
