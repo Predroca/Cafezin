@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/indexLoja.css">
-
+<script src="JavaScript/Comprador/sacolaDados.js"></script>
+<script src="JavaScript/Comprador/adicionarSacola.js"></script>
     <div vw class="enabled"> <div vw-access-button class="active"></div> <div vw-plugin-wrapper> <div class="vw-plugin-top-wrapper"></div> </div> </div> <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> <script> new window.VLibras.Widget('https://vlibras.gov.br/app'); </script>
 </head>
 <body id="topo">
@@ -19,22 +20,21 @@
             <a class="logoLoja" href="#topo" aria-label="Cafézin - painel da loja">Cafézin <span>Loja</span></a>
 
             <nav class="navLinks" aria-label="Navegação do painel">
-                <a class="ativo" href="#painel">Cardápio</a>
-                <a href="#pedidos">Pedidos</a>
+                <a class="ativo" href="#painel">Inicio</a>
+                <a href="gestorPedidos.html">Pedidos</a>
 
-                <a href="#minhaLoja">Minha loja</a>
+                <a href="perfilLoja.html">Minha loja</a>
             </nav>
 
             <div class="navAcoes">
 
-                <a class="notificacao" href="#pedidos" aria-label="3 pedidos aguardando">
+                <a class="notificacao" href="gestorPedidos.html" aria-label="3 pedidos aguardando">
                     <i class="bi bi-bell" aria-hidden="true"></i>
                     <span>3</span>
                 </a>
 
-                <a class="perfilLoja" href="perfilLoja.html" aria-label="Abrir perfil da loja">
+                <a class="perfilLoja" href="perfilLoja.html" aria-label="Abrir dados da loja">
                     <i class="bi bi-shop" aria-hidden="true"></i>
-                    <img id="fotoPerfilLoja" alt="" hidden>
                 </a>
 
             </div>
@@ -377,111 +377,51 @@
     </main>
 
    <footer>
-
         <div class="footerConteudo">
-
             <section class="footerSection footerMarca">
-
                 <img src="img/FooterLogo.svg" alt="Cafézin" class="footerLogoTexto">
-
                 <img src="img/FooterTitulo.svg" alt="" class="footerLogoImagem">
-
             </section>
 
-
             <section class="footerSection">
-
-                <div class="titulo">
-                    Sobre nós
-                </div>
-
+                <div class="titulo">Sobre nós</div>
                 <ul class="footerSectionLists">
-
-                    <li>
-                        <a href="cadastrarLoja.html">
-                            Cadastre sua loja
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="cadastrarEntregador.html">
-                            Seja entregador
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="canalAtendimento.html">
-                            Fale Conosco
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="cafeDev.html">
-                            CaféDev
-                        </a>
-                    </li>
-
+                    <li><a href="cadastrarLoja.html">Cadastre sua loja</a></li>
+                    <li><a href="infoLoja.html">Sobre Lojas</a></li>
+                    <li><a href="cadastrarComprador.html">Produtos</a></li>
+                    <li><a href="sobreNos.html">sobreNós</a></li>
                 </ul>
-
             </section>
 
-
             <section class="footerSection">
-
-                <div class="titulo">
-                    Contato
-                </div>
-
+                <div class="titulo">Contato</div>
                 <ul class="footerSectionLists">
-
-                    <li class="footerSubtitulo">
-                        Redes sociais
-                    </li>
-
+                    <li class="footerSubtitulo">Redes sociais</li>
                     <li>
-                        <img
-                            src="icones/iconesEmpresas/Instagram.svg"
-                            alt="Instagram"
-                        >
+                        <img src="icones/iconesEmpresas/Instagram.svg" alt="Instagram">
                         <span>@CafezinDSA</span>
                     </li>
-
                     <li>
-                        <img
-                            src="icones/iconesEmpresas/Twitter.svg"
-                            alt="Twitter"
-                        >
+                        <img src="icones/iconesEmpresas/Twitter.svg" alt="Twitter">
                         <span>@Cafezin_DSA</span>
                     </li>
-
                     <li>
-                        <img
-                            src="icones/iconesEmpresas/Whatsapp.svg"
-                            alt="WhatsApp"
-                        >
+                        <img src="icones/iconesEmpresas/Whatsapp.svg" alt="WhatsApp">
                         <span>(34) 9 9999-9999</span>
                     </li>
-
                 </ul>
-
             </section>
-
         </div>
-
 
         <div class="footerCopyright">
-
-            <p>
-                © 2026 Cafézin. Todos os direitos reservados.
-            </p>
-
+            <p>© 2026 Cafézin. Todos os direitos reservados.</p>
         </div>
-
     </footer>
 
 
     <script src="JavaScript/Loja/categoriasCardapio.js"></script>
     <script src="JavaScript/Loja/rendereizaçãoLoja.js"></script>
+    
     
 </body>
 </html>

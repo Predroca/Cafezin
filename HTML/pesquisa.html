@@ -31,7 +31,7 @@
         <a href="indexComprador.html#pedidos">Pedidos</a>
       </nav>
       <div class="navAcoes">
-        <a class="sacola" href="Sacola.html" aria-label="Abrir sacola"><i class="bi bi-bag" aria-hidden="true"></i></a>
+        <a class="sacola" href="Sacola.html" aria-label="Abrir sacola"><i class="bi bi-bag" aria-hidden="true"></i><span>0</span></a>
         <a class="perfil" href="PerfilComprador.html" aria-label="Abrir perfil"><i class="bi bi-person-circle" aria-hidden="true"></i></a>
       </div>
     </div>
@@ -48,11 +48,27 @@
 
       <section id="painelPesquisa" class="painelPesquisa" role="tabpanel" aria-labelledby="abaLojas">
         <div class="filtrosPesquisa" id="filtrosLojas" aria-label="Filtros de lojas">
-          <button class="filtroPesquisa" type="button" aria-pressed="false">Ordenar <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
-          <button class="filtroPesquisa" type="button" aria-pressed="false">Somente lojas abertas</button>
-          <button class="filtroPesquisa" type="button" aria-pressed="false">Entrega <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
-          <button class="filtroPesquisa" type="button" aria-pressed="false">Filtros <i class="bi bi-sliders" aria-hidden="true"></i></button>
-
+        <div class="filtroMenu">
+          <button class="filtroPesquisa" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuOrdenarLojas" data-rotulo="Ordenar"><span class="rotuloFiltro">Ordenar</span> <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+        <div class="menuFiltro" id="menuOrdenarLojas" role="menu" data-filtro="ordenarLojas" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-valor="relevancia" data-padrao>Relevância</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="nota">Melhor avaliadas</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="avaliacoes">Mais avaliadas</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="nome">Nome (A–Z)</button>
+          </div>
+        </div>
+          <button class="filtroPesquisa" id="filtroAbertas" type="button" aria-pressed="false">Somente lojas abertas</button>
+          
+        <div class="filtroMenu">
+          <button class="filtroPesquisa" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuFiltrosLojas" data-rotulo="Filtros"><span class="rotuloFiltro">Filtros</span> <i class="bi bi-sliders" aria-hidden="true"></i></button>
+        <div class="menuFiltro" id="menuFiltrosLojas" role="menu" data-filtro="notaMinima" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-valor="0" data-padrao>Qualquer nota</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="3">Nota 3 ou mais</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="4">Nota 4 ou mais</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="4.5">Nota 4,5 ou mais</button>
+          </div>
+        </div>
+          <button class="filtroPesquisa filtroLimpar" id="limparFiltrosLojas" type="button" hidden>Limpar filtros</button>
         </div>
         <div class="filtrosPesquisa filtrosItens" id="filtrosItens" aria-label="Categorias de produtos" hidden>
           <span class="rotuloCategoriasPesquisa">Categorias:</span>
@@ -62,7 +78,25 @@
           <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Salgados">Salgados</button>
           <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Bebidas">Bebidas</button>
           <button class="filtroPesquisa filtroCategoria" type="button" aria-pressed="false" data-categoria="Pães">Pães</button>
-
+        <div class="filtroMenu">
+          <button class="filtroPesquisa" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuOrdenarItens" data-rotulo="Ordenar"><span class="rotuloFiltro">Ordenar</span> <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+        <div class="menuFiltro" id="menuOrdenarItens" role="menu" data-filtro="ordenarItens" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-valor="relevancia" data-padrao>Relevância</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="menor">Menor preço</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="maior">Maior preço</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="nome">Nome (A–Z)</button>
+          </div>
+        </div>
+        <div class="filtroMenu">
+          <button class="filtroPesquisa" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menuPrecoItens" data-rotulo="Preço"><span class="rotuloFiltro">Preço</span> <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
+        <div class="menuFiltro" id="menuPrecoItens" role="menu" data-filtro="faixaPreco" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" data-valor="todas" data-padrao>Qualquer preço</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="ate10">Até R$ 10</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="10a20">R$ 10 a R$ 20</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-valor="acima20">Acima de R$ 20</button>
+          </div>
+        </div>
+          <button class="filtroPesquisa filtroLimpar" id="limparFiltrosItens" type="button" hidden>Limpar filtros</button>
         </div>
 
         <div class="resultadosPesquisa" aria-live="polite"></div>
@@ -70,6 +104,9 @@
     </div>
   </main>
 
+    <script src="JavaScript/Comprador/favoritarLoja.js"></script>
+    <script src="JavaScript/Comprador/adicionarSacola.js"></script>
+    <script src="JavaScript/Comprador/abrirProduto.js"></script>
     <script src="JavaScript/Comprador/Pesquisa.js"></script>
 </body>
 </html>
