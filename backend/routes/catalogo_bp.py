@@ -3,6 +3,7 @@ from sqlalchemy import func, exists, or_, and_
 
 from sqlalchemy import func
 from flask import Blueprint, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.exc import SQLAlchemyError
 from extensions import db
 
@@ -23,6 +24,7 @@ from models.comprador import Comprador
 catalogo_bp = Blueprint("catalogo", __name__)
 
 VALOR_FRETE_PADRAO = 5.00
+FRETE_GRATIS_A_PARTIR_DE = 25.00
 FORMAS_PAGAMENTO = ["PIX", "Boleto", "Cartão", "Dinheiro", "Transferência"]
 
 
@@ -116,56 +118,88 @@ def produto_detalhe(cod_produto):
 
 
 @catalogo_bp.route("/pedidos", methods=["POST"])
+@jwt_required()
 def criar_pedido():
-    dados = request.get_json()
+    # Formato enviado pelo front (pagamentoItens.js):
+    # { "itens": [{"cod_produto": 1, "quantidade": 2}], "cod_endereco": 5, "forma_pagamento": "PIX" }
+    dados = request.get_json(silent=True) or {}
 
-    cod_produto = dados.get("cod_produto")
-    cod_comprador = dados.get("cod_comprador")
+    itens = dados.get("itens")
     cod_endereco = dados.get("cod_endereco")
     forma_pagamento = dados.get("forma_pagamento")
-    quantidade = max(1, int(dados.get("quantidade", 1)))
 
     if forma_pagamento not in FORMAS_PAGAMENTO:
         return {"error": "forma de pagamento inválida"}, 400
 
-    produto = Produto.query.get_or_404(cod_produto)
+    if not isinstance(itens, list) or not itens:
+        return {"error": "pedido sem itens"}, 400
 
-    if not produto.disponibilidade:
-        return {"error": "produto indisponível no momento"}, 409
+    # comprador vem do token (e não do body)
+    comprador = Comprador.query.filter_by(cod_usuario=int(get_jwt_identity())).first()
+    if comprador is None:
+        return {"error": "apenas compradores podem fazer pedidos"}, 403
 
-    valor_total = round(float(produto.preco) * quantidade + VALOR_FRETE_PADRAO, 2)
+    linhas = []
+    cod_loja = None
+    subtotal = 0.0
+
+    for it in itens:
+        try:
+            cod_produto = int(it.get("cod_produto"))
+            quantidade = int(it.get("quantidade", 1))
+        except (TypeError, ValueError, AttributeError):
+            return {"error": "item inválido"}, 400
+
+        if not 1 <= quantidade <= 20:
+            return {"error": "quantidade deve ser entre 1 e 20"}, 400
+
+        produto = db.session.get(Produto, cod_produto)
+        if produto is None or not produto.disponibilidade:
+            return {"error": f"produto {cod_produto} indisponível no momento"}, 409
+
+        if cod_loja is not None and produto.cod_loja != cod_loja:
+            return {"error": "o pedido só pode ter produtos de uma loja"}, 400
+
+        cod_loja = produto.cod_loja
+        subtotal += float(produto.preco) * quantidade
+        linhas.append((produto, quantidade))
+
+    frete = 0.0 if subtotal >= FRETE_GRATIS_A_PARTIR_DE else VALOR_FRETE_PADRAO
+    valor_total = round(subtotal + frete, 2)
     agora = datetime.now()
 
-    # cria o Pagamento e usa flush() para já ter o cod_pagamento gerado,
-    # sem precisar de um commit isolado por tabela
     pagamento = Pagamento(tipo=forma_pagamento, data=agora)
     db.session.add(pagamento)
     db.session.flush()
 
     pedido = Pedido(
         data_pedido=agora,
-        valor_frete=VALOR_FRETE_PADRAO,
+        valor_frete=frete,
         valor_total=valor_total,
         status="Pendente",
-        cod_comprador=cod_comprador,
-        cod_loja=produto.cod_loja,
+        cod_comprador=comprador.cod_comprador,
+        cod_loja=cod_loja,
         cod_end_entrega=cod_endereco,
         cod_pagamento=pagamento.cod_pagamento,
     )
     db.session.add(pedido)
     db.session.flush()
 
-    item = ItemPedido(
-        quantidade=quantidade,
-        preco_unitario=produto.preco,
-        cod_pedido=pedido.cod_pedido,
-        cod_produto=cod_produto,
-    )
-    db.session.add(item)
+    for produto, quantidade in linhas:
+        db.session.add(ItemPedido(
+            quantidade=quantidade,
+            preco_unitario=produto.preco,
+            cod_pedido=pedido.cod_pedido,
+            cod_produto=produto.cod_produto,
+        ))
 
     db.session.commit()
 
-    return {"message": "pedido criado", "cod_pedido": pedido.cod_pedido}, 201
+    return {
+        "message": "pedido criado",
+        "cod_pedido": pedido.cod_pedido,
+        "valor_total": valor_total,
+    }, 201
 
 
 @catalogo_bp.route("/pedidos/<int:cod_pedido>", methods=["GET"])
@@ -413,6 +447,7 @@ def _avaliacao_json(nome, a):
     }
 
 
+
 @catalogo_bp.route("/produtos/<int:cod_produto>/avaliacoes", methods=["GET"])
 def avaliacoes_do_produto(cod_produto):
     if db.session.get(Produto, cod_produto) is None:
@@ -436,42 +471,6 @@ def avaliacoes_do_produto(cod_produto):
         .join(Usuario, Usuario.cod_usuario == Comprador.cod_usuario)
         .filter(AvaliacaoProduto.cod_produto == cod_produto)
         .order_by(AvaliacaoProduto.data.desc(), AvaliacaoProduto.horario.desc())
-        .limit(limite)
-        .offset(offset)
-        .all()
-    )
-
-    return {
-        "media_avaliacao": round(float(media), 1) if media is not None else None,
-        "total_avaliacoes": total,
-        "avaliacoes": [_avaliacao_json(nome, a) for nome, a in linhas],
-    }
-
-@catalogo_bp.route("/lojas/<int:cod_loja>/avaliacoes", methods=["GET"])
-def avaliacoes_da_loja(cod_loja):
-    if db.session.get(Loja, cod_loja) is None:
-        return {"error": "loja não encontrada"}, 404
-
-    limite, offset = _paginacao(padrao=10, maximo=50)
-
-    media, total = (
-        db.session.query(
-            func.avg(AvaliacaoLoja.nota),
-            func.count(AvaliacaoLoja.nota),
-        )
-        .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
-        .filter(Pedido.cod_loja == cod_loja)
-        .one()
-    )
-
-    linhas = (
-        db.session.query(Usuario.nome, AvaliacaoLoja)
-        .select_from(AvaliacaoLoja)
-        .join(Pedido, Pedido.cod_pedido == AvaliacaoLoja.cod_pedido)
-        .join(Comprador, Comprador.cod_comprador == Pedido.cod_comprador)
-        .join(Usuario, Usuario.cod_usuario == Comprador.cod_usuario)
-        .filter(Pedido.cod_loja == cod_loja)
-        .order_by(AvaliacaoLoja.data.desc(), AvaliacaoLoja.horario.desc())
         .limit(limite)
         .offset(offset)
         .all()
